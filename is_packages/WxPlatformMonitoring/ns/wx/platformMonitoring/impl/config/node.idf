@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="node_type">interface</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_nsName">wx.platformMonitoring.impl.config</value>
+  <value name="is_public">false</value>
+  <value name="encodeutf8">true</value>
+  <value name="shared">c3RhdGljIEpzb25BcnJheSBpbnRlcmZhY2VzID0gbnVsbDsKCnByaXZhdGUgc3RhdGljIHZvaWQg
+Y2FsbFBhcnNlQ29uZmlnKCkgewoKCS8vIGlucHV0CglJRGF0YSBpbnB1dCA9IElEYXRhRmFjdG9y
+eS5jcmVhdGUoKTsKCgkvLyBvdXRwdXQKCUlEYXRhIAlvdXRwdXQgPSBJRGF0YUZhY3RvcnkuY3Jl
+YXRlKCk7Cgl0cnl7CgkJb3V0cHV0ID0gU2VydmljZS5kb0ludm9rZSggInd4LnBsYXRmb3JtTW9u
+aXRvcmluZy5pbXBsLmNvbmZpZyIsICJwYXJzZUNvbmZpZyIsIGlucHV0ICk7Cgl9Y2F0Y2goIEV4
+Y2VwdGlvbiBlKXt9Cgp9</value>
+  <value name="extends"></value>
+  <array name="implements" type="value" depth="1">
+  </array>
+  <array name="imports" type="value" depth="1">
+    <value>java.io.File</value>
+    <value>java.io.FileNotFoundException</value>
+    <value>java.io.FileReader</value>
+    <value>java.io.IOException</value>
+    <value>com.eclipsesource.json.Json</value>
+    <value>com.eclipsesource.json.JsonArray</value>
+    <value>com.eclipsesource.json.JsonValue</value>
+    <value>com.wm.app.b2b.server.ServerAPI</value>
+    <value>com.wm.data.IData</value>
+  </array>
+</Values>

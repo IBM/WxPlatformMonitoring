@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="code/source"/>
+	<classpathentry kind="lib" path="code/jars/minimal-json-0.9.4.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="var" path="IS_CLIENT"/>
+	<classpathentry kind="var" path="IS_CORE"/>
+	<classpathentry kind="var" path="IS_EDITOR"/>
+	<classpathentry kind="var" path="IS_ENTTK"/>
+	<classpathentry kind="var" path="IS_G11N"/>
+	<classpathentry kind="var" path="IS_ICU4J"/>
+	<classpathentry kind="var" path="IS_MAIL"/>
+	<classpathentry kind="var" path="IS_SERVER"/>
+	<classpathentry kind="var" path="IS_UIUTILS"/>
+	<classpathentry kind="var" path="IS_WSDL4J"/>
+	<classpathentry kind="lib" path="/WxPlatformMonitoring_Project/libs/minimal-json-0.9.4.jar"/>
+	<classpathentry kind="output" path="code/classes"/>
+</classpath>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<FLOW VERSION="3.0" CLEANUP="true">
+  <COMMENT></COMMENT>
+
+  <!-- nodes -->
+
+<INVOKE TIMEOUT="" SERVICE="reiff_Monitoring.services.pub.interfaces:checkInterfaceStatus" VALIDATE-IN="$none" VALIDATE-OUT="$none">
+  <COMMENT>output via DSP</COMMENT>
+
+  <!-- nodes -->
+
+<MAP MODE="OUTPUT">
+</MAP>
+</INVOKE>
+</FLOW>

@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+
+<project name="build_test_SoapUI" default="soapui.startTest_SoapUI" basedir="./..">
+
+	<property name="test.package.dir" value="${is.home}/packages/WxRestServices_Test/resources/test" />
+	<property name="soapui.tmpTestDir" value="${test.package.dir}/temp" />
+
+	<property name="soapui.testfile.extension" value="generated" />
+
+	<target name="soapui.test-and-report-xml" depends="soapui.init.packageTest" >
+		<log msg="Searching for SoapUI tests in directory '${test.package.xml.dir}'." level="INFO" />
+		<mkdir dir="${test.package.reports.dir}" />
+		<for param="test.setup.file" keepgoing="true">
+			<path>
+				<fileset dir="${test.package.xml.dir}" includes="**/*.xml" />
+			</path>
+			<sequential>
+				<trycatch reference="exception_ref">
+					<try>
+						<basename property="file.basename" file="@{test.setup.file}" suffix=".xml" />
+						<log level="INFO" msg="Found SoapUI test setup file: @{test.setup.file}" />
+						<antcall target="soapui.prepareTest">
+							<param name="test.setup.file" value="@{test.setup.file}" />
+							<param name="test.setup.filename" value="${file.basename}"/>
+						</antcall>
+						<antcall target="soapui.invokeTest">
+							<param name="test.setup.file" value="@{test.setup.file}" />
+							<param name="test.setup.filename" value="${file.basename}"/>
+						</antcall>
+						<var name="file.basename" unset="true" />
+					</try>
+					<catch>
+						<log level="ERROR" msg="SoapUI test for '@{test.setup.file}' failed:" />
+						<property name="test.fail" refid="exception_ref" />
+						<log level="ERROR" msg="${test.fail}" />
+					</catch>
+				</trycatch>
+			</sequential>
+		</for>
+		
+		<!-- copy all reports from tmp dir to respective package dir -->
+		<antcall target="soapui.createTestReport">
+			<param name="report.target.dir" value="${test.package.reports.dir}"/>
+			<param name="report.target.file" value="TESTS-TestSuites_SoapUI.xml"/>
+			<param name="report.source.dir" value="${soapui.tmpTestDir.package}"/>
+		</antcall>
+
+		<fail message="At least one SoapUI test for package WxInterceptor failed." if="test.fail" />
+	</target>
+
+	<target name="soapui.createTestReport">
+		<log msg="Creating SoapUI Test Report in directory '${report.target.dir}', writing file '${report.target.file}', using source '${report.source.dir}'." />
+		<junitreport todir="${report.target.dir}" tofile="${report.target.file}">
+			<fileset dir="${report.source.dir}">
+				<include name="TEST-*.xml" />
+				<exclude name="TESTS-TestSuites.xml" />
+			</fileset>
+			<report format="frames" todir="${report.target.dir}/html" />
+		</junitreport>
+	</target>
+
+	<condition property="createUnifiedReport">
+		<equals arg1="${unified-report.create}" arg2="true" />
+	</condition>
+
+	<target name="soapui.create_unified_report" if="createUnifiedReport">
+		<log level="INFO" msg="Creating unified SoapUI test report from source dir '${soapui.tmpTestDir}'." />
+		<antcall target="soapui.createTestReport">
+			<param name="report.target.dir" value="${unified-report.dir}"/>
+			<param name="report.target.file" value="TESTS-TestSuites_SoapUI.xml"/>
+			<param name="report.source.dir" value="${soapui.tmpTestDir}"/>
+		</antcall>
+
+		<log level="INFO" msg="Copying JUnit test results to folder '${unified-report.dir}'" />
+		<copy todir="${unified-report.dir}/">
+			<fileset dir="${soapui.tmpTestDir}">
+				<include name="**/*" />
+			</fileset>
+		</copy>
+	</target>
+
+
+	<target name="soapui.init.packageTest">
+
+		<log level="INFO" msg="Init directory structure for package ${test.package.dir}" />
+		<property name="test.package.xml.dir" value="${test.package.dir}/soapui" />
+
+		<property name="test.package.reports.dir" value="${test.package.dir}/reports" />
+		<antcall target="common.create_dir">
+			<param name="dir" value="${test.package.reports.dir}" />
+			<param name="overwrite" value="true" />
+		</antcall>
+
+		<property name="soapui.tmpTestDir.package" value="${soapui.tmpTestDir}/WxInterceptor" />
+		<antcall target="common.create_dir">
+			<param name="dir" value="${soapui.tmpTestDir.package}" />
+		</antcall>
+	</target>
+	
+	<target name="soapui.init">
+		<property name="soapui.tmpTestDir" value="${soapui.tmpTestDir}/soapui" />
+		<log msg="Setting tmp dir for SoapUI to '${soapui.tmpTestDir}'" level="INFO"/>
+	</target>
+
+
+	<target name="soapui.startTest_SoapUI" depends="soapui.init">
+		<log level="INFO" msg="Starting SOAP UI Tests" />
+		<antcall target="soapui.test-and-report-xml" inheritall="true" inheritrefs="true"/>
+		<antcall target="soapui.create_unified_report" inheritall="true" inheritrefs="true"/>
+	</target>
+
+	<target name="soapui.prepareTest">
+		<log level="INFO" msg="Preparing test ${test.setup.file}" />
+		<antcall target="soapui.replaceSoapUiParameters">
+			<param name="testsuite.file" value="${test.setup.file}" />
+			<param name="test.setup.filename" value="${test.setup.filename}"/>
+		</antcall>
+	</target>
+
+	<!-- ATTENTION. Works only with ANT 1.9 when using Java 1.8! -->
+	<target name="soapui.invokeTest" >
+		<log level="INFO" msg="Invoking test '${test.setup.file}'" />
+		<property name="testsuite.file.generated" value="${soapui.tmpTestDir.package}/${test.setup.filename}.xml"/>
+		<exec dir="${soapUI.home}/bin" executable="${soapUI.home}/bin/testrunner.bat" resultproperty="test.state" failonerror="false" failifexecutionfails="false">
+			<arg value="-rajf" />
+			<arg path="${soapui.tmpTestDir.package}" />
+			<arg path="${testsuite.file.generated}" />
+		</exec>
+		<if>
+			<equals arg1="0" arg2="${test.state}" />
+			<then>
+				<log level="INFO" msg="SoapUI Test ${test.setup.file} succeeded" />
+			</then>
+			<else>
+				<log level="ERROR" msg="SoapUI Test ${test.setup.file} failed. See ${test.package.reports.dir} for details" />
+				<fail>SoapUI Test ${test.setup.file} failed.</fail>
+			</else>
+		</if>
+	</target>
+
+
+	<target name="soapui.replaceSoapUiParameters">
+		<!-- first copy the test suite file to tmp location -->
+		<log level="DEBUG" msg="Copying tmp SoapUi test from '${testsuite.file}' tofile '${testsuite.file.generated}'"/>
+		<copy file="${testsuite.file}" todir="${soapui.tmpTestDir.package}" />
+		<property name="testsuite.file.generated" value="${soapui.tmpTestDir.package}/${test.setup.filename}.xml"/>
+		<!-- replace target host parameters -->
+		<log level="DEBUG" msg="Replacing endpoint in test file '${testsuite.file.generated}' with host:port = ${is.host}:${is.port}"/>
+		<xmltask source="${testsuite.file.generated}" dest="${testsuite.file.generated}">
+			<regexp path="//con:endpoint/text()" pattern="(\w+)://([^/;\?#]+)(?:/?([^;\?#]+))?" replace="$1://${is.host}:${is.port}/$3" />
+		</xmltask>
+	</target>
+
+</project>

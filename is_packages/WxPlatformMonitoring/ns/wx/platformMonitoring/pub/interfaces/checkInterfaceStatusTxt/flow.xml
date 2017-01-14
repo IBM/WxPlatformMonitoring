@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<FLOW VERSION="3.0" CLEANUP="true">
+  <COMMENT></COMMENT>
+
+  <!-- nodes -->
+
+<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.pub.interfaces:checkInterfaceStatus" VALIDATE-IN="$none" VALIDATE-OUT="$none">
+  <COMMENT>output via DSP as simple txt</COMMENT>
+
+  <!-- nodes -->
+
+<MAP MODE="OUTPUT">
+</MAP>
+</INVOKE>
+</FLOW>

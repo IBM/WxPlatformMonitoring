@@ -1,0 +1,9 @@
+{
+	"interfaces": [{
+		"interface": "asdf",
+		"interval": "123"
+	},{
+		"interface": "i2",
+		"interval": "345"
+	}]
+}

@@ -1,0 +1,179 @@
+<project name="wxplatformmonitoring" basedir="." default="buildAndDistributeWxPlatformMonitoringPackage">
+	<!--
+	<property name="version" value="99"/>
+	-->
+	<property name="version" value="912"/>
+	<property file="build_${version}.properties" />
+
+	<property name="build.dir" value="build/${version}" />
+	<property name="build.dir.java" value="${build.dir}/java" />
+	<property name="classes.dir.java" value="${build.dir.java}/classes" />
+
+
+	<property name="wxplatformmonitoring.package.home" value="is_packages/wxplatformmonitoring" />
+	<property name="build.dir.package" value="${build.dir}/package" />
+
+	<property name="svn.installation.path" value="c:/Program Files/SlikSvn/bin" />
+
+	<path id="build.classpath">
+		<fileset dir="libs">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${wm.home}/common/lib">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${wm.home}/IntegrationServer/lib">
+			<include name="**/*.jar" />
+			<exclude name="**/WxIntercptor*.jar" />
+		</fileset>
+	</path>
+
+	<taskdef name="xmltask" classname="com.oopsconsultancy.xmltask.ant.XmlTask" classpathref="build.classpath" />
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties" classpathref="build.classpath" />
+	<taskdef resource="net/sf/antcontrib/antlib.xml">
+		<classpath refid="build.classpath" />
+	</taskdef>
+	<taskdef name="log" classname="com.sag.wm.ant.tasks.is.util.TALogger" classpathref="build.classpath" />
+
+	<import file="build_Test_SoapUI.xml" />
+	<import file="build_common.xml" />
+
+	<target name="jcode">
+		<property name="wxplatformmonitoringTmp" value="${is.home}/packages/WxPlatformMonitoring_Tmp" />
+		<delete dir="${wxplatformmonitoringTmp}">
+		</delete>
+		<mkdir dir="${wxplatformmonitoringTmp}" />
+		<copy todir="${wxplatformmonitoringTmp}">
+			<fileset dir="${wxplatformmonitoring.package.home}" includes="**">
+			</fileset>
+		</copy>
+
+		<exec resultproperty="jcodeResult" failonerror="true" executable="${is.home}/bin/jcode.bat" dir="${is.home}/bin/" output="jcode.log">
+			<arg value="makeall" />
+			<arg line="WxPlatformMonitoring_Tmp" />
+		</exec>
+		<fail message="Jcode ended with error">
+			<condition>
+				<resourcecontains resource="jcode.log" substring=" errors" />
+			</condition>
+		</fail>
+		<echo>Result from jcode: ${jcodeResult}</echo>
+
+		<!-- delete the tmp file -->
+		<delete file="${wxplatformmonitoringTmp_mathJarPath}" />
+
+		<delete dir="${wxplatformmonitoring.package.home}">
+		</delete>
+		<copy todir="${wxplatformmonitoring.package.home}">
+			<fileset dir="${wxplatformmonitoringTmp}" includes="**">
+			</fileset>
+		</copy>
+		<delete dir="${wxplatformmonitoringTmp}">
+		</delete>
+	</target>
+
+	<target name="clean.package">
+		<delete dir="${build.dir.package}" />
+		<mkdir dir="${build.dir.package}" />
+	</target>
+
+	<target name="buildWxPlatformMonitoring">
+		<property name="version.num" value="1.0" />
+		<antcallback target="svnversion" return="svnversion" />
+		<property name="build.number" value="${svnversion}" />
+		<tstamp>
+			<format property="TODAY" pattern="yyyy-MM-dd HH:mm:ss" />
+		</tstamp>
+		<antcall target="buildWxPlatformMonitoringsPackage" />
+	</target>
+
+	<target name="distWxPlatformMonitoring" depends="buildWxPlatformMonitoring">
+		<antcall target="distWxPlatformMonitoringPackage" />
+	</target>
+
+	<target name="distWxPlatformMonitoringPackage">
+		<copy file="${build.dir.package}/WxPlatformMonitoring.zip" todir="${is.home}/replicate/inbound" />
+		<!--<copy file="${build.dir.package}/WxPlatformMonitoring_Test.zip" todir="${is.home}/replicate/inbound" />-->
+	</target>
+
+
+	<target name="buildWxPlatformMonitoringsPackage" depends="clean.package, jcode">
+		<xmltask source="${wxplatformmonitoring.package.home}/manifest.v3" dest="${wxplatformmonitoring.package.home}/manifest.v3">
+			<replace path="Values/value[@name='version']/text()" withText="${version.num}" />
+			<remove path="Values/value[@name='build']" />
+			<insert path="Values">
+				<![CDATA[<value name="build">${build.number}</value>]]></insert>
+		</xmltask>
+		<!--<zip destfile="${build.dir.package}/WxPlatformMonitoring_Test.zip" basedir="${wxplatformmonitoring.package.home}_Test" />-->
+		<zip destfile="${build.dir.package}/WxPlatformMonitoring.zip" basedir="${wxplatformmonitoring.package.home}" />
+	</target>
+
+	<target name="buildAndDistributeWxPlatformMonitoringPackage" depends="buildWxPlatformMonitoringsPackage, distWxPlatformMonitoringPackage">
+	</target>
+
+	<target name="buildAndDistributeWxPlatformMonitoringPackageAsSymLink" depends="buildWxPlatformMonitoringsPackage, installPackageAsSymLink">
+	</target>
+	
+	<target name="fetchWxPlatformMonitoringPackageFromIntegrationServer">
+		<delete dir="${wxplatformmonitoring.package.home}" />
+		<copy todir="${wxplatformmonitoring.package.home}">
+			<fileset dir="${is.home}/packages/WxPlatformMonitoring">
+			</fileset>
+		</copy>
+		<!--
+		<delete dir="${wxplatformmonitoring.package.home}_Test" />
+		<copy todir="${wxplatformmonitoring.package.home}_Test">
+			<fileset dir="${is.home}/packages/WxPlatformMonitoring_Test">
+			</fileset>
+		</copy>
+		-->
+	</target>
+	
+	
+	<target name="svnversion">
+		<exec executable="${svn.installation.path}/svnversion.exe" outputproperty="svnversionRaw" />
+		<propertyregex property="svnversion" input="${svnversionRaw}" regexp=":" replace="_" global="true" />
+		<echo message="Using svnversion ${svnversion}" />
+	</target>
+	
+	<condition property="isUnix">
+			  <os family="unix"/>
+			</condition>
+	
+	<target name="installPackageAsSymLink">
+		<condition property="isUnix">
+			<os family="unix"/>
+		</condition>
+		<if>
+			<isset property="isUnix"/>
+			<then>
+				<pathconvert targetos="unix" property="isInstallationPackageDirUnix">
+				    <path location="${is.home}/packages"/>
+				</pathconvert>
+				<pathconvert targetos="unix" property="is_packagesLocalUnix">
+				    <path location="./is_packages"/>
+				</pathconvert>
+				<symlink link="${isInstallationPackageDirUnix}/WxPlatformMonitoring" resource="${is_packagesLocalUnix}/WxPlatformMonitoring"/>
+			</then>
+			<else>
+				<pathconvert targetos="windows" property="isInstallationPackageDirWin">
+				    <path location="${is.home}/packages"/>
+				</pathconvert>
+				<pathconvert targetos="windows" property="is_packagesLocalWin">
+				    <path location="./is_packages"/>
+				</pathconvert>
+				<exec executable="cmd.exe" output="symlink.out" >
+				  <arg line="/c MKLINK /D ${isInstallationPackageDirWin}\WxPlatformMonitoring ${is_packagesLocalWin}\WxPlatformMonitoring"/>
+				</exec>
+			</else>
+		</if>
+	</target>
+	
+	<!--
+	<target name="test">
+		<log level="INFO" msg="Starting SOAP UI Tests" />
+		<log level="DEBUG" msg="ATTENTION: Make sure that all services in WxPlatformMonitoring_Test have ExecuteACL=Anonymous" />
+		<antcall target="soapui.startTest_SoapUI" inheritall="true" inheritrefs="true" />
+	</target>
+	-->
+</project>
