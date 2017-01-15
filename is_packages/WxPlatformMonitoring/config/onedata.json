@@ -1,0 +1,9 @@
+{
+	"onedata": {
+		"config": {
+			"host": "localhost",
+			"port": "9090",
+			"restPath": "/rest"
+		}
+	}
+}

@@ -1,7 +1,7 @@
 package wx.platformMonitoring.impl;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-01-15 15:10:24 CET
+// -----( CREATED: 2017-01-15 19:22:08 CET
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
@@ -35,6 +35,60 @@ public final class config
 
 	// ---( server methods )---
 
+
+
+
+	public static final void getAdapterMonitoringConfig (IData pipeline)
+        throws ServiceException
+	{
+		// --- <<IS-START(getAdapterMonitoringConfig)>> ---
+		// @sigtype java 3.5
+		// [o] recref:0:required adapterMonitoringConfig wx.platformMonitoring.impl.adapter:AdapterMonitoringConfig
+		if( configAdapters == null ) {
+			configAdapters = getConfig("adapters.json");
+		}
+		JsonObject adapters = configAdapters.asObject().get("adapters").asObject();
+		JsonArray jdbcConnections = adapters.get("jdbc").asObject().get("connections").asArray();
+		JsonObject jSap = adapters.get("sap").asObject();
+		JsonArray sapConnections = adapters.get("sap").asObject().get("connections").asArray();
+		JsonArray sapNotifications = adapters.get("sap").asObject().get("connections").asArray();
+		JsonArray sapListeners = adapters.get("sap").asObject().get("connections").asArray();
+		
+		// pipeline
+		IDataCursor pipelineCursor = pipeline.getCursor();
+		// adapterMonitoringConfig
+		IData	adapterMonitoringConfig = IDataFactory.create();
+		IDataCursor adapterMonitoringConfigCursor = adapterMonitoringConfig.getCursor();
+		
+		// adapterMonitoringConfig.jdbc
+		IData	jdbc = IDataFactory.create();
+		IDataCursor jdbcCursor = jdbc.getCursor();
+		String[]	connections = new String[jdbcConnections.size()];
+		for( int i=0; i<connections.length; i++ ) {
+			connections[i] = jdbcConnections.get(i).asString();
+		}
+		IDataUtil.put( jdbcCursor, "connections", connections );
+		jdbcCursor.destroy();
+		IDataUtil.put( adapterMonitoringConfigCursor, "jdbc", jdbc );
+		// adapterMonitoringConfig.sap
+		IData	sap = IDataFactory.create();
+		IDataCursor sapCursor = sap.getCursor();
+		String[]	sapConns = new String[sapConnections.size()];
+		for( int i=0; i<sapConns.length; i++ ) {
+			sapConns[i] = sapConnections.get(i).asString();
+		}
+		IDataUtil.put( sapCursor, "connections", sapConns );
+		sapCursor.destroy();
+		IDataUtil.put( adapterMonitoringConfigCursor, "sap", sap );
+				
+		adapterMonitoringConfigCursor.destroy();
+		IDataUtil.put( pipelineCursor, "adapterMonitoringConfig", adapterMonitoringConfig );
+		pipelineCursor.destroy();
+			
+		// --- <<IS-END>> ---
+
+                
+	}
 
 
 
@@ -152,6 +206,35 @@ public final class config
 
 
 
+	public static final void getOnedataConfig (IData pipeline)
+        throws ServiceException
+	{
+		// --- <<IS-START(getOnedataConfig)>> ---
+		// @sigtype java 3.5
+		// [o] recref:0:required onedataConnectionData wx.platformMonitoring.impl.onedata:OnedataConnectionData
+		if(configOnedata == null ) {
+			configOnedata = getConfig("onedata.json");
+		}
+		JsonObject onedata = configOnedata.asObject().get("onedata").asObject().get("config").asObject();
+		// pipeline
+		IDataCursor pipelineCursor = pipeline.getCursor();
+		// onedataConnectionData
+		IData	onedataConnectionData = IDataFactory.create();
+		IDataCursor onedataConnectionDataCursor = onedataConnectionData.getCursor();
+		IDataUtil.put( onedataConnectionDataCursor, "host", onedata.get("host").asString() );
+		IDataUtil.put( onedataConnectionDataCursor, "port", onedata.get("port").asString( ));
+		IDataUtil.put( onedataConnectionDataCursor, "restPath", onedata.get("restPath").asString( ));
+		onedataConnectionDataCursor.destroy();
+		IDataUtil.put( pipelineCursor, "onedataConnectionData", onedataConnectionData );
+		pipelineCursor.destroy();
+			
+		// --- <<IS-END>> ---
+
+                
+	}
+
+
+
 	public static final void parseConfig (IData pipeline)
         throws ServiceException
 	{
@@ -196,6 +279,8 @@ public final class config
 	static JsonArray interfaces = null;
 	static JsonValue configBroker = null;
 	static JsonValue configBrokerMonitoring = null;
+	static JsonValue configAdapters = null;
+	static JsonValue configOnedata = null;
 	
 	private static JsonValue getConfig(String configFileName) throws ServiceException {
 		String configFilename = configFileName;

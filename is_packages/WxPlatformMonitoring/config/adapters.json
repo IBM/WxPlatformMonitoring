@@ -1,7 +1,12 @@
 {
 	"adapters": {
 		"jdbc": {
-			"connectionsEnabled": ["/Package2/", "/Pacakge2/"]
+			"connections": ["jdbc.dkmsCore.connections:DKMSCoreConnection", "jdbc.dkmsWebforms.connections.pl:WebformsConnecctionPL"]
+		},
+		"sap": {
+			"connections": ["sap.dkmsCore.connections:DKMSCoreConnection", "sap.dkmsWebforms.connections.pl:WebformsConnecctionPL"],
+			"listeners": ["sap.dkmsCore.connections:DKMSCoreConnection", "sap.dkmsWebforms.connections.pl:WebformsConnecctionPL"],
+			"notifications": ["sap.dkmsCore.connections:DKMSCoreConnection", "sap.dkmsWebforms.connections.pl:WebformsConnecctionPL"]		
 		}
 	}
 }
