@@ -1,0 +1,20 @@
+{
+	"broker": {
+		"config": {
+			"server_port": "localhost:6849",
+			"brokerName": "Broker #1",
+			"brokerAppName": "IntegrationServer",
+			"brokerClientGroup": "admin"
+		},
+		"monitoring": {
+			"clients": [{
+				"clientName": "J_jRQtEolDEurgAVIwwwADXaZQs__wx.platformMonitoring_Test.pub.broker.trigger_testMessagingTrigger",
+				"maxElementsQueued": "345"
+			}],
+			"allClients": {
+				"queueSizeBytes.threshold.warn": "123",
+				"queueSizeBytes.threshold.fatal": "123"
+			}
+		}
+	}
+}

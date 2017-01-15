@@ -1,0 +1,18 @@
+{
+	"broker": {
+		"monitoring": {
+			"clients": [{
+				"clientName": "J_jRQtEolDEurgAVIwwwADXaZQs__wx.platformMonitoring_Test.pub.broker.trigger_testMessagingTrigger",
+				"maxElementsQueuedThreshold": "345"
+			},
+			{
+				"clientName": "MessagingTrigger",
+				"maxElementsQueuedThreshold": "546"
+			}],
+			"allClients": {
+				"queueSizeBytes.threshold.warn": "123",
+				"queueSizeBytes.threshold.critical": "123"
+			}
+		}
+	}
+}

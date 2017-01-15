@@ -6,12 +6,27 @@
   <value name="node_nsName">wx.platformMonitoring.impl.config</value>
   <value name="is_public">false</value>
   <value name="encodeutf8">true</value>
-  <value name="shared">c3RhdGljIEpzb25BcnJheSBpbnRlcmZhY2VzID0gbnVsbDsKCnByaXZhdGUgc3RhdGljIHZvaWQg
-Y2FsbFBhcnNlQ29uZmlnKCkgewoKCS8vIGlucHV0CglJRGF0YSBpbnB1dCA9IElEYXRhRmFjdG9y
-eS5jcmVhdGUoKTsKCgkvLyBvdXRwdXQKCUlEYXRhIAlvdXRwdXQgPSBJRGF0YUZhY3RvcnkuY3Jl
-YXRlKCk7Cgl0cnl7CgkJb3V0cHV0ID0gU2VydmljZS5kb0ludm9rZSggInd4LnBsYXRmb3JtTW9u
-aXRvcmluZy5pbXBsLmNvbmZpZyIsICJwYXJzZUNvbmZpZyIsIGlucHV0ICk7Cgl9Y2F0Y2goIEV4
-Y2VwdGlvbiBlKXt9Cgp9</value>
+  <value name="shared">c3RhdGljIEpzb25BcnJheSBpbnRlcmZhY2VzID0gbnVsbDsKc3RhdGljIEpzb25WYWx1ZSBjb25m
+aWdCcm9rZXIgPSBudWxsOwpzdGF0aWMgSnNvblZhbHVlIGNvbmZpZ0Jyb2tlck1vbml0b3Jpbmcg
+PSBudWxsOwoKcHJpdmF0ZSBzdGF0aWMgSnNvblZhbHVlIGdldENvbmZpZyhTdHJpbmcgY29uZmln
+RmlsZU5hbWUpIHRocm93cyBTZXJ2aWNlRXhjZXB0aW9uIHsKCVN0cmluZyBjb25maWdGaWxlbmFt
+ZSA9IGNvbmZpZ0ZpbGVOYW1lOwoJRmlsZSBjb25maWdGaWxlID0gbmV3IEZpbGUoU2VydmVyQVBJ
+LmdldFBhY2thZ2VDb25maWdEaXIoIld4UGxhdGZvcm1Nb25pdG9yaW5nIiksCgkJCWNvbmZpZ0Zp
+bGVuYW1lKTsKCWphdmEuaW8uUmVhZGVyIHJlYWRlcjsKCXRyeSB7CgkJcmVhZGVyID0gbmV3IEZp
+bGVSZWFkZXIoY29uZmlnRmlsZSk7CgkJcmV0dXJuIEpzb24ucGFyc2UocmVhZGVyKTsKCX0gY2F0
+Y2ggKEZpbGVOb3RGb3VuZEV4Y2VwdGlvbiBmbmZlKSB7CgkJLy8gVE9ETyBBdXRvLWdlbmVyYXRl
+ZCBjYXRjaCBibG9jawoJCWZuZmUucHJpbnRTdGFja1RyYWNlKCk7CgkJdGhyb3cgbmV3IFNlcnZp
+Y2VFeGNlcHRpb24oIkZpbGVOb3RGb3VuZEV4Y2VwdGlvbjogQ291bGQgbm90IHJlYWQgc3RhbmRh
+cmQganNvbiBpbnRlcmZhY2VzIGNvbmZpZyBmaWxlIGZyb20gV3hQbGF0Zm9ybU1vbml0b3Jpbmcv
+Y29uZmlnLyIgKyBjb25maWdGaWxlbmFtZSArICI6ICIgKyBmbmZlKTsKCX0gY2F0Y2goIElPRXhj
+ZXB0aW9uIGlvZSApIHsKCQl0aHJvdyBuZXcgU2VydmljZUV4Y2VwdGlvbigiSU9FeGNlcHRpb246
+IENvdWxkIG5vdCByZWFkIHN0YW5kYXJkIGpzb24gaW50ZXJmYWNlcyBjb25maWcgZmlsZSBmcm9t
+IFd4UGxhdGZvcm1Nb25pdG9yaW5nL2NvbmZpZy8iICsgY29uZmlnRmlsZW5hbWUgKyAiOiAiICsg
+aW9lKTsKCX0KfQoKcHJpdmF0ZSBzdGF0aWMgdm9pZCBjYWxsUGFyc2VDb25maWcoKSB7CgoJLy8g
+aW5wdXQKCUlEYXRhIGlucHV0ID0gSURhdGFGYWN0b3J5LmNyZWF0ZSgpOwoKCS8vIG91dHB1dAoJ
+SURhdGEgCW91dHB1dCA9IElEYXRhRmFjdG9yeS5jcmVhdGUoKTsKCXRyeXsKCQlvdXRwdXQgPSBT
+ZXJ2aWNlLmRvSW52b2tlKCAid3gucGxhdGZvcm1Nb25pdG9yaW5nLmltcGwuY29uZmlnIiwgInBh
+cnNlQ29uZmlnIiwgaW5wdXQgKTsKCX1jYXRjaCggRXhjZXB0aW9uIGUpe30KCn0=</value>
   <value name="extends"></value>
   <array name="implements" type="value" depth="1">
   </array>
@@ -22,8 +37,10 @@ Y2VwdGlvbiBlKXt9Cgp9</value>
     <value>java.io.IOException</value>
     <value>com.eclipsesource.json.Json</value>
     <value>com.eclipsesource.json.JsonArray</value>
+    <value>com.eclipsesource.json.JsonObject</value>
     <value>com.eclipsesource.json.JsonValue</value>
     <value>com.wm.app.b2b.server.ServerAPI</value>
     <value>com.wm.data.IData</value>
+    <value>com.wm.data.IDataFactory</value>
   </array>
 </Values>

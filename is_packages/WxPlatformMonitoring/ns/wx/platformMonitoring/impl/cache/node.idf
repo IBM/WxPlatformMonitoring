@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="node_type">interface</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_nsName">wx.platformMonitoring.impl.cache</value>
+  <value name="is_public">false</value>
+  <value name="shared">cHVibGljIHN0YXRpYyBmaW5hbCBTdHJpbmcgQ0FDSEVfS0VZID0gInRlc3RWYWx1ZSI7CgpwdWJs
+aWMgc3RhdGljIENhY2hlIGdldFRlc3RDYWNoZSgpIHsKCVN0cmluZyBjYWNoZU1hbmFnZXJOYW1l
+ID0gIk9yZGVyQ2FjaGVNYW5hZ2VyIjsKCVN0cmluZyBjYWNoZU5hbWUgPSAiVGVzdENhY2hlIjsK
+CQoJcmV0dXJuIENhY2hlTWFuYWdlclV0aWwuZ2V0Q2FjaGVNYW5hZ2VyKGNhY2hlTWFuYWdlck5h
+bWUpLmdldENhY2hlKGNhY2hlTmFtZSk7Cn0KCnN0YXRpYyB2b2lkIHB1dEluQ2FjaGUoQ2FjaGUg
+Y2FjaGUsIFRlc3RDYWNoZUVudHJ5IHRjZSkgewoJRWxlbWVudCBlID0gbmV3IEVsZW1lbnQoQ0FD
+SEVfS0VZLCB0Y2UpOwoJY2FjaGUucHV0KGUpOwp9Cgk=</value>
+  <value name="encodeutf8">true</value>
+  <value name="extends"></value>
+  <array name="implements" type="value" depth="1">
+  </array>
+  <array name="imports" type="value" depth="1">
+    <value>net.sf.ehcache.Cache</value>
+    <value>net.sf.ehcache.CacheManager</value>
+    <value>net.sf.ehcache.Element</value>
+    <value>net.sf.ehcache.search.Attribute</value>
+    <value>net.sf.ehcache.search.Query</value>
+    <value>net.sf.ehcache.search.Result</value>
+    <value>net.sf.ehcache.search.Results</value>
+    <value>net.sf.ehcache.search.expression.Criteria</value>
+    <value>com.wm.app.b2b.server.cache.CacheManagerUtil</value>
+    <value>com.softwareag.cache.admin.TestCacheEntry</value>
+    <value>net.sf.ehcache.store.MemoryStoreEvictionPolicy</value>
+    <value>net.sf.ehcache.store.FifoPolicy</value>
+  </array>
+</Values>

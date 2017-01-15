@@ -1,0 +1,10 @@
+{
+	"broker": {
+		"config": {
+			"brokerURI": "localhost:6849",
+			"brokerName": "Broker #1",
+			"brokerAppName": "IntegrationServer",
+			"brokerClientGroup": "admin"
+		}
+	}
+}

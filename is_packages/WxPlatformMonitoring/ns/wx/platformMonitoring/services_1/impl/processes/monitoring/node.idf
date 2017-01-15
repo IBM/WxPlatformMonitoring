@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="node_type">interface</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_nsName">wx.platformMonitoring.services_1.impl.processes.monitoring</value>
+  <value name="is_public">false</value>
+  <value name="shared">cHJpdmF0ZSBzdGF0aWMgY2xhc3MgU3RlcFNwZWMgewogICAgcHJpdmF0ZSBTdHJpbmcgc3RlcElk
+OwogICAgcHJpdmF0ZSBTdHJpbmcgc3RlcE5hbWU7CiAgICBwcml2YXRlIFN0ZXBTcGVjKFN0cmlu
+ZyBpZCwgU3RyaW5nIG5hbWUpIHsKICAgICAgICBzdGVwSWQgPSBpZDsKICAgICAgICBzdGVwTmFt
+ZSA9IG5hbWU7CiAgICB9CiAgICBwdWJsaWMgU3RyaW5nIGdldFN0ZXBJZCgpIHsKICAgICAgICBy
+ZXR1cm4gc3RlcElkOwogICAgfQogICAgcHVibGljIFN0cmluZyBnZXRTdGVwTmFtZSgpIHsKICAg
+ICAgICByZXR1cm4gc3RlcE5hbWU7CiAgICB9CiAgICAKICAgIEBPdmVycmlkZQogICAgcHVibGlj
+IFN0cmluZyB0b1N0cmluZygpIHsKICAgICAgICByZXR1cm4gc3RlcElkOwogICAgfQp9CgovLyBC
+ZXNjaHJlaWJ1bmcgZWluZXMgUHJvemVzc2VzCnByaXZhdGUgc3RhdGljIGNsYXNzIFByb2Nlc3NT
+cGVjIHsKICAgIC8qKiBBbGxlIFNjaHJpdHRlLCBkaWUgbWluZGVzdGVucyBlaW5tYWwgZHVyY2hs
+YXVmZW4gc2VpbiBtw7xzc2VuIC0tIGVnYWwgaW4gd2VsY2hlciBQcm96ZXNzaXRlcmF0aW9uICov
+CiAgICBwcml2YXRlIFN0ZXBTcGVjW10gaW5jbFN0ZXBzOwoKICAgIC8qKiBTY2hyaXR0ZSwgZGll
+IGluIGRlciBsZXR6dGVuIFByb3plc3NpdGVyYXRpb24gbmljaHQgZHVyY2hsYXVmZW4gc2VpbiBk
+w7xyZmVuICovCiAgICBwcml2YXRlIFN0ZXBTcGVjW10gZXhjbFN0ZXBzOwoKICAgIHB1YmxpYyBQ
+cm9jZXNzU3BlYyhTdGVwU3BlY1tdIGluY2xTdGVwcywgU3RlcFNwZWNbXSBleGNsU3RlcHMpIHsK
+ICAgICAgICB0aGlzLmluY2xTdGVwcyA9IGluY2xTdGVwczsKICAgICAgICB0aGlzLmV4Y2xTdGVw
+cyA9IGV4Y2xTdGVwczsKICAgIH0KICAgIAogICAgQE92ZXJyaWRlCiAgICBwdWJsaWMgU3RyaW5n
+IHRvU3RyaW5nKCkgewogICAgICAgIHJldHVybiAiSW5jbFN0ZXBzOiAiICsgaW5jbFN0ZXBzICsg
+IiwgRXhjbFN0ZXBzOiAiICsgZXhjbFN0ZXBzOwogICAgfQp9Cg==</value>
+  <value name="encodeutf8">true</value>
+  <value name="extends"></value>
+  <array name="implements" type="value" depth="1">
+  </array>
+  <array name="imports" type="value" depth="1">
+    <value>java.util.List</value>
+    <value>java.util.ArrayList</value>
+    <value>java.util.Set</value>
+    <value>java.util.HashSet</value>
+    <value>java.util.Map</value>
+    <value>java.util.HashMap</value>
+    <value>java.util.Date</value>
+  </array>
+</Values>

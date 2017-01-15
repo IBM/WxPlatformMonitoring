@@ -1,0 +1,7 @@
+{
+	"adapters": {
+		"jdbc": {
+			"connectionsEnabled": ["/Package2/", "/Pacakge2/"]
+		}
+	}
+}
