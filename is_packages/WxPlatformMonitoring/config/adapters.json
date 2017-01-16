@@ -4,9 +4,9 @@
 			"connections": ["jdbc.dkmsCore.connections:DKMSCoreConnection", "jdbc.dkmsWebforms.connections.pl:WebformsConnecctionPL"]
 		},
 		"sap": {
-			"connections": ["sap.dkmsCore.connections:DKMSCoreConnection", "sap.dkmsWebforms.connections.pl:WebformsConnecctionPL"],
-			"listeners": ["sap.dkmsCore.connections:DKMSCoreConnection", "sap.dkmsWebforms.connections.pl:WebformsConnecctionPL"],
-			"notifications": ["sap.dkmsCore.connections:DKMSCoreConnection", "sap.dkmsWebforms.connections.pl:WebformsConnecctionPL"]		
+			"connections": ["sap.conn.connections:DKMSCoreConnection", "sap.conn.connections.pl:WebformsConnecctionPL"],
+			"listeners": ["sap.listener.connections:DKMSCoreConnection", "sap.listener.connections.pl:WebformsConnecctionPL"],
+			"notifications": ["sap.notification.connections:DKMSCoreConnection", "sap.notification.connections.pl:WebformsConnecctionPL"]		
 		}
 	}
 }

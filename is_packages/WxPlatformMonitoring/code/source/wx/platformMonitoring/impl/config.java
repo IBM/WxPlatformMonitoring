@@ -1,7 +1,7 @@
 package wx.platformMonitoring.impl;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-01-15 19:22:08 CET
+// -----( CREATED: 2017-01-16 09:50:32 CET
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
@@ -44,15 +44,13 @@ public final class config
 		// --- <<IS-START(getAdapterMonitoringConfig)>> ---
 		// @sigtype java 3.5
 		// [o] recref:0:required adapterMonitoringConfig wx.platformMonitoring.impl.adapter:AdapterMonitoringConfig
-		if( configAdapters == null ) {
-			configAdapters = getConfig("adapters.json");
-		}
+		JsonValue configAdapters =getConfig("adapters.json");
 		JsonObject adapters = configAdapters.asObject().get("adapters").asObject();
 		JsonArray jdbcConnections = adapters.get("jdbc").asObject().get("connections").asArray();
 		JsonObject jSap = adapters.get("sap").asObject();
-		JsonArray sapConnections = adapters.get("sap").asObject().get("connections").asArray();
-		JsonArray sapNotifications = adapters.get("sap").asObject().get("connections").asArray();
-		JsonArray sapListeners = adapters.get("sap").asObject().get("connections").asArray();
+		JsonArray jSapConnections = jSap.get("connections").asArray();
+		JsonArray jSapNotifications = jSap.get("notifications").asArray();
+		JsonArray jSapListeners = jSap.get("listeners").asArray();
 		
 		// pipeline
 		IDataCursor pipelineCursor = pipeline.getCursor();
@@ -73,11 +71,21 @@ public final class config
 		// adapterMonitoringConfig.sap
 		IData	sap = IDataFactory.create();
 		IDataCursor sapCursor = sap.getCursor();
-		String[]	sapConns = new String[sapConnections.size()];
-		for( int i=0; i<sapConns.length; i++ ) {
-			sapConns[i] = sapConnections.get(i).asString();
+		String[]	sapConnections = new String[jSapConnections.size()];
+		String[]	sapNotifications = new String[jSapNotifications.size()];
+		String[]	sapListeners = new String[jSapListeners.size()];
+		for( int i=0; i<sapConnections.length; i++ ) {
+			sapConnections[i] = jSapConnections.get(i).asString();
 		}
-		IDataUtil.put( sapCursor, "connections", sapConns );
+		for( int i=0; i<sapNotifications.length; i++ ) {
+			sapNotifications[i] = jSapNotifications.get(i).asString();
+		}
+		for( int i=0; i<sapListeners.length; i++ ) {
+			sapListeners[i] = jSapListeners.get(i).asString();
+		}
+		IDataUtil.put( sapCursor, "connections", sapConnections );
+		IDataUtil.put( sapCursor, "notifications", sapNotifications );
+		IDataUtil.put( sapCursor, "listeners", sapListeners );
 		sapCursor.destroy();
 		IDataUtil.put( adapterMonitoringConfigCursor, "sap", sap );
 				
@@ -98,9 +106,7 @@ public final class config
 		// --- <<IS-START(getBrokerConfig)>> ---
 		// @sigtype java 3.5
 		// [o] recref:0:required brokerConnectionData wx.platformMonitoring.impl.broker:BrokerConnectionData
-	if( configBroker == null ) {
-		configBroker = getConfig("brokerConfig.json");
-	}
+	JsonValue configBroker =getConfig("brokerConfig.json");
 	JsonObject brokerConfig = configBroker.asObject().get("broker").asObject().get("config").asObject();
 	// pipeline
 	IDataCursor pipelineCursor = pipeline.getCursor();
@@ -128,9 +134,7 @@ public final class config
 		// --- <<IS-START(getBrokerMonitoringConfig)>> ---
 		// @sigtype java 3.5
 		// [o] recref:0:required brokerMonitoringConfig wx.platformMonitoring.impl.broker:BrokerMonitoringData
-		if( configBrokerMonitoring == null ) {
-			configBrokerMonitoring = getConfig("brokerMonitoring.json");
-		}
+		JsonValue configBrokerMonitoring =getConfig("brokerMonitoring.json");
 		JsonObject jMonitoring = configBrokerMonitoring.asObject().get("broker").asObject().get("monitoring").asObject();
 		JsonArray jClients = jMonitoring.get("clients").asArray();
 		JsonObject jAllClients = jMonitoring.get("allClients").asObject();
@@ -171,6 +175,41 @@ public final class config
 
 
 
+	public static final void getInterfaceConfig (IData pipeline)
+        throws ServiceException
+	{
+		// --- <<IS-START(getInterfaceConfig)>> ---
+		// @sigtype java 3.5
+		// [o] recref:0:required interfacesMonitoringConfig wx.platformMonitoring.impl.interfaces:InterfacesMonitoringConfig
+		JsonArray jInterfaces = getConfig("interfaces.json").asObject().get("interfaces").asArray();
+		// pipeline
+		IDataCursor pipelineCursor = pipeline.getCursor();
+		
+		// interfacesMonitoringConfig
+		IData	interfacesMonitoringConfig = IDataFactory.create();
+		IDataCursor interfacesMonitoringConfigCursor = interfacesMonitoringConfig.getCursor();
+		
+		// interfacesMonitoringConfig.interfaces
+		IData[]	interfaces = new IData[jInterfaces.size()];
+		for( int i=0; i<jInterfaces.size(); i++ ) {
+			interfaces[i] = IDataFactory.create();
+			IDataCursor interfacesCursor = interfaces[i].getCursor();
+			IDataUtil.put( interfacesCursor, "interface", jInterfaces.get(i).asObject().get("interface").asString() );
+			IDataUtil.put( interfacesCursor, "interval", jInterfaces.get(i).asObject().get("interval").asString());
+			interfacesCursor.destroy();
+		}
+		IDataUtil.put( interfacesMonitoringConfigCursor, "interfaces", interfaces );
+		interfacesMonitoringConfigCursor.destroy();
+		IDataUtil.put( pipelineCursor, "interfacesMonitoringConfig", interfacesMonitoringConfig );
+		pipelineCursor.destroy();
+			
+		// --- <<IS-END>> ---
+
+                
+	}
+
+
+
 	public static final void getIntervalForInterface (IData pipeline)
         throws ServiceException
 	{
@@ -183,13 +222,8 @@ public final class config
 		if( interfaceName == null || "".equals(interfaceName) ) {
 			throw new ServiceException("Provide an interface to lookup the interval for.");
 		}
-		if( interfaces == null ) {
-			callParseConfig();
-			if( interfaces == null ) {
-				throw new ServiceException("Config cannot be read. Use wx.platformMonitoring.impl.config:parseConfig");
-			}
-		}
-		for (JsonValue i : interfaces) {
+		JsonValue interfaces = getConfig("interfaces.json");
+		for (JsonValue i : interfaces.asArray()) {
 		  String name = i.asObject().get("interface").asString();
 		  if( name.equals(interfaceName) ) {
 			  IDataUtil.put(pipelineC, "interval", i.asObject().get("interval").asString());
@@ -212,9 +246,7 @@ public final class config
 		// --- <<IS-START(getOnedataConfig)>> ---
 		// @sigtype java 3.5
 		// [o] recref:0:required onedataConnectionData wx.platformMonitoring.impl.onedata:OnedataConnectionData
-		if(configOnedata == null ) {
-			configOnedata = getConfig("onedata.json");
-		}
+		JsonValue configOnedata = getConfig("onedata.json");
 		JsonObject onedata = configOnedata.asObject().get("onedata").asObject().get("config").asObject();
 		// pipeline
 		IDataCursor pipelineCursor = pipeline.getCursor();
@@ -235,26 +267,65 @@ public final class config
 
 
 
-	public static final void parseConfig (IData pipeline)
+	public static final void getSchedulersConfig (IData pipeline)
         throws ServiceException
 	{
-		// --- <<IS-START(parseConfig)>> ---
+		// --- <<IS-START(getSchedulersConfig)>> ---
 		// @sigtype java 3.5
-		String configFilename = "interfaces.json";
-		File configFile = new File(ServerAPI.getPackageConfigDir("WxPlatformMonitoring"),
-				configFilename);
-		java.io.Reader reader;
-		try {
-			reader = new FileReader(configFile);
-			JsonValue json = Json.parse(reader);
-			interfaces = json.asObject().get("interfaces").asArray();
-		} catch (FileNotFoundException fnfe) {
-			// TODO Auto-generated catch block
-			fnfe.printStackTrace();
-			throw new ServiceException("FileNotFoundException: Could not read standard json interfaces config file from WxPlatformMonitoring/config/" + configFilename + ": " + fnfe);
-		} catch( IOException ioe ) {
-			throw new ServiceException("IOException: Could not read standard json interfaces config file from WxPlatformMonitoring/config/" + configFilename + ": " + ioe);
-		}
+		// [o] recref:0:required schedulerMonitoringConfig wx.platformMonitoring.impl.scheduler:SchedulerMonitoringConfig
+	JsonValue configSchedulers = getConfig("schedulers.json");
+	JsonArray jSchedulers = configSchedulers.asObject().get("schedulers").asArray();
+	// pipeline
+	IDataCursor pipelineCursor = pipeline.getCursor();
+	// schedulerMonitoringConfig
+	IData	schedulerMonitoringConfig = IDataFactory.create();
+	IDataCursor schedulerMonitoringConfigCursor = schedulerMonitoringConfig.getCursor();
+	String[]	schedulers = new String[jSchedulers.size()];
+	for( int i=0; i<schedulers.length; i++ ) {
+		schedulers[i] = jSchedulers.get(i).asString();
+	}
+	IDataUtil.put( schedulerMonitoringConfigCursor, "schedulers", schedulers );
+	schedulerMonitoringConfigCursor.destroy();
+	IDataUtil.put( pipelineCursor, "schedulerMonitoringConfig", schedulerMonitoringConfig );
+	pipelineCursor.destroy();
+
+	
+		// --- <<IS-END>> ---
+
+                
+	}
+
+
+
+	public static final void getTriggersConfig (IData pipeline)
+        throws ServiceException
+	{
+		// --- <<IS-START(getTriggersConfig)>> ---
+		// @sigtype java 3.5
+		// [o] recref:0:required triggerMonitoringConfig wx.platformMonitoring.impl.trigger:TriggerMonitoringConfig
+	JsonValue configTriggers = configs.get("triggers");
+	JsonArray jMessagingTriggers = configTriggers.asObject().get("messagingTriggers").asArray();
+	JsonArray jJmsTriggers = configTriggers.asObject().get("jmsTriggers").asArray();
+	// pipeline
+	IDataCursor pipelineCursor = pipeline.getCursor();
+	// schedulerMonitoringConfig
+	IData	triggerMonitoringConfig = IDataFactory.create();
+	IDataCursor triggerMonitoringConfigCursor = triggerMonitoringConfig.getCursor();
+	String[]	messagingTriggers = new String[jMessagingTriggers.size()];
+	for( int i=0; i<messagingTriggers.length; i++ ) {
+		messagingTriggers[i] = jMessagingTriggers.get(i).asString();
+	}
+	IDataUtil.put( triggerMonitoringConfigCursor, "messagingTriggers", messagingTriggers );
+	String[]	jmsTriggers = new String[jJmsTriggers.size()];
+	for( int i=0; i<jmsTriggers.length; i++ ) {
+		jmsTriggers[i] = jJmsTriggers.get(i).asString();
+	}
+	IDataUtil.put( triggerMonitoringConfigCursor, "jmsTriggers", jmsTriggers );
+	triggerMonitoringConfigCursor.destroy();
+	IDataUtil.put( pipelineCursor, "triggerMonitoringConfig", triggerMonitoringConfig );
+	pipelineCursor.destroy();
+
+	
 		// --- <<IS-END>> ---
 
                 
@@ -267,36 +338,39 @@ public final class config
 	{
 		// --- <<IS-START(reloadConfig)>> ---
 		// @sigtype java 3.5
-		interfaces = null;
-		configBroker = null;
-		configBrokerMonitoring = null;
+		configs.clear();
 		// --- <<IS-END>> ---
 
                 
 	}
 
 	// --- <<IS-START-SHARED>> ---
-	static JsonArray interfaces = null;
-	static JsonValue configBroker = null;
-	static JsonValue configBrokerMonitoring = null;
-	static JsonValue configAdapters = null;
-	static JsonValue configOnedata = null;
+	//	static JsonArray interfaces = null;
+	//	static JsonValue configBroker = null;
+	//	static JsonValue configBrokerMonitoring = null;
+	//	static JsonValue configAdapters = null;
+	//	static JsonValue configOnedata = null;
+	//	static JsonValue configSchedulers = null;
+	//	static JsonValue configTriggers = null;
+	static java.util.Map<String, JsonValue> configs = new java.util.HashMap<String, JsonValue>();
 	
 	private static JsonValue getConfig(String configFileName) throws ServiceException {
-		String configFilename = configFileName;
-		File configFile = new File(ServerAPI.getPackageConfigDir("WxPlatformMonitoring"),
-				configFilename);
-		java.io.Reader reader;
-		try {
-			reader = new FileReader(configFile);
-			return Json.parse(reader);
-		} catch (FileNotFoundException fnfe) {
-			// TODO Auto-generated catch block
-			fnfe.printStackTrace();
-			throw new ServiceException("FileNotFoundException: Could not read standard json interfaces config file from WxPlatformMonitoring/config/" + configFilename + ": " + fnfe);
-		} catch( IOException ioe ) {
-			throw new ServiceException("IOException: Could not read standard json interfaces config file from WxPlatformMonitoring/config/" + configFilename + ": " + ioe);
+		if( !configs.containsKey(configFileName) ) {
+			File configFile = new File(ServerAPI.getPackageConfigDir("WxPlatformMonitoring"),
+					configFileName);
+			java.io.Reader reader;
+			try {
+				reader = new FileReader(configFile);
+				return Json.parse(reader);
+			} catch (FileNotFoundException fnfe) {
+				// TODO Auto-generated catch block
+				fnfe.printStackTrace();
+				throw new ServiceException("FileNotFoundException: Could not read standard json interfaces config file from WxPlatformMonitoring/config/" + configFileName + ": " + fnfe);
+			} catch( IOException ioe ) {
+				throw new ServiceException("IOException: Could not read standard json interfaces config file from WxPlatformMonitoring/config/" + configFileName + ": " + ioe);
+			}
 		}
+		return configs.get(configFileName);
 	}
 	
 	private static void callParseConfig() {
