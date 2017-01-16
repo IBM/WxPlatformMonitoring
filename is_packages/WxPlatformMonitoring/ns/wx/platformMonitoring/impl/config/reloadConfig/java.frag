@@ -3,5 +3,5 @@
 <Values version="2.0">
   <value name="name">reloadConfig</value>
   <value name="encodeutf8">true</value>
-  <value name="body">Y29uZmlncy5jbGVhcigpOw==</value>
+  <value name="body">X2NvbmZpZ3MuY2xlYXIoKTs=</value>
 </Values>

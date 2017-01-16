@@ -1,7 +1,7 @@
 package wx.platformMonitoring.impl;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-01-16 09:50:32 CET
+// -----( CREATED: 2017-01-16 10:48:53 CET
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
@@ -303,7 +303,7 @@ public final class config
 		// --- <<IS-START(getTriggersConfig)>> ---
 		// @sigtype java 3.5
 		// [o] recref:0:required triggerMonitoringConfig wx.platformMonitoring.impl.trigger:TriggerMonitoringConfig
-	JsonValue configTriggers = configs.get("triggers");
+	JsonValue configTriggers = getConfig("triggers.json");
 	JsonArray jMessagingTriggers = configTriggers.asObject().get("messagingTriggers").asArray();
 	JsonArray jJmsTriggers = configTriggers.asObject().get("jmsTriggers").asArray();
 	// pipeline
@@ -338,7 +338,7 @@ public final class config
 	{
 		// --- <<IS-START(reloadConfig)>> ---
 		// @sigtype java 3.5
-		configs.clear();
+		_configs.clear();
 		// --- <<IS-END>> ---
 
                 
@@ -352,16 +352,16 @@ public final class config
 	//	static JsonValue configOnedata = null;
 	//	static JsonValue configSchedulers = null;
 	//	static JsonValue configTriggers = null;
-	static java.util.Map<String, JsonValue> configs = new java.util.HashMap<String, JsonValue>();
+	static java.util.Map<String, JsonValue> _configs = new java.util.HashMap<String, JsonValue>();
 	
 	private static JsonValue getConfig(String configFileName) throws ServiceException {
-		if( !configs.containsKey(configFileName) ) {
+		if( !_configs.containsKey(configFileName) ) {
 			File configFile = new File(ServerAPI.getPackageConfigDir("WxPlatformMonitoring"),
 					configFileName);
 			java.io.Reader reader;
 			try {
 				reader = new FileReader(configFile);
-				return Json.parse(reader);
+				_configs.put(configFileName, Json.parse(reader));
 			} catch (FileNotFoundException fnfe) {
 				// TODO Auto-generated catch block
 				fnfe.printStackTrace();
@@ -370,7 +370,7 @@ public final class config
 				throw new ServiceException("IOException: Could not read standard json interfaces config file from WxPlatformMonitoring/config/" + configFileName + ": " + ioe);
 			}
 		}
-		return configs.get(configFileName);
+		return _configs.get(configFileName);
 	}
 	
 	private static void callParseConfig() {
