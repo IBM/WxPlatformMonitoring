@@ -1,4 +1,6 @@
 {
-	"messagingTriggers": ["BDAS_Processes.BDAS_TestProcess.BDAS_TestProcess_1.local_910:transitionTrigger", "wm.prt.status:controlTrigger"],
-	"jmsTriggers": ["simpleTestPackage.services.filepolling.test.jms:getAddressTopic", "jtrigger2"]
+	"triggers": {
+		"messagingTriggers": ["BDAS_Processes.BDAS_TestProcess.BDAS_TestProcess_1.local_910:transitionTrigger", "wm.prt.status:controlTrigger"],
+		"jmsTriggers": ["simpleTestPackage.services.filepolling.test.jms:getAddressTopic", "jtrigger2"]
+	}
 }

@@ -1,7 +1,7 @@
 package wx.platformMonitoring.impl;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-01-16 10:48:53 CET
+// -----( CREATED: 2017-01-20 16:59:14 CET
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
@@ -267,6 +267,53 @@ public final class config
 
 
 
+	public static final void getPortsConfig (IData pipeline)
+        throws ServiceException
+	{
+		// --- <<IS-START(getPortsConfig)>> ---
+		// @sigtype java 3.5
+		// [o] recref:0:required portMonitoringConfig wx.platformMonitoring.impl.port:PortMonitoringConfig
+	JsonValue configPorts = getConfig("ports.json");
+	JsonObject jPort = configPorts.asObject().get("ports").asObject();
+	JsonArray jPorts = jPort.get("ports").asArray();
+	JsonArray jPackages = jPort.get("packages").asArray();
+	JsonArray jPortAliases = jPort.get("portAliases").asArray();
+	// pipeline
+	IDataCursor pipelineCursor = pipeline.getCursor();
+	// schedulerMonitoringConfig
+	IData	portMonitoringConfig = IDataFactory.create();
+	IDataCursor portMonitoringConfigCursor = portMonitoringConfig.getCursor();
+	
+	String[]	packages = new String[jPackages.size()];
+	for( int i=0; i<packages.length; i++ ) {
+		packages[i] = jPackages.get(i).asString();
+	}
+	IDataUtil.put( portMonitoringConfigCursor, "packages", packages );
+	
+	String[]	ports = new String[jPorts.size()];
+	for( int i=0; i<ports.length; i++ ) {
+		ports[i] = jPorts.get(i).asString();
+	}
+	IDataUtil.put( portMonitoringConfigCursor, "ports", ports );
+	
+	String[]	portAliases = new String[jPortAliases.size()];
+	for( int i=0; i<portAliases.length; i++ ) {
+		portAliases[i] = jPortAliases.get(i).asString();
+	}
+	IDataUtil.put( portMonitoringConfigCursor, "portAliases", portAliases );
+	
+	portMonitoringConfigCursor.destroy();
+	IDataUtil.put( pipelineCursor, "portMonitoringConfig", portMonitoringConfig );
+	pipelineCursor.destroy();
+
+	
+		// --- <<IS-END>> ---
+
+                
+	}
+
+
+
 	public static final void getSchedulersConfig (IData pipeline)
         throws ServiceException
 	{
@@ -304,8 +351,9 @@ public final class config
 		// @sigtype java 3.5
 		// [o] recref:0:required triggerMonitoringConfig wx.platformMonitoring.impl.trigger:TriggerMonitoringConfig
 	JsonValue configTriggers = getConfig("triggers.json");
-	JsonArray jMessagingTriggers = configTriggers.asObject().get("messagingTriggers").asArray();
-	JsonArray jJmsTriggers = configTriggers.asObject().get("jmsTriggers").asArray();
+	JsonObject jTriggers = configTriggers.asObject().get("triggers").asObject();
+	JsonArray jMessagingTriggers = jTriggers.get("messagingTriggers").asArray();
+	JsonArray jJmsTriggers = jTriggers.get("jmsTriggers").asArray();
 	// pipeline
 	IDataCursor pipelineCursor = pipeline.getCursor();
 	// schedulerMonitoringConfig
@@ -345,13 +393,7 @@ public final class config
 	}
 
 	// --- <<IS-START-SHARED>> ---
-	//	static JsonArray interfaces = null;
-	//	static JsonValue configBroker = null;
-	//	static JsonValue configBrokerMonitoring = null;
-	//	static JsonValue configAdapters = null;
-	//	static JsonValue configOnedata = null;
-	//	static JsonValue configSchedulers = null;
-	//	static JsonValue configTriggers = null;
+	
 	static java.util.Map<String, JsonValue> _configs = new java.util.HashMap<String, JsonValue>();
 	
 	private static JsonValue getConfig(String configFileName) throws ServiceException {

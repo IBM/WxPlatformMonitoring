@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="node_type">interface</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_nsName">wx.platformMonitoring.impl.um</value>
+  <value name="is_public">false</value>
+  <value name="encodeutf8">true</value>
+  <value name="shared"></value>
+  <value name="extends"></value>
+  <array name="implements" type="value" depth="1">
+  </array>
+  <array name="imports" type="value" depth="1">
+    <value>java.util.Enumeration</value>
+    <value>com.pcbsys.nirvana.client.nIllegalArgumentException</value>
+    <value>com.pcbsys.nirvana.client.nSessionAttributes</value>
+    <value>com.pcbsys.nirvana.nAdminAPI.nBaseAdminException</value>
+    <value>com.pcbsys.nirvana.nAdminAPI.nLeafNode</value>
+    <value>com.pcbsys.nirvana.nAdminAPI.nNode</value>
+    <value>com.pcbsys.nirvana.nAdminAPI.nRealmNode</value>
+    <value>com.wm.data.IData</value>
+  </array>
+</Values>
