@@ -68,6 +68,7 @@ ICAgICAgICAgICAgICAgcmV0dXJuIC0xOwogICAgICAgICAgICB9Cgp9</value>
     <value>javax.jms.Destination</value>
     <value>com.pcbsys.nirvana.client.nChannel</value>
     <value>com.pcbsys.nirvana.client.nChannelAttributes</value>
+    <value>com.pcbsys.nirvana.client.nFindResult</value>
     <value>com.pcbsys.nirvana.client.nNamedObject</value>
     <value>com.pcbsys.nirvana.client.nQueue</value>
     <value>com.pcbsys.nirvana.client.nQueueDetails</value>

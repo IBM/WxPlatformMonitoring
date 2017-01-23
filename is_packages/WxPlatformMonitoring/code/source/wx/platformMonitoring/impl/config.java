@@ -1,7 +1,7 @@
 package wx.platformMonitoring.impl;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-01-20 16:59:14 CET
+// -----( CREATED: 2017-01-23 20:34:35 CET
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
@@ -350,30 +350,55 @@ public final class config
 		// --- <<IS-START(getTriggersConfig)>> ---
 		// @sigtype java 3.5
 		// [o] recref:0:required triggerMonitoringConfig wx.platformMonitoring.impl.trigger:TriggerMonitoringConfig
-	JsonValue configTriggers = getConfig("triggers.json");
-	JsonObject jTriggers = configTriggers.asObject().get("triggers").asObject();
-	JsonArray jMessagingTriggers = jTriggers.get("messagingTriggers").asArray();
-	JsonArray jJmsTriggers = jTriggers.get("jmsTriggers").asArray();
-	// pipeline
-	IDataCursor pipelineCursor = pipeline.getCursor();
-	// schedulerMonitoringConfig
-	IData	triggerMonitoringConfig = IDataFactory.create();
-	IDataCursor triggerMonitoringConfigCursor = triggerMonitoringConfig.getCursor();
-	String[]	messagingTriggers = new String[jMessagingTriggers.size()];
-	for( int i=0; i<messagingTriggers.length; i++ ) {
-		messagingTriggers[i] = jMessagingTriggers.get(i).asString();
-	}
-	IDataUtil.put( triggerMonitoringConfigCursor, "messagingTriggers", messagingTriggers );
-	String[]	jmsTriggers = new String[jJmsTriggers.size()];
-	for( int i=0; i<jmsTriggers.length; i++ ) {
-		jmsTriggers[i] = jJmsTriggers.get(i).asString();
-	}
-	IDataUtil.put( triggerMonitoringConfigCursor, "jmsTriggers", jmsTriggers );
-	triggerMonitoringConfigCursor.destroy();
-	IDataUtil.put( pipelineCursor, "triggerMonitoringConfig", triggerMonitoringConfig );
-	pipelineCursor.destroy();
-
-	
+		/*
+		 * Maybe remove maxElementsQueued and put this is a separate UM config. This is about if a trigger
+		 * is enabled or not, which is independent from UM or Broker as a messaging system. But the storage
+		 * size is very much Messaging Bus dependent, plus the user has to provide the connection details,
+		 * which differ very much between Broker and UM. And there is already the Broker specific config
+		 * which also checks the queue size....
+		 */
+		
+		JsonValue configTriggers = getConfig("triggers.json");
+			JsonObject jTriggers = configTriggers.asObject().get("triggers").asObject();
+			JsonArray jMessagingTriggers = jTriggers.get("messagingTriggers").asArray();
+			JsonArray jJmsTriggers = jTriggers.get("jmsTriggers").asArray();
+			// pipeline
+			IDataCursor pipelineCursor = pipeline.getCursor();
+			// schedulerMonitoringConfig
+			IData	triggerMonitoringConfig = IDataFactory.create();
+			IDataCursor triggerMonitoringConfigCursor = triggerMonitoringConfig.getCursor();
+			
+			IData[]	jmsTriggers = new IData[jJmsTriggers.size()];
+			IDataCursor jmsTriggersC = null;
+			for( int i=0; i<jmsTriggers.length; i++ ) {
+				jmsTriggers[i] = IDataFactory.create();
+				jmsTriggersC = jmsTriggers[i].getCursor();
+				IDataUtil.put(jmsTriggersC, "name", jJmsTriggers.get(i).asObject().get("name").asString());
+				if( jJmsTriggers.get(i).asObject().get("maxElementsQueued") != null ) {
+					IDataUtil.put(jmsTriggersC, "maxElementsQueued", jJmsTriggers.get(i).asObject().get("maxElementsQueued").asString());
+				}
+				jmsTriggersC.destroy();
+			}
+			IDataUtil.put( triggerMonitoringConfigCursor, "jmsTriggers", jmsTriggers );
+			
+			IData[]	messagingTriggers = new IData[jMessagingTriggers.size()];
+			IDataCursor messagingTriggersC = null;
+			for( int i=0; i<messagingTriggers.length; i++ ) {
+				messagingTriggers[i] = IDataFactory.create();
+				messagingTriggersC = messagingTriggers[i].getCursor();
+				IDataUtil.put(messagingTriggersC, "name", jMessagingTriggers.get(i).asObject().get("name").asString());
+				if( jMessagingTriggers.get(i).asObject().get("maxElementsQueued") != null ) {
+					IDataUtil.put(messagingTriggersC, "maxElementsQueued", jMessagingTriggers.get(i).asObject().get("maxElementsQueued").asString());
+				}
+				messagingTriggersC.destroy();
+			}
+			IDataUtil.put( triggerMonitoringConfigCursor, "messagingTriggers", messagingTriggers );
+			
+			triggerMonitoringConfigCursor.destroy();
+			IDataUtil.put( pipelineCursor, "triggerMonitoringConfig", triggerMonitoringConfig );
+			pipelineCursor.destroy();
+		
+			
 		// --- <<IS-END>> ---
 
                 

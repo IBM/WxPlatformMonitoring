@@ -1,7 +1,7 @@
 package wx.platformMonitoring.impl;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-01-23 18:56:21 CET
+// -----( CREATED: 2017-01-23 19:37:52 CET
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
@@ -14,6 +14,7 @@ import java.util.Enumeration;
 import javax.jms.Destination;
 import com.pcbsys.nirvana.client.nChannel;
 import com.pcbsys.nirvana.client.nChannelAttributes;
+import com.pcbsys.nirvana.client.nFindResult;
 import com.pcbsys.nirvana.client.nNamedObject;
 import com.pcbsys.nirvana.client.nQueue;
 import com.pcbsys.nirvana.client.nQueueDetails;
@@ -48,6 +49,113 @@ public final class nAdmin
 
 	// ---( server methods )---
 
+
+
+
+	public static final void getQueuedElementsChannel (IData pipeline)
+        throws ServiceException
+	{
+		// --- <<IS-START(getQueuedElementsChannel)>> ---
+		// @sigtype java 3.5
+		// [i] field:0:required RNAME
+		// [i] field:0:required topicName
+		// [o] field:0:required outstandingEvents
+		// [o] field:0:required isSharedDurable {"true","false"}
+		try {
+			
+			// pipeline
+			IDataCursor pipelineCursor = pipeline.getCursor();
+			String	RNAME = IDataUtil.getString( pipelineCursor, "RNAME" );
+			String	channelName = IDataUtil.getString( pipelineCursor, "channelName" );
+			
+			if( RNAME == null || "".equals(RNAME) )  {
+				throw new ServiceException("RNAME must not be empty. Provide like: 'nsp://host:port'.");
+			}
+			if( channelName == null || "".equals(channelName) ) {
+				throw new ServiceException("channelName must not be null.");
+			}
+			
+			nSessionAttributes nsa=new nSessionAttributes(RNAME);
+			nSession      mySession = nSessionFactory.create(nsa);
+			mySession.init();
+		
+			nChannelAttributes attrib = new nChannelAttributes();
+		    attrib.setName(channelName);
+		    nChannel channel = mySession.findChannel(attrib);
+		    if( channel.getNamedObjects().length != 0 ) {
+		    	IDataUtil.put(pipelineCursor, "outstandingEvents", channel.getNamedObjects()[0].getSharedNamedObjectOutstandingEvents() + "");
+		    	IDataUtil.put(pipelineCursor, "isSharedDurable", "true");
+		    } else {
+		    	IDataUtil.put(pipelineCursor, "outstandingEvents", channel.getEventCount() + "");
+		    	IDataUtil.put(pipelineCursor, "isSharedDurable", "false");
+		    }
+		    pipelineCursor.destroy();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new ServiceException(e);
+		}
+		
+			
+		// --- <<IS-END>> ---
+
+                
+	}
+
+
+
+	public static final void getQueuedElementsJms (IData pipeline)
+        throws ServiceException
+	{
+		// --- <<IS-START(getQueuedElementsJms)>> ---
+		// @sigtype java 3.5
+		// [i] field:0:required RNAME
+		// [i] field:0:required topicName
+		// [o] field:0:required outstandingEvents
+		try {
+			
+			// pipeline
+			IDataCursor pipelineCursor = pipeline.getCursor();
+			String	RNAME = IDataUtil.getString( pipelineCursor, "RNAME" );
+			String	jmsQueueName = IDataUtil.getString( pipelineCursor, "jmsQueueName" );
+			
+			if( RNAME == null || "".equals(RNAME) )  {
+				throw new ServiceException("RNAME must not be empty. Provide like: 'nsp://host:port'.");
+			}
+			if( jmsQueueName == null || "".equals(jmsQueueName) ) {
+				throw new ServiceException("jmsQueueName must not be null.");
+			}
+			
+			nSessionAttributes nsa=new nSessionAttributes(RNAME);
+			nSession mySession = nSessionFactory.create(nsa);
+			mySession.init();
+		
+			nChannelAttributes attrib = new nChannelAttributes();
+		    attrib.setName(jmsQueueName);
+		    nFindResult[] findResult = mySession.find(new nChannelAttributes[] {attrib});
+		    if( findResult.length == 0 ) {
+		    	throw new ServiceException("JMS queue " + jmsQueueName + " was not found on realm " + RNAME);
+		    }
+		    if( findResult[0].isChannel() ) {
+		    	IDataUtil.put( pipelineCursor, "topicName", jmsQueueName );
+		    	getQueuedElementsChannel(pipeline);
+		    } else if( findResult[1].isQueue() ) {
+		    	IDataUtil.put( pipelineCursor, "queueName", jmsQueueName );
+		    	getQueuedElementsJmsQueue(pipeline);
+		    } else {
+		    	throw new ServiceException("JMS queue " + jmsQueueName + " on realm " + RNAME + " is neither queue nor channel.");
+		    }
+		    pipelineCursor.destroy();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new ServiceException(e);
+		}
+		// --- <<IS-END>> ---
+
+                
+	}
 
 
 
@@ -177,7 +285,7 @@ public final class nAdmin
 		    nChannel channel = mySession.findChannel(attrib);
 		    for( nNamedObject no : channel.getNamedObjects() ) {
 		    	// we expect that a native messaging trigger (and therefore UM queue only has one named object, i.e. the trigger client id
-		    	IDataUtil.put(pipelineCursor, "getNamedObject", no.getSharedNamedObjectOutstandingEvents());
+		    	IDataUtil.put(pipelineCursor, "outstandingEvents", no.getSharedNamedObjectOutstandingEvents() + "");
 		    }
 		    pipelineCursor.destroy();
 		} catch (Exception e) {
