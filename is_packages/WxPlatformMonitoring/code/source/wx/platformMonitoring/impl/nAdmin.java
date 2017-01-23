@@ -1,7 +1,7 @@
 package wx.platformMonitoring.impl;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-01-23 16:46:34 CET
+// -----( CREATED: 2017-01-23 18:56:21 CET
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
@@ -11,22 +11,28 @@ import com.wm.app.b2b.server.ServiceException;
 // --- <<IS-START-IMPORTS>> ---
 import java.util.ArrayList;
 import java.util.Enumeration;
+import javax.jms.Destination;
 import com.pcbsys.nirvana.client.nChannel;
 import com.pcbsys.nirvana.client.nChannelAttributes;
 import com.pcbsys.nirvana.client.nNamedObject;
 import com.pcbsys.nirvana.client.nQueue;
+import com.pcbsys.nirvana.client.nQueueDetails;
 import com.pcbsys.nirvana.client.nSession;
 import com.pcbsys.nirvana.client.nSessionAttributes;
+import com.pcbsys.nirvana.client.nSessionFactory;
 import com.pcbsys.nirvana.nAdminAPI.nContainer;
 import com.pcbsys.nirvana.nAdminAPI.nLeafNode;
 import com.pcbsys.nirvana.nAdminAPI.nNode;
+import com.pcbsys.nirvana.server.store.nNamedSubscriber;
 import com.softwareag.util.IDataMap;
+import com.wm.app.b2b.server.dispatcher.DispatchFacade;
+import com.wm.app.b2b.server.jms.ConnectionAlias;
+import com.wm.app.b2b.server.jms.JMSSubsystem;
+import com.wm.app.b2b.server.jms.RuntimeConfiguration;
 import com.wm.data.IData;
 import com.wm.data.IDataCursor;
 import com.wm.data.IDataFactory;
 import com.wm.data.IDataUtil;
-import com.pcbsys.nirvana.server.store.nNamedSubscriber;
-import com.pcbsys.nirvana.client.nSessionFactory;
 // --- <<IS-END-IMPORTS>> ---
 
 public final class nAdmin
@@ -50,74 +56,130 @@ public final class nAdmin
 	{
 		// --- <<IS-START(getQueuedElementsJmsQueue)>> ---
 		// @sigtype java 3.5
+		// [i] field:0:required RNAME
+		// [i] field:0:required queueName
+		// [o] field:0:required outstandingEvents
+		// [o] field:0:required queueStorageSize
 		try {
 			
 			// pipeline
 			IDataCursor pipelineCursor = pipeline.getCursor();
 			String	RNAME = IDataUtil.getString( pipelineCursor, "RNAME" );
-			pipelineCursor.destroy();
-		
-			// pipeline
-		
-		
+			String	queueName = IDataUtil.getString( pipelineCursor, "queueName" );
+			
+			if( RNAME == null || "".equals(RNAME) )  {
+				throw new ServiceException("RNAME must not be empty. Provide like: 'nsp://host:port'.");
+			}
+			if( queueName == null || "".equals(queueName) ) {
+				throw new ServiceException("queueName must not be null.");
+			}
+			
 			nSessionAttributes nsa=new nSessionAttributes(RNAME);
-		
-		//			nRealmNode realm = new nRealmNode(nsa);			
-		//			
-		//			realm.waitForEntireNameSpace();
-			
-			ArrayList<IData> nodeList = new ArrayList<IData>();
 			nSession      mySession = nSessionFactory.create(nsa);
-					mySession.init();
-		//					traverseNodes(realm, nodeList, mySession);
-							for(nChannelAttributes ncaint :mySession.getChannels()){
-						    	IDataMap idm = new IDataMap(IDataFactory.create());
-						    	idm.put("Name", ncaint.getName());
-						    	if(ncaint.getChannelMode()==nChannelAttributes.CHANNEL_MODE){
-						    		nChannel nc = mySession.findChannel(ncaint);
-						    		idm.put("Type", "Topic");
-						    		idm.put("Size", "0");
-						    		
-									nodeList.add(idm.getIData());
+			mySession.init();
 		
-									
-								    
-								    nNamedObject[] durableSubscribers = nc.getNamedObjects();
-									System.err.println("UM:    "+nc.getName()+" - "+durableSubscribers.length);	    
-							    for(nNamedObject nNamedObject : durableSubscribers){
-							    	idm = new IDataMap(IDataFactory.create());
-									idm.put("Name", nc.getName()+"/"+nNamedObject.getName());
-									idm.put("Type", "Durable");
-									idm.put("Size", findHiddenQueue(nc.getName(),nNamedObject.getName(),mySession));
-		//									idm.put("Stored", findHiddenQueue(nc.getName(),nNamedObject.getName(),mySession));
-		//									idm.put("Current", nNamedObject.getEID());
-									nodeList.add(idm.getIData());
-							    }
-				
-						    	}else{
-						    		nQueue nq = mySession.findQueue(ncaint);
-						    		idm.put("Type", "Queue");
-						    		idm.put("Size", nq.size());
-									nodeList.add(idm.getIData());
+			nChannelAttributes attrib = new nChannelAttributes();
+		    attrib.setName(queueName);
+		    nQueue queue = mySession.findQueue(attrib);
+		    nQueueDetails details = queue.getDetails();
+		    IDataUtil.put(pipelineCursor, "outstandingEvents", details.getNoOfEvents() + "");
+		    IDataUtil.put(pipelineCursor, "queueStorageSize", details.getTotalMemorySize() + "");
+		    pipelineCursor.destroy();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new ServiceException(e);
+		}
 		
-						    		}
-				//				    	nChannel nc = mySession.findChannel(ncaint);
-				//				    	if(nc!=null && ncaint.getChannelMode()==nChannelAttributes.QUEUE_MODE)
-				//				    		idm.put("Size", nc.getQueueSize());
-								
-				//						idm.put("Stored", chan.getQueueSize());
-		//										idm.put("Current", chan.getLastEID());
-						    }
-					
-					
-		//				idm.put("con", "Leaf Node "+leaf.getName()+" is a channel"+leaf.getCurrentNumberOfEvents());
-					
-					
-			mySession.close();
 			
-			IDataUtil.put(pipeline.getCursor(), "RealmOverview", nodeList.toArray(new IData[nodeList.size()]));
+		// --- <<IS-END>> ---
+
+                
+	}
+
+
+
+	public static final void getQueuedElementsJmsTopic (IData pipeline)
+        throws ServiceException
+	{
+		// --- <<IS-START(getQueuedElementsJmsTopic)>> ---
+		// @sigtype java 3.5
+		// [i] field:0:required RNAME
+		// [i] field:0:required topicName
+		// [o] field:0:required outstandingEvents
+		try {
 			
+			// pipeline
+			IDataCursor pipelineCursor = pipeline.getCursor();
+			String	RNAME = IDataUtil.getString( pipelineCursor, "RNAME" );
+			String	topicName = IDataUtil.getString( pipelineCursor, "topicName" );
 			
+			if( RNAME == null || "".equals(RNAME) )  {
+				throw new ServiceException("RNAME must not be empty. Provide like: 'nsp://host:port'.");
+			}
+			if( topicName == null || "".equals(topicName) ) {
+				throw new ServiceException("topicName must not be null.");
+			}
+			
+			nSessionAttributes nsa=new nSessionAttributes(RNAME);
+			nSession      mySession = nSessionFactory.create(nsa);
+			mySession.init();
+		
+			nChannelAttributes attrib = new nChannelAttributes();
+		    attrib.setName(topicName);
+		    nChannel channel = mySession.findChannel(attrib);
+		    IDataUtil.put(pipelineCursor, "outstandingEvents", channel.getEventCount() + "");
+		    pipelineCursor.destroy();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new ServiceException(e);
+		}
+		
+			
+		// --- <<IS-END>> ---
+
+                
+	}
+
+
+
+	public static final void getQueuedElementsSharedDurable (IData pipeline)
+        throws ServiceException
+	{
+		// --- <<IS-START(getQueuedElementsSharedDurable)>> ---
+		// @sigtype java 3.5
+		// [i] field:0:required RNAME
+		// [i] field:0:required channelName
+		// [o] field:0:required outstandingEvents
+		try {
+			
+			// pipeline
+			IDataCursor pipelineCursor = pipeline.getCursor();
+			String	RNAME = IDataUtil.getString( pipelineCursor, "RNAME" );
+			String	channelName = IDataUtil.getString( pipelineCursor, "channelName" );
+			
+			if( RNAME == null || "".equals(RNAME) )  {
+				throw new ServiceException("RNAME must not be empty. Provide like: 'nsp://host:port'.");
+			}
+			if( channelName == null || "".equals(channelName) ) {
+				throw new ServiceException("channelName must not be null.");
+			}
+			
+			nSessionAttributes nsa=new nSessionAttributes(RNAME);
+			nSession      mySession = nSessionFactory.create(nsa);
+			mySession.init();
+		
+			nChannelAttributes attrib = new nChannelAttributes();
+		    attrib.setName(channelName);
+		    nChannel channel = mySession.findChannel(attrib);
+		    for( nNamedObject no : channel.getNamedObjects() ) {
+		    	// we expect that a native messaging trigger (and therefore UM queue only has one named object, i.e. the trigger client id
+		    	IDataUtil.put(pipelineCursor, "getNamedObject", no.getSharedNamedObjectOutstandingEvents());
+		    }
+		    pipelineCursor.destroy();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
