@@ -1,7 +1,7 @@
 package wx.platformMonitoring.impl;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-01-19 14:51:13 CET
+// -----( CREATED: 2017-01-23 16:34:59 CET
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
@@ -40,9 +40,9 @@ public final class um
 	{
 		// --- <<IS-START(getOutstandingJmsQueueEvents)>> ---
 		// @sigtype java 3.5
-		String queueName = "jmsQueueDurable";
+		String queueName = "jmsQueue";
 		
-		String[] RNAME={"nsp://localhost:9001"};
+		String[] RNAME={"nsp://localhost:9000"};
 		nSessionAttributes nsa;
 		try {
 			nsa = new nSessionAttributes(RNAME);

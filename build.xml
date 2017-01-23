@@ -150,11 +150,7 @@
 		
 	</target>
 	
-
 	<target name="installPackageAsSymLink">
-		<!--
-		<antcall target="deletePackageSymLink">
-			-->
 		<antcall target="createSymLink">
 			<param name="link" value="${is.home}/packages/${packageName}"/>
 			<param name="resource" value="./is_packages/${packageName}"/>
