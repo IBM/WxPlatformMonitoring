@@ -140,30 +140,53 @@
 			  <os family="unix"/>
 			</condition>
 	
+	<target name="installPackagesAsSymLink">
+		<antcall target="installPackageAsSymLink">
+			<param name="packageName" value="WxPlatformMonitoring"/>
+		</antcall>
+		<antcall target="installPackageAsSymLink">
+			<param name="packageName" value="WxPlatformMonitoring_Test"/>
+		</antcall>
+		
+	</target>
+	
+
 	<target name="installPackageAsSymLink">
+		<!--
+		<antcall target="deletePackageSymLink">
+			-->
+		<antcall target="createSymLink">
+			<param name="link" value="${is.home}/packages/${packageName}"/>
+			<param name="resource" value="./is_packages/${packageName}"/>
+		</antcall>
+	</target>
+	
+	<target name="createSymLink" depends="">
 		<condition property="isUnix">
 			<os family="unix"/>
 		</condition>
 		<if>
 			<isset property="isUnix"/>
 			<then>
-				<pathconvert targetos="unix" property="isInstallationPackageDirUnix">
-				    <path location="${is.home}/packages"/>
+				<pathconvert targetos="unix" property="linkUnix">
+				    <path location="${link}"/>
 				</pathconvert>
-				<pathconvert targetos="unix" property="is_packagesLocalUnix">
-				    <path location="./is_packages"/>
+				<pathconvert targetos="unix" property="resourceUnix">
+				    <path location="${resource}"/>
 				</pathconvert>
-				<symlink link="${isInstallationPackageDirUnix}/WxPlatformMonitoring" resource="${is_packagesLocalUnix}/WxPlatformMonitoring"/>
+				<symlink link="${linkUnix}" resource="${resourceUnix}"/>
 			</then>
 			<else>
-				<pathconvert targetos="windows" property="isInstallationPackageDirWin">
-				    <path location="${is.home}/packages"/>
+				<pathconvert targetos="windows" property="linkWin">
+				    <path location="${link}"/>
 				</pathconvert>
-				<pathconvert targetos="windows" property="is_packagesLocalWin">
-				    <path location="./is_packages"/>
+				<pathconvert targetos="windows" property="resourceWin">
+				    <path location="${resource}"/>
 				</pathconvert>
+				<property name="cmd" value="/c MKLINK /D &quot;${linkWin}&quot; &quot;${resourceWin}&quot;"/>
+				<echo message="MKLINK command: ${cmd}"/>
 				<exec executable="cmd.exe" output="symlink.out" >
-				  <arg line="/c MKLINK /D ${isInstallationPackageDirWin}\WxPlatformMonitoring ${is_packagesLocalWin}\WxPlatformMonitoring"/>
+				  <arg line="${cmd}"/>
 				</exec>
 			</else>
 		</if>
