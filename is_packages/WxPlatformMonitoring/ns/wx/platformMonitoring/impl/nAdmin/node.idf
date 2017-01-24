@@ -67,16 +67,29 @@ ICAgICAgICAgICAgICAgcmV0dXJuIC0xOwogICAgICAgICAgICB9Cgp9</value>
     <value>java.util.Enumeration</value>
     <value>com.pcbsys.nirvana.client.nChannel</value>
     <value>com.pcbsys.nirvana.client.nChannelAttributes</value>
+    <value>com.pcbsys.nirvana.client.nChannelNotFoundException</value>
+    <value>com.pcbsys.nirvana.client.nIllegalArgumentException</value>
+    <value>com.pcbsys.nirvana.client.nIllegalChannelMode</value>
     <value>com.pcbsys.nirvana.client.nNamedObject</value>
     <value>com.pcbsys.nirvana.client.nQueue</value>
+    <value>com.pcbsys.nirvana.client.nRealmUnreachableException</value>
+    <value>com.pcbsys.nirvana.client.nRequestTimedOutException</value>
+    <value>com.pcbsys.nirvana.client.nSecurityException</value>
     <value>com.pcbsys.nirvana.client.nSession</value>
+    <value>com.pcbsys.nirvana.client.nSessionAlreadyInitialisedException</value>
     <value>com.pcbsys.nirvana.client.nSessionAttributes</value>
     <value>com.pcbsys.nirvana.client.nSessionFactory</value>
+    <value>com.pcbsys.nirvana.client.nSessionNotConnectedException</value>
+    <value>com.pcbsys.nirvana.client.nSessionPausedException</value>
+    <value>com.pcbsys.nirvana.client.nUnexpectedResponseException</value>
+    <value>com.pcbsys.nirvana.client.nUnknownRemoteRealmException</value>
     <value>com.pcbsys.nirvana.nAdminAPI.nContainer</value>
     <value>com.pcbsys.nirvana.nAdminAPI.nLeafNode</value>
     <value>com.pcbsys.nirvana.nAdminAPI.nNode</value>
     <value>com.pcbsys.nirvana.nAdminAPI.nRealmNode</value>
+    <value>com.pcbsys.nirvana.server.apps.nChannelTool</value>
     <value>com.pcbsys.nirvana.server.store.nNamedSubscriber</value>
+    <value>com.softwareag.is.metadata.util.IDataMapUtil</value>
     <value>com.softwareag.util.IDataMap</value>
     <value>com.wm.data.IData</value>
     <value>com.wm.data.IDataCursor</value>
