@@ -1,7 +1,7 @@
 package wx.platformMonitoring.impl;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-01-23 19:37:52 CET
+// -----( CREATED: 2017-01-24 12:00:01 CET
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
@@ -11,25 +11,19 @@ import com.wm.app.b2b.server.ServiceException;
 // --- <<IS-START-IMPORTS>> ---
 import java.util.ArrayList;
 import java.util.Enumeration;
-import javax.jms.Destination;
 import com.pcbsys.nirvana.client.nChannel;
 import com.pcbsys.nirvana.client.nChannelAttributes;
-import com.pcbsys.nirvana.client.nFindResult;
 import com.pcbsys.nirvana.client.nNamedObject;
 import com.pcbsys.nirvana.client.nQueue;
-import com.pcbsys.nirvana.client.nQueueDetails;
 import com.pcbsys.nirvana.client.nSession;
 import com.pcbsys.nirvana.client.nSessionAttributes;
 import com.pcbsys.nirvana.client.nSessionFactory;
 import com.pcbsys.nirvana.nAdminAPI.nContainer;
 import com.pcbsys.nirvana.nAdminAPI.nLeafNode;
 import com.pcbsys.nirvana.nAdminAPI.nNode;
+import com.pcbsys.nirvana.nAdminAPI.nRealmNode;
 import com.pcbsys.nirvana.server.store.nNamedSubscriber;
 import com.softwareag.util.IDataMap;
-import com.wm.app.b2b.server.dispatcher.DispatchFacade;
-import com.wm.app.b2b.server.jms.ConnectionAlias;
-import com.wm.app.b2b.server.jms.JMSSubsystem;
-import com.wm.app.b2b.server.jms.RuntimeConfiguration;
 import com.wm.data.IData;
 import com.wm.data.IDataCursor;
 import com.wm.data.IDataFactory;
@@ -58,9 +52,12 @@ public final class nAdmin
 		// --- <<IS-START(getQueuedElementsChannel)>> ---
 		// @sigtype java 3.5
 		// [i] field:0:required RNAME
-		// [i] field:0:required topicName
+		// [i] field:0:required channelName
 		// [o] field:0:required outstandingEvents
-		// [o] field:0:required isSharedDurable {"true","false"}
+		// [o] record:1:required sharedDurableOutstandingEvents
+		// [o] - field:0:required outstandingEvents
+		// [o] - field:0:required namedObject
+		// [o] field:0:required outstandingEventsSharedDurableMax
 		try {
 			
 			// pipeline
@@ -78,17 +75,45 @@ public final class nAdmin
 			nSessionAttributes nsa=new nSessionAttributes(RNAME);
 			nSession      mySession = nSessionFactory.create(nsa);
 			mySession.init();
-		
+			
 			nChannelAttributes attrib = new nChannelAttributes();
 		    attrib.setName(channelName);
 		    nChannel channel = mySession.findChannel(attrib);
+		    // check for shared durable
+		
 		    if( channel.getNamedObjects().length != 0 ) {
-		    	IDataUtil.put(pipelineCursor, "outstandingEvents", channel.getNamedObjects()[0].getSharedNamedObjectOutstandingEvents() + "");
-		    	IDataUtil.put(pipelineCursor, "isSharedDurable", "true");
-		    } else {
-		    	IDataUtil.put(pipelineCursor, "outstandingEvents", channel.getEventCount() + "");
-		    	IDataUtil.put(pipelineCursor, "isSharedDurable", "false");
-		    }
+		    	/*
+		    	 * A standard wM messaging trigger has a shared durable connection and does "concurrent" processing.
+		    	 * For such a trigger hidden queues are created, which are Named Objects in UM. 
+		    	 */
+		    	IData[] sharedDurableOutstandingEvents = new IData[channel.getNamedObjects().length];
+		    	long max = 0;
+		    	nNamedObject[] namedObjects = channel.getNamedObjects();
+		    	for( int i=0; i<sharedDurableOutstandingEvents.length; i++ ) {
+		    		nNamedObject no = namedObjects[i];
+		    		sharedDurableOutstandingEvents[i] = IDataFactory.create();
+		    		IDataCursor sharedDurableOutstandingEventsC = sharedDurableOutstandingEvents[i].getCursor();
+		    		long outstandingEvents = no.getSharedNamedObjectOutstandingEvents();
+		    		IDataUtil.put(sharedDurableOutstandingEventsC, "outstandingEvents", outstandingEvents + "");
+		    		IDataUtil.put(sharedDurableOutstandingEventsC, "namedObject", no.getName());
+		    		sharedDurableOutstandingEventsC.destroy();
+		    		if( max < outstandingEvents ) {
+		    			max = outstandingEvents;
+		    		}
+		    	}
+		    	IDataUtil.put(pipelineCursor, "outstandingEventsSharedDurableMax", max + "");
+		    	IDataUtil.put(pipelineCursor, "sharedDurableOutstandingEvents",sharedDurableOutstandingEvents);
+		    } 
+		    
+			// non shard durable,
+		    // as well as IS Native Messaging Trigger with Serial Processing on Shared Durable Connection 
+		    /*
+		     * If a wM messaging trigger has a shared durable connection, but does serial processing,
+		     * then the event is stored directly in the channel, therefore we can just get the event count
+		     * for the topic 
+		     */
+			IDataUtil.put(pipelineCursor, "outstandingEvents", channel.getEventCount() + "");
+		    
 		    pipelineCursor.destroy();
 			
 		} catch (Exception e) {
@@ -133,14 +158,16 @@ public final class nAdmin
 		
 			nChannelAttributes attrib = new nChannelAttributes();
 		    attrib.setName(jmsQueueName);
-		    nFindResult[] findResult = mySession.find(new nChannelAttributes[] {attrib});
+		    com.pcbsys.nirvana.client.nFindResult[] findResult = mySession.find(new nChannelAttributes[] {attrib});
 		    if( findResult.length == 0 ) {
 		    	throw new ServiceException("JMS queue " + jmsQueueName + " was not found on realm " + RNAME);
 		    }
 		    if( findResult[0].isChannel() ) {
+		    	// if it is a channel, then it is a jms topic
 		    	IDataUtil.put( pipelineCursor, "topicName", jmsQueueName );
-		    	getQueuedElementsChannel(pipeline);
+		    	getQueuedElementsJmsTopic(pipeline);
 		    } else if( findResult[1].isQueue() ) {
+		    	// this is a jms queue
 		    	IDataUtil.put( pipelineCursor, "queueName", jmsQueueName );
 		    	getQueuedElementsJmsQueue(pipeline);
 		    } else {
@@ -189,7 +216,7 @@ public final class nAdmin
 			nChannelAttributes attrib = new nChannelAttributes();
 		    attrib.setName(queueName);
 		    nQueue queue = mySession.findQueue(attrib);
-		    nQueueDetails details = queue.getDetails();
+		    com.pcbsys.nirvana.client.nQueueDetails details = queue.getDetails();
 		    IDataUtil.put(pipelineCursor, "outstandingEvents", details.getNoOfEvents() + "");
 		    IDataUtil.put(pipelineCursor, "queueStorageSize", details.getTotalMemorySize() + "");
 		    pipelineCursor.destroy();
@@ -216,6 +243,7 @@ public final class nAdmin
 		// [i] field:0:required RNAME
 		// [i] field:0:required topicName
 		// [o] field:0:required outstandingEvents
+		// [o] field:0:required queueStorageSize
 		try {
 			
 			// pipeline
@@ -237,57 +265,19 @@ public final class nAdmin
 			nChannelAttributes attrib = new nChannelAttributes();
 		    attrib.setName(topicName);
 		    nChannel channel = mySession.findChannel(attrib);
+		
+		    nRealmNode realmNode = new nRealmNode(nsa);
+		    nNode node = realmNode.findNode(topicName);
+		    if (node instanceof nLeafNode) {
+				if (((nLeafNode) node).isChannel() || ((nLeafNode) node).isQueue()) {
+					nLeafNode leafNode = (nLeafNode)node;
+					IDataUtil.put(pipelineCursor, "queueStorageSize", leafNode.getUsedSpace() + "");
+		//					IDataUtil.put(pipelineCursor, "getCurrentNumberOfEvents", leafNode.getCurrentNumberOfEvents() + "");
+				}
+			}
 		    IDataUtil.put(pipelineCursor, "outstandingEvents", channel.getEventCount() + "");
 		    pipelineCursor.destroy();
 			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new ServiceException(e);
-		}
-		
-			
-		// --- <<IS-END>> ---
-
-                
-	}
-
-
-
-	public static final void getQueuedElementsSharedDurable (IData pipeline)
-        throws ServiceException
-	{
-		// --- <<IS-START(getQueuedElementsSharedDurable)>> ---
-		// @sigtype java 3.5
-		// [i] field:0:required RNAME
-		// [i] field:0:required channelName
-		// [o] field:0:required outstandingEvents
-		try {
-			
-			// pipeline
-			IDataCursor pipelineCursor = pipeline.getCursor();
-			String	RNAME = IDataUtil.getString( pipelineCursor, "RNAME" );
-			String	channelName = IDataUtil.getString( pipelineCursor, "channelName" );
-			
-			if( RNAME == null || "".equals(RNAME) )  {
-				throw new ServiceException("RNAME must not be empty. Provide like: 'nsp://host:port'.");
-			}
-			if( channelName == null || "".equals(channelName) ) {
-				throw new ServiceException("channelName must not be null.");
-			}
-			
-			nSessionAttributes nsa=new nSessionAttributes(RNAME);
-			nSession      mySession = nSessionFactory.create(nsa);
-			mySession.init();
-		
-			nChannelAttributes attrib = new nChannelAttributes();
-		    attrib.setName(channelName);
-		    nChannel channel = mySession.findChannel(attrib);
-		    for( nNamedObject no : channel.getNamedObjects() ) {
-		    	// we expect that a native messaging trigger (and therefore UM queue only has one named object, i.e. the trigger client id
-		    	IDataUtil.put(pipelineCursor, "outstandingEvents", no.getSharedNamedObjectOutstandingEvents() + "");
-		    }
-		    pipelineCursor.destroy();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

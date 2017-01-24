@@ -65,25 +65,19 @@ ICAgICAgICAgICAgICAgcmV0dXJuIC0xOwogICAgICAgICAgICB9Cgp9</value>
   <array name="imports" type="value" depth="1">
     <value>java.util.ArrayList</value>
     <value>java.util.Enumeration</value>
-    <value>javax.jms.Destination</value>
     <value>com.pcbsys.nirvana.client.nChannel</value>
     <value>com.pcbsys.nirvana.client.nChannelAttributes</value>
-    <value>com.pcbsys.nirvana.client.nFindResult</value>
     <value>com.pcbsys.nirvana.client.nNamedObject</value>
     <value>com.pcbsys.nirvana.client.nQueue</value>
-    <value>com.pcbsys.nirvana.client.nQueueDetails</value>
     <value>com.pcbsys.nirvana.client.nSession</value>
     <value>com.pcbsys.nirvana.client.nSessionAttributes</value>
     <value>com.pcbsys.nirvana.client.nSessionFactory</value>
     <value>com.pcbsys.nirvana.nAdminAPI.nContainer</value>
     <value>com.pcbsys.nirvana.nAdminAPI.nLeafNode</value>
     <value>com.pcbsys.nirvana.nAdminAPI.nNode</value>
+    <value>com.pcbsys.nirvana.nAdminAPI.nRealmNode</value>
     <value>com.pcbsys.nirvana.server.store.nNamedSubscriber</value>
     <value>com.softwareag.util.IDataMap</value>
-    <value>com.wm.app.b2b.server.dispatcher.DispatchFacade</value>
-    <value>com.wm.app.b2b.server.jms.ConnectionAlias</value>
-    <value>com.wm.app.b2b.server.jms.JMSSubsystem</value>
-    <value>com.wm.app.b2b.server.jms.RuntimeConfiguration</value>
     <value>com.wm.data.IData</value>
     <value>com.wm.data.IDataCursor</value>
     <value>com.wm.data.IDataFactory</value>
