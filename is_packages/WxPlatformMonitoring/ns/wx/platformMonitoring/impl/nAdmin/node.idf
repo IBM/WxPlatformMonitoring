@@ -6,94 +6,29 @@
   <value name="node_nsName">wx.platformMonitoring.impl.nAdmin</value>
   <value name="is_public">false</value>
   <value name="encodeutf8">true</value>
-  <value name="shared">cHVibGljIHN0YXRpYyB2b2lkIHRyYXZlcnNlTm9kZXMobkNvbnRhaW5lciBjb250YWluZXIsIEFy
-cmF5TGlzdDxJRGF0YT4gcE5vZGVMaXN0LCBuU2Vzc2lvbiBwU2Vzc2lvbikgdGhyb3dzIEV4Y2Vw
-dGlvbnsKCQpFbnVtZXJhdGlvbjxuTm9kZT4gY2hpbGRyZW4gPSBjb250YWluZXIuZ2V0Tm9kZXMo
-KTsKCkFycmF5TGlzdDxuTGVhZk5vZGU+IHRvcGljTGlzdCA9IG5ldyBBcnJheUxpc3Q8bkxlYWZO
-b2RlPigpOwpBcnJheUxpc3Q8bkxlYWZOb2RlPiBxTGlzdCA9IG5ldyBBcnJheUxpc3Q8bkxlYWZO
-b2RlPigpOwp3aGlsZSAoY2hpbGRyZW4uaGFzTW9yZUVsZW1lbnRzKCkpIHsKCW5Ob2RlIGNoaWxk
-ID0gKG5Ob2RlKWNoaWxkcmVuLm5leHRFbGVtZW50KCk7CglpZiAoY2hpbGQgaW5zdGFuY2VvZiBu
-Q29udGFpbmVyKSB7CgkJdHJhdmVyc2VOb2RlcygobkNvbnRhaW5lciljaGlsZCwgcE5vZGVMaXN0
-LCBwU2Vzc2lvbik7Cgl9IAoJZWxzZSBpZiAoY2hpbGQgaW5zdGFuY2VvZiBuTGVhZk5vZGUpIHsK
-CQluTGVhZk5vZGUgbGVhZiA9IChuTGVhZk5vZGUpY2hpbGQ7CgkJaWYgKGxlYWYuaXNDaGFubmVs
-KCkpIHsKCQkJdG9waWNMaXN0LmFkZChsZWFmKTsKCQkJCgkJfSBlbHNlIGlmIChsZWFmLmlzUXVl
-dWUoKSkgewoJCQlxTGlzdC5hZGQobGVhZik7CgkJCQoJCQkKCQkJCgkJfQoJfQoJfQoKdHJ5e1Ro
-cmVhZC5zbGVlcCg1MDAwKTt9Y2F0Y2goRXhjZXB0aW9uIGUpe30KZm9yKG5MZWFmTm9kZSBsZWFm
-IDogdG9waWNMaXN0KXsKCUlEYXRhTWFwIGlkbSA9IG5ldyBJRGF0YU1hcChJRGF0YUZhY3Rvcnku
-Y3JlYXRlKCkpOwoJaWRtLnB1dCgiTmFtZSIsIGxlYWYuZ2V0QWJzb2x1dGVQYXRoKCkpOwoJaWRt
-LnB1dCgiU3RvcmVkIiwgbGVhZi5nZXRDdXJyZW50TnVtYmVyT2ZFdmVudHMoKSk7CglpZG0ucHV0
-KCJDdXJyZW50IiwgbGVhZi5nZXRMYXN0RUlEKCkpOwoJCXBOb2RlTGlzdC5hZGQoaWRtLmdldElE
-YXRhKCkpOwoJCQoJCVN5c3RlbS5lcnIucHJpbnRsbigiVU06ICAgICIrbGVhZi5nZXRBYnNvbHV0
-ZVBhdGgoKSk7CgkJCgkgICAgbkNoYW5uZWxBdHRyaWJ1dGVzIGF0dHJpYiA9IG5ldyBuQ2hhbm5l
-bEF0dHJpYnV0ZXMoKTsKCSAgICBhdHRyaWIuc2V0TmFtZShsZWFmLmdldEFic29sdXRlUGF0aCgp
-KTsKCSAgICBuQ2hhbm5lbCBjaGFubmVsID0gcFNlc3Npb24uZmluZENoYW5uZWwoYXR0cmliKTsK
-CSAgICBuTmFtZWRPYmplY3RbXSBkdXJhYmxlU3Vic2NyaWJlcnMgPSBjaGFubmVsLmdldE5hbWVk
-T2JqZWN0cygpOwoJCVN5c3RlbS5lcnIucHJpbnRsbigiVU06ICAgICIrbGVhZi5nZXRBYnNvbHV0
-ZVBhdGgoKSk7CgkJU3lzdGVtLmVyci5wcmludGxuKCJVTTogICAgIitsZWFmLmdldEFic29sdXRl
-UGF0aCgpKyIgLSAiK2R1cmFibGVTdWJzY3JpYmVycy5sZW5ndGgpOwkgICAgCiAgICBmb3Iobk5h
-bWVkT2JqZWN0IG5OYW1lZE9iamVjdCA6IGR1cmFibGVTdWJzY3JpYmVycyl7CiAgICAJaWRtID0g
-bmV3IElEYXRhTWFwKElEYXRhRmFjdG9yeS5jcmVhdGUoKSk7CgkJaWRtLnB1dCgiTmFtZSIsIGxl
-YWYuZ2V0QWJzb2x1dGVQYXRoKCkrIi8iK25OYW1lZE9iamVjdC5nZXROYW1lKCkpOwoJCWlkbS5w
-dXQoIlN0b3JlZCIsIGZpbmRIaWRkZW5RdWV1ZShsZWFmLmdldEFic29sdXRlUGF0aCgpLG5OYW1l
-ZE9iamVjdC5nZXROYW1lKCkscFNlc3Npb24pKTsKCQlpZG0ucHV0KCJDdXJyZW50Iiwgbk5hbWVk
-T2JqZWN0LmdldEVJRCgpKTsKCQlwTm9kZUxpc3QuYWRkKGlkbS5nZXRJRGF0YSgpKTsKICAgIH0K
-CQoJCn0KZm9yKG5MZWFmTm9kZSBsZWFmIDogcUxpc3QpewoJSURhdGFNYXAgaWRtID0gbmV3IElE
-YXRhTWFwKElEYXRhRmFjdG9yeS5jcmVhdGUoKSk7CglpZG0ucHV0KCJOYW1lIiwgbGVhZi5nZXRB
-YnNvbHV0ZVBhdGgoKSk7CglpZG0ucHV0KCJTdG9yZWQiLCBsZWFmLmdldEN1cnJlbnROdW1iZXJP
-ZkV2ZW50cygpKTsKCWlkbS5wdXQoIkN1cnJlbnQiLCBsZWFmLmdldExhc3RFSUQoKSk7CglwTm9k
-ZUxpc3QuYWRkKGlkbS5nZXRJRGF0YSgpKTsKfQoKCgp9Cgpwcml2YXRlIHN0YXRpYyBsb25nIGZp
-bmRIaWRkZW5RdWV1ZShTdHJpbmcgcGFyZW50LCBTdHJpbmcgbmFtZSwgblNlc3Npb24gc2Vzc2lv
-bikKewogICAgICAgICAgICB0cnkKICAgICAgICAgICAgewogICAgICAgICAgICAgICAgICAgICAg
-ICBuQ2hhbm5lbEF0dHJpYnV0ZXMgYXR0cmliID0gbmV3IG5DaGFubmVsQXR0cmlidXRlcygpOwog
-ICAgICAgICAgICAgICAgICAgICAgICBhdHRyaWIuc2V0TmFtZShwYXJlbnQpOwogICAgICAgICAg
-ICAgICAgICAgICAgICBuQ2hhbm5lbCBjaGFubmVsID0gc2Vzc2lvbi5maW5kQ2hhbm5lbChhdHRy
-aWIpOwoKCiAgICAgICAgICAgICAgICAgICAgICAgIGNvbS5wY2JzeXMubmlydmFuYS5iYXNlLmV2
-ZW50cy5uTWFuYWdlTmFtZWRTdWIubk5hbWVkT2JqZWN0SGVscGVyIApoZWxwZXIgPSAKKGNvbS5w
-Y2JzeXMubmlydmFuYS5iYXNlLmV2ZW50cy5uTWFuYWdlTmFtZWRTdWIubk5hbWVkT2JqZWN0SGVs
-cGVyKWNoYW5uZWwuZ2V0TmFtZWRPYmplY3QobmFtZSk7CiAgICAgICAgICAgICAgICAgICAgICAg
-IGxvbmcgaWQgPSBoZWxwZXIuZ2V0SWQoKTsKCiAgICAgICAgICAgICAgICAgICAgICAgIGF0dHJp
-Yi5zZXROYW1lKCIvIiArIG5OYW1lZFN1YnNjcmliZXIuc2hhcmVkUXVldWVGb2xkZXIgKyAiLyIg
-KyBwYXJlbnQgKyAiLyIgCisgIk5hbWVkU3Vic2NyaWJlciIgKyBpZCk7CiAgICAgICAgICAgICAg
-ICAgICAgICAgIG5RdWV1ZSBoaWRkZW4gPSBzZXNzaW9uLmZpbmRRdWV1ZShhdHRyaWIpOwogICAg
-ICAgICAgICAgICAgICAgICAgICByZXR1cm4gaGlkZGVuLnNpemUoKTsKICAgICAgICAgICAgfQog
-ICAgICAgICAgICBjYXRjaCAoRXhjZXB0aW9uIGUpCiAgICAgICAgICAgIHsKICAgICAgICAgICAg
-ICAgICAgICAgICAgU3lzdGVtLmVyci5wcmludGxuKGUuZ2V0TWVzc2FnZSgpKTsKICAgICAgICAg
-ICAgICAgICAgICAgICAgcmV0dXJuIC0xOwogICAgICAgICAgICB9Cgp9</value>
+  <value name="shared"></value>
   <value name="extends"></value>
   <array name="implements" type="value" depth="1">
   </array>
   <array name="imports" type="value" depth="1">
-    <value>java.util.ArrayList</value>
-    <value>java.util.Enumeration</value>
+    <value>java.util.Hashtable</value>
+    <value>javax.jms.ConnectionFactory</value>
+    <value>javax.jms.ConnectionMetaData</value>
+    <value>javax.jms.JMSException</value>
+    <value>javax.naming.Context</value>
+    <value>javax.naming.InitialContext</value>
+    <value>javax.naming.NamingException</value>
     <value>com.pcbsys.nirvana.client.nChannel</value>
     <value>com.pcbsys.nirvana.client.nChannelAttributes</value>
-    <value>com.pcbsys.nirvana.client.nChannelNotFoundException</value>
-    <value>com.pcbsys.nirvana.client.nIllegalArgumentException</value>
-    <value>com.pcbsys.nirvana.client.nIllegalChannelMode</value>
     <value>com.pcbsys.nirvana.client.nNamedObject</value>
     <value>com.pcbsys.nirvana.client.nQueue</value>
-    <value>com.pcbsys.nirvana.client.nRealmUnreachableException</value>
-    <value>com.pcbsys.nirvana.client.nRequestTimedOutException</value>
-    <value>com.pcbsys.nirvana.client.nSecurityException</value>
     <value>com.pcbsys.nirvana.client.nSession</value>
-    <value>com.pcbsys.nirvana.client.nSessionAlreadyInitialisedException</value>
     <value>com.pcbsys.nirvana.client.nSessionAttributes</value>
     <value>com.pcbsys.nirvana.client.nSessionFactory</value>
-    <value>com.pcbsys.nirvana.client.nSessionNotConnectedException</value>
-    <value>com.pcbsys.nirvana.client.nSessionPausedException</value>
-    <value>com.pcbsys.nirvana.client.nUnexpectedResponseException</value>
-    <value>com.pcbsys.nirvana.client.nUnknownRemoteRealmException</value>
     <value>com.pcbsys.nirvana.nAdminAPI.nContainer</value>
     <value>com.pcbsys.nirvana.nAdminAPI.nLeafNode</value>
     <value>com.pcbsys.nirvana.nAdminAPI.nNode</value>
     <value>com.pcbsys.nirvana.nAdminAPI.nRealmNode</value>
-    <value>com.pcbsys.nirvana.server.apps.nChannelTool</value>
-    <value>com.pcbsys.nirvana.server.store.nNamedSubscriber</value>
-    <value>com.softwareag.is.metadata.util.IDataMapUtil</value>
-    <value>com.softwareag.util.IDataMap</value>
-    <value>com.wm.data.IData</value>
-    <value>com.wm.data.IDataCursor</value>
-    <value>com.wm.data.IDataFactory</value>
-    <value>com.wm.data.IDataUtil</value>
+    <value>java.util.Enumeration</value>
   </array>
 </Values>

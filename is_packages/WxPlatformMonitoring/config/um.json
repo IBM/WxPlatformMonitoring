@@ -1,0 +1,39 @@
+{
+	"um": {
+		"triggers": {
+			"messagingTriggers": [{
+				"name": "BDAS_Processes.BDAS_TestProcess.BDAS_TestProcess_1.local_910:transitionTrigger",
+				"maxElementsQueued": "2"
+			},
+			{
+				"name": "wm.prt.status:controlTrigger",
+				"maxElementsQueued": "2"
+			}],
+			"jmsTriggers": [{
+				"name": "simpleTestPackage.services.filepolling.test.jms:getAddressTopic",
+				"maxElementsQueued": "2"
+			},
+			{
+				"name": "jtrigger2"
+			}]
+		},
+		"direct": {
+			"config": {
+				"jmsConnectionAlias": "",
+				"messagingConnectionAlias": ""
+			},
+			"channels": [{
+				"name": "wm/is/wx/platformMonitoring_Test/pub/trigger/messaging/publishableDoc",
+				"maxElementsQueued": "2"
+			},
+			{
+				"name": "jmsTopic",
+				"maxElementsQueued": "2"
+			}],
+			"queues": [{
+				"name": "jmsQueue",
+				"maxElementsQueued": "2"
+			}]
+		}
+	}
+}

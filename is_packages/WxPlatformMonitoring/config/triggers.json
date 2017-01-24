@@ -1,19 +1,6 @@
 {
 	"triggers": {
-		"messagingTriggers": [{
-			"name": "BDAS_Processes.BDAS_TestProcess.BDAS_TestProcess_1.local_910:transitionTrigger",
-			"maxElementsQueued": "2"
-		},
-		{
-			"name": "wm.prt.status:controlTrigger",
-			"maxElementsQueued": "2"
-		}],
-		"jmsTriggers": [{
-			"name": "simpleTestPackage.services.filepolling.test.jms:getAddressTopic",
-			"maxElementsQueued": "2"
-		},
-		{
-			"name": "jtrigger2"
-		}]
+		"messagingTriggers": ["BDAS_Processes.BDAS_TestProcess.BDAS_TestProcess_1.local_910:transitionTrigger", "wm.prt.status:controlTrigger"],
+		"jmsTriggers": ["simpleTestPackage.services.filepolling.test.jms:getAddressTopic", "jtrigger2"]
 	}
 }

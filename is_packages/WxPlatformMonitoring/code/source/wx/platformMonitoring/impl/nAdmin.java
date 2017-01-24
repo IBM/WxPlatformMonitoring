@@ -1,7 +1,7 @@
 package wx.platformMonitoring.impl;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-01-24 13:56:34 CET
+// -----( CREATED: 2017-01-24 18:30:42 CET
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
@@ -9,38 +9,25 @@ import com.wm.util.Values;
 import com.wm.app.b2b.server.Service;
 import com.wm.app.b2b.server.ServiceException;
 // --- <<IS-START-IMPORTS>> ---
-import java.util.ArrayList;
-import java.util.Enumeration;
+import java.util.Hashtable;
+import javax.jms.ConnectionFactory;
+import javax.jms.ConnectionMetaData;
+import javax.jms.JMSException;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import com.pcbsys.nirvana.client.nChannel;
 import com.pcbsys.nirvana.client.nChannelAttributes;
-import com.pcbsys.nirvana.client.nChannelNotFoundException;
-import com.pcbsys.nirvana.client.nIllegalArgumentException;
-import com.pcbsys.nirvana.client.nIllegalChannelMode;
 import com.pcbsys.nirvana.client.nNamedObject;
 import com.pcbsys.nirvana.client.nQueue;
-import com.pcbsys.nirvana.client.nRealmUnreachableException;
-import com.pcbsys.nirvana.client.nRequestTimedOutException;
-import com.pcbsys.nirvana.client.nSecurityException;
 import com.pcbsys.nirvana.client.nSession;
-import com.pcbsys.nirvana.client.nSessionAlreadyInitialisedException;
 import com.pcbsys.nirvana.client.nSessionAttributes;
 import com.pcbsys.nirvana.client.nSessionFactory;
-import com.pcbsys.nirvana.client.nSessionNotConnectedException;
-import com.pcbsys.nirvana.client.nSessionPausedException;
-import com.pcbsys.nirvana.client.nUnexpectedResponseException;
-import com.pcbsys.nirvana.client.nUnknownRemoteRealmException;
 import com.pcbsys.nirvana.nAdminAPI.nContainer;
 import com.pcbsys.nirvana.nAdminAPI.nLeafNode;
 import com.pcbsys.nirvana.nAdminAPI.nNode;
 import com.pcbsys.nirvana.nAdminAPI.nRealmNode;
-import com.pcbsys.nirvana.server.apps.nChannelTool;
-import com.pcbsys.nirvana.server.store.nNamedSubscriber;
-import com.softwareag.is.metadata.util.IDataMapUtil;
-import com.softwareag.util.IDataMap;
-import com.wm.data.IData;
-import com.wm.data.IDataCursor;
-import com.wm.data.IDataFactory;
-import com.wm.data.IDataUtil;
+import java.util.Enumeration;
 // --- <<IS-END-IMPORTS>> ---
 
 public final class nAdmin
@@ -393,96 +380,123 @@ public final class nAdmin
                 
 	}
 
-	// --- <<IS-START-SHARED>> ---
-	public static void traverseNodes(nContainer container, ArrayList<IData> pNodeList, nSession pSession) throws Exception{
+
+
+	public static final void getRNAMEByJmsConnectionAlias (IData pipeline)
+        throws ServiceException
+	{
+		// --- <<IS-START(getRNAMEByJmsConnectionAlias)>> ---
+		// @sigtype java 3.5
+		// [i] field:0:required jmsConnectionAlias
+		// [o] field:0:required RNAME
+		IDataCursor pipelineCursor = pipeline.getCursor();
 		
-	Enumeration<nNode> children = container.getNodes();
-	
-	ArrayList<nLeafNode> topicList = new ArrayList<nLeafNode>();
-	ArrayList<nLeafNode> qList = new ArrayList<nLeafNode>();
-	while (children.hasMoreElements()) {
-		nNode child = (nNode)children.nextElement();
-		if (child instanceof nContainer) {
-			traverseNodes((nContainer)child, pNodeList, pSession);
-		} 
-		else if (child instanceof nLeafNode) {
-			nLeafNode leaf = (nLeafNode)child;
-			if (leaf.isChannel()) {
-				topicList.add(leaf);
-				
-			} else if (leaf.isQueue()) {
-				qList.add(leaf);
-				
-				
-				
+		String jmsConnectionAlias = IDataUtil.getString(pipelineCursor, "jmsConnectionAlias");
+		
+		// input
+		IData input = IDataFactory.create();
+		IDataCursor inputCursor = input.getCursor();
+		IDataUtil.put( inputCursor, "aliasName", jmsConnectionAlias );
+		inputCursor.destroy();
+		
+		// output
+		IData 	output = IDataFactory.create();
+		try{
+			output = Service.doInvoke( "wm.server.jms", "getConnectionAliasReport", input );
+		}catch( Exception e){
+			throw new ServiceException("Could not get connection alias " + jmsConnectionAlias + " with service wm.server.jms:getConnectionAliasReport: " + e) ;
+		}
+		
+		String jndi_jndiAliasName = IDataUtil.getString(output.getCursor(), "jndi_jndiAliasName");
+		String jndi_connectionFactoryLookupName = IDataUtil.getString(output.getCursor(), "jndi_connectionFactoryLookupName");
+		
+		// input
+		input = IDataFactory.create();
+		inputCursor = input.getCursor();
+		IDataUtil.put( inputCursor, "jndiAliasName", jndi_jndiAliasName );
+		inputCursor.destroy();
+		
+		// output
+		output = IDataFactory.create();
+		try{
+			output = Service.doInvoke( "wm.server.jndi", "getJNDIAliasData", input );
+		}catch( Exception e){
+			throw new ServiceException("Could not get jndi alias " + jndi_jndiAliasName + " with service wm.server.jndi:getJNDIAliasData: " + e);
+		}
+		String providerURL = IDataUtil.getString(output.getCursor(), "providerURL");
+		String initialContextFactory = IDataUtil.getString(output.getCursor(), "initialContextFactory");
+		
+		try {
+			Hashtable<String, String> env = new Hashtable<String, String>();
+			env.put(Context.INITIAL_CONTEXT_FACTORY, initialContextFactory);
+			env.put(Context.PROVIDER_URL, providerURL);
+			InitialContext initialContext = new InitialContext(env);
+			com.pcbsys.nirvana.nJMS.ConnectionFactoryImpl connectionFactory = (com.pcbsys.nirvana.nJMS.ConnectionFactoryImpl) initialContext
+					.lookup(jndi_connectionFactoryLookupName);
+			String cfRname = connectionFactory.getRNAME();
+			IDataUtil.put(pipeline.getCursor(), "RNAME", cfRname);
+		} catch (NamingException e1) {
+			// TODO Auto-generated catch block
+			throw new ServiceException("NamingException when looking up RNAME for JMS Connection Alias " + jmsConnectionAlias + ": " + e1);
+		}
+		// --- <<IS-END>> ---
+
+                
+	}
+
+
+
+	public static final void getRNAMEByMessagingConnectionAlias (IData pipeline)
+        throws ServiceException
+	{
+		// --- <<IS-START(getRNAMEByMessagingConnectionAlias)>> ---
+		// @sigtype java 3.5
+		// [i] field:0:required useDefaultMessagingConnectionAlias {"true","false"}
+		// [i] field:0:required messagingConnectionAlias
+		// [o] field:0:required RNAME
+		// pipeline
+		IDataCursor pipelineCursor = pipeline.getCursor();
+		String	useDefaultMessagingConnectionAlias = IDataUtil.getString( pipelineCursor, "useDefaultMessagingConnectionAlias" );
+		String	messagingConnectionAlias = IDataUtil.getString( pipelineCursor, "messagingConnectionAlias" );
+		
+		if( useDefaultMessagingConnectionAlias == null || "".equals(useDefaultMessagingConnectionAlias) ) {
+			useDefaultMessagingConnectionAlias = "false";
+		}
+		if(( messagingConnectionAlias == null || "".equals(messagingConnectionAlias) ) && useDefaultMessagingConnectionAlias.equals("false")) {
+			throw new ServiceException("Either provide a messagingConnectionAlias, or set useDefaultMessagingConnectionAlias=true");
+		}
+		
+		IData 	output = IDataFactory.create();
+		try{
+			output = Service.doInvoke( "wm.server.messaging", "getConnectionAliasReport", IDataFactory.create() );
+		}catch( Exception e){
+			throw new ServiceException("Could not invoke wm.server.messaging:getConnectionAliasReport: " + e);
+		}
+		
+		IData[] aliasDataList = IDataUtil.getIDataArray(output.getCursor(), "aliasDataList");
+		String um_rname = null;
+		for( IData aliasData : aliasDataList ) {
+		//			aliasDataList/aliasDataList[0]/defaultAlias
+			IDataCursor aliasDataC = aliasData.getCursor();
+			boolean isDefaultAlias = IDataUtil.getBoolean(aliasDataC, "defaultAlias");
+			String aliasName = IDataUtil.getString(aliasDataC, "aliasName");
+			if( useDefaultMessagingConnectionAlias.equals("true") && isDefaultAlias ) {
+				um_rname = IDataUtil.getString(aliasDataC, "um_rname");
+				break;
+			} else if(aliasName.equals(messagingConnectionAlias) ) {
+				um_rname = IDataUtil.getString(aliasDataC, "um_rname");
+				break;
 			}
 		}
+		if ( um_rname == null ) {
+			throw new ServiceException("Did not find an messaging connection alias. Parameters: useDefaultMessagingConnectionAlias='"  + useDefaultMessagingConnectionAlias + "', messagingConnectionAlias='" + messagingConnectionAlias + "'.");
 		}
-	
-	try{Thread.sleep(5000);}catch(Exception e){}
-	for(nLeafNode leaf : topicList){
-		IDataMap idm = new IDataMap(IDataFactory.create());
-		idm.put("Name", leaf.getAbsolutePath());
-		idm.put("Stored", leaf.getCurrentNumberOfEvents());
-		idm.put("Current", leaf.getLastEID());
-			pNodeList.add(idm.getIData());
-			
-			System.err.println("UM:    "+leaf.getAbsolutePath());
-			
-		    nChannelAttributes attrib = new nChannelAttributes();
-		    attrib.setName(leaf.getAbsolutePath());
-		    nChannel channel = pSession.findChannel(attrib);
-		    nNamedObject[] durableSubscribers = channel.getNamedObjects();
-			System.err.println("UM:    "+leaf.getAbsolutePath());
-			System.err.println("UM:    "+leaf.getAbsolutePath()+" - "+durableSubscribers.length);	    
-	    for(nNamedObject nNamedObject : durableSubscribers){
-	    	idm = new IDataMap(IDataFactory.create());
-			idm.put("Name", leaf.getAbsolutePath()+"/"+nNamedObject.getName());
-			idm.put("Stored", findHiddenQueue(leaf.getAbsolutePath(),nNamedObject.getName(),pSession));
-			idm.put("Current", nNamedObject.getEID());
-			pNodeList.add(idm.getIData());
-	    }
 		
-		
+		IDataUtil.put( pipelineCursor, "RNAME", um_rname );
+		pipelineCursor.destroy();
+		// --- <<IS-END>> ---
+
+                
 	}
-	for(nLeafNode leaf : qList){
-		IDataMap idm = new IDataMap(IDataFactory.create());
-		idm.put("Name", leaf.getAbsolutePath());
-		idm.put("Stored", leaf.getCurrentNumberOfEvents());
-		idm.put("Current", leaf.getLastEID());
-		pNodeList.add(idm.getIData());
-	}
-	
-	
-	
-	}
-	
-	private static long findHiddenQueue(String parent, String name, nSession session)
-	{
-	            try
-	            {
-	                        nChannelAttributes attrib = new nChannelAttributes();
-	                        attrib.setName(parent);
-	                        nChannel channel = session.findChannel(attrib);
-	
-	
-	                        com.pcbsys.nirvana.base.events.nManageNamedSub.nNamedObjectHelper 
-	helper = 
-	(com.pcbsys.nirvana.base.events.nManageNamedSub.nNamedObjectHelper)channel.getNamedObject(name);
-	                        long id = helper.getId();
-	
-	                        attrib.setName("/" + nNamedSubscriber.sharedQueueFolder + "/" + parent + "/" 
-	+ "NamedSubscriber" + id);
-	                        nQueue hidden = session.findQueue(attrib);
-	                        return hidden.size();
-	            }
-	            catch (Exception e)
-	            {
-	                        System.err.println(e.getMessage());
-	                        return -1;
-	            }
-	
-	}
-	// --- <<IS-END-SHARED>> ---
 }
 
