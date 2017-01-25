@@ -1,7 +1,7 @@
 package wx.platformMonitoring.impl;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-01-25 11:33:26 CET
+// -----( CREATED: 2017-01-25 12:31:57 CET
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
@@ -288,7 +288,7 @@ public final class nAdmin
 		// --- <<IS-START(getQueuedElementsJms)>> ---
 		// @sigtype java 3.5
 		// [i] field:0:required RNAME
-		// [i] field:0:required topicName
+		// [i] field:0:required jmsQueueName
 		// [o] field:0:required outstandingEvents
 		try {
 			
@@ -454,6 +454,10 @@ public final class nAdmin
 		IDataCursor pipelineCursor = pipeline.getCursor();
 		
 		String jmsConnectionAlias = IDataUtil.getString(pipelineCursor, "jmsConnectionAlias");
+		
+		if( jmsConnectionAlias == null || "".equals(jmsConnectionAlias)) {
+			throw new ServiceException("jmsConnectionAlias must not be empty");
+		}
 		
 		// input
 		IData input = IDataFactory.create();

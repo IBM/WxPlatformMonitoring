@@ -10,17 +10,18 @@
 				"maxElementsQueued": "2"
 			}],
 			"jmsTriggers": [{
-				"name": "simpleTestPackage.services.filepolling.test.jms:getAddressTopic",
+				"name": "wx.platformMonitoring_Test.pub.trigger.jms:jmsQueueTrigger",
 				"maxElementsQueued": "2"
 			},
 			{
-				"name": "jtrigger2"
+				"name": "wx.platformMonitoring_Test.pub.trigger.jms:jmsTopicTrigger",
+				"maxElementsQueued": "1"
 			}]
 		},
 		"direct": {
 			"config": {
-				"jmsConnectionAlias": "myJmsConAlias",
-				"messagingConnectionAlias": "myMsgConAslias"
+				"jmsConnectionAlias": "",
+				"messagingConnectionAlias": "IS_UM_CONNECTION"
 			},
 			"channels": [{
 				"name": "wm/is/wx/platformMonitoring_Test/pub/trigger/messaging/publishableDoc",

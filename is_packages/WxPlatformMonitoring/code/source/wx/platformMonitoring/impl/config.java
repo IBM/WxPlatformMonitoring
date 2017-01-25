@@ -1,7 +1,7 @@
 package wx.platformMonitoring.impl;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-01-25 11:12:48 CET
+// -----( CREATED: 2017-01-25 13:13:55 CET
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
