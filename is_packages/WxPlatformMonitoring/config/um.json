@@ -20,7 +20,7 @@
 		},
 		"direct": {
 			"config": {
-				"jmsConnectionAlias": "",
+				"jmsConnectionAlias": "test",
 				"messagingConnectionAlias": "IS_UM_CONNECTION"
 			},
 			"channels": [{
