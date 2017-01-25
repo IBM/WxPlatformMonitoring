@@ -1,7 +1,7 @@
 package wx.platformMonitoring.impl;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-01-25 13:13:55 CET
+// -----( CREATED: 2017-01-25 13:21:15 CET
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
@@ -438,6 +438,29 @@ public final class config
 	}
 	
 	static Object[] iterateJsonArray(JsonArray jArr) {
+		Object[] array = new Object[jArr.size()];
+		IData[] docArr = new IData[jArr.size()];
+		String[] stringArr = new String[jArr.size()];
+		boolean isStringArr = false;
+		for( int i=0; i<jArr.size(); i++) {
+			JsonValue jElem = jArr.get(i);
+			if( jElem.isObject() ) {
+				IData doc = IDataFactory.create();
+				docArr[i] = doc;
+				iterateJson(jElem.asObject(), doc.getCursor());
+			} else if( jElem.isString() ) {
+				stringArr[i] = jElem.asString();
+				isStringArr = true;
+			}
+		}
+		if( isStringArr ) {
+			return stringArr;
+		} else {
+			return docArr;
+		}
+	}
+	
+	static Object[] iterateJsonArrayx(JsonArray jArr) {
 		Object[] array = new Object[jArr.size()];
 		for( int i=0; i<jArr.size(); i++) {
 			JsonValue jElem = jArr.get(i);

@@ -2,11 +2,11 @@
 	"um": {
 		"triggers": {
 			"messagingTriggers": [{
-				"name": "BDAS_Processes.BDAS_TestProcess.BDAS_TestProcess_1.local_910:transitionTrigger",
-				"maxElementsQueued": "2"
+				"name": "wx.platformMonitoring_Test.pub.trigger.messaging:serielMessagingTrigger",
+				"maxElementsQueued": "20"
 			},
 			{
-				"name": "wm.prt.status:controlTrigger",
+				"name": "wx.platformMonitoring_Test.pub.trigger.messaging:messagingTrigger",
 				"maxElementsQueued": "2"
 			}],
 			"jmsTriggers": [{
