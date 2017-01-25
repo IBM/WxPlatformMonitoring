@@ -6,7 +6,40 @@
   <value name="node_nsName">wx.platformMonitoring.impl.config</value>
   <value name="is_public">false</value>
   <value name="encodeutf8">true</value>
-  <value name="shared">CnN0YXRpYyBqYXZhLnV0aWwuTWFwPFN0cmluZywgSnNvblZhbHVlPiBfY29uZmlncyA9IG5ldyBq
+  <value name="shared">c3RhdGljIHZvaWQgaXRlcmF0ZUpzb24oSnNvbk9iamVjdCBqT2JqLCBJRGF0YUN1cnNvciBwaXBl
+bGluZUN1cnNvcikgewoJCWZvciggU3RyaW5nIGNoaWxkTmFtZTogak9iai5uYW1lcygpICkgewoJ
+CQlKc29uVmFsdWUgY2hpbGQgPSBqT2JqLmdldChjaGlsZE5hbWUpOwoJCQlpZiggY2hpbGQuaXNP
+YmplY3QoKSApIHsKCQkJCUlEYXRhIGNoaWxkRG9jID0gSURhdGFGYWN0b3J5LmNyZWF0ZSgpOwoJ
+CQkJSURhdGFVdGlsLnB1dChwaXBlbGluZUN1cnNvciwgY2hpbGROYW1lLCBjaGlsZERvYyk7CgkJ
+CQlpdGVyYXRlSnNvbihjaGlsZC5hc09iamVjdCgpLCBjaGlsZERvYy5nZXRDdXJzb3IoKSk7CgkJ
+CX0gZWxzZSBpZiggY2hpbGQuaXNBcnJheSgpICkgewoJCQkJT2JqZWN0W10gYXJyYXkgPSBpdGVy
+YXRlSnNvbkFycmF5KGNoaWxkLmFzQXJyYXkoKSk7CgkJCQlJRGF0YVV0aWwucHV0KHBpcGVsaW5l
+Q3Vyc29yLCBjaGlsZE5hbWUsIGFycmF5KTsKCQkJfSBlbHNlIGlmKCBjaGlsZC5pc1N0cmluZygp
+ICkgewoJCQkJSURhdGFVdGlsLnB1dChwaXBlbGluZUN1cnNvciwgY2hpbGROYW1lLCBjaGlsZC5h
+c1N0cmluZygpKTsKCQkJfQoJCX0KfQoKc3RhdGljIE9iamVjdFtdIGl0ZXJhdGVKc29uQXJyYXko
+SnNvbkFycmF5IGpBcnIpIHsKCU9iamVjdFtdIGFycmF5ID0gbmV3IE9iamVjdFtqQXJyLnNpemUo
+KV07Cglmb3IoIGludCBpPTA7IGk8akFyci5zaXplKCk7IGkrKykgewoJCUpzb25WYWx1ZSBqRWxl
+bSA9IGpBcnIuZ2V0KGkpOwoJCWlmKCBqRWxlbS5pc09iamVjdCgpICkgewoJCQlJRGF0YSBkb2Mg
+PSBJRGF0YUZhY3RvcnkuY3JlYXRlKCk7CgkJCWFycmF5W2ldID0gZG9jOwoJCQlpdGVyYXRlSnNv
+bihqRWxlbS5hc09iamVjdCgpLCBkb2MuZ2V0Q3Vyc29yKCkpOwoJCX0gZWxzZSBpZiggakVsZW0u
+aXNTdHJpbmcoKSApIHsKCQkJYXJyYXlbaV0gPSBqRWxlbS5hc1N0cmluZygpOwoJCX0KCX0KCXJl
+dHVybiBhcnJheTsKfQovKnN0YXRpYyB2b2lkIGl0ZXJhdGVKc29ueChKc29uVmFsdWUgalZhbHVl
+LCBTdHJpbmcgbmFtZSwgSURhdGEgcGlwZWxpbmUpIHsKCUlEYXRhQ3Vyc29yIHBpcGVsaW5lQ3Vy
+c29yID0gcGlwZWxpbmUuZ2V0Q3Vyc29yKCk7CglpZiggalZhbHVlLmlzT2JqZWN0KCkgKSB7CgkJ
+SURhdGEgZG9jID0gSURhdGFGYWN0b3J5LmNyZWF0ZSgpOwoJCUlEYXRhVXRpbC5wdXQocGlwZWxp
+bmVDdXJzb3IsIG5hbWUsIGRvYyk7CgkJZm9yKCBTdHJpbmcgY2hpbGROYW1lOiBqVmFsdWUuYXNP
+YmplY3QoKS5uYW1lcygpICkgewoJCQlKc29uVmFsdWUgY2hpbGQgPSBqVmFsdWUuYXNPYmplY3Qo
+KS5nZXQoY2hpbGROYW1lKTsKCQkJaXRlcmF0ZUpzb24oY2hpbGQsIGNoaWxkTmFtZSwgZG9jKTsK
+CQl9Cgl9IGVsc2UgaWYgKCBqVmFsdWUuaXNBcnJheSgpICkgewoJCUpzb25BcnJheSBqQXJyID0g
+alZhbHVlLmFzQXJyYXkoKTsKCQlmb3IoIGludCBpPTA7IGk8akFyci5zaXplKCk7IGkrKyApIHsK
+CQkJSnNvblZhbHVlIGNoaWxkID0gakFyci5nZXQoaSk7CgkJCWlmKCBjaGlsZC5pc09iamVjdCgp
+ICkgewoJCQkJCgkJCX0gZWxzZSBpZiggY2hpbGQuaXNTdHJpbmcoKSApIHsKCQkJCQoJCQl9CgkJ
+fQoJCQoJCQoJCUlEYXRhW10gZG9jQXJyID0gbmV3IElEYXRhW2pBcnIuc2l6ZSgpXTsKCQlJRGF0
+YVV0aWwucHV0KHBpcGVsaW5lQ3Vyc29yLCBuYW1lLCBkb2NBcnIpOwoJCWZvciggaW50IGk9MDsg
+aTxkb2NBcnIubGVuZ3RoOyBpKysgKSB7CgkJCWRvY0FycltpXSA9IElEYXRhRmFjdG9yeS5jcmVh
+dGUoKTsKCQkJCgkJfQoJfSBlbHNlIGlmKCBqVmFsdWUuaXNTdHJpbmcoKSApIHsKCQlJRGF0YVV0
+aWwucHV0KHBpcGVsaW5lQ3Vyc29yLCBuYW1lLCBqVmFsdWUuYXNTdHJpbmcoKSk7Cgl9Cn0KKi8K
+CnN0YXRpYyBqYXZhLnV0aWwuTWFwPFN0cmluZywgSnNvblZhbHVlPiBfY29uZmlncyA9IG5ldyBq
 YXZhLnV0aWwuSGFzaE1hcDxTdHJpbmcsIEpzb25WYWx1ZT4oKTsKCnByaXZhdGUgc3RhdGljIEpz
 b25WYWx1ZSBnZXRDb25maWcoU3RyaW5nIGNvbmZpZ0ZpbGVOYW1lKSB0aHJvd3MgU2VydmljZUV4
 Y2VwdGlvbiB7CglpZiggIV9jb25maWdzLmNvbnRhaW5zS2V5KGNvbmZpZ0ZpbGVOYW1lKSApIHsK
@@ -32,6 +65,7 @@ cnNlQ29uZmlnIiwgaW5wdXQgKTsKCX1jYXRjaCggRXhjZXB0aW9uIGUpe30KCn0=</value>
   <array name="implements" type="value" depth="1">
   </array>
   <array name="imports" type="value" depth="1">
+    <value>sun.tools.jar.resources.jar</value>
     <value>java.io.File</value>
     <value>java.io.FileNotFoundException</value>
     <value>java.io.FileReader</value>
@@ -41,7 +75,10 @@ cnNlQ29uZmlnIiwgaW5wdXQgKTsKCX1jYXRjaCggRXhjZXB0aW9uIGUpe30KCn0=</value>
     <value>com.eclipsesource.json.JsonObject</value>
     <value>com.eclipsesource.json.JsonValue</value>
     <value>com.wm.app.b2b.server.ServerAPI</value>
-    <value>com.wm.data.IData</value>
-    <value>com.wm.data.IDataFactory</value>
+    <value>com.wm.lang.ns.NSName</value>
+    <value>com.wm.lang.ns.NSNode</value>
+    <value>com.wm.lang.ns.NSRecord</value>
+    <value>com.wm.lang.ns.NSRecordRef</value>
+    <value>com.wm.lang.ns.NSField</value>
   </array>
 </Values>

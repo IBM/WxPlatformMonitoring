@@ -1,7 +1,7 @@
 package wx.platformMonitoring.impl;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-01-24 16:49:34 CET
+// -----( CREATED: 2017-01-25 11:12:48 CET
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
@@ -9,6 +9,7 @@ import com.wm.util.Values;
 import com.wm.app.b2b.server.Service;
 import com.wm.app.b2b.server.ServiceException;
 // --- <<IS-START-IMPORTS>> ---
+import sun.tools.jar.resources.jar;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -18,8 +19,11 @@ import com.eclipsesource.json.JsonArray;
 import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.JsonValue;
 import com.wm.app.b2b.server.ServerAPI;
-import com.wm.data.IData;
-import com.wm.data.IDataFactory;
+import com.wm.lang.ns.NSName;
+import com.wm.lang.ns.NSNode;
+import com.wm.lang.ns.NSRecord;
+import com.wm.lang.ns.NSRecordRef;
+import com.wm.lang.ns.NSField;
 // --- <<IS-END-IMPORTS>> ---
 
 public final class config
@@ -168,6 +172,30 @@ public final class config
 		IDataUtil.put( pipelineCursor, "brokerMonitoringConfig", brokerMonitoringConfig );
 		pipelineCursor.destroy();
 			
+		// --- <<IS-END>> ---
+
+                
+	}
+
+
+
+	public static final void getConfig (IData pipeline)
+        throws ServiceException
+	{
+		// --- <<IS-START(getConfig)>> ---
+		// @sigtype java 3.5
+		// [i] field:0:required jsonConfig
+		// [o] record:0:required config
+		IDataCursor pipelineCursor = pipeline.getCursor();
+		String jsonConfig = IDataUtil.getString(pipelineCursor, "jsonConfig");
+		if( jsonConfig == null || "".equals(jsonConfig) ) {
+			throw new ServiceException("jsonConfig must not be empty");
+		}
+		JsonValue configUm =getConfig(jsonConfig);
+		IData umDoc = IDataFactory.create();
+		iterateJson(configUm.asObject().get("um").asObject(), umDoc.getCursor());
+		IDataUtil.put(pipelineCursor, "config", umDoc);
+		pipelineCursor.destroy();
 		// --- <<IS-END>> ---
 
                 
@@ -393,6 +421,68 @@ public final class config
 	}
 
 	// --- <<IS-START-SHARED>> ---
+	static void iterateJson(JsonObject jObj, IDataCursor pipelineCursor) {
+			for( String childName: jObj.names() ) {
+				JsonValue child = jObj.get(childName);
+				if( child.isObject() ) {
+					IData childDoc = IDataFactory.create();
+					IDataUtil.put(pipelineCursor, childName, childDoc);
+					iterateJson(child.asObject(), childDoc.getCursor());
+				} else if( child.isArray() ) {
+					Object[] array = iterateJsonArray(child.asArray());
+					IDataUtil.put(pipelineCursor, childName, array);
+				} else if( child.isString() ) {
+					IDataUtil.put(pipelineCursor, childName, child.asString());
+				}
+			}
+	}
+	
+	static Object[] iterateJsonArray(JsonArray jArr) {
+		Object[] array = new Object[jArr.size()];
+		for( int i=0; i<jArr.size(); i++) {
+			JsonValue jElem = jArr.get(i);
+			if( jElem.isObject() ) {
+				IData doc = IDataFactory.create();
+				array[i] = doc;
+				iterateJson(jElem.asObject(), doc.getCursor());
+			} else if( jElem.isString() ) {
+				array[i] = jElem.asString();
+			}
+		}
+		return array;
+	}
+	/*static void iterateJsonx(JsonValue jValue, String name, IData pipeline) {
+		IDataCursor pipelineCursor = pipeline.getCursor();
+		if( jValue.isObject() ) {
+			IData doc = IDataFactory.create();
+			IDataUtil.put(pipelineCursor, name, doc);
+			for( String childName: jValue.asObject().names() ) {
+				JsonValue child = jValue.asObject().get(childName);
+				iterateJson(child, childName, doc);
+			}
+		} else if ( jValue.isArray() ) {
+			JsonArray jArr = jValue.asArray();
+			for( int i=0; i<jArr.size(); i++ ) {
+				JsonValue child = jArr.get(i);
+				if( child.isObject() ) {
+					
+				} else if( child.isString() ) {
+					
+				}
+			}
+			
+			
+			IData[] docArr = new IData[jArr.size()];
+			IDataUtil.put(pipelineCursor, name, docArr);
+			for( int i=0; i<docArr.length; i++ ) {
+				docArr[i] = IDataFactory.create();
+				
+			}
+		} else if( jValue.isString() ) {
+			IDataUtil.put(pipelineCursor, name, jValue.asString());
+		}
+	}
+	*/
 	
 	static java.util.Map<String, JsonValue> _configs = new java.util.HashMap<String, JsonValue>();
 	

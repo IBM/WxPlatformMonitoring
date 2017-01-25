@@ -1,7 +1,7 @@
 package wx.platformMonitoring.impl;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-01-24 18:30:42 CET
+// -----( CREATED: 2017-01-25 11:33:26 CET
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
@@ -43,6 +43,68 @@ public final class nAdmin
 
 	// ---( server methods )---
 
+
+
+
+	public static final void getQueuedElements (IData pipeline)
+        throws ServiceException
+	{
+		// --- <<IS-START(getQueuedElements)>> ---
+		// @sigtype java 3.5
+		// [i] field:0:required RNAME
+		// [i] field:0:required queueName
+		// [o] field:0:required outstandingEvents
+		// [o] record:1:required sharedDurableOutstandingEvents
+		// [o] - field:0:required outstandingEvents
+		// [o] - field:0:required namedObject
+		// [o] field:0:required outstandingEventsSharedDurableMax
+		try {
+			
+			// pipeline
+			IDataCursor pipelineCursor = pipeline.getCursor();
+			String	RNAME = IDataUtil.getString( pipelineCursor, "RNAME" );
+			String	queueName = IDataUtil.getString( pipelineCursor, "queueName" );
+			
+			if( RNAME == null || "".equals(RNAME) )  {
+				throw new ServiceException("RNAME must not be empty. Provide like: 'nsp://host:port'.");
+			}
+			if( queueName == null || "".equals(queueName) ) {
+				throw new ServiceException("queueName must not be null.");
+			}
+			
+			nSessionAttributes nsa=new nSessionAttributes(RNAME);
+			nSession      mySession = nSessionFactory.create(nsa);
+			mySession.init();
+			
+			nChannelAttributes attrib = new nChannelAttributes();
+		    attrib.setName(queueName);
+		    com.pcbsys.nirvana.client.nFindResult[] findResult = mySession.find(new nChannelAttributes[] {attrib});
+		    if( findResult.length == 0 ) {
+		    	throw new ServiceException("Qeueu" + queueName+ " was not found on realm " + RNAME);
+		    }
+		    if( findResult[0].isChannel() ) {
+		    	// if it is a channel, then it is a jms topic
+		    	IDataUtil.put( pipelineCursor, "channelName", queueName);
+		    	getQueuedElementsChannel(pipeline);
+		    } else if( findResult[0].isQueue() ) {
+		    	// this is a jms queue
+		    	getQueuedElementsJmsQueue(pipeline);
+		    } else {
+		    	throw new ServiceException("Queue " + queueName + " on realm " + RNAME + " is neither queue nor channel.");
+		    }
+		    pipelineCursor.destroy();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new ServiceException(e);
+		}
+		
+			
+		// --- <<IS-END>> ---
+
+                
+	}
 
 
 
@@ -256,7 +318,7 @@ public final class nAdmin
 		    	// if it is a channel, then it is a jms topic
 		    	IDataUtil.put( pipelineCursor, "topicName", jmsQueueName );
 		    	getQueuedElementsJmsTopic(pipeline);
-		    } else if( findResult[1].isQueue() ) {
+		    } else if( findResult[0].isQueue() ) {
 		    	// this is a jms queue
 		    	IDataUtil.put( pipelineCursor, "queueName", jmsQueueName );
 		    	getQueuedElementsJmsQueue(pipeline);

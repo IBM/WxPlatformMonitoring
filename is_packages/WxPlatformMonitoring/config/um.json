@@ -19,8 +19,8 @@
 		},
 		"direct": {
 			"config": {
-				"jmsConnectionAlias": "",
-				"messagingConnectionAlias": ""
+				"jmsConnectionAlias": "myJmsConAlias",
+				"messagingConnectionAlias": "myMsgConAslias"
 			},
 			"channels": [{
 				"name": "wm/is/wx/platformMonitoring_Test/pub/trigger/messaging/publishableDoc",
