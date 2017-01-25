@@ -1,7 +1,7 @@
 package wx.platformMonitoring.impl;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-01-25 12:31:57 CET
+// -----( CREATED: 2017-01-25 13:33:22 CET
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
@@ -247,13 +247,15 @@ public final class nAdmin
 		    nRealmNode realmNode = new nRealmNode(nsa);
 		    nNode documentLeafNode = realmNode.findNode(documentLeafNodeName);
 		    Enumeration<nNode> nodes = ((nContainer)documentLeafNode).getNodes();
+		    nChannel channel = null;
+		    long outstandingEvents = -1;
 		    for( ; nodes.hasMoreElements(); ) {
 		    	nNode node = nodes.nextElement();
 		    	 if( node instanceof nLeafNode ) {
 		    		 // we are only interested in channels
 		    	      if( ((nLeafNode) node).isChannel() ) {
 		    	    	  nLeafNode leaf = (nLeafNode) node;
-		    	    	  nChannel channel = mySession.findChannel(leaf.getAttributes());
+		    	    	  channel = mySession.findChannel(leaf.getAttributes());
 							for (nNamedObject nno : channel.getNamedObjects()) {
 								String nnoName = nno.getName();
 								/*
@@ -264,14 +266,18 @@ public final class nAdmin
 								 */
 								String clientId = nnoName.replaceAll("__", "_").replaceFirst("##", "_");
 								if( clientId.equals(principal) ) {
-									IDataUtil.put(pipelineCursor, "outstandingEvents",
-											nno.getSharedNamedObjectOutstandingEvents() + "");
+									outstandingEvents = nno.getSharedNamedObjectOutstandingEvents();
 									break;
 								}
 							}
 		    	      }
 		    	 }
 		    }
+		    if( channel != null && outstandingEvents == -1 ) {
+		    	outstandingEvents = channel.getEventCount();
+		    }
+		    IDataUtil.put(pipelineCursor, "outstandingEvents",
+		    		outstandingEvents + "");
 		} catch (Exception e) {
 			throw new ServiceException("Could not get the nr of queued events for trigger " + triggerName + " on realm " + RNAME + ": " + e);
 		}
