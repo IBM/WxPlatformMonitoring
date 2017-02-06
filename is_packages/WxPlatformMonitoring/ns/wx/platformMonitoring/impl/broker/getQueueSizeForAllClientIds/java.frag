@@ -2,6 +2,12 @@
 
 <Values version="2.0">
   <value name="name">getQueueSizeForAllClientIds</value>
+  <array name="sig" type="value" depth="1">
+    <value>[i] recref:0:required brokerConnectionData reiff_administration.documents.broker:BrokerConnectionData</value>
+    <value>[o] recref:1:required brokerClientQueueSizeList reiff_administration.documents.broker:BrokerClientQueueSize</value>
+    <value>[o] field:0:required totalSize</value>
+  </array>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">Ly8gaW5pdCBwYXJhbXMNClN0cmluZyBicm9rZXJVUkkgPSBudWxsOw0KU3RyaW5nIGJyb2tlckNs
 aWVudEdyb3VwID0gbnVsbDsNClN0cmluZyBicm9rZXJBcHBOYW1lID0gbnVsbDsNClN0cmluZyBi
@@ -46,5 +52,5 @@ Cgl9DQp9DQoNCklEYXRhQ3Vyc29yIHBjT3V0cHV0ID0gcGlwZWxpbmUuZ2V0Q3Vyc29yKCk7DQpJ
 RGF0YVV0aWwucHV0KCBwY091dHB1dCwgImJyb2tlckNsaWVudFF1ZXVlU2l6ZUxpc3QiLCANCgkJ
 YnJva2VyQ2xpZW50UXVldWVTaXplTGlzdC50b0FycmF5KCANCgkJbmV3IElEYXRhWzBdKSk7DQpJ
 RGF0YVV0aWwucHV0KCBwY091dHB1dCwgInRvdGFsU2l6ZSIsIA0KCQlTdHJpbmcudmFsdWVPZih0
-b3RhbFNpemUpKTsNCnBjT3V0cHV0LmRlc3Ryb3koKTsNCgk=</value>
+b3RhbFNpemUpKTsNCnBjT3V0cHV0LmRlc3Ryb3koKTsNCgkNCg==</value>
 </Values>

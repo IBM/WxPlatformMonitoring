@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="name">contains</value>
+  <value name="encodeutf8">true</value>
+  <value name="body">Ly8gcGlwZWxpbmUNCklEYXRhQ3Vyc29yIHBpcGVsaW5lQ3Vyc29yID0gcGlwZWxpbmUuZ2V0Q3Vy
+c29yKCk7DQpTdHJpbmdbXSAgICAgICBzdHJpbmdBcnJheSA9IElEYXRhVXRpbC5nZXRTdHJpbmdB
+cnJheSggcGlwZWxpbmVDdXJzb3IsICJzdHJpbmdBcnJheSIgKTsNClN0cmluZyAgICAgICAgICAg
+ICAgIHZhbHVlID0gSURhdGFVdGlsLmdldFN0cmluZyggcGlwZWxpbmVDdXJzb3IsICJ2YWx1ZSIg
+KTsNCg0KU2V0PFN0cmluZz4gcyA9IG5ldyBIYXNoU2V0PFN0cmluZz4oKTsNCnMuYWRkQWxsKCBB
+cnJheXMuYXNMaXN0KCBzdHJpbmdBcnJheSkgKTsNCg0KSURhdGFVdGlsLnB1dCggcGlwZWxpbmVD
+dXJzb3IsICJpc0luIiwgIiIgKyBzLmNvbnRhaW5zKCB2YWx1ZSApICk7DQpwaXBlbGluZUN1cnNv
+ci5kZXN0cm95KCk7DQoJDQoJ</value>
+</Values>

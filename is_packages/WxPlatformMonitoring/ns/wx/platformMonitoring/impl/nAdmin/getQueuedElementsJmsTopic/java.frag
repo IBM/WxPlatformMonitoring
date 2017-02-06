@@ -2,6 +2,13 @@
 
 <Values version="2.0">
   <value name="name">getQueuedElementsJmsTopic</value>
+  <array name="sig" type="value" depth="1">
+    <value>[i] field:0:required RNAME</value>
+    <value>[i] field:0:required topicName</value>
+    <value>[o] field:0:required outstandingEvents</value>
+    <value>[o] field:0:required queueStorageSize</value>
+  </array>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">dHJ5IHsNCgkNCgkvLyBwaXBlbGluZQ0KCUlEYXRhQ3Vyc29yIHBpcGVsaW5lQ3Vyc29yID0gcGlw
 ZWxpbmUuZ2V0Q3Vyc29yKCk7DQoJU3RyaW5nCVJOQU1FID0gSURhdGFVdGlsLmdldFN0cmluZygg
@@ -28,5 +35,5 @@ KyAiIik7DQoJCX0NCgl9DQogICAgSURhdGFVdGlsLnB1dChwaXBlbGluZUN1cnNvciwgIm91dHN0
 YW5kaW5nRXZlbnRzIiwgY2hhbm5lbC5nZXRFdmVudENvdW50KCkgKyAiIik7DQogICAgcGlwZWxp
 bmVDdXJzb3IuZGVzdHJveSgpOw0KCQ0KfSBjYXRjaCAoRXhjZXB0aW9uIGUpIHsNCgkvLyBUT0RP
 IEF1dG8tZ2VuZXJhdGVkIGNhdGNoIGJsb2NrDQoJZS5wcmludFN0YWNrVHJhY2UoKTsNCgl0aHJv
-dyBuZXcgU2VydmljZUV4Y2VwdGlvbihlKTsNCn0NCg0KCQ==</value>
+dyBuZXcgU2VydmljZUV4Y2VwdGlvbihlKTsNCn0NCg0KCQ0K</value>
 </Values>

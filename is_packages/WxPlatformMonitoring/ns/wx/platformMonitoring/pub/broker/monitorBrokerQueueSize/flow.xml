@@ -494,21 +494,7 @@
 </SEQUENCE>
 </BRANCH>
 
-<MAP TIMEOUT="" MODE="STANDALONE">
-  <COMMENT>## clean</COMMENT>
-
-  <!-- nodes -->
-
-<MAPDELETE FIELD="/criticalSize;1;0">
-</MAPDELETE>
-
-<MAPDELETE FIELD="/brokerClientQueueSizeList;4;1;wx.platformMonitoring.pub.broker:BrokerClientQueueSize">
-</MAPDELETE>
-
-<MAPDELETE FIELD="/totalSize;1;0">
-</MAPDELETE>
-
-<MAPDELETE FIELD="/warnSize;1;0">
-</MAPDELETE>
-</MAP>
+<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.utility.flow:preserveOutputSig" VALIDATE-IN="$none" VALIDATE-OUT="$none">
+  <COMMENT></COMMENT>
+</INVOKE>
 </FLOW>

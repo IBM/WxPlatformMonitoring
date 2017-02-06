@@ -2,6 +2,11 @@
 
 <Values version="2.0">
   <value name="name">getQueueLengthForAllClientIds</value>
+  <array name="sig" type="value" depth="1">
+    <value>[i] recref:0:required brokerConnectionData reiff_administration.documents.broker:BrokerConnectionData</value>
+    <value>[o] recref:1:required brokerClientQueueLengthList reiff_administration.documents.broker:BrokerClientQueueLength</value>
+  </array>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">Ly8gaW5pdCBwYXJhbXMNClN0cmluZyBicm9rZXJVUkkgPSBudWxsOw0KU3RyaW5nIGJyb2tlckNs
 aWVudEdyb3VwID0gbnVsbDsNClN0cmluZyBicm9rZXJBcHBOYW1lID0gbnVsbDsNClN0cmluZyBi
@@ -35,5 +40,5 @@ CgkJCS8vIGRvIG5vdGhpbmcsIHdlIGFyZSBpbiB0aGUgZmluYWxseSBibG9jaw0KCQl9DQoJfQ0K
 fQ0KDQpJRGF0YUN1cnNvciBwY091dHB1dCA9IHBpcGVsaW5lLmdldEN1cnNvcigpOw0KSURhdGFV
 dGlsLnB1dCggcGNPdXRwdXQsICJicm9rZXJDbGllbnRRdWV1ZUxlbmd0aExpc3QiLCANCgkJYnJv
 a2VyQ2xpZW50UXVldWVMZW5ndGhMaXN0LnRvQXJyYXkoIA0KCQluZXcgSURhdGFbMF0pKTsNCnBj
-T3V0cHV0LmRlc3Ryb3koKTsNCgk=</value>
+T3V0cHV0LmRlc3Ryb3koKTsNCgkNCg==</value>
 </Values>

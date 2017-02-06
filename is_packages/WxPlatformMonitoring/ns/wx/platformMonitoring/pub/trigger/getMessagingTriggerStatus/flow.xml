@@ -176,7 +176,7 @@
 
   <!-- nodes -->
 
-<SEQUENCE NAME="%triggers/processingStatus/state% == &quot;active&quot; &amp;&amp; %triggers/processingStatus/state% == &quot;active&quot; &amp;&amp; %triggers/properties/executeEnabled% == &quot;true&quot; &amp;&amp; %triggers/retrievalStatus/state% == &quot;active&quot;" TIMEOUT="" EXIT-ON="FAILURE">
+<SEQUENCE NAME="%triggers/processingStatus/state% == &#34;active&#34; &amp;&amp; %triggers/processingStatus/state% == &#34;active&#34; &amp;&amp; %triggers/properties/executeEnabled% == &#34;true&#34; &amp;&amp; %triggers/retrievalStatus/state% == &#34;active&#34;" TIMEOUT="" EXIT-ON="FAILURE">
   <COMMENT></COMMENT>
 
   <!-- nodes -->
@@ -470,21 +470,7 @@
 </BRANCH>
 </LOOP>
 
-<MAP TIMEOUT="" MODE="STANDALONE">
+<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.utility.flow:preserveOutputSig" VALIDATE-IN="$none" VALIDATE-OUT="$none">
   <COMMENT></COMMENT>
-
-  <!-- nodes -->
-
-<MAPDELETE FIELD="/globalSettings;2;0">
-</MAPDELETE>
-
-<MAPDELETE FIELD="/triggers;2;1">
-</MAPDELETE>
-
-<MAPDELETE FIELD="/size;1;0">
-</MAPDELETE>
-
-<MAPDELETE FIELD="/triggerName;1;0">
-</MAPDELETE>
-</MAP>
+</INVOKE>
 </FLOW>

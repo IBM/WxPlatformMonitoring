@@ -2,6 +2,10 @@
 
 <Values version="2.0">
   <value name="name">getBrokerMonitoringConfig</value>
+  <array name="sig" type="value" depth="1">
+    <value>[o] recref:0:required brokerMonitoringConfig wx.platformMonitoring.impl.broker:BrokerMonitoringData</value>
+  </array>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">SnNvblZhbHVlIGNvbmZpZ0Jyb2tlck1vbml0b3JpbmcgPWdldENvbmZpZygiYnJva2VyTW9uaXRv
 cmluZy5qc29uIik7DQpKc29uT2JqZWN0IGpNb25pdG9yaW5nID0gY29uZmlnQnJva2VyTW9uaXRv
@@ -33,6 +37,6 @@ ZC5jcml0aWNhbCIpLmFzU3RyaW5nKCkgKTsNCmFsbENsaWVudHNDdXJzb3IuZGVzdHJveSgpOw0K
 SURhdGFVdGlsLnB1dCggYnJva2VyTW9uaXRvcmluZ0NvbmZpZ0N1cnNvciwgImFsbENsaWVudHMi
 LCBhbGxDbGllbnRzICk7DQpicm9rZXJNb25pdG9yaW5nQ29uZmlnQ3Vyc29yLmRlc3Ryb3koKTsN
 CklEYXRhVXRpbC5wdXQoIHBpcGVsaW5lQ3Vyc29yLCAiYnJva2VyTW9uaXRvcmluZ0NvbmZpZyIs
-IGJyb2tlck1vbml0b3JpbmdDb25maWcgKTsNCnBpcGVsaW5lQ3Vyc29yLmRlc3Ryb3koKTsNCgk=
-</value>
+IGJyb2tlck1vbml0b3JpbmdDb25maWcgKTsNCnBpcGVsaW5lQ3Vyc29yLmRlc3Ryb3koKTsNCgkN
+Cg==</value>
 </Values>

@@ -2,6 +2,10 @@
 
 <Values version="2.0">
   <value name="name">getTriggersConfig</value>
+  <array name="sig" type="value" depth="1">
+    <value>[o] recref:0:required triggerMonitoringConfig wx.platformMonitoring.impl.trigger:TriggerMonitoringConfig</value>
+  </array>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">SnNvblZhbHVlIGNvbmZpZ1RyaWdnZXJzID0gZ2V0Q29uZmlnKCJ0cmlnZ2Vycy5qc29uIik7DQpK
 c29uT2JqZWN0IGpUcmlnZ2VycyA9IGNvbmZpZ1RyaWdnZXJzLmFzT2JqZWN0KCkuZ2V0KCJ0cmln
@@ -23,5 +27,5 @@ aWdnZXJzLmdldChpKS5hc1N0cmluZygpOw0KfQ0KSURhdGFVdGlsLnB1dCggdHJpZ2dlck1vbml0
 b3JpbmdDb25maWdDdXJzb3IsICJqbXNUcmlnZ2VycyIsIGptc1RyaWdnZXJzICk7DQp0cmlnZ2Vy
 TW9uaXRvcmluZ0NvbmZpZ0N1cnNvci5kZXN0cm95KCk7DQpJRGF0YVV0aWwucHV0KCBwaXBlbGlu
 ZUN1cnNvciwgInRyaWdnZXJNb25pdG9yaW5nQ29uZmlnIiwgdHJpZ2dlck1vbml0b3JpbmdDb25m
-aWcgKTsNCnBpcGVsaW5lQ3Vyc29yLmRlc3Ryb3koKTsNCg0KCQ==</value>
+aWcgKTsNCnBpcGVsaW5lQ3Vyc29yLmRlc3Ryb3koKTsNCg0KCQ0K</value>
 </Values>

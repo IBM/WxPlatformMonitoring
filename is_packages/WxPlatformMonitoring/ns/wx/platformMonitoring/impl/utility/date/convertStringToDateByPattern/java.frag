@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="name">convertStringToDateByPattern</value>
+  <array name="sig" type="value" depth="1">
+    <value>[i] field:0:required stringDate</value>
+    <value>[i] field:0:required datePattern {"yyyyMMdd","dd.MM.yyyy","yyyy-MM-dd'T'HH:mm:ss","yyyy-MM-dd'Z'","yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"}</value>
+    <value>[o] object:0:required date</value>
+  </array>
+  <value name="subtype">unknown</value>
+  <value name="sigtype">java 3.5</value>
+  <value name="encodeutf8">true</value>
+  <value name="body">Ly8gYWNjZXNzaW5nIHBpcGVsaW5lIGZvciByZXRyaWV2aW5nIGlucHV0IHBhcmFtZXRlcnMNCklE
+YXRhQ3Vyc29yIHBpcGVsaW5lQ3Vyc29ySW5wdXQgPSBwaXBlbGluZS5nZXRDdXJzb3IoKTsNCglT
+dHJpbmcJc3RyaW5nRGF0ZSA9IElEYXRhVXRpbC5nZXRTdHJpbmcoIHBpcGVsaW5lQ3Vyc29ySW5w
+dXQsICJzdHJpbmdEYXRlIiApOw0KCVN0cmluZwlwYXR0ZXJuID0gSURhdGFVdGlsLmdldFN0cmlu
+ZyggcGlwZWxpbmVDdXJzb3JJbnB1dCwgImRhdGVQYXR0ZXJuIiApOw0KcGlwZWxpbmVDdXJzb3JJ
+bnB1dC5kZXN0cm95KCk7DQovLyBhY2Nlc3NpbmcgcGlwZWxpbmUgZm9yIGZpbGxpbmcgb3V0cHV0
+IHBhcmFtZXRlcnMgDQpJRGF0YUN1cnNvciBwaXBlbGluZUN1cnNvck91dHB1dCA9IHBpcGVsaW5l
+LmdldEN1cnNvcigpOw0KDQppZihwYXR0ZXJuPT1udWxsKXsNCgl0aHJvdyBuZXcgU2VydmljZUV4
+Y2VwdGlvbigiVGhlIHBhdHRlciBmb3IgcGFyc2luZyB0aGUgZGF0ZSBtdXN0IG5vdCBiZSBudWxs
+Iik7DQp9DQppZihzdHJpbmdEYXRlPT1udWxsIHx8IHN0cmluZ0RhdGUubGVuZ3RoKCk9PTApew0K
+CUlEYXRhVXRpbC5wdXQoIHBpcGVsaW5lQ3Vyc29yT3V0cHV0LCAiZGF0ZSIsIG51bGwgKTsNCglw
+aXBlbGluZUN1cnNvck91dHB1dC5kZXN0cm95KCk7DQoJcmV0dXJuOw0KfQ0KDQp0cnkgew0KCWZp
+bmFsIFNpbXBsZURhdGVGb3JtYXQgc2ltcGxlRGF0ZUZvcm1hdCA9IG5ldyBTaW1wbGVEYXRlRm9y
+bWF0KHBhdHRlcm4pOw0KCURhdGUgZGF0ZSA9IHNpbXBsZURhdGVGb3JtYXQucGFyc2Uoc3RyaW5n
+RGF0ZSk7DQoJSURhdGFVdGlsLnB1dCggcGlwZWxpbmVDdXJzb3JPdXRwdXQsICJkYXRlIiwgZGF0
+ZSApOw0KCXBpcGVsaW5lQ3Vyc29yT3V0cHV0LmRlc3Ryb3koKTsNCg0KfSBjYXRjaCAoZmluYWwg
+UGFyc2VFeGNlcHRpb24gcGFyc2VFeGNlcHRpb24pIHsNCgl0aHJvdyBuZXcgU2VydmljZUV4Y2Vw
+dGlvbihwYXJzZUV4Y2VwdGlvbik7DQp9DQoJDQoJDQo=</value>
+</Values>

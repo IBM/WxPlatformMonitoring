@@ -1,8 +1,8 @@
 <project name="wxplatformmonitoring" basedir="." default="buildAndDistributeWxPlatformMonitoringPackage">
 	<!--
-	<property name="version" value="912"/>
-	-->
 	<property name="version" value="910"/>
+	-->
+	<property name="version" value="912"/>
 	<property file="build_${version}.properties" />
 
 	<property name="build.dir" value="build/${version}" />

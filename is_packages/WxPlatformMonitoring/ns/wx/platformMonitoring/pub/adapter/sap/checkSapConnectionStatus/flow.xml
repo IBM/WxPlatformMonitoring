@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <FLOW VERSION="3.0" CLEANUP="true">
+  <COMMENT>init</COMMENT>
 
   <!-- nodes -->
 
@@ -551,7 +552,7 @@
 </MAPCOPY>
 </MAP>
 
-<INVOKE TIMEOUT="" SERVICE="wx.utilities.list:contains" VALIDATE-IN="$none" VALIDATE-OUT="$none">
+<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.utility.list:contains" VALIDATE-IN="$none" VALIDATE-OUT="$none">
   <COMMENT></COMMENT>
 
   <!-- nodes -->
@@ -1721,12 +1722,7 @@
 </BRANCH>
 </LOOP>
 
-<MAP TIMEOUT="" MODE="STANDALONE">
+<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.utility.flow:preserveOutputSig" VALIDATE-IN="$none" VALIDATE-OUT="$none">
   <COMMENT></COMMENT>
-
-  <!-- nodes -->
-
-<MAPDELETE FIELD="/adapterMonitoringConfig;4;0;wx.platformMonitoring.impl.adapter:AdapterMonitoringConfig">
-</MAPDELETE>
-</MAP>
+</INVOKE>
 </FLOW>

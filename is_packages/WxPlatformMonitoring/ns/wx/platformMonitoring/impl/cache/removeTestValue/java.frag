@@ -2,7 +2,8 @@
 
 <Values version="2.0">
   <value name="name">removeTestValue</value>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">Q2FjaGUgY2FjaGUgPSBnZXRUZXN0Q2FjaGUoKTsNCg0KY2FjaGUucmVtb3ZlKENBQ0hFX0tFWSk7
-DQoJ</value>
+DQoJDQo=</value>
 </Values>

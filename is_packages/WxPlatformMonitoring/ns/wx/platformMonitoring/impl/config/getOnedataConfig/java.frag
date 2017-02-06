@@ -2,6 +2,10 @@
 
 <Values version="2.0">
   <value name="name">getOnedataConfig</value>
+  <array name="sig" type="value" depth="1">
+    <value>[o] recref:0:required onedataConnectionData wx.platformMonitoring.impl.onedata:OnedataConnectionData</value>
+  </array>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">SnNvblZhbHVlIGNvbmZpZ09uZWRhdGEgPSBnZXRDb25maWcoIm9uZWRhdGEuanNvbiIpOw0KSnNv
 bk9iamVjdCBvbmVkYXRhID0gY29uZmlnT25lZGF0YS5hc09iamVjdCgpLmdldCgib25lZGF0YSIp
@@ -16,5 +20,6 @@ LCBvbmVkYXRhLmdldCgicG9ydCIpLmFzU3RyaW5nKCApKTsNCklEYXRhVXRpbC5wdXQoIG9uZWRh
 dGFDb25uZWN0aW9uRGF0YUN1cnNvciwgInJlc3RQYXRoIiwgb25lZGF0YS5nZXQoInJlc3RQYXRo
 IikuYXNTdHJpbmcoICkpOw0Kb25lZGF0YUNvbm5lY3Rpb25EYXRhQ3Vyc29yLmRlc3Ryb3koKTsN
 CklEYXRhVXRpbC5wdXQoIHBpcGVsaW5lQ3Vyc29yLCAib25lZGF0YUNvbm5lY3Rpb25EYXRhIiwg
-b25lZGF0YUNvbm5lY3Rpb25EYXRhICk7DQpwaXBlbGluZUN1cnNvci5kZXN0cm95KCk7DQoJ</value>
+b25lZGF0YUNvbm5lY3Rpb25EYXRhICk7DQpwaXBlbGluZUN1cnNvci5kZXN0cm95KCk7DQoJDQo=
+</value>
 </Values>

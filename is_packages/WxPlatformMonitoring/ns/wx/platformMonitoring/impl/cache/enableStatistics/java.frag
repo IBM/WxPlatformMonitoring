@@ -2,6 +2,11 @@
 
 <Values version="2.0">
   <value name="name">enableStatistics</value>
+  <array name="sig" type="value" depth="1">
+    <value>[i] field:0:required cacheManagerName</value>
+    <value>[i] field:0:required cacheName</value>
+  </array>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">SURhdGFDdXJzb3IgaWRjID0gcGlwZWxpbmUuZ2V0Q3Vyc29yKCk7DQpTdHJpbmcgY2FjaGVNYW5h
 Z2VyTmFtZSA9IElEYXRhVXRpbC5nZXRTdHJpbmcoaWRjLCAiY2FjaGVNYW5hZ2VyTmFtZSIpOw0K
@@ -15,5 +20,6 @@ CmNhY2hlLmdldENhY2hlQ29uZmlndXJhdGlvbigpLnNldE1lbW9yeVN0b3JlRXZpY3Rpb25Qb2xp
 Y3koTWVtb3J5U3RvcmVFdmljdGlvblBvbGljeS5GSUZPLnRvU3RyaW5nKCkpOw0KY2FjaGUuc2V0
 TWVtb3J5U3RvcmVFdmljdGlvblBvbGljeShuZXcgRmlmb1BvbGljeSgpKTsNCmNhY2hlLmdldE1l
 bW9yeVN0b3JlRXZpY3Rpb25Qb2xpY3koKS5nZXROYW1lKCk7DQovL2NhY2hlLnNldFN0YXRpc3Rp
-Y3NBY2N1cmFjeShTdGF0aXN0aWNzLlNUQVRJU1RJQ1NfQUNDVVJBQ1lfR1VBUkFOVEVFRCk7</value>
+Y3NBY2N1cmFjeShTdGF0aXN0aWNzLlNUQVRJU1RJQ1NfQUNDVVJBQ1lfR1VBUkFOVEVFRCk7DQo=
+</value>
 </Values>

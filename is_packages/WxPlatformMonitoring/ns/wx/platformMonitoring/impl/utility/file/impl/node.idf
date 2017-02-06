@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="node_type">interface</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_nsName">wx.platformMonitoring.impl.utility.file.impl</value>
+  <value name="is_public">false</value>
+  <value name="shared"></value>
+  <value name="encodeutf8">true</value>
+  <value name="extends"></value>
+  <array name="implements" type="value" depth="1">
+  </array>
+  <array name="imports" type="value" depth="1">
+    <value>com.softwareag.util.IDataMap</value>
+    <value>java.io.BufferedWriter</value>
+    <value>java.io.File</value>
+    <value>java.io.FileOutputStream</value>
+    <value>java.io.FileWriter</value>
+    <value>java.io.IOException</value>
+    <value>java.io.OutputStreamWriter</value>
+    <value>java.nio.charset.Charset</value>
+    <value>com.wm.data.IData</value>
+    <value>com.wm.data.IDataCursor</value>
+    <value>com.wm.data.IDataUtil</value>
+    <value>java.io.FileNotFoundException</value>
+    <value>java.io.BufferedReader</value>
+    <value>java.io.FileReader</value>
+    <value>java.io.InputStreamReader</value>
+    <value>java.io.FileInputStream</value>
+    <value>java.io.PrintWriter</value>
+    <value>java.io.BufferedOutputStream</value>
+    <value>java.io.Closeable</value>
+  </array>
+</Values>

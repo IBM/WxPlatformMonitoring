@@ -2,6 +2,11 @@
 
 <Values version="2.0">
   <value name="name">getRNAMEByJmsConnectionAlias</value>
+  <array name="sig" type="value" depth="1">
+    <value>[i] field:0:required jmsConnectionAlias</value>
+    <value>[o] field:0:required RNAME</value>
+  </array>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">SURhdGFDdXJzb3IgcGlwZWxpbmVDdXJzb3IgPSBwaXBlbGluZS5nZXRDdXJzb3IoKTsNCg0KU3Ry
 aW5nIGptc0Nvbm5lY3Rpb25BbGlhcyA9IElEYXRhVXRpbC5nZXRTdHJpbmcocGlwZWxpbmVDdXJz
@@ -44,5 +49,5 @@ Ow0KCUlEYXRhVXRpbC5wdXQocGlwZWxpbmUuZ2V0Q3Vyc29yKCksICJSTkFNRSIsIGNmUm5hbWUp
 Ow0KfSBjYXRjaCAoTmFtaW5nRXhjZXB0aW9uIGUxKSB7DQoJLy8gVE9ETyBBdXRvLWdlbmVyYXRl
 ZCBjYXRjaCBibG9jaw0KCXRocm93IG5ldyBTZXJ2aWNlRXhjZXB0aW9uKCJOYW1pbmdFeGNlcHRp
 b24gd2hlbiBsb29raW5nIHVwIFJOQU1FIGZvciBKTVMgQ29ubmVjdGlvbiBBbGlhcyAiICsgam1z
-Q29ubmVjdGlvbkFsaWFzICsgIjogIiArIGUxKTsNCn0=</value>
+Q29ubmVjdGlvbkFsaWFzICsgIjogIiArIGUxKTsNCn0NCg==</value>
 </Values>

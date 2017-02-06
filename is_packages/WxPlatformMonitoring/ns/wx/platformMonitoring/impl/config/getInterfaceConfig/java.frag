@@ -2,6 +2,10 @@
 
 <Values version="2.0">
   <value name="name">getInterfaceConfig</value>
+  <array name="sig" type="value" depth="1">
+    <value>[o] recref:0:required interfacesMonitoringConfig wx.platformMonitoring.impl.interfaces:InterfacesMonitoringConfig</value>
+  </array>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">SnNvbkFycmF5IGpJbnRlcmZhY2VzID0gZ2V0Q29uZmlnKCJpbnRlcmZhY2VzLmpzb24iKS5hc09i
 amVjdCgpLmdldCgiaW50ZXJmYWNlcyIpLmFzQXJyYXkoKTsNCi8vIHBpcGVsaW5lDQpJRGF0YUN1
@@ -21,5 +25,5 @@ aW50ZXJmYWNlc0N1cnNvci5kZXN0cm95KCk7DQp9DQpJRGF0YVV0aWwucHV0KCBpbnRlcmZhY2Vz
 TW9uaXRvcmluZ0NvbmZpZ0N1cnNvciwgImludGVyZmFjZXMiLCBpbnRlcmZhY2VzICk7DQppbnRl
 cmZhY2VzTW9uaXRvcmluZ0NvbmZpZ0N1cnNvci5kZXN0cm95KCk7DQpJRGF0YVV0aWwucHV0KCBw
 aXBlbGluZUN1cnNvciwgImludGVyZmFjZXNNb25pdG9yaW5nQ29uZmlnIiwgaW50ZXJmYWNlc01v
-bml0b3JpbmdDb25maWcgKTsNCnBpcGVsaW5lQ3Vyc29yLmRlc3Ryb3koKTsNCgk=</value>
+bml0b3JpbmdDb25maWcgKTsNCnBpcGVsaW5lQ3Vyc29yLmRlc3Ryb3koKTsNCgkNCg==</value>
 </Values>

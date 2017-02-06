@@ -2,6 +2,12 @@
 
 <Values version="2.0">
   <value name="name">getQueuedElementsForMessagingTrigger</value>
+  <array name="sig" type="value" depth="1">
+    <value>[i] field:0:required RNAME</value>
+    <value>[i] field:0:required triggerName</value>
+    <value>[o] field:0:required outstandingEvents</value>
+  </array>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">SURhdGFDdXJzb3IgcGlwZWxpbmVDdXJzb3IgPSBwaXBlbGluZS5nZXRDdXJzb3IoKTsNClN0cmlu
 ZyB0cmlnZ2VyTmFtZSA9IElEYXRhVXRpbC5nZXRTdHJpbmcocGlwZWxpbmVDdXJzb3IsICJ0cmln
@@ -82,5 +88,5 @@ DQogICAgfQ0KICAgIElEYXRhVXRpbC5wdXQocGlwZWxpbmVDdXJzb3IsICJvdXRzdGFuZGluZ0V2
 ZW50cyIsDQogICAgCQlvdXRzdGFuZGluZ0V2ZW50cyArICIiKTsNCn0gY2F0Y2ggKEV4Y2VwdGlv
 biBlKSB7DQoJdGhyb3cgbmV3IFNlcnZpY2VFeGNlcHRpb24oIkNvdWxkIG5vdCBnZXQgdGhlIG5y
 IG9mIHF1ZXVlZCBldmVudHMgZm9yIHRyaWdnZXIgIiArIHRyaWdnZXJOYW1lICsgIiBvbiByZWFs
-bSAiICsgUk5BTUUgKyAiOiAiICsgZSk7DQp9</value>
+bSAiICsgUk5BTUUgKyAiOiAiICsgZSk7DQp9DQo=</value>
 </Values>

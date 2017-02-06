@@ -2,6 +2,11 @@
 
 <Values version="2.0">
   <value name="name">getPermGen</value>
+  <array name="sig" type="value" depth="1">
+    <value>[o] field:0:required percentageUsed</value>
+    <value>[o] field:0:required resultTxt</value>
+  </array>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">TWVtb3J5UG9vbE1YQmVhbiBwZXJtZ2VuQmVhbiA9IG51bGw7DQogICAgTGlzdDxNZW1vcnlQb29s
 TVhCZWFuPiBiZWFucyA9IA0KICAgICAgICAgICAgTWFuYWdlbWVudEZhY3RvcnkuZ2V0TWVtb3J5
@@ -19,5 +24,5 @@ ICAgIElEYXRhVXRpbC5wdXQocGlwZWxpbmUuZ2V0Q3Vyc29yKCksICJtYXhQZXJtR2VuIiwgY3Vy
 cmVudFVzYWdlLmdldE1heCgpICsgIiIpOw0KICAgIElEYXRhVXRpbC5wdXQocGlwZWxpbmUuZ2V0
 Q3Vyc29yKCksICJ1c2VkUGVybUdlbiIsIGN1cnJlbnRVc2FnZS5nZXRVc2VkKCkgKyAiIik7DQog
 ICAgSURhdGFVdGlsLnB1dChwaXBlbGluZS5nZXRDdXJzb3IoKSwgInBlcmNlbnRhZ2VVc2VkIiwg
-cGVyY2VudGFnZVVzZWQgKyAiIik7DQoJ</value>
+cGVyY2VudGFnZVVzZWQgKyAiIik7DQoJDQo=</value>
 </Values>

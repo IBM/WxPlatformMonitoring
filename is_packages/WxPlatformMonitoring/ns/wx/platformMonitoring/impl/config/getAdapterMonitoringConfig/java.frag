@@ -2,6 +2,10 @@
 
 <Values version="2.0">
   <value name="name">getAdapterMonitoringConfig</value>
+  <array name="sig" type="value" depth="1">
+    <value>[o] recref:0:required adapterMonitoringConfig wx.platformMonitoring.impl.adapter:AdapterMonitoringConfig</value>
+  </array>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">SnNvblZhbHVlIGNvbmZpZ0FkYXB0ZXJzID1nZXRDb25maWcoImFkYXB0ZXJzLmpzb24iKTsNCkpz
 b25PYmplY3QgYWRhcHRlcnMgPSBjb25maWdBZGFwdGVycy5hc09iamVjdCgpLmdldCgiYWRhcHRl
@@ -41,5 +45,5 @@ cm95KCk7DQpJRGF0YVV0aWwucHV0KCBhZGFwdGVyTW9uaXRvcmluZ0NvbmZpZ0N1cnNvciwgInNh
 cCIsIHNhcCApOw0KCQkNCmFkYXB0ZXJNb25pdG9yaW5nQ29uZmlnQ3Vyc29yLmRlc3Ryb3koKTsN
 CklEYXRhVXRpbC5wdXQoIHBpcGVsaW5lQ3Vyc29yLCAiYWRhcHRlck1vbml0b3JpbmdDb25maWci
 LCBhZGFwdGVyTW9uaXRvcmluZ0NvbmZpZyApOw0KcGlwZWxpbmVDdXJzb3IuZGVzdHJveSgpOw0K
-CQ==</value>
+CQ0K</value>
 </Values>

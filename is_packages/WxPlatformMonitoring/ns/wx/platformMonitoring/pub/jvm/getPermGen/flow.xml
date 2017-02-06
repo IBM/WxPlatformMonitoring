@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <FLOW VERSION="3.0" CLEANUP="true">
+  <COMMENT></COMMENT>
 
   <!-- nodes -->
 
@@ -240,5 +241,9 @@
 <MAPDELETE FIELD="/usedPermGen;1;0">
 </MAPDELETE>
 </MAP>
+</INVOKE>
+
+<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.utility.flow:preserveOutputSig" VALIDATE-IN="$none" VALIDATE-OUT="$none">
+  <COMMENT></COMMENT>
 </INVOKE>
 </FLOW>

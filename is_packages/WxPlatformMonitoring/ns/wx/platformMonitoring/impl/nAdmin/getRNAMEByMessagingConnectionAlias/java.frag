@@ -2,6 +2,12 @@
 
 <Values version="2.0">
   <value name="name">getRNAMEByMessagingConnectionAlias</value>
+  <array name="sig" type="value" depth="1">
+    <value>[i] field:0:required useDefaultMessagingConnectionAlias {"true","false"}</value>
+    <value>[i] field:0:required messagingConnectionAlias</value>
+    <value>[o] field:0:required RNAME</value>
+  </array>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">Ly8gcGlwZWxpbmUNCklEYXRhQ3Vyc29yIHBpcGVsaW5lQ3Vyc29yID0gcGlwZWxpbmUuZ2V0Q3Vy
 c29yKCk7DQpTdHJpbmcJdXNlRGVmYXVsdE1lc3NhZ2luZ0Nvbm5lY3Rpb25BbGlhcyA9IElEYXRh
@@ -38,5 +44,5 @@ IFBhcmFtZXRlcnM6IHVzZURlZmF1bHRNZXNzYWdpbmdDb25uZWN0aW9uQWxpYXM9JyIgICsgdXNl
 RGVmYXVsdE1lc3NhZ2luZ0Nvbm5lY3Rpb25BbGlhcyArICInLCBtZXNzYWdpbmdDb25uZWN0aW9u
 QWxpYXM9JyIgKyBtZXNzYWdpbmdDb25uZWN0aW9uQWxpYXMgKyAiJy4iKTsNCn0NCg0KSURhdGFV
 dGlsLnB1dCggcGlwZWxpbmVDdXJzb3IsICJSTkFNRSIsIHVtX3JuYW1lICk7DQpwaXBlbGluZUN1
-cnNvci5kZXN0cm95KCk7</value>
+cnNvci5kZXN0cm95KCk7DQo=</value>
 </Values>

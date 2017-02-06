@@ -2,6 +2,11 @@
 
 <Values version="2.0">
   <value name="name">getStatistics</value>
+  <array name="sig" type="value" depth="1">
+    <value>[i] field:0:required cacheManagerName</value>
+    <value>[i] field:0:required cacheName</value>
+  </array>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">SURhdGFDdXJzb3IgaWRjID0gcGlwZWxpbmUuZ2V0Q3Vyc29yKCk7DQpTdHJpbmcgY2FjaGVNYW5h
 Z2VyTmFtZSA9IElEYXRhVXRpbC5nZXRTdHJpbmcoaWRjLCAiY2FjaGVNYW5hZ2VyTmFtZSIpOw0K
@@ -16,5 +21,5 @@ dmljdGlvblBvbGljeTogIiArIGNhY2hlLmdldE1lbW9yeVN0b3JlRXZpY3Rpb25Qb2xpY3koKS5n
 ZXROYW1lKCk7DQoNClN0cmluZyBuckVudHJpZXMgPSBjYWNoZS5nZXRLZXlzKCkuc2l6ZSgpICsg
 IiI7DQoNCklEYXRhVXRpbC5wdXQoaWRjLCAic3RhdHMiLCBzdGF0cyk7DQpJRGF0YVV0aWwucHV0
 KGlkYywgImNvbmZpZyIsIGNvbmZpZyk7DQpJRGF0YVV0aWwucHV0KGlkYywgIm5yRW50cmllcyIs
-IG5yRW50cmllcyk7DQppZGMuZGVzdHJveSgpOw==</value>
+IG5yRW50cmllcyk7DQppZGMuZGVzdHJveSgpOw0K</value>
 </Values>

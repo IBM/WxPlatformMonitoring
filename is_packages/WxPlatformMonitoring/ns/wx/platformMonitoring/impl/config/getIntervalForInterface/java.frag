@@ -2,6 +2,11 @@
 
 <Values version="2.0">
   <value name="name">getIntervalForInterface</value>
+  <array name="sig" type="value" depth="1">
+    <value>[i] field:0:required interface</value>
+    <value>[o] field:0:required interval</value>
+  </array>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">SURhdGFDdXJzb3IgcGlwZWxpbmVDID0gcGlwZWxpbmUuZ2V0Q3Vyc29yKCk7DQpTdHJpbmcgaW50
 ZXJmYWNlTmFtZSA9IElEYXRhVXRpbC5nZXRTdHJpbmcocGlwZWxpbmVDLCAiaW50ZXJmYWNlIik7
@@ -15,5 +20,5 @@ ICBJRGF0YVV0aWwucHV0KHBpcGVsaW5lQywgImludGVydmFsIiwgaS5hc09iamVjdCgpLmdldCgi
 aW50ZXJ2YWwiKS5hc1N0cmluZygpKTsNCgkgIHBpcGVsaW5lQy5kZXN0cm95KCk7DQoJICByZXR1
 cm47DQogIH0NCn0NCnBpcGVsaW5lQy5kZXN0cm95KCk7DQovLwkJdGhyb3cgbmV3IFNlcnZpY2VF
 eGNlcHRpb24oIk5vIGludGVyZmFjZSB3aXRoIG5hbWUgIiArIGludGVyZmFjZU5hbWUgKyAiIGRl
-ZmluZWQgaW4gY29uZmlndXJhdGlvbiEiKTs=</value>
+ZmluZWQgaW4gY29uZmlndXJhdGlvbiEiKTsNCg==</value>
 </Values>

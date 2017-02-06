@@ -2,6 +2,16 @@
 
 <Values version="2.0">
   <value name="name">getQueuedElementsChannel</value>
+  <array name="sig" type="value" depth="1">
+    <value>[i] field:0:required RNAME</value>
+    <value>[i] field:0:required channelName</value>
+    <value>[o] field:0:required outstandingEvents</value>
+    <value>[o] record:1:required sharedDurableOutstandingEvents</value>
+    <value>[o] - field:0:required outstandingEvents</value>
+    <value>[o] - field:0:required namedObject</value>
+    <value>[o] field:0:required outstandingEventsSharedDurableMax</value>
+  </array>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">dHJ5IHsNCgkNCgkvLyBwaXBlbGluZQ0KCUlEYXRhQ3Vyc29yIHBpcGVsaW5lQ3Vyc29yID0gcGlw
 ZWxpbmUuZ2V0Q3Vyc29yKCk7DQoJU3RyaW5nCVJOQU1FID0gSURhdGFVdGlsLmdldFN0cmluZygg
@@ -50,5 +60,5 @@ ICAqIGZvciB0aGUgdG9waWMgDQogICAgICovDQoJSURhdGFVdGlsLnB1dChwaXBlbGluZUN1cnNv
 ciwgIm91dHN0YW5kaW5nRXZlbnRzIiwgY2hhbm5lbC5nZXRFdmVudENvdW50KCkgKyAiIik7DQog
 ICAgDQogICAgcGlwZWxpbmVDdXJzb3IuZGVzdHJveSgpOw0KCQ0KfSBjYXRjaCAoRXhjZXB0aW9u
 IGUpIHsNCgkvLyBUT0RPIEF1dG8tZ2VuZXJhdGVkIGNhdGNoIGJsb2NrDQoJZS5wcmludFN0YWNr
-VHJhY2UoKTsNCgl0aHJvdyBuZXcgU2VydmljZUV4Y2VwdGlvbihlKTsNCn0NCg0KCQ==</value>
+VHJhY2UoKTsNCgl0aHJvdyBuZXcgU2VydmljZUV4Y2VwdGlvbihlKTsNCn0NCg0KCQ0K</value>
 </Values>
