@@ -5,6 +5,6 @@ log4j {
 	appender.'stdout.layout.ConversionPattern'="prod %-4r [%t] %-5p %c %x - %m%n"
 		
 	logger.org.apache.http=INFO
-	logger.httpclient.wire="INFO"
-	logger.org.apache.commons.httpclient="INFO"
+	logger.httpclient.wire=INFO
+	logger.org.apache.commons.httpclient=INFO
 }
