@@ -16,7 +16,7 @@
 	<property name="svn.installation.path" value="c:/Program Files/SlikSvn/bin" />
 
 	<path id="build.classpath">
-		<fileset dir="libs">
+		<fileset dir="libs/ant">
 			<include name="**/*.jar" />
 		</fileset>
 		<fileset dir="${wm.home}/common/lib">

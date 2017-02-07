@@ -134,7 +134,25 @@
 	<classpathentry kind="lib" path="C:/SoftwareAG910/common/lib/xqjapi.jar"/>
 	<classpathentry kind="lib" path="C:/SoftwareAG910/common/lib/xqj-ino-api.jar"/>
 	<classpathentry kind="lib" path="C:/SoftwareAG910/IntegrationServer/lib/wm-isserver.jar"/>
-	<classpathentry kind="lib" path="is_packages/WxPlatformMonitoring/code/jars/minimal-json-0.9.4.jar"/>
-	<classpathentry kind="lib" path="is_packages/WxPlatformMonitoring/code/jars/wx-is-utilities-core.jar"/>
+	<classpathentry exported="true" kind="con" path="GROOVY_SUPPORT"/>
+	<classpathentry exported="true" kind="con" path="GROOVY_DSL_SUPPORT"/>
+	<classpathentry kind="lib" path="libs/groovyFileUploadJars/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="libs/groovyFileUploadJars/commons-collections-3.2.2.jar"/>
+	<classpathentry kind="lib" path="libs/groovyFileUploadJars/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="libs/groovyFileUploadJars/fluent-hc-4.5.3.jar"/>
+	<classpathentry kind="lib" path="libs/groovyFileUploadJars/httpclient-4.5.3.jar"/>
+	<classpathentry kind="lib" path="libs/groovyFileUploadJars/httpclient-cache-4.5.3.jar"/>
+	<classpathentry kind="lib" path="libs/groovyFileUploadJars/httpclient-win-4.5.3.jar"/>
+	<classpathentry kind="lib" path="libs/groovyFileUploadJars/httpcore-4.4.6.jar"/>
+	<classpathentry kind="lib" path="libs/groovyFileUploadJars/httpmime-4.5.3.jar"/>
+	<classpathentry kind="lib" path="libs/groovyFileUploadJars/jna-4.1.0.jar"/>
+	<classpathentry kind="lib" path="libs/groovyFileUploadJars/jna-platform-4.1.0.jar"/>
+	<classpathentry kind="lib" path="libs/groovyFileUploadJars/xml-resolver-1.2.jar"/>
+	<classpathentry kind="lib" path="libs/groovyFileUploadJars/ant-1.8.2.jar"/>
+	<classpathentry kind="lib" path="libs/groovyFileUploadJars/ant-launcher-1.8.2.jar"/>
+	<classpathentry kind="lib" path="libs/groovyFileUploadJars/http-builder-0.7.1.jar"/>
+	<classpathentry kind="lib" path="libs/groovyFileUploadJars/json-lib-2.4-jdk15.jar"/>
+	<classpathentry kind="lib" path="libs/groovyFileUploadJars/nekohtml-1.9.22.jar"/>
+	<classpathentry kind="lib" path="libs/groovyFileUploadJars/xercesImpl-2.9.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
