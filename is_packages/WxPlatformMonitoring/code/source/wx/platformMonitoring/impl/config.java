@@ -1,7 +1,7 @@
 package wx.platformMonitoring.impl;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-01-25 13:21:15 CET
+// -----( CREATED: 2017-02-07 11:33:57 CET
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
@@ -110,21 +110,21 @@ public final class config
 		// --- <<IS-START(getBrokerConfig)>> ---
 		// @sigtype java 3.5
 		// [o] recref:0:required brokerConnectionData wx.platformMonitoring.impl.broker:BrokerConnectionData
-	JsonValue configBroker =getConfig("brokerConfig.json");
-	JsonObject brokerConfig = configBroker.asObject().get("broker").asObject().get("config").asObject();
-	// pipeline
-	IDataCursor pipelineCursor = pipeline.getCursor();
-	// brokerConnectionData
-	IData	brokerConnectionData = IDataFactory.create();
-	IDataCursor brokerConnectionDataCursor = brokerConnectionData.getCursor();
-	IDataUtil.put( brokerConnectionDataCursor, "brokerURI", brokerConfig.get("brokerURI").asString() );
-	IDataUtil.put( brokerConnectionDataCursor, "brokerName", brokerConfig.get("brokerName").asString() );
-	IDataUtil.put( brokerConnectionDataCursor, "brokerAppName", brokerConfig.get("brokerAppName").asString() );
-	IDataUtil.put( brokerConnectionDataCursor, "brokerClientGroup", brokerConfig.get("brokerClientGroup").asString() );
-	brokerConnectionDataCursor.destroy();
-	IDataUtil.put( pipelineCursor, "brokerConnectionData", brokerConnectionData );
-	pipelineCursor.destroy();
-	
+		JsonValue configBroker =getConfig("brokerConfig.json");
+		JsonObject brokerConfig = configBroker.asObject().get("broker").asObject().get("config").asObject();
+		// pipeline
+		IDataCursor pipelineCursor = pipeline.getCursor();
+		// brokerConnectionData
+		IData	brokerConnectionData = IDataFactory.create();
+		IDataCursor brokerConnectionDataCursor = brokerConnectionData.getCursor();
+		IDataUtil.put( brokerConnectionDataCursor, "brokerURI", brokerConfig.get("brokerURI").asString() );
+		IDataUtil.put( brokerConnectionDataCursor, "brokerName", brokerConfig.get("brokerName").asString() );
+		IDataUtil.put( brokerConnectionDataCursor, "brokerAppName", brokerConfig.get("brokerAppName").asString() );
+		IDataUtil.put( brokerConnectionDataCursor, "brokerClientGroup", brokerConfig.get("brokerClientGroup").asString() );
+		brokerConnectionDataCursor.destroy();
+		IDataUtil.put( pipelineCursor, "brokerConnectionData", brokerConnectionData );
+		pipelineCursor.destroy();
+		
 		// --- <<IS-END>> ---
 
                 
@@ -191,11 +191,13 @@ public final class config
 		if( jsonConfig == null || "".equals(jsonConfig) ) {
 			throw new ServiceException("jsonConfig must not be empty");
 		}
-		JsonValue configUm =getConfig(jsonConfig);
-		IData umDoc = IDataFactory.create();
-		iterateJson(configUm.asObject().get("um").asObject(), umDoc.getCursor());
-		IDataUtil.put(pipelineCursor, "config", umDoc);
+		JsonValue jConfig =getConfig(jsonConfig);
+		IData configDoc = IDataFactory.create();
+		String root = jConfig.asObject().names().get(0);
+		iterateJson(jConfig.asObject().get(root).asObject(), configDoc.getCursor());
+		IDataUtil.put(pipelineCursor, "config", configDoc);
 		pipelineCursor.destroy();
+			
 		// --- <<IS-END>> ---
 
                 
@@ -301,40 +303,40 @@ public final class config
 		// --- <<IS-START(getPortsConfig)>> ---
 		// @sigtype java 3.5
 		// [o] recref:0:required portMonitoringConfig wx.platformMonitoring.impl.port:PortMonitoringConfig
-	JsonValue configPorts = getConfig("ports.json");
-	JsonObject jPort = configPorts.asObject().get("ports").asObject();
-	JsonArray jPorts = jPort.get("ports").asArray();
-	JsonArray jPackages = jPort.get("packages").asArray();
-	JsonArray jPortAliases = jPort.get("portAliases").asArray();
-	// pipeline
-	IDataCursor pipelineCursor = pipeline.getCursor();
-	// schedulerMonitoringConfig
-	IData	portMonitoringConfig = IDataFactory.create();
-	IDataCursor portMonitoringConfigCursor = portMonitoringConfig.getCursor();
-	
-	String[]	packages = new String[jPackages.size()];
-	for( int i=0; i<packages.length; i++ ) {
-		packages[i] = jPackages.get(i).asString();
-	}
-	IDataUtil.put( portMonitoringConfigCursor, "packages", packages );
-	
-	String[]	ports = new String[jPorts.size()];
-	for( int i=0; i<ports.length; i++ ) {
-		ports[i] = jPorts.get(i).asString();
-	}
-	IDataUtil.put( portMonitoringConfigCursor, "ports", ports );
-	
-	String[]	portAliases = new String[jPortAliases.size()];
-	for( int i=0; i<portAliases.length; i++ ) {
-		portAliases[i] = jPortAliases.get(i).asString();
-	}
-	IDataUtil.put( portMonitoringConfigCursor, "portAliases", portAliases );
-	
-	portMonitoringConfigCursor.destroy();
-	IDataUtil.put( pipelineCursor, "portMonitoringConfig", portMonitoringConfig );
-	pipelineCursor.destroy();
-
-	
+		JsonValue configPorts = getConfig("ports.json");
+		JsonObject jPort = configPorts.asObject().get("ports").asObject();
+		JsonArray jPorts = jPort.get("ports").asArray();
+		JsonArray jPackages = jPort.get("packages").asArray();
+		JsonArray jPortAliases = jPort.get("portAliases").asArray();
+		// pipeline
+		IDataCursor pipelineCursor = pipeline.getCursor();
+		// schedulerMonitoringConfig
+		IData	portMonitoringConfig = IDataFactory.create();
+		IDataCursor portMonitoringConfigCursor = portMonitoringConfig.getCursor();
+		
+		String[]	packages = new String[jPackages.size()];
+		for( int i=0; i<packages.length; i++ ) {
+			packages[i] = jPackages.get(i).asString();
+		}
+		IDataUtil.put( portMonitoringConfigCursor, "packages", packages );
+		
+		String[]	ports = new String[jPorts.size()];
+		for( int i=0; i<ports.length; i++ ) {
+			ports[i] = jPorts.get(i).asString();
+		}
+		IDataUtil.put( portMonitoringConfigCursor, "ports", ports );
+		
+		String[]	portAliases = new String[jPortAliases.size()];
+		for( int i=0; i<portAliases.length; i++ ) {
+			portAliases[i] = jPortAliases.get(i).asString();
+		}
+		IDataUtil.put( portMonitoringConfigCursor, "portAliases", portAliases );
+		
+		portMonitoringConfigCursor.destroy();
+		IDataUtil.put( pipelineCursor, "portMonitoringConfig", portMonitoringConfig );
+		pipelineCursor.destroy();
+		
+		
 		// --- <<IS-END>> ---
 
                 
@@ -348,23 +350,23 @@ public final class config
 		// --- <<IS-START(getSchedulersConfig)>> ---
 		// @sigtype java 3.5
 		// [o] recref:0:required schedulerMonitoringConfig wx.platformMonitoring.impl.scheduler:SchedulerMonitoringConfig
-	JsonValue configSchedulers = getConfig("schedulers.json");
-	JsonArray jSchedulers = configSchedulers.asObject().get("schedulers").asArray();
-	// pipeline
-	IDataCursor pipelineCursor = pipeline.getCursor();
-	// schedulerMonitoringConfig
-	IData	schedulerMonitoringConfig = IDataFactory.create();
-	IDataCursor schedulerMonitoringConfigCursor = schedulerMonitoringConfig.getCursor();
-	String[]	schedulers = new String[jSchedulers.size()];
-	for( int i=0; i<schedulers.length; i++ ) {
-		schedulers[i] = jSchedulers.get(i).asString();
-	}
-	IDataUtil.put( schedulerMonitoringConfigCursor, "schedulers", schedulers );
-	schedulerMonitoringConfigCursor.destroy();
-	IDataUtil.put( pipelineCursor, "schedulerMonitoringConfig", schedulerMonitoringConfig );
-	pipelineCursor.destroy();
-
-	
+		JsonValue configSchedulers = getConfig("schedulers.json");
+		JsonArray jSchedulers = configSchedulers.asObject().get("schedulers").asArray();
+		// pipeline
+		IDataCursor pipelineCursor = pipeline.getCursor();
+		// schedulerMonitoringConfig
+		IData	schedulerMonitoringConfig = IDataFactory.create();
+		IDataCursor schedulerMonitoringConfigCursor = schedulerMonitoringConfig.getCursor();
+		String[]	schedulers = new String[jSchedulers.size()];
+		for( int i=0; i<schedulers.length; i++ ) {
+			schedulers[i] = jSchedulers.get(i).asString();
+		}
+		IDataUtil.put( schedulerMonitoringConfigCursor, "schedulers", schedulers );
+		schedulerMonitoringConfigCursor.destroy();
+		IDataUtil.put( pipelineCursor, "schedulerMonitoringConfig", schedulerMonitoringConfig );
+		pipelineCursor.destroy();
+		
+		
 		// --- <<IS-END>> ---
 
                 
@@ -540,6 +542,7 @@ public final class config
 		}catch( Exception e){}
 	
 	}
+		
 	// --- <<IS-END-SHARED>> ---
 }
 
