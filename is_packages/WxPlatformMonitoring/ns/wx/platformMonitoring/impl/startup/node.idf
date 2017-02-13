@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Values version="2.0">
+  <value name="shared"></value>
+  <value name="encodeutf8">true</value>
+  <value name="extends"></value>
+  <array name="implements" type="value" depth="1">
+  </array>
+  <array name="imports" type="value" depth="1">
+    <value>java.io.File</value>
+    <value>org.apache.log4j.Logger</value>
+    <value>org.apache.log4j.xml.DOMConfigurator</value>
+    <value>com.wm.app.b2b.server.ServerAPI</value>
+    <value>com.wm.data.IData</value>
+  </array>
 </Values>

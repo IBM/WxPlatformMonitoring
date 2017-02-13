@@ -1,0 +1,11 @@
+.is-state-unknown {
+  backround-color: grey;
+}
+
+.is-state-ok {
+  background-color: green;
+}
+
+.is-state-nok {
+  background-color: red;
+}
