@@ -1,11 +1,14 @@
-.is-state-unknown {
-  backround-color: grey;
+td.is-state-unknown {
+  backround-color: rgb(176, 176, 176);
+  border: 1px solid rgb(140, 134, 134);
 }
 
-.is-state-ok {
-  background-color: green;
+td.is-state-ok {
+  background-color: rgb(129, 215, 148);
+  border: 1px solid rgb(104, 163, 117);
 }
 
-.is-state-nok {
-  background-color: red;
+td.is-state-nok {
+  background-color: rgb(221, 116, 116);
+  border: 1px solid rgb(158, 89, 89);
 }

@@ -1,16 +1,20 @@
 <project name="wxplatformmonitoring" basedir="." default="buildAndDistributeWxPlatformMonitoringPackage">
 	<!--
-	<property name="version" value="910"/>
-	-->
 	<property name="version" value="912"/>
+	-->
+	<property name="version" value="910"/>
 	<property file="build_${version}.properties" />
 
 	<property name="build.dir" value="build/${version}" />
+	<property name="build.dir.tmp" value="build/tmp" />
+	<property name="build.dir.tmp.wxplatformmonitoring" value="${build.dir.tmp}/WxPlatformMonitoring" />
 	<property name="build.dir.java" value="${build.dir}/java" />
 	<property name="classes.dir.java" value="${build.dir.java}/classes" />
 
+	<property name="wxplatformmonitoring.package.name" value="WxPlatformMonitoring"/>
 
-	<property name="wxplatformmonitoring.package.home" value="is_packages/wxplatformmonitoring" />
+
+	<property name="wxplatformmonitoring.package.home" value="is_packages/${wxplatformmonitoring.package.name}" />
 	<property name="build.dir.package" value="${build.dir}/package" />
 
 	<property name="svn.installation.path" value="c:/Program Files/SlikSvn/bin" />
@@ -59,12 +63,9 @@
 		</fail>
 		<echo>Result from jcode: ${jcodeResult}</echo>
 
-		<!-- delete the tmp file -->
-		<delete file="${wxplatformmonitoringTmp_mathJarPath}" />
-
-		<delete dir="${wxplatformmonitoring.package.home}">
+		<delete dir="${build.dir.tmp.wxplatformmonitoring}">
 		</delete>
-		<copy todir="${wxplatformmonitoring.package.home}">
+		<copy todir="${build.dir.tmp.wxplatformmonitoring}">
 			<fileset dir="${wxplatformmonitoringTmp}" includes="**">
 			</fileset>
 		</copy>
@@ -79,8 +80,8 @@
 
 	<target name="buildWxPlatformMonitoring">
 		<property name="version.num" value="1.0" />
-		<antcallback target="svnversion" return="svnversion" />
-		<property name="build.number" value="${svnversion}" />
+		<antcallback target="git.revision" return="repository.version" />
+		<property name="build.number" value="${repository.version}" />
 		<tstamp>
 			<format property="TODAY" pattern="yyyy-MM-dd HH:mm:ss" />
 		</tstamp>
@@ -98,14 +99,14 @@
 
 
 	<target name="buildWxPlatformMonitoringsPackage" depends="clean.package, jcode">
-		<xmltask source="${wxplatformmonitoring.package.home}/manifest.v3" dest="${wxplatformmonitoring.package.home}/manifest.v3">
+		<xmltask source="${build.dir.tmp.wxplatformmonitoring}/manifest.v3" dest="${build.dir.tmp.wxplatformmonitoring}/manifest.v3">
 			<replace path="Values/value[@name='version']/text()" withText="${version.num}" />
 			<remove path="Values/value[@name='build']" />
 			<insert path="Values">
 				<![CDATA[<value name="build">${build.number}</value>]]></insert>
 		</xmltask>
 		<!--<zip destfile="${build.dir.package}/WxPlatformMonitoring_Test.zip" basedir="${wxplatformmonitoring.package.home}_Test" />-->
-		<zip destfile="${build.dir.package}/WxPlatformMonitoring.zip" basedir="${wxplatformmonitoring.package.home}" />
+		<zip destfile="${build.dir.package}/WxPlatformMonitoring.zip" basedir="${build.dir.tmp.wxplatformmonitoring}" />
 	</target>
 
 	<target name="buildAndDistributeWxPlatformMonitoringPackage" depends="buildWxPlatformMonitoringsPackage, distWxPlatformMonitoringPackage">
@@ -134,6 +135,23 @@
 		<exec executable="${svn.installation.path}/svnversion.exe" outputproperty="svnversionRaw" />
 		<propertyregex property="svnversion" input="${svnversionRaw}" regexp=":" replace="_" global="true" />
 		<echo message="Using svnversion ${svnversion}" />
+	</target>
+	
+
+	<target name="git.revision" description="Store git revision in ${repository.version}" >
+	    <exec executable="git" outputproperty="git.revision" failifexecutionfails="false" errorproperty="">
+	        <arg value="describe"/>
+	        <arg value="--tags"/>
+	        <arg value="--always"/>
+	        <arg value="HEAD"/>
+	    </exec>
+	    <condition property="repository.version" value="${git.revision}" else="unknown">
+	        <and>
+	            <isset property="git.revision"/>
+	            <length string="${git.revision}" trim="yes" length="0" when="greater"/>
+	        </and>
+	    </condition>
+		<echo message="git: ${repository.version}"/>
 	</target>
 	
 	<condition property="isUnix">
