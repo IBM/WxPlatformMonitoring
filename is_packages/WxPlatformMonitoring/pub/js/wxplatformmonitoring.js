@@ -37,8 +37,13 @@ function invoke(url, data, id, checkFunctionCallback, getStatusValueCallback) {
             // console.log("length: "  + $divHidden.length);
             // if( $divHidden.length == 1 ) {
               // $divHidden.text(JSON.stringify(msg));
-              $infoSpan = $("<span/>").attr("class", "material-icons").text("info_outline");
-              $statusDetail.append($infoSpan);
+              $infoSpanLink = $("<a/>", {
+                name : "link",
+                href : "#"
+              });
+              $infoSpan = $("<span/>").attr("class", "is-link material-icons").text("info_outline");
+              $infoSpanLink.append($infoSpan);
+              $statusDetail.append($infoSpanLink);
               $infoSpan.click(function() {
                 var formatter = new JSONFormatter(msg, 1, {hoverPreviewEnabled: true});
                 $result = $("<span/>").attr("class", "json-formatter-row json-formatter-open");

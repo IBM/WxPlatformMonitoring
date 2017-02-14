@@ -14,6 +14,7 @@
 	<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/json-formatter.css">
 	<link href="css/wxplatformmonitoring.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/odometer-theme-minimal.css" />
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -25,6 +26,7 @@
 
 <body>
 	<h1>Hello, world!</h1>
+			<span class="odometer">henning</span>
 
 	<div class="pure-g">
 		<div class="pure-u-1-2">
@@ -79,7 +81,18 @@
 		<script src="js/bootbox.min.js"></script>
 		<script src="js/wxplatformmonitoring.js"></script>
 		<script src="js/json-formatter.js"></script>
+		<script src="js/odometer.min.js"></script>
 		<script type="text/javascript">
+
+
+		var el = document.querySelector('.odometer');
+
+		od = new Odometer({
+		  el: el,
+		  value: 0	});
+
+		od.update(2555);
+
 			evaluateExtendedSettings("watt.server.scheduler.threadThrottle", function checkFunction(result) {
 				if (result.propertyValue > 0) {
 					return true;

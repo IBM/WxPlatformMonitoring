@@ -23,11 +23,15 @@ span.is-inactive {
 }
 
 td.status-details {
-  text-align: center;;
+  text-align: center;
 }
 
 td.status-edit {
-  text-align: center;;
+  text-align: center;
+}
+
+span.is-link {
+  cursor: pointer;
 }
 
 /* fallback */
