@@ -12,6 +12,8 @@
 	<!-- <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet"> -->
 	<link href="css/pure-nr-min.css" rel="stylesheet">
 	<link href="css/wxplatformmonitoring.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/json-formatter.css">
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -30,20 +32,43 @@
 					<tr>
 						<th>S</th>
 						<th>Check</th>
+						<th>Details</th>
+						<th>Link</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr id="watt.server.scheduler.threadThrottle">
 						<td class="is-state-unknown"></td>
 						<td class="status-description">watt.server.scheduler.threadThrottle=<span class="status-value"></span></td>
+						<td></td>
+						<td></td>
 					</tr>
 					<tr id="watt.wx.platformmonitoring.server.quiesce">
 						<td class="is-state-unknown"></td>
 						<td class="status-description">watt.wx.platformmonitoring.server.quiesce=<span class="status-value"></span></td>
+						<td></td>
+						<td></td>
 					</tr>
 					<tr id="wx.platformMonitoring.pub.onedata:checkServerConnection">
 						<td class="is-state-unknown"></td>
 						<td class="status-description">ODE URL=<span class="status-value"></span></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr id="wx.platformMonitoring.pub.trigger:listJmsTriggers">
+						<td class="is-state-unknown"></td>
+						<td class="status-description">Disabled JMS Triggers=<span class="status-value"></span></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr id="wx.platformMonitoring.pub.scheduler:listScheduledServices">
+						<td class="is-state-unknown"></td>
+						<td class="status-description">Disabled Scheduled Services=<span class="status-value"></span></td>
+						<td class="status-details">
+							<div style="display:none;"></div>
+							<button>D</button>
+						</td>
+						<td></td>
 					</tr>
 				</tbody>
 			</table>
@@ -84,32 +109,54 @@
 				</tbody>
 			</table>
 		</div>
+		<p>Content here. <a class="_xalert" href=#>Alert!</a></p>
 
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="js/jquery-3.1.1.min.js"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="js/bootstrap.min.js"></script>
+		<script src="js/bootbox.min.js"></script>
 		<script src="js/wxplatformmonitoring.js"></script>
+		<script src="js/json-formatter.js"></script>
 		<script type="text/javascript">
-			evaluateExtendedSettings("watt.server.scheduler.threadThrottle", function(result) {
+
+			evaluateExtendedSettings("watt.server.scheduler.threadThrottle", function checkFunction(result) {
 				if (result.propertyValue > 0) {
 					return true;
 				}
 				return false;
 			});
-			evaluateExtendedSettings("watt.wx.platformmonitoring.server.quiesce", function(result) {
+			evaluateExtendedSettings("watt.wx.platformmonitoring.server.quiesce", function checkFunction(result) {
 				if (result.propertyValue == "false") {
 					return true;
 				}
 				return false;
 			});
-			evaluteService("wx.platformMonitoring.pub.onedata:checkServerConnection", function(result) {
+			evaluteService("wx.platformMonitoring.pub.onedata:checkServerConnection", function checkFunction(result) {
 				if (result.success == "true") {
 					return true;
 				}
 				return false;
-			}, function(result) {
+			}, function getStatusValue(result) {
 				return result.odeUrl;
+			});
+
+			evaluteService("wx.platformMonitoring.pub.trigger:listJmsTriggers", function checkFunction(result) {
+				if (result.nrDisabled == 0) {
+					return true;
+				}
+				return false;
+			}, function getStatusValue(result) {
+				return result.nrDisabled;
+			});
+
+			evaluteService("wx.platformMonitoring.pub.scheduler:listScheduledServices", function checkFunction(result) {
+				if (result.nrDisabled == 0) {
+					return true;
+				}
+				return false;
+			}, function getStatusValue(result) {
+				return result.nrDisabled;
 			});
 		</script>
 </body>
