@@ -33,27 +33,25 @@ function invoke(url, data, id, checkFunctionCallback, getStatusValueCallback) {
             }
             var $spanStatusValue = $tdStatus.next().children().first();
             var $statusDetail = $statusTr.find(".status-details");
-            var $divHidden = $statusDetail.children().first();
-            console.log("length: "  + $divHidden.length);
-            if( $divHidden.length == 1 ) {
-              $divHidden.text(JSON.stringify(msg));
-              $button = $divHidden.next();
-              $button.click(function() {
-                // var formatter = new JSONFormatter($divHidden.text());
-                console.log($divHidden.text());
+            // var $divHidden = $statusDetail.children().first();
+            // console.log("length: "  + $divHidden.length);
+            // if( $divHidden.length == 1 ) {
+              // $divHidden.text(JSON.stringify(msg));
+              $infoSpan = $("<span/>").attr("class", "material-icons").text("info_outline");
+              $statusDetail.append($infoSpan);
+              $infoSpan.click(function() {
                 var formatter = new JSONFormatter(msg, 1, {hoverPreviewEnabled: true});
                 $result = $("<span/>").attr("class", "json-formatter-row json-formatter-open");
                 var rs = $result.get(0);
                 rs.innerHTML = '';
                 rs.appendChild(formatter.render());
-                // document.body.appendChild(formatter.render());
                 bootbox.alert({
                   size: "medium",
-                  title: "Response data for " + url,
+                  title: "Response data for '" + url + "'",
                   message: rs
                 });
               });
-            }
+            // }
             var statusValue = getStatusValueCallback(msg);
             $spanStatusValue.text(statusValue);
         })
