@@ -1,4 +1,6 @@
 function evaluateExtendedSettings(propertyName, checkFunctionCallback) {
+
+
     var url = "/invoke/pub.utils/getServerProperty";
     var data = {
         propertyName: propertyName
@@ -33,10 +35,6 @@ function invoke(url, data, id, checkFunctionCallback, getStatusValueCallback) {
             }
             var $spanStatusValue = $tdStatus.next().children().first();
             var $statusDetail = $statusTr.find(".status-details");
-            // var $divHidden = $statusDetail.children().first();
-            // console.log("length: "  + $divHidden.length);
-            // if( $divHidden.length == 1 ) {
-              // $divHidden.text(JSON.stringify(msg));
               $infoSpanLink = $("<a/>", {
                 name : "link",
                 href : "#"
@@ -56,7 +54,6 @@ function invoke(url, data, id, checkFunctionCallback, getStatusValueCallback) {
                   message: rs
                 });
               });
-            // }
             var statusValue = getStatusValueCallback(msg);
             $spanStatusValue.text(statusValue);
         })

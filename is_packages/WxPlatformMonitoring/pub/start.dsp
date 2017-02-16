@@ -14,7 +14,6 @@
 	<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/json-formatter.css">
 	<link href="css/wxplatformmonitoring.css" rel="stylesheet">
-	<link rel="stylesheet" href="css/odometer-theme-minimal.css" />
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -26,9 +25,37 @@
 
 <body>
 	<h1>Hello, world!</h1>
-			<span class="odometer">henning</span>
+
+	<span class="odometer">henning</span>
+	<span class="odometer1" id="xxxx">henning</span>
 
 	<div class="pure-g">
+		<div class="pure-u-1-2">
+			<table class="pure-table pure-table-horizontal">
+				<thead>
+					<tr>
+						<th><span class="tiny material-icons">done</span></th>
+						<th>Check</th>
+						<th>Details</th>
+						<th>Link</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr id="wx.platformMonitoring.pub.jvm:getPermGen">
+						<td class="is-state-unknown"></td>
+						<td class="status-description">Used JVM Perm Gen=<span class="status-value"></span></td>
+						<td class="status-details"></td>
+						<td class="status-edit"><a href="/"><span class="material-icons">mode_edit</span></a></td>
+					</tr>
+					<tr id="wx.platformMonitoring.pub.server:getCountCurrentlyRunningServices">
+						<td class="is-state-unknown"></td>
+						<td class="status-description">Number of currently running services=<span class="status-value"></span></td>
+						<td class="status-details"></td>
+						<td class="status-edit"><a href="/WmRoot/stats-services.dsp"><span class="material-icons">mode_edit</span></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 		<div class="pure-u-1-2">
 			<table class="pure-table pure-table-horizontal">
 				<thead>
@@ -81,18 +108,7 @@
 		<script src="js/bootbox.min.js"></script>
 		<script src="js/wxplatformmonitoring.js"></script>
 		<script src="js/json-formatter.js"></script>
-		<script src="js/odometer.min.js"></script>
 		<script type="text/javascript">
-
-
-		var el = document.querySelector('.odometer');
-
-		od = new Odometer({
-		  el: el,
-		  value: 0	});
-
-		od.update(2555);
-
 			evaluateExtendedSettings("watt.server.scheduler.threadThrottle", function checkFunction(result) {
 				if (result.propertyValue > 0) {
 					return true;
@@ -130,6 +146,12 @@
 				return false;
 			}, function getStatusValue(result) {
 				return result.nrDisabled;
+			});
+
+			evaluteService("wx.platformMonitoring.pub.server:getCountCurrentlyRunningServices", function checkFunction(result) {
+				return true;
+			}, function getStatusValue(result) {
+					return result.currentlyRunningServicesCount;
 			});
 		</script>
 </body>

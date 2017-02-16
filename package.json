@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "description": "WxPlatformMonitoring",
   "dependencies": {
-    "google-fonts-offline": "^0.1.2",
     "json-formatter-js": "^1.3.0"
   }
 }
