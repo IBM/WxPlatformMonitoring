@@ -1,7 +1,7 @@
 package wx.platformMonitoring.impl;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-02-07 11:33:57 CET
+// -----( CREATED: 2017-02-16 16:11:05 CET
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
@@ -461,53 +461,6 @@ public final class config
 			return docArr;
 		}
 	}
-	
-	static Object[] iterateJsonArrayx(JsonArray jArr) {
-		Object[] array = new Object[jArr.size()];
-		for( int i=0; i<jArr.size(); i++) {
-			JsonValue jElem = jArr.get(i);
-			if( jElem.isObject() ) {
-				IData doc = IDataFactory.create();
-				array[i] = doc;
-				iterateJson(jElem.asObject(), doc.getCursor());
-			} else if( jElem.isString() ) {
-				array[i] = jElem.asString();
-			}
-		}
-		return array;
-	}
-	/*static void iterateJsonx(JsonValue jValue, String name, IData pipeline) {
-		IDataCursor pipelineCursor = pipeline.getCursor();
-		if( jValue.isObject() ) {
-			IData doc = IDataFactory.create();
-			IDataUtil.put(pipelineCursor, name, doc);
-			for( String childName: jValue.asObject().names() ) {
-				JsonValue child = jValue.asObject().get(childName);
-				iterateJson(child, childName, doc);
-			}
-		} else if ( jValue.isArray() ) {
-			JsonArray jArr = jValue.asArray();
-			for( int i=0; i<jArr.size(); i++ ) {
-				JsonValue child = jArr.get(i);
-				if( child.isObject() ) {
-					
-				} else if( child.isString() ) {
-					
-				}
-			}
-			
-			
-			IData[] docArr = new IData[jArr.size()];
-			IDataUtil.put(pipelineCursor, name, docArr);
-			for( int i=0; i<docArr.length; i++ ) {
-				docArr[i] = IDataFactory.create();
-				
-			}
-		} else if( jValue.isString() ) {
-			IDataUtil.put(pipelineCursor, name, jValue.asString());
-		}
-	}
-	*/
 	
 	static java.util.Map<String, JsonValue> _configs = new java.util.HashMap<String, JsonValue>();
 	

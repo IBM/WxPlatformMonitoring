@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <record name="listeners" javaclass="com.wm.util.Values">
+    <record name="HTTPListener@5678" javaclass="com.wm.util.Values">
+      <number name="port" type="Integer">5678</number>
+      <value name="protocol">HTTP</value>
+      <value name="pkg">WxPlatformMonitoring_Test</value>
+      <value name="enabled">true</value>
+      <value name="key">HTTPListener@5678</value>
+      <value name="uniqueID">f8d664630355198415ae25f1712</value>
+      <value name="portAlias">Port_5678</value>
+      <value name="portDescription">Integration Server HTTP port: 5678</value>
+      <value name="factoryKey">webMethods/HTTP</value>
+      <value name="configURL">/WmRoot/configHTTP.dsp</value>
+      <value name="provider">webMethods</value>
+      <value name="listenerType">Regular</value>
+      <value name="clientAuth">none</value>
+      <value name="idProvider">salesforce.com</value>
+      <value name="ssl">false</value>
+      <value name="maxQueue">200</value>
+      <value name="keepAliveTimeout">20000</value>
+      <value name="threadPool">true</value>
+      <value name="minThread">1</value>
+      <value name="maxThread">50</value>
+      <value name="threadPriority">5</value>
+      <value name="usedThreadCount">0</value>
+      <value name="internalPort">-1</value>
+      <value name="curDelay">0</value>
+      <value name="stepsize">10000</value>
+      <value name="suspended">false</value>
+    </record>
+  </record>
+  <record name="access" javaclass="com.wm.util.Values">
+    <record name="HTTPListener@5678" javaclass="com.wm.util.Values">
+      <null name="home"/>
+      <value name="default">include</value>
+      <record name="nodes" javaclass="com.wm.util.StringSet">
+        <list name="elements">
+        </list>
+      </record>
+      <value name="key">HTTPListener@5678</value>
+    </record>
+  </record>
+</Values>
