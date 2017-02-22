@@ -23,10 +23,12 @@ import javax.management.ReflectionException;
 import javax.management.RuntimeOperationsException;
 import javax.management.openmbean.OpenDataException;
 
+import org.apache.log4j.Logger;
+
 import com.wm.app.b2b.server.InvokeState;
+import com.wm.app.b2b.server.ServiceException;
 import com.wm.app.b2b.server.Session;
-import com.wm.app.b2b.server.audit.type.ServiceNameFieldType;
-import com.wm.lang.ns.NSNode;
+import com.wm.app.b2b.server.User;
 
 public class ServicesDynamicMBean implements DynamicMBean {
 
@@ -34,20 +36,70 @@ public class ServicesDynamicMBean implements DynamicMBean {
 	String folderName = "undefined";
 	String packageName = "undefined";
 	Session session = null;
-	InvokeState state = null;
+	User user = null;
 	List<String> services = null;
-	int localServerPost = 5555;
 
+	/**
+	 * These lists/arrays must be initialized in the constructor, else we have
+	 * duplicates
+	 */
+	List<MBeanAttributeInfo> beanAttributesList = null;
+	Map<String, ServiceOperation> serviceOperationMap = null;
+	MBeanConstructorInfo[] dConstructors = null;
+
+	Logger logger = Logger.getLogger(this.getClass());
+
+	/**
+	 * Create a Dynamic MBean for the list of services
+	 * 
+	 * @param packageName
+	 *            gets exposed as an attribte
+	 * @param folderName
+	 *            gets exposed as an attribte
+	 * @param services
+	 *            the list of services to expose as operations
+	 * @param session
+	 *            the IS Server Session with which this bean is created. Used
+	 *            for Service Invokes. If null, it is created ad hoc.
+	 * @param user
+	 *            the IS Server User with which this mBean is created. Used for
+	 *            Service Invokes. If null, a dummy User (Administrator) is
+	 *            created ad hoc.
+	 */
 	public ServicesDynamicMBean(String packageName, String folderName, List<String> services,
-			com.wm.app.b2b.server.Session session, InvokeState state, int localServerPost) {
+			com.wm.app.b2b.server.Session session, User user) {
 		this.folderName = folderName;
 		this.packageName = packageName;
 		this.session = session;
-		this.state = state;
+		this.user = user;
 		this.services = services;
-		this.localServerPost = localServerPost;
+
+		// we have to initialize these lists here, because this method gets
+		// invoked multiple times (don't know why), and if we re-use the list
+		// each time we will duplicate entries
+		this.beanAttributesList = new ArrayList<MBeanAttributeInfo>();
+		this.serviceOperationMap = new HashMap<String, ServiceOperation>();
+		this.dConstructors = new MBeanConstructorInfo[1];
 	}
 
+	/**
+	 * Create a Dynamic MBean for the list of services. User and Session for
+	 * Service Invokes are generated at runtime
+	 * 
+	 * @param packageName
+	 *            gets exposed as an attribte
+	 * @param folderName
+	 *            gets exposed as an attribte
+	 * @param services
+	 *            the list of services to expose as operations
+	 */
+	public ServicesDynamicMBean(String packageName, String folderName, List<String> services) {
+		this(folderName, packageName, services, null, null);
+	}
+
+	/**
+	 * Standard implementation
+	 */
 	@Override
 	public Object getAttribute(String attribute_name)
 			throws AttributeNotFoundException, MBeanException, ReflectionException {
@@ -57,6 +109,8 @@ public class ServicesDynamicMBean implements DynamicMBean {
 					"Cannot invoke a getter of " + dClassName + " with null attribute name");
 		}
 
+		// we only have two standard attributes for each MBean, i.e. folder name
+		// and package
 		// Call the corresponding getter for a recognized attribute_name
 		if (attribute_name.equals("Package")) {
 			return getPackageName();
@@ -64,7 +118,6 @@ public class ServicesDynamicMBean implements DynamicMBean {
 		if (attribute_name.equals("Folder")) {
 			return getFolderName();
 		}
-
 		// If attribute_name has not been recognized
 		throw (new AttributeNotFoundException("Cannot find " + attribute_name + " attribute in " + dClassName));
 	}
@@ -85,6 +138,9 @@ public class ServicesDynamicMBean implements DynamicMBean {
 		this.packageName = packageName;
 	}
 
+	/**
+	 * Standard implementation
+	 */
 	@Override
 	public AttributeList getAttributes(String[] attributeNames) {
 		// Check attributeNames to avoid NullPointerException later on
@@ -106,18 +162,46 @@ public class ServicesDynamicMBean implements DynamicMBean {
 			} catch (Exception e) {
 				// print debug info but continue processing list
 				e.printStackTrace();
+				logger.error("Exception occured when calling getAttributes: " + e);
 			}
 		}
 		return (resultList);
 	}
 
+	/**
+	 * Create the MBean
+	 */
 	@Override
 	public MBeanInfo getMBeanInfo() {
-		// TODO Auto-generated method stub
-		buildDynamicMBeanInfo();
+		// generic building the constructor. Done like this in all tutorials...
+		Constructor[] constructors = this.getClass().getConstructors();
+		this.dConstructors[0] = new MBeanConstructorInfo("Constructs a " + "ServicesDynamicMBean object",
+				constructors[0]);
+
+		// add the two standard attributes to the bean
+		addReadOnlyStringAttribute("Folder", "Folder name to scan for services");
+		addReadOnlyStringAttribute("Package", "Package name");
+
+		// add all services to the mbean as operations
+		parseServicesAndToServiceOperationMap();
+
+		/*
+		 * construct the MBeanInfo Object
+		 */
+		String mBeanDescription = "MBean for package " + this.packageName + " and folder " + this.folderName;
+		MBeanOperationInfo[] mMBeanOperationInfoArray = buildMBeanOperationInfoArray();
+		// we do not have any notifications
+		MBeanNotificationInfo[] mMBeanNotificationArray = new MBeanNotificationInfo[0];
+		MBeanInfo dMBeanInfo = new MBeanInfo(this.getClass().getName(), mBeanDescription,
+				beanAttributesList.toArray(new MBeanAttributeInfo[0]), dConstructors, mMBeanOperationInfoArray,
+				mMBeanNotificationArray);
+
 		return dMBeanInfo;
 	}
 
+	/**
+	 * Gets called for operations
+	 */
 	@Override
 	public Object invoke(String operationName, Object[] params, String[] signature)
 			throws MBeanException, ReflectionException {
@@ -127,11 +211,22 @@ public class ServicesDynamicMBean implements DynamicMBean {
 					"Cannot invoke a null operation in " + dClassName);
 		} else if (serviceOperationMap.containsKey(operationName)) {
 			try {
-				return serviceOperationMap.get(operationName).buildOutput(params, signature, session, state);
+				// get the serviceOperation
+				ServiceOperation serviceOperation = serviceOperationMap.get(operationName);
+				// build the output, i.e. invoke the service and generate the
+				// MBean output object
+				return serviceOperation.invokeService(params, signature, session, user);
 			} catch (OpenDataException e) {
+				e.printStackTrace();
+				String message = "An error occured when invoking operation '" + operationName + "': " + e;
+				logger.error(message);
+				throw new MBeanException(e, message);
+			} catch (ServiceException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				return null;
+				String message = "An ServiceException occured when invoking IS Service for operation '" + operationName + "': " + e;
+				logger.error(message);
+				throw new MBeanException(e, message);
 			}
 		} else {
 			// unrecognized operation name:
@@ -140,6 +235,9 @@ public class ServicesDynamicMBean implements DynamicMBean {
 		}
 	}
 
+	/**
+	 * Standard implementation
+	 */
 	@Override
 	public void setAttribute(Attribute attribute)
 			throws AttributeNotFoundException, InvalidAttributeValueException, MBeanException, ReflectionException {
@@ -151,77 +249,57 @@ public class ServicesDynamicMBean implements DynamicMBean {
 		String name = attribute.getName();
 		Object value = attribute.getValue();
 
-		if (name.equals("Folder")) {
-			// if null value, try and see if the setter returns any exception
-			if (value == null) {
-				try {
-					setFolderName(null);
-				} catch (Exception e) {
-					throw (new InvalidAttributeValueException("Cannot set attribute " + name + " to null"));
-				}
-			}
-			// if non null value, make sure it is assignable to the attribute
-			else if (String.class.isAssignableFrom(value.getClass())) {
-				setFolderName((String) value);
-			} else {
-				throw new InvalidAttributeValueException("Cannot set attribute " + name + " to a "
-						+ value.getClass().getName() + " object, String expected");
-			}
-		} else {
-			// unrecognized attribute name
-			throw new AttributeNotFoundException("Attribute " + name + " not found in " + this.getClass().getName());
-		}
+		throw new InvalidAttributeValueException(
+				"Cannot set attribute " + name + " to a " + value.getClass().getName() + " object.");
+
 	}
 
-	private void buildDynamicMBeanInfo() {
-
-		Constructor[] constructors = this.getClass().getConstructors();
-		this.dConstructors = new MBeanConstructorInfo[1];
-		this.dConstructors[0] = new MBeanConstructorInfo("Constructs a " + "ServicesDynamicMBean object",
-				constructors[0]);
-
-		this.beanAttributesList = new ArrayList<MBeanAttributeInfo>();
-		this.serviceOperationMap = new HashMap<String, ServiceOperation>();
-
-		addReadOnlyStringAttribute("Folder", "Folder name to scan for services");
-		addReadOnlyStringAttribute("Package", "Package name");
-
-//		addSimpleInvokeServiceOperation("someService", new String[] { "inputValue" });
-		addServiceOperationsForPackage();
-
-		dMBeanInfo = new MBeanInfo(this.getClass().getName(),
-				"MBean for package " + this.packageName + " and folder " + this.folderName,
-				beanAttributesList.toArray(new MBeanAttributeInfo[0]), dConstructors, getOperations(),
-				new MBeanNotificationInfo[0]);
-	}
-
-	List<MBeanAttributeInfo> beanAttributesList = null;
-	Map<String, ServiceOperation> serviceOperationMap = null;
-	MBeanConstructorInfo[] dConstructors = null;
-	private MBeanInfo dMBeanInfo = null;
-
-	private void addServiceOperationsForPackage() {
+	/**
+	 * Iterates over the service list (provided in constructor) and create the
+	 * wrapper MBean objects
+	 */
+	private void parseServicesAndToServiceOperationMap() {
 		for (String service : this.services) {
 			try {
-				InvokeServiceOperation i = new InvokeServiceOperation(service, this.localServerPost);
-				serviceOperationMap.put(service, i);
+				InvokeServiceOperation invokeServiceOperation = new InvokeServiceOperation(service);
+				serviceOperationMap.put(service, invokeServiceOperation);
+			} catch (IllegalArgumentException i) {
+				// log error but continue with other services
+				i.printStackTrace();
+				logger.error("An error occured when parsing input or output of service " + service + ": " + i);
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
+				// log error but continue with other services
 				e.printStackTrace();
-				System.out.println("------------- could not parse service " + service + ": " + e);
+				logger.error("Ccould not parse service " + service + ": " + e);
 			}
 		}
 	}
 
-	private MBeanOperationInfo[] getOperations() {
+	/**
+	 * Creates the MBean array for all operations which where passed to this
+	 * bean
+	 * 
+	 * @return
+	 */
+	private MBeanOperationInfo[] buildMBeanOperationInfoArray() {
 		List<MBeanOperationInfo> operations = new ArrayList<MBeanOperationInfo>();
 		for (String serviceName : serviceOperationMap.keySet()) {
 			ServiceOperation op = serviceOperationMap.get(serviceName);
-			operations.add(op.createOperation());
+			// create the MBean operation objects
+			MBeanOperationInfo operation = op.createMBeanOperationForService();
+			// add the operation to the list
+			operations.add(operation);
 		}
 		return operations.toArray(new MBeanOperationInfo[0]);
 	}
 
+	/**
+	 * Use to create an operation for a service which has only one string field
+	 * as an output Note: the output field is unnamed if created like this.
+	 * 
+	 * @param serviceName
+	 * @param inputVariables
+	 */
 	private void addSimpleInvokeServiceOperation(String serviceName, String[] inputVariables) {
 		InvokeSimpleServiceOperation op = new InvokeSimpleServiceOperation(serviceName);
 		for (String input : inputVariables) {
@@ -230,8 +308,16 @@ public class ServicesDynamicMBean implements DynamicMBean {
 		serviceOperationMap.put(serviceName, op);
 	}
 
+	/**
+	 * Creates a read only attribute for this mbean of the given type
+	 * 
+	 * @param name
+	 * @param type
+	 *            e.g. "java.lang.String"
+	 * @param description
+	 */
 	private void addReadOnlyAttribute(String name, String type, String description) {
-		MBeanAttributeInfo attribute = new MBeanAttributeInfo(name, "java.lang.String", description, true, true, false);
+		MBeanAttributeInfo attribute = new MBeanAttributeInfo(name, type, description, true, true, false);
 		beanAttributesList.add(attribute);
 	}
 
@@ -239,6 +325,9 @@ public class ServicesDynamicMBean implements DynamicMBean {
 		this.addReadOnlyAttribute(name, "java.lang.String", description);
 	}
 
+	/**
+	 * Standard implementation
+	 */
 	@Override
 	public AttributeList setAttributes(AttributeList attributes) {
 		// Check attributes to avoid NullPointerException later on

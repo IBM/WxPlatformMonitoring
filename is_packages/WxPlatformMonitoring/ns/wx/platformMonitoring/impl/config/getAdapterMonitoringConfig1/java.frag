@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Values version="2.0">
-  <value name="name">getAdapterMonitoringConfig</value>
+  <value name="name">getAdapterMonitoringConfig1</value>
   <array name="sig" type="value" depth="1">
     <value>[o] recref:0:required adapterMonitoringConfig wx.platformMonitoring.impl.adapter:AdapterMonitoringConfig</value>
   </array>

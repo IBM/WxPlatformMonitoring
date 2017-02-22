@@ -7,8 +7,8 @@ import javax.management.MBeanOperationInfo;
 import javax.management.MBeanParameterInfo;
 import javax.management.openmbean.OpenDataException;
 
-import com.wm.app.b2b.server.InvokeState;
 import com.wm.app.b2b.server.Session;
+import com.wm.app.b2b.server.User;
 
 public class InvokeSimpleServiceOperation implements ServiceOperation {
 
@@ -26,7 +26,7 @@ public class InvokeSimpleServiceOperation implements ServiceOperation {
 		this.inputParameters.add(p);
 	}
 
-	public MBeanOperationInfo createOperation() {
+	public MBeanOperationInfo createMBeanOperationForService() {
 		MBeanParameterInfo[] inputs = null;
 		if (inputParameters.size() > 0) {
 			inputs = inputParameters.toArray(new MBeanParameterInfo[0]);
@@ -36,7 +36,7 @@ public class InvokeSimpleServiceOperation implements ServiceOperation {
 	}
 
 	@Override
-	public Object buildOutput(Object[] params, String[] signature, Session session, InvokeState state) throws OpenDataException {
+	public Object invokeService(Object[] params, String[] signature, Session session, User user) throws OpenDataException {
 		// TODO Auto-generated method stub
 		return "mySimpleOutput";
 	}

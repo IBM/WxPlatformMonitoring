@@ -1,7 +1,8 @@
 {
 	"adapters": {
 		"jdbc": {
-			"connections": ["wx.platformMonitoring_Test.pub.jdbc:jdbcConn", "simpleTestPackage.adapter.connection:jdbcConnection"]
+			"connections": ["wx.platformMonitoring_Test.pub.jdbc:jdbcConn"],
+			"packages": ["SimpleTestPackage"]
 		},
 		"sap": {
 			"connections": ["sap.conn.connections:DKMSCoreConnection", "sap.conn.connections.pl:WebformsConnecctionPL"],

@@ -1,7 +1,7 @@
 package wx.platformMonitoring.impl;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-02-20 17:15:21 CET
+// -----( CREATED: 2017-02-22 16:23:12 CET
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
@@ -43,10 +43,10 @@ public final class config
 
 
 
-	public static final void getAdapterMonitoringConfig (IData pipeline)
+	public static final void getAdapterMonitoringConfig1 (IData pipeline)
         throws ServiceException
 	{
-		// --- <<IS-START(getAdapterMonitoringConfig)>> ---
+		// --- <<IS-START(getAdapterMonitoringConfig1)>> ---
 		// @sigtype java 3.5
 		// [o] recref:0:required adapterMonitoringConfig wx.platformMonitoring.impl.adapter:AdapterMonitoringConfig
 		JsonValue configAdapters =getConfig("adapters.json");

@@ -1,7 +1,7 @@
 package wx.platformMonitoring.impl;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-02-22 16:13:15 CET
+// -----( CREATED: 2017-02-22 20:41:17 CET
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
@@ -19,6 +19,7 @@ import javax.management.MBeanServer;
 import javax.management.ObjectInstance;
 import javax.management.ObjectName;
 import com.softwareag.wx.platformMonitoring.jmx.agent.WxPlatformMonitoringMXBean;
+import com.webmethods.core.util.Logger;
 import com.wm.app.b2b.server.InvokeState;
 import com.wm.app.b2b.server.User;
 // --- <<IS-END-IMPORTS>> ---
@@ -39,52 +40,10 @@ public final class jmx
 
 
 
-	public static final void registerAgent (IData pipeline)
+	public static final void registerMBean (IData pipeline)
         throws ServiceException
 	{
-		// --- <<IS-START(registerAgent)>> ---
-		// @sigtype java 3.5
-		if (agent == null) {
-			java.io.File configFile = new java.io.File(
-					com.wm.app.b2b.server.ServerAPI.getPackageConfigDir("WxPlatformMonitoring"),
-					"jmx-wxplatformmonitoring-agent.properties");
-			String pathToFile = getPathForConfigFile(configFile);
-			pathToFile = "jmx-wxplatformmonitoring-agent.properties";
-			try {
-				agent = new com.softwareag.wx.platformMonitoring.jmx.agent.WxPlatformMonitoringJmxAgent(pathToFile);
-				MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
-				String n = String.format("%s,group=%s,name=%s", "com.softwareag.wx.is.jmx:type=JMXMonitor",
-						"IntegrationServer", "WxPlatformMonitoring");
-				n = String.format("%s,group=%s,name=%s", "com.softwareag.wx.is.jmx:type=JMXMonitor",
-						"WxPlatformMonitoring", "IntegrationServer");
-				ObjectName name = new ObjectName(n);
-				Set<ObjectInstance> oSet = mbs.queryMBeans(name, null);
-				if (oSet.size() != 0 ) {
-					mbs.unregisterMBean(name);
-				}
-		
-				mbs.registerMBean(new WxPlatformMonitoringMXBean(), name);
-				mbs.getMBeanCount();
-		
-				// mbs.registerMBean(paramObject, paramObjectName);
-			} catch (com.softwareag.wx.is.jmx.agent.common.CustomAgentException c) {
-				throw new ServiceException("Could not register WxPlatformMonitoring JMX Agent: " + c);
-			} catch (Exception e) {
-				throw new ServiceException("Could not register WxPlatformMonitoring JMX Agent: " + e);
-			}
-		}
-			
-		// --- <<IS-END>> ---
-
-                
-	}
-
-
-
-	public static final void spring (IData pipeline)
-        throws ServiceException
-	{
-		// --- <<IS-START(spring)>> ---
+		// --- <<IS-START(registerMBean)>> ---
 		// @sigtype java 3.5
 		//		com.softwareag.wx.platformMonitoring.jmx.spring.JmxManagement j = new com.softwareag.wx.platformMonitoring.jmx.spring.JmxManagement();
 		//		j.init();
@@ -99,18 +58,40 @@ public final class jmx
 		//		/* 641 */       currentThread.setContextClassLoader(ServerClassLoader.getPackageLoader("WxPlatformMonitoring"));
 		//		/* --> */     ClassLoader cl6 = currentThread.getContextClassLoader(); 
 		//		
-		com.softwareag.wx.platformMonitoring.jmx.JmxManagement j = new com.softwareag.wx.platformMonitoring.jmx.JmxManagement();
-		com.wm.app.b2b.server.Session session = Service.getSession();
-		InvokeState state = InvokeState.getCurrentState();
-		j.init("wx.platformMonitoring.pub", session, state, InvokeState.getCurrentSocket().getLocalPort());		
-				
+		
+		// input
+		IData input = IDataFactory.create();
+		IDataCursor inputCursor = input.getCursor();
+		IDataUtil.put( inputCursor, "propertyName", "watt.wx.platformmonitoring.jmx.enable" );
+		IDataUtil.put( inputCursor, "defaultValue", "false" );
+		inputCursor.destroy();
+		
+		// output
+		IData 	output = IDataFactory.create();
+		try{
+			output = Service.doInvoke( "pub.utils", "getServerProperty", input );
+		}catch( Exception e){}
+		IDataCursor outputCursor = output.getCursor();
+		String	enable = IDataUtil.getString( outputCursor, "propertyValue" );
+		outputCursor.destroy();
+		
+		if( enable.equals("true") ) {
+			logger.info("Loading WxPlatformMonitoring MBeans...");
+			com.wm.app.b2b.server.Session session = Service.getSession();
+			User user = InvokeState.getCurrentUser();
+			com.softwareag.wx.platformMonitoring.jmx.JmxManagement jmxManagement = new com.softwareag.wx.platformMonitoring.jmx.JmxManagement(session, user);
+			jmxManagement.exposeServicesInFolderRecursively("WxPlatformMonitoring", "wx.platformMonitoring.pub");		
+			logger.info("Successfully loaded WxPlatformMonitoring MBeans...");			
+		} else {
+			logger.info("_NOT_ loading WxPlatformMonitoring MBeans, because ExtendedSettings 'watt.wx.platformmonitoring.jmx.enable' is not set to 'true'!");
+		}
 		// --- <<IS-END>> ---
 
                 
 	}
 
 	// --- <<IS-START-SHARED>> ---
-	static com.softwareag.wx.platformMonitoring.jmx.agent.WxPlatformMonitoringJmxAgent agent = null;
+	static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger("wx.platformMonitoring.config");
 	
 	private static String getPathForConfigFile(File file) throws ServiceException {
 		java.nio.file.Path pathToFile = java.nio.file.Paths.get(file.getAbsolutePath());

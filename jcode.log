@@ -30,6 +30,7 @@ classpath:'c:\SoftwareAG910\IntegrationServer\instances\default\bin\..\..\..\lib
  compiling: com\softwareag\wx\platformMonitoring\jmx\agent\WxPlatformMonitoringJmxAgent.java
  compiling: com\softwareag\wx\platformMonitoring\jmx\agent\WxPlatformMonitoringMXBean.java
  compiling: com\softwareag\wx\platformMonitoring\jmx\agent\WxPlatformMonitoringMXBeanFactory.java
+ compiling: com\softwareag\wx\platformMonitoring\jmx\IDataUtil.java
  compiling: com\softwareag\wx\platformMonitoring\jmx\IntegrationServerAgent.java
  compiling: com\softwareag\wx\platformMonitoring\jmx\InvokeServiceOperation.java
  compiling: com\softwareag\wx\platformMonitoring\jmx\InvokeSimpleServiceOperation.java
@@ -61,7 +62,5 @@ Compiling with JVM System Java Compiler : javac -g -encoding Cp1252 -classpath {
 errors = C:\SoftwareAG910\IntegrationServer\instances\default\packages\WxPlatformMonitoring_Tmp\code\source\wx\platformMonitoring\impl\config.java:12: warning: jar is internal proprietary API and may be removed in a future release
 import sun.tools.jar.resources.jar;
                               ^
-Note: C:\SoftwareAG910\IntegrationServer\instances\default\packages\WxPlatformMonitoring_Tmp\code\source\com\softwareag\wx\platformMonitoring\jmx\ServicesDynamicMBean.java uses or overrides a deprecated API.
-Note: Recompile with -Xlint:deprecation for details.
 1 warning
 
