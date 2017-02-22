@@ -1,12 +1,21 @@
 package com.softwaerag.gcs.wx.platformmonitoring.utils.labcase
 
+
+@Grapes([
+         @Grab(group='commons-logging', module='commons-logging', version='1.2'),
+	@Grab(group='org.springframework', module='spring-core', version='4.3.5.RELEASE')
+]
+)
 import org.apache.http.entity.FileEntity
 import org.apache.log4j.PropertyConfigurator
 
+import groovy.lang.Grab
+import groovy.lang.Grapes
 import groovy.swing.SwingBuilder
 import groovy.util.logging.Log4j
 import groovyx.net.http.ContentType
 import groovyx.net.http.Method
+
 
 @Log4j
 class UploadPackage {
@@ -42,37 +51,38 @@ class UploadPackage {
 
 	void initClient() {
 		client = new groovyx.net.http.RESTClient('https://labcase.softwareag.com/')
-		
-//		def readln = javax.swing.JOptionPane.&showInputDialog
-//		def pwd = readln 'Labcase Password for user waa?'
-		
+
+		//		def readln = javax.swing.JOptionPane.&showInputDialog
+		//		def pwd = readln 'Labcase Password for user waa?'
+
 		def pwd = ''
 		if(System.console() == null) {
-		  new SwingBuilder().edt {
-			dialog(modal: true, // Otherwise the build will continue running before you closed the dialog
+			new SwingBuilder().edt {
+				dialog(modal: true, // Otherwise the build will continue running before you closed the dialog
 				title: 'Enter password for labcase', // Dialog title
 				alwaysOnTop: true, // pretty much what the name says
 				resizable: false, // Don't allow the user to resize the dialog
 				locationRelativeTo: null, // Place dialog in center of the screen
 				pack: true, // We need to pack the dialog (so it will take the size of it's children)
 				show: true // Let's show it
-			) {
-			  vbox { // Put everything below each other
-				label(text: "Please enter labcase password for waa:")
-				input = passwordField()
-				button(defaultButton: true, text: 'OK', actionPerformed: {
-				  pwd = input.password; // Set pass variable to value of input field
-				  dispose(); // Close dialog
-				})
-			  } // vbox end
-			} // dialog end
-		  } // edt end
+				) {
+					vbox {
+						// Put everything below each other
+						label(text: "Please enter labcase password for waa:")
+						input = passwordField()
+						button(defaultButton: true, text: 'OK', actionPerformed: {
+							pwd = input.password; // Set pass variable to value of input field
+							dispose(); // Close dialog
+						})
+					} // vbox end
+				} // dialog end
+			} // edt end
 		} else {
-		  pwd = System.console().readPassword("\nPlease enter key passphrase: ")
+			pwd = System.console().readPassword("\nPlease enter key passphrase: ")
 		}
-	
+
 		if(pwd.size() <= 0) {
-		  throw new RuntimeException("You must enter a password to proceed.")
+			throw new RuntimeException("You must enter a password to proceed.")
 		}
 		pwd = new String(pwd)
 		client.auth.basic 'waa', pwd
@@ -106,7 +116,7 @@ class UploadPackage {
 			updateDocument(filetoken, assetId);
 		}
 	}
-	
+
 	void updateDocument(String filetoken, String assetId) {
 		println "updating document in labcase (filetoke: " + filetoken + ", assetId: "  + assetId + ")"
 		String jsonBody = '{"asset":{"token":"' + filetoken + '"}}';
@@ -143,14 +153,14 @@ class UploadPackage {
 			}
 		}
 	}
-	
-	
-	
+
+
+
 	String getPackageAssetIdIfExists() {
 		println "checking if package has been uploaded already"
 		String uploadDirPath = "projects/wxplatformmon/alfresco/documents/" + uploadDirId + ".json"
 		String id = null;
-		client.get(path: uploadDirPath) { resp, json -> 
+		client.get(path: uploadDirPath) { resp, json ->
 			println "folder listing: "  + json
 			def children = json.asset.children;
 			children.each() { child ->
@@ -190,7 +200,7 @@ class UploadPackage {
 		def ant = new AntBuilder()
 		ant.zip(destfile: destination, basedir: 'is_packages/WxPlatformMonitoring')
 		return destination;
-//		println "!!!!!!!!!!!!!!!!!!!!!!! returning dummy zip"
-//		return "build/tmp.zip";
+		//		println "!!!!!!!!!!!!!!!!!!!!!!! returning dummy zip"
+		//		return "build/tmp.zip";
 	}
 }

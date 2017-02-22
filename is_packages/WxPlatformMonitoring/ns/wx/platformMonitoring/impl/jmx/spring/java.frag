@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="name">spring</value>
+  <value name="encodeutf8">true</value>
+  <value name="body">Ly8JCWNvbS5zb2Z0d2FyZWFnLnd4LnBsYXRmb3JtTW9uaXRvcmluZy5qbXguc3ByaW5nLkpteE1h
+bmFnZW1lbnQgaiA9IG5ldyBjb20uc29mdHdhcmVhZy53eC5wbGF0Zm9ybU1vbml0b3Jpbmcuam14
+LnNwcmluZy5KbXhNYW5hZ2VtZW50KCk7DQovLwkJai5pbml0KCk7DQpjb20uc29mdHdhcmVhZy53
+eC5wbGF0Zm9ybU1vbml0b3Jpbmcuam14LkpteE1hbmFnZW1lbnQgaiA9IG5ldyBjb20uc29mdHdh
+cmVhZy53eC5wbGF0Zm9ybU1vbml0b3Jpbmcuam14LkpteE1hbmFnZW1lbnQoKTsNCmNvbS53bS5h
+cHAuYjJiLnNlcnZlci5TZXNzaW9uIHMgPSBTZXJ2aWNlLmdldFNlc3Npb24oKTsNCkludm9rZVN0
+YXRlIHN0YXRlID0gSW52b2tlU3RhdGUuZ2V0Q3VycmVudFN0YXRlKCk7DQpqLmluaXQoInd4LnBs
+YXRmb3JtTW9uaXRvcmluZy5wdWIiLCBzLCBzdGF0ZSk7DQoNCg0KDQoJCQ==</value>
+</Values>

@@ -5,6 +5,10 @@
 
   <!-- nodes -->
 
+<INVOKE TIMEOUT="" SERVICE="pub.flow:tracePipeline" VALIDATE-IN="$none" VALIDATE-OUT="$none">
+  <COMMENT></COMMENT>
+</INVOKE>
+
 <SEQUENCE TIMEOUT="" EXIT-ON="SUCCESS">
   <COMMENT></COMMENT>
 

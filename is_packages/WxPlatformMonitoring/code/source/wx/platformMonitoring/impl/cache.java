@@ -5,18 +5,11 @@ package wx.platformMonitoring.impl;
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
-import com.wm.util.Values;
-import com.wm.app.b2b.server.Service;
 import com.wm.app.b2b.server.ServiceException;
 // --- <<IS-START-IMPORTS>> ---
 import net.sf.ehcache.Cache;
-import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
-import net.sf.ehcache.search.Attribute;
-import net.sf.ehcache.search.Query;
-import net.sf.ehcache.search.Result;
-import net.sf.ehcache.search.Results;
-import net.sf.ehcache.search.expression.Criteria;
+
 import com.wm.app.b2b.server.cache.CacheManagerUtil;
 import com.softwareag.cache.admin.TestCacheEntry;
 import net.sf.ehcache.store.MemoryStoreEvictionPolicy;
@@ -52,7 +45,7 @@ public final class cache
 		idc.destroy();
 		
 		Cache cache = CacheManagerUtil.getCacheManager(cacheManagerName).getCache(cacheName);
-		cache.getCacheConfiguration().setStatistics(true);
+//		cache.getCacheConfiguration().setStatistics(true);
 		// TODO: class Statistics does not exist any more. cache.setStatisticsEnabled neither.
 		//		cache.setStatisticsEnabled(true);
 		cache.getCacheConfiguration().setMemoryStoreEvictionPolicy(MemoryStoreEvictionPolicy.FIFO.toString());
@@ -81,7 +74,7 @@ public final class cache
 		String stats = cache.getStatistics().toString();
 		
 		String config = "getMaxEntriesLocalHeap: " + cache.getCacheConfiguration().getMaxEntriesLocalHeap() + 
-				",  getMaxElementsInMemory: " + cache.getCacheConfiguration().getMaxElementsInMemory() + ", evictionPolicy: " + cache.getMemoryStoreEvictionPolicy().getName();
+				",  evictionPolicy: " + cache.getMemoryStoreEvictionPolicy().getName();
 		
 		String nrEntries = cache.getKeys().size() + "";
 		

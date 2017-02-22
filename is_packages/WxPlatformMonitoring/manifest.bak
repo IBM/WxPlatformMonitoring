@@ -7,10 +7,13 @@
   <record name="startup_services" javaclass="com.wm.util.Values">
     <null name="wx.platformMonitoring.impl.startup:addAcl"/>
     <null name="wx.platformMonitoring.impl.startup:registerSolution"/>
+    <null name="wx.platformMonitoring.impl.startup:setupLogger"/>
   </record>
   <null name="shutdown_services"/>
   <null name="replication_services"/>
-  <null name="requires"/>
+  <record name="requires" javaclass="com.wm.util.Values">
+    <value name="WxJMXAgent">*</value>
+  </record>
   <value name="listACL">Default</value>
   <value name="webappLoad">yes</value>
 </Values>

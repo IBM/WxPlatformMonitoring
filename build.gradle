@@ -4,6 +4,33 @@ repositories {
     mavenCentral()
 }
 
+//configurations {
+//	wxPackage
+//}
+
+configurations {
+	compile {
+		description = 'compile classpath'
+		transitive = true
+	}
+	wxPackage {
+		extendsFrom compile
+	}
+}
+
 dependencies {
 	compile 'com.eclipsesource.minimal-json:minimal-json:0.9.4'
+	compile group: 'org.springframework', name: 'spring-core', version: '4.3.6.RELEASE'
+	compile group: 'org.springframework.integration', name: 'spring-integration-jmx', version: '4.3.6.RELEASE'
+//	wxPackage 'com.eclipsesource.minimal-json:minimal-json:0.9.3'
+//	wxPackage group: 'org.springframework', name: 'spring-core', version: '4.3.6.RELEASE'
+//	wxPackage group: 'org.springframework.integration', name: 'spring-integration-jmx', version: '4.3.6.RELEASE'
+	// https://mvnrepository.com/artifact/org.springframework.integration/spring-integration-jmx
+	
+}
+
+
+task getDeps(type: Copy) {
+	from configurations.wxPackage
+	into 'is_packages/WxPlatformMonitoring/code/jars'
 }

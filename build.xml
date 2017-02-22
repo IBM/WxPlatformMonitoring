@@ -1,8 +1,8 @@
-<project name="wxplatformmonitoring" basedir="." default="buildAndDistributeWxPlatformMonitoringPackage">
+<project name="wxplatformmonitoring" basedir="." default="buildWxPlatformMonitoring">
 	<!--
 	<property name="version" value="912"/>
 	-->
-	<property name="version" value="910"/>
+	<property name="version" value="910" />
 	<property file="build_${version}.properties" />
 
 	<property name="build.dir" value="build/${version}" />
@@ -11,10 +11,11 @@
 	<property name="build.dir.java" value="${build.dir}/java" />
 	<property name="classes.dir.java" value="${build.dir.java}/classes" />
 
-	<property name="wxplatformmonitoring.package.name" value="WxPlatformMonitoring"/>
+	<property name="wxplatformmonitoring.package.name" value="WxPlatformMonitoring" />
 
 
 	<property name="wxplatformmonitoring.package.home" value="is_packages/${wxplatformmonitoring.package.name}" />
+	<property name="wxplatformmonitoring.package.lib" value="${wxplatformmonitoring.package.home}/code/jars" />
 	<property name="build.dir.package" value="${build.dir}/package" />
 
 	<property name="svn.installation.path" value="c:/Program Files/SlikSvn/bin" />
@@ -28,7 +29,9 @@
 		</fileset>
 		<fileset dir="${wm.home}/IntegrationServer/lib">
 			<include name="**/*.jar" />
-			<exclude name="**/WxIntercptor*.jar" />
+		</fileset>
+		<fileset dir="${wxplatformmonitoring.package.lib}">
+			<include name="**/*.jar" />
 		</fileset>
 	</path>
 
@@ -58,7 +61,12 @@
 		</exec>
 		<fail message="Jcode ended with error">
 			<condition>
-				<resourcecontains resource="jcode.log" substring=" errors" />
+				<and>
+					<resourcecontains resource="jcode.log" substring=" errors" />
+					<not>
+						<resourcecontains resource="jcode.log" substring="compile errors may result" />
+					</not>
+				</and>
 			</condition>
 		</fail>
 		<echo>Result from jcode: ${jcodeResult}</echo>
@@ -104,109 +112,119 @@
 			<remove path="Values/value[@name='build']" />
 			<insert path="Values">
 				<![CDATA[<value name="build">${build.number}</value>]]></insert>
-		</xmltask>
-		<!--<zip destfile="${build.dir.package}/WxPlatformMonitoring_Test.zip" basedir="${wxplatformmonitoring.package.home}_Test" />-->
-		<zip destfile="${build.dir.package}/WxPlatformMonitoring.zip" basedir="${build.dir.tmp.wxplatformmonitoring}" />
-	</target>
+	</xmltask>
+	<!--<zip destfile="${build.dir.package}/WxPlatformMonitoring_Test.zip" basedir="${wxplatformmonitoring.package.home}_Test" />-->
+	<zip destfile="${build.dir.package}/WxPlatformMonitoring.zip" basedir="${build.dir.tmp.wxplatformmonitoring}" />
+</target>
 
-	<target name="buildAndDistributeWxPlatformMonitoringPackage" depends="buildWxPlatformMonitoringsPackage, distWxPlatformMonitoringPackage">
-	</target>
+<target name="buildAndDistributeWxPlatformMonitoringPackage" depends="buildWxPlatformMonitoringsPackage, distWxPlatformMonitoringPackage">
+</target>
 
-	<target name="buildAndDistributeWxPlatformMonitoringPackageAsSymLink" depends="buildWxPlatformMonitoringsPackage, installPackageAsSymLink">
-	</target>
-	
-	<target name="fetchWxPlatformMonitoringPackageFromIntegrationServer">
-		<delete dir="${wxplatformmonitoring.package.home}" />
-		<copy todir="${wxplatformmonitoring.package.home}">
-			<fileset dir="${is.home}/packages/WxPlatformMonitoring">
-			</fileset>
-		</copy>
-		<!--
+<target name="buildAndDistributeWxPlatformMonitoringPackageAsSymLink" depends="buildWxPlatformMonitoringsPackage, installPackageAsSymLink">
+</target>
+
+<target name="fetchWxPlatformMonitoringPackageFromIntegrationServer">
+	<delete dir="${wxplatformmonitoring.package.home}" />
+	<copy todir="${wxplatformmonitoring.package.home}">
+		<fileset dir="${is.home}/packages/WxPlatformMonitoring">
+		</fileset>
+	</copy>
+	<!--
 		<delete dir="${wxplatformmonitoring.package.home}_Test" />
 		<copy todir="${wxplatformmonitoring.package.home}_Test">
 			<fileset dir="${is.home}/packages/WxPlatformMonitoring_Test">
 			</fileset>
 		</copy>
 		-->
-	</target>
-	
-	
-	<target name="svnversion">
-		<exec executable="${svn.installation.path}/svnversion.exe" outputproperty="svnversionRaw" />
-		<propertyregex property="svnversion" input="${svnversionRaw}" regexp=":" replace="_" global="true" />
-		<echo message="Using svnversion ${svnversion}" />
-	</target>
-	
+</target>
 
-	<target name="git.revision" description="Store git revision in ${repository.version}" >
-	    <exec executable="git" outputproperty="git.revision" failifexecutionfails="false" errorproperty="">
-	        <arg value="describe"/>
-	        <arg value="--tags"/>
-	        <arg value="--always"/>
-	        <arg value="HEAD"/>
-	    </exec>
-	    <condition property="repository.version" value="${git.revision}" else="unknown">
-	        <and>
-	            <isset property="git.revision"/>
-	            <length string="${git.revision}" trim="yes" length="0" when="greater"/>
-	        </and>
-	    </condition>
-		<echo message="git: ${repository.version}"/>
-	</target>
-	
+
+<target name="svnversion">
+	<exec executable="${svn.installation.path}/svnversion.exe" outputproperty="svnversionRaw" />
+	<propertyregex property="svnversion" input="${svnversionRaw}" regexp=":" replace="_" global="true" />
+	<echo message="Using svnversion ${svnversion}" />
+</target>
+
+
+<target name="git.revision" description="Store git revision in ${repository.version}">
+	<exec executable="git" outputproperty="git.revision" failifexecutionfails="false" errorproperty="">
+		<arg value="describe" />
+		<arg value="--tags" />
+		<arg value="--always" />
+		<arg value="HEAD" />
+	</exec>
+	<condition property="repository.version" value="${git.revision}" else="unknown">
+		<and>
+			<isset property="git.revision" />
+			<length string="${git.revision}" trim="yes" length="0" when="greater" />
+		</and>
+	</condition>
+	<echo message="git: ${repository.version}" />
+</target>
+
+<condition property="isUnix">
+	<os family="unix" />
+</condition>
+
+<target name="installPackagesAsSymLink">
+	<antcall target="installPackageAsSymLink">
+		<param name="packageName" value="WxPlatformMonitoring" />
+	</antcall>
+	<antcall target="installPackageAsSymLink">
+		<param name="packageName" value="WxPlatformMonitoring_Test" />
+	</antcall>
+
+</target>
+
+<target name="installPackageAsSymLink">
+	<antcall target="createSymLink">
+		<param name="link" value="${is.home}/packages/${packageName}" />
+		<param name="resource" value="./is_packages/${packageName}" />
+	</antcall>
+</target>
+
+<target name="createSymLink" depends="">
 	<condition property="isUnix">
-			  <os family="unix"/>
-			</condition>
-	
-	<target name="installPackagesAsSymLink">
-		<antcall target="installPackageAsSymLink">
-			<param name="packageName" value="WxPlatformMonitoring"/>
-		</antcall>
-		<antcall target="installPackageAsSymLink">
-			<param name="packageName" value="WxPlatformMonitoring_Test"/>
-		</antcall>
-		
-	</target>
-	
-	<target name="installPackageAsSymLink">
-		<antcall target="createSymLink">
-			<param name="link" value="${is.home}/packages/${packageName}"/>
-			<param name="resource" value="./is_packages/${packageName}"/>
-		</antcall>
-	</target>
-	
-	<target name="createSymLink" depends="">
-		<condition property="isUnix">
-			<os family="unix"/>
-		</condition>
-		<if>
-			<isset property="isUnix"/>
-			<then>
-				<pathconvert targetos="unix" property="linkUnix">
-				    <path location="${link}"/>
-				</pathconvert>
-				<pathconvert targetos="unix" property="resourceUnix">
-				    <path location="${resource}"/>
-				</pathconvert>
-				<symlink link="${linkUnix}" resource="${resourceUnix}"/>
-			</then>
-			<else>
-				<pathconvert targetos="windows" property="linkWin">
-				    <path location="${link}"/>
-				</pathconvert>
-				<pathconvert targetos="windows" property="resourceWin">
-				    <path location="${resource}"/>
-				</pathconvert>
-				<property name="cmd" value="/c MKLINK /D &quot;${linkWin}&quot; &quot;${resourceWin}&quot;"/>
-				<echo message="MKLINK command: ${cmd}"/>
-				<exec executable="cmd.exe" output="symlink.out" >
-				  <arg line="${cmd}"/>
-				</exec>
-			</else>
-		</if>
-	</target>
-	
-	<!--
+		<os family="unix" />
+	</condition>
+	<if>
+		<isset property="isUnix" />
+		<then>
+			<pathconvert targetos="unix" property="linkUnix">
+				<path location="${link}" />
+			</pathconvert>
+			<pathconvert targetos="unix" property="resourceUnix">
+				<path location="${resource}" />
+			</pathconvert>
+			<symlink link="${linkUnix}" resource="${resourceUnix}" />
+		</then>
+		<else>
+			<pathconvert targetos="windows" property="linkWin">
+				<path location="${link}" />
+			</pathconvert>
+			<pathconvert targetos="windows" property="resourceWin">
+				<path location="${resource}" />
+			</pathconvert>
+			<property name="cmd" value="/c MKLINK /D &quot;${linkWin}&quot; &quot;${resourceWin}&quot;" />
+			<echo message="MKLINK command: ${cmd}" />
+			<exec executable="cmd.exe" output="symlink.out">
+				<arg line="${cmd}" />
+			</exec>
+		</else>
+	</if>
+</target>
+
+<target name="buildWxPlatformMonitoringPackageClasses" description="Builds Java classes">
+	<javac srcdir="${wxplatformmonitoring.package.home}/code/source" destdir="${wxplatformmonitoring.package.home}/code/classes" debug="true" optimize="true" deprecation="true" includeantruntime="false">
+		<!--<include name="${app.include}" />-->
+		<compilerarg value="-Xlint:unchecked" />
+		<classpath>
+			<path refid="build.classpath" />
+		</classpath>
+	</javac>
+</target>
+
+<!--
 	<target name="test">
 		<log level="INFO" msg="Starting SOAP UI Tests" />
 		<log level="DEBUG" msg="ATTENTION: Make sure that all services in WxPlatformMonitoring_Test have ExecuteACL=Anonymous" />

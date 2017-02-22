@@ -13,7 +13,6 @@
 	<classpathentry kind="var" path="IS_SERVER"/>
 	<classpathentry kind="var" path="IS_UIUTILS"/>
 	<classpathentry kind="var" path="IS_WSDL4J"/>
-	<classpathentry kind="lib" path="/WxPlatformMonitoring_Project/libs/minimal-json-0.9.4.jar"/>
 	<classpathentry kind="lib" path="C:/SoftwareAG912/common/lib/terracotta-toolkit-runtime-ee.jar"/>
 	<classpathentry kind="lib" path="C:/SoftwareAG912/common/lib/ehcache-ee.jar"/>
 	<classpathentry kind="lib" path="C:/SoftwareAG912/common/lib/ehcache-ee-terracotta-client-all.jar"/>
@@ -140,5 +139,6 @@
 	<classpathentry kind="lib" path="C:/SoftwareAG912/common/lib/wvcm.jar"/>
 	<classpathentry kind="lib" path="C:/SoftwareAG912/common/lib/xqjapi.jar"/>
 	<classpathentry kind="lib" path="C:/SoftwareAG912/common/lib/xqj-ino-api.jar"/>
+	<classpathentry kind="lib" path="/WxJMXAgent/code/jars/wx-jmx.jar"/>
 	<classpathentry kind="output" path="code/classes"/>
 </classpath>

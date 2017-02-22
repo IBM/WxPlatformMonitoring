@@ -1,7 +1,7 @@
 package wx.platformMonitoring.impl;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-02-16 16:11:05 CET
+// -----( CREATED: 2017-02-20 17:15:21 CET
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
@@ -18,6 +18,7 @@ import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonArray;
 import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.JsonValue;
+import com.webmethods.core.util.Logger;
 import com.wm.app.b2b.server.ServerAPI;
 import com.wm.lang.ns.NSName;
 import com.wm.lang.ns.NSNode;
@@ -423,6 +424,9 @@ public final class config
 	}
 
 	// --- <<IS-START-SHARED>> ---
+	
+	static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger("wx.platformMonitoring.config");
+	
 	static void iterateJson(JsonObject jObj, IDataCursor pipelineCursor) {
 			for( String childName: jObj.names() ) {
 				JsonValue child = jObj.get(childName);
@@ -466,8 +470,8 @@ public final class config
 	
 	private static JsonValue getConfig(String configFileName) throws ServiceException {
 		if( !_configs.containsKey(configFileName) ) {
-			File configFile = new File(ServerAPI.getPackageConfigDir("WxPlatformMonitoring"),
-					configFileName);
+			File configFile = getConfigFile(configFileName);
+			logger.debug("Getting config from " + configFile.getAbsolutePath());
 			java.io.Reader reader;
 			try {
 				reader = new FileReader(configFile);
@@ -475,25 +479,53 @@ public final class config
 			} catch (FileNotFoundException fnfe) {
 				// TODO Auto-generated catch block
 				fnfe.printStackTrace();
-				throw new ServiceException("FileNotFoundException: Could not read standard json interfaces config file from WxPlatformMonitoring/config/" + configFileName + ": " + fnfe);
+				throw new ServiceException("FileNotFoundException: Could not read json config file '" + configFileName + "': " + fnfe);
 			} catch( IOException ioe ) {
-				throw new ServiceException("IOException: Could not read standard json interfaces config file from WxPlatformMonitoring/config/" + configFileName + ": " + ioe);
+				throw new ServiceException("IOException: Could not read json config file '" + configFileName + "': " + ioe);
 			}
 		}
 		return _configs.get(configFileName);
 	}
 	
-	private static void callParseConfig() {
+	private static File getConfigFile(String jsonFileName) {
+		File configDir = ServerAPI.getPackageConfigDir("WxPlatformMonitoring");
+		File jsonConfigFile;
 	
 		// input
 		IData input = IDataFactory.create();
+		IDataCursor inputCursor = input.getCursor();
+		IDataUtil.put( inputCursor, "propertyName", "watt.wx.platformMonitoring.configDir" );
+		inputCursor.destroy();
 	
 		// output
 		IData 	output = IDataFactory.create();
 		try{
-			output = Service.doInvoke( "wx.platformMonitoring.impl.config", "parseConfig", input );
-		}catch( Exception e){}
-	
+			output = Service.doInvoke( "pub.utils", "getServerProperty", input );
+			String	propertyValue = IDataUtil.getString( output.getCursor(), "propertyValue" );
+			if( propertyValue != null && !"".equals(propertyValue)) {
+				File c = new File(propertyValue);
+				if( c.exists() ) {
+					if( c.isDirectory() ) {
+						jsonConfigFile = new File(c, jsonFileName);
+						if( jsonConfigFile.exists() ) {
+							logger.info("Loading " + jsonFileName + " from config directory " + c.getAbsolutePath());
+							return jsonConfigFile;
+						}
+					} else {
+						logger.error("Extended settings 'watt.wx.platformMonitoring.configDir' does not point to a directory. Using 'WxPlatformMonitoring/config' as config directory.");
+					}
+				} else {
+					logger.error("Config directory '" + propertyValue + "' from extended settings 'watt.wx.platformMonitoring.configDir' does not exist. Using 'WxPlatformMonitoring/config' as config directory.");
+				}
+			} else {
+				logger.info("No config directory configured with extended settings 'watt.wx.platformMonitoring.configDir'. Using 'WxPlatformMonitoring/config' as config directory.");
+			}
+		}catch( Exception e){
+			logger.error("Could not get config directory from extended settings 'watt.wx.platformMonitoring.configDir'. Using 'WxPlatformMonitoring/config' as config directory.");
+		}
+		logger.info("Loading " + jsonFileName + " from config directory " + configDir.getAbsolutePath());
+		jsonConfigFile = new File(configDir, jsonFileName);
+		return jsonConfigFile;
 	}
 		
 	// --- <<IS-END-SHARED>> ---

@@ -5,14 +5,10 @@ package wx.platformMonitoring.impl;
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
-import com.wm.util.Values;
 import com.wm.app.b2b.server.Service;
 import com.wm.app.b2b.server.ServiceException;
 // --- <<IS-START-IMPORTS>> ---
 import java.util.Hashtable;
-import javax.jms.ConnectionFactory;
-import javax.jms.ConnectionMetaData;
-import javax.jms.JMSException;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -192,6 +188,7 @@ public final class nAdmin
 
 
 
+	@SuppressWarnings("unchecked")
 	public static final void getQueuedElementsForMessagingTrigger (IData pipeline)
         throws ServiceException
 	{

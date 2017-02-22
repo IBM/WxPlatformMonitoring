@@ -1,7 +1,7 @@
 package wx.platformMonitoring.impl.utility;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-02-06 16:55:56 CET
+// -----( CREATED: 2017-02-21 20:24:53 CET
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
@@ -104,6 +104,7 @@ public final class date
 		} catch (final ParseException parseException) {
 			throw new ServiceException(parseException);
 		}
+			
 			
 			
 		// --- <<IS-END>> ---
