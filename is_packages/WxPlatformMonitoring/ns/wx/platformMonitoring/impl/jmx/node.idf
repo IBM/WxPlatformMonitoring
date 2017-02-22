@@ -31,9 +31,9 @@ aWxlLmdldEFic29sdXRlUGF0aCgpOwp9</value>
   <array name="implements" type="value" depth="1">
   </array>
   <array name="imports" type="value" depth="1">
-    <value>com.wm.app.b2b.server.InvokeState</value>
     <value>java.io.File</value>
     <value>java.lang.management.ManagementFactory</value>
+    <value>java.net.Socket</value>
     <value>java.util.ArrayList</value>
     <value>java.util.List</value>
     <value>java.util.Set</value>
@@ -41,5 +41,7 @@ aWxlLmdldEFic29sdXRlUGF0aCgpOwp9</value>
     <value>javax.management.ObjectInstance</value>
     <value>javax.management.ObjectName</value>
     <value>com.softwareag.wx.platformMonitoring.jmx.agent.WxPlatformMonitoringMXBean</value>
+    <value>com.wm.app.b2b.server.InvokeState</value>
+    <value>com.wm.app.b2b.server.User</value>
   </array>
 </Values>

@@ -1,7 +1,7 @@
 package wx.platformMonitoring.impl;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-02-22 10:16:30 CET
+// -----( CREATED: 2017-02-22 16:13:15 CET
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
@@ -9,9 +9,9 @@ import com.wm.util.Values;
 import com.wm.app.b2b.server.Service;
 import com.wm.app.b2b.server.ServiceException;
 // --- <<IS-START-IMPORTS>> ---
-import com.wm.app.b2b.server.InvokeState;
 import java.io.File;
 import java.lang.management.ManagementFactory;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -19,6 +19,8 @@ import javax.management.MBeanServer;
 import javax.management.ObjectInstance;
 import javax.management.ObjectName;
 import com.softwareag.wx.platformMonitoring.jmx.agent.WxPlatformMonitoringMXBean;
+import com.wm.app.b2b.server.InvokeState;
+import com.wm.app.b2b.server.User;
 // --- <<IS-END-IMPORTS>> ---
 
 public final class jmx
@@ -86,13 +88,21 @@ public final class jmx
 		// @sigtype java 3.5
 		//		com.softwareag.wx.platformMonitoring.jmx.spring.JmxManagement j = new com.softwareag.wx.platformMonitoring.jmx.spring.JmxManagement();
 		//		j.init();
+		//		ClassLoader cl1 = Service.class.getClassLoader();
+		//		ClassLoader cl2 = Server.class.getClassLoader();
+		//		ClassLoader cl3 = Service.getSession().getClass().getClassLoader();
+		//		     Thread currentThread = Thread.currentThread();
+		//		/* --> */     ClassLoader cl4 = currentThread.getContextClassLoader();
+		//		ServerClassLoader cl5 = ServerClassLoader.getCurrent();
+		//		
+		//		
+		//		/* 641 */       currentThread.setContextClassLoader(ServerClassLoader.getPackageLoader("WxPlatformMonitoring"));
+		//		/* --> */     ClassLoader cl6 = currentThread.getContextClassLoader(); 
+		//		
 		com.softwareag.wx.platformMonitoring.jmx.JmxManagement j = new com.softwareag.wx.platformMonitoring.jmx.JmxManagement();
-		com.wm.app.b2b.server.Session s = Service.getSession();
+		com.wm.app.b2b.server.Session session = Service.getSession();
 		InvokeState state = InvokeState.getCurrentState();
-		j.init("wx.platformMonitoring.pub", s, state);
-		
-		
-		
+		j.init("wx.platformMonitoring.pub", session, state, InvokeState.getCurrentSocket().getLocalPort());		
 				
 		// --- <<IS-END>> ---
 

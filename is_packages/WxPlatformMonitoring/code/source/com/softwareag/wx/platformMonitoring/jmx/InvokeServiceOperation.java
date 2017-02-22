@@ -30,10 +30,12 @@ public class InvokeServiceOperation implements ServiceOperation {
 
 	private List<OpenMBeanParameterInfoSupport> inputParameters = new ArrayList<OpenMBeanParameterInfoSupport>();
 	private final String serviceName;
-	CompositeType pipelineOutput = null;
+	OpenType pipelineOutput = SimpleType.VOID;
+	int localServerPost = 5555;
 
-	public InvokeServiceOperation(String serviceName) throws ParseException {
+	public InvokeServiceOperation(String serviceName, int localServerPost) throws ParseException {
 		this.serviceName = serviceName;
+		this.localServerPost = localServerPost;
 		parseService();
 	}
 
@@ -68,7 +70,7 @@ public class InvokeServiceOperation implements ServiceOperation {
 		}
 	}
 
-	private CompositeType getOutputFields(NSRecord outputRecord, String name) throws ParseException {
+	private OpenType getOutputFields(NSRecord outputRecord, String name) throws ParseException {
 		List<Object> outputFields = new ArrayList<Object>();
 		List<String> outputFieldDescriptions = new ArrayList<String>();
 		if (outputRecord != null && outputRecord.getFields() != null) {
@@ -94,12 +96,17 @@ public class InvokeServiceOperation implements ServiceOperation {
 				outputFieldTypes[i] = (CompositeType) f;
 			}
 		}
+		if (outputFieldDescriptions.size() == 0) {
+			return SimpleType.VOID;
+		}
 		CompositeType compositeType;
 		try {
 			compositeType = new CompositeType(name, name, outputFieldDescriptions.toArray(new String[0]),
 					outputFieldDescriptions.toArray(new String[0]), outputFieldTypes);
 		} catch (OpenDataException e) {
-			throw new ParseException("Error when creating output compoisite type", -1);
+			throw new ParseException("Error when creating output compoisite type for name " + name, -1);
+		} catch (java.lang.IllegalArgumentException a) {
+			throw new ParseException("Error when creating output compoisite type for name " + name, -1);
 		}
 		return compositeType;
 	}
@@ -118,11 +125,11 @@ public class InvokeServiceOperation implements ServiceOperation {
 
 	public Object buildOutput(Object[] params, String[] signature, Session session, InvokeState state)
 			throws OpenDataException {
-		CompositeDataSupport output = invokeService(params, signature, session, state);
+		Object output = invokeService(params, signature, session, state);
 		return output;
 	}
 
-	public CompositeDataSupport invokeService(Object[] params, String[] signature, Session session, InvokeState state) {
+	public Object invokeService(Object[] params, String[] signature, Session session, InvokeState state) {
 
 		IData input = IDataFactory.create();
 		for (int i = 0; i < params.length; i++) {
@@ -144,9 +151,10 @@ public class InvokeServiceOperation implements ServiceOperation {
 	}
 
 	private IData invokeService(String service, IData pipeline) throws ServiceException {
+
 		Context context = new Context();
 		try {
-			context.connect("localhost:5912", null, null);
+			context.connect("localhost:" + this.localServerPost, null, null);
 		} catch (Exception e) {
 			throw new ServiceException("Unable to connect to localhost for service invoke: " + e);
 		}
@@ -156,20 +164,33 @@ public class InvokeServiceOperation implements ServiceOperation {
 		return output;
 	}
 
+	private Object parseOutput(IData pipeline, OpenType openType) throws OpenDataException {
+		if (openType instanceof CompositeType) {
+			return parseOutput(pipeline, (CompositeType) openType);
+		} else if (openType instanceof SimpleType<?>) {
+			if (openType.isValue(null)) {
+				return null;
+			} else {
+				throw new OpenDataException();
+			}
+		} else {
+			throw new OpenDataException();
+		}
+	}
+
 	private CompositeDataSupport parseOutput(IData pipeline, CompositeType compositeType) throws OpenDataException {
-		if( pipeline == null ) 
+		if (pipeline == null)
 			pipeline = IDataFactory.create();
-//		Map<String, Object> output = new HashMap<String, Object>();
 		String[] keys = new String[compositeType.keySet().size()];
 		Object[] values = new Object[compositeType.keySet().size()];
 		IDataCursor pipelineC = pipeline.getCursor();
-		int i=0;
+		int i = 0;
 		for (String key : compositeType.keySet()) {
 			OpenType type = compositeType.getType(key);
 			String typeName = type.getTypeName();
 			if (typeName.equals("java.lang.String")) {
 				String pipelineValue = IDataUtil.getString(pipelineC, key);
-				if( pipelineValue == null ) {
+				if (pipelineValue == null) {
 					pipelineValue = new String("");
 				}
 				keys[i] = key;
@@ -181,12 +202,12 @@ public class InvokeServiceOperation implements ServiceOperation {
 			}
 			i++;
 		}
-		CompositeDataSupport outputDocument = new CompositeDataSupport(compositeType,
-				keys, values);
+		CompositeDataSupport outputDocument = new CompositeDataSupport(compositeType, keys, values);
 		return outputDocument;
 	}
+
 	private CompositeDataSupport parseOutput2(IData pipeline, CompositeType compositeType) throws OpenDataException {
-		if( pipeline == null ) 
+		if (pipeline == null)
 			return null;
 		Map<String, Object> output = new HashMap<String, Object>();
 		IDataCursor pipelineC = pipeline.getCursor();
