@@ -125,7 +125,7 @@ public class InvokeServiceOperation implements ServiceOperation {
 		List<String> outputFieldDescriptions = new ArrayList<String>();
 		// iterate over all fields and add recursively to lists of outputFields
 		// (either SimpleType.STRING or a complex CompositeType)
-		if (outputRecord != null && outputRecord.getFields() != null || outputRecord.getFields().length != 0) {
+		if (outputRecord != null && outputRecord.getFields() != null && outputRecord.getFields().length != 0) {
 			for (NSField f : outputRecord.getFields()) {
 				outputFieldDescriptions.add(f.getName());
 				if (f.getType() == NSField.FIELD_STRING) {
@@ -165,6 +165,8 @@ public class InvokeServiceOperation implements ServiceOperation {
 					outputFieldDescriptions.toArray(new String[0]), outputFieldTypes);
 			return compositeType;
 		} catch (OpenDataException e) {
+			throw new ParseException("Error when creating output compoisite type for name " + name, -1);
+		} catch( Exception e ) {
 			throw new ParseException("Error when creating output compoisite type for name " + name, -1);
 		}
 	}

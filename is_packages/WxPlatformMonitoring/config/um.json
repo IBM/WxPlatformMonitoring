@@ -20,7 +20,7 @@
 		},
 		"direct": {
 			"config": {
-				"jmsConnectionAlias": "test",
+				"jmsConnectionAlias": "DEFAULT_IS_JMS_CONNECTION",
 				"messagingConnectionAlias": "IS_UM_CONNECTION"
 			},
 			"channels": [{
@@ -33,6 +33,9 @@
 			}],
 			"queues": [{
 				"name": "jmsQueue",
+				"maxElementsQueued": "2"
+			}, {
+				"name": "jmsTopic",
 				"maxElementsQueued": "2"
 			}]
 		}

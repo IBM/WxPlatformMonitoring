@@ -1,7 +1,7 @@
 package wx.platformMonitoring.impl.utility;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-02-06 16:54:10 CET
+// -----( CREATED: 2017-02-23 11:25:25 CET
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
@@ -50,10 +50,22 @@ public final class list
 		String[]       stringArray = IDataUtil.getStringArray( pipelineCursor, "stringArray" );
 		String               value = IDataUtil.getString( pipelineCursor, "value" );
 		
-		Set<String> s = new HashSet<String>();
-		s.addAll( Arrays.asList( stringArray) );
-		
-		IDataUtil.put( pipelineCursor, "isIn", "" + s.contains( value ) );
+		if( stringArray == null ) {
+			stringArray = new String[0];
+		}
+		String contains = "false";
+		for( String stringElem : stringArray ) {
+			if( stringElem.equals(value) )  {
+				contains = "true";
+				break;
+			}
+		}
+		IDataUtil.put( pipelineCursor, "isIn", contains );
+		//		
+		//		Set<String> s = new HashSet<String>();
+		//		s.addAll( Arrays.asList( stringArray) );
+		//		
+		//		IDataUtil.put( pipelineCursor, "isIn", "" + s.contains( value ) );
 		pipelineCursor.destroy();
 			
 			

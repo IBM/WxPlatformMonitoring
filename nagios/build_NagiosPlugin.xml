@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="build_WxPlatformMonitoring_Nagios_Plugin" basedir=".." default="nagiosPlugin_build">
+
+	<property name="src.dir" location="src" />
+	<property name="build.dir" location="build" />
+	<property name="lib.dir" location="libs" />
+
+	<path id="build.classpath">
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<property name="name" value="WxPlatformMonitoring" />
+	<property name="builddir" location="${build.dir}/${name}" />
+	<property name="builddir.classes" location="${builddir}/classes" />
+
+	<property name="nagiosPlugin.packagePath" value="com/softwareag/wx/platformMonitoring/nagios" />
+	<property name="nagiosPlugin.jarname" value="${name}_NagiosPlugin.jar" />
+
+	<target name="nagiosPlugin_build" depends="nagiosPlugin_build_jar, cleanup" description="build the task def jar and put in lib folder">
+	</target>
+
+	<target name="nagiosPlugin_build_jar">
+		<mkdir dir="${builddir.classes}" />
+		<javac srcdir="${src.dir}" destdir="${builddir.classes}" classpathref="build.classpath" debug="on">
+			<include name="${nagiosPlugin.packagePath}/**" />
+		</javac>
+		<copy todir="${builddir.classes}/${nagiosPlugin.packagePath}" file="${src.dir}/${nagiosPlugin.packagePath}/nagios_check_jmx_ext.txt" />
+		<jar destfile="${builddir}/${nagiosPlugin.jarname}" basedir="${builddir.classes}" />
+		<copy file="${builddir}/${nagiosPlugin.jarname}" todir="nagios/plugin/" />
+	</target>
+
+	<target name="cleanup">
+		<delete dir="${builddir.classes}" />
+	</target>
+</project>

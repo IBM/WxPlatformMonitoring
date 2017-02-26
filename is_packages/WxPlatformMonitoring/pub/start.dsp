@@ -24,10 +24,6 @@
 </head>
 
 <body>
-	<h1>Hello, world!</h1>
-
-	<span class="odometer">henning</span>
-	<span class="odometer1" id="xxxx">henning</span>
 
 	<div class="pure-g">
 		<div class="pure-u-1-2">
@@ -41,9 +37,15 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr id="wx.platformMonitoring.pub.jvm:getPermGen">
+					<tr id="wx.platformMonitoring.pub.um.monitoring:listJmsQueues">
 						<td class="is-state-unknown"></td>
-						<td class="status-description">Used JVM Perm Gen=<span class="status-value"></span></td>
+						<td class="status-description">Number of out of compliance JMS queues=<span class="status-value"></span></td>
+						<td class="status-details"></td>
+						<td class="status-edit"><a href="/"><span class="material-icons">mode_edit</span></a></td>
+					</tr>					
+					<tr id="wx.platformMonitoring.pub.um.monitoring:listMessagingQueues">
+						<td class="is-state-unknown"></td>
+						<td class="status-description">Number of out of compliance Messaging channels=<span class="status-value"></span></td>
 						<td class="status-details"></td>
 						<td class="status-edit"><a href="/"><span class="material-icons">mode_edit</span></a></td>
 					</tr>
@@ -152,6 +154,18 @@
 				return true;
 			}, function getStatusValue(result) {
 					return result.currentlyRunningServicesCount;
+			});
+			evaluteService("wx.platformMonitoring.pub.um.monitoring:listJmsQueues", function checkFunction(result) {
+				return result.nrNOk > 0 ? false: true;
+				return true;
+			}, function getStatusValue(result) {
+					return result.nrNOk;
+			});
+			evaluteService("wx.platformMonitoring.pub.um.monitoring:listMessagingQueues", function checkFunction(result) {
+				return result.nrNOk > 0 ? false: true;
+				return true;
+			}, function getStatusValue(result) {
+					return result.nrNOk;
 			});
 		</script>
 </body>
