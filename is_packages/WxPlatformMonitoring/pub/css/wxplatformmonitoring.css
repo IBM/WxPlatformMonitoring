@@ -2,6 +2,18 @@ body {
   font-size: 1em;
 }
 
+.wx-json-formatter {
+  font-size: 1.2em;
+}
+
+.wx-response-modal h4 {
+  font-size: 1.3em;
+}
+
+.wx-response-modal-bold {
+    font-weight: bold;
+}
+
 tbody.overview tr td{
   padding: 0.25em 0.5em;
 }

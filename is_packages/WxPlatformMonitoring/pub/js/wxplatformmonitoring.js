@@ -1,6 +1,4 @@
 function evaluateExtendedSettings(propertyName, checkFunctionCallback) {
-
-
     var url = "/invoke/pub.utils/getServerProperty";
     var data = {
         propertyName: propertyName
@@ -8,7 +6,6 @@ function evaluateExtendedSettings(propertyName, checkFunctionCallback) {
     invoke(url, data, propertyName, checkFunctionCallback, function(result) {
         return result.propertyValue;
     });
-
 }
 
 function evaluteService(serviceName, checkFunctionCallback, getStatusValueCallback) {
@@ -44,14 +41,15 @@ function invoke(url, data, id, checkFunctionCallback, getStatusValueCallback) {
               $statusDetail.append($infoSpanLink);
               $infoSpan.click(function() {
                 var formatter = new JSONFormatter(msg, 1, {hoverPreviewEnabled: true});
-                $result = $("<span/>").attr("class", "json-formatter-row json-formatter-open");
+                $result = $("<span/>").attr("class", "wx-json-formatter json-formatter-row json-formatter-open");
                 var rs = $result.get(0);
                 rs.innerHTML = '';
                 rs.appendChild(formatter.render());
                 bootbox.alert({
                   size: "medium",
-                  title: "Response data for '" + url + "'",
-                  message: rs
+                  title: "Response data for '<span class='wx-response-modal-bold'>" + url + "</span>'",
+                  message: rs,
+                  className: "wx-response-modal"
                 });
               });
             var statusValue = getStatusValueCallback(msg);
