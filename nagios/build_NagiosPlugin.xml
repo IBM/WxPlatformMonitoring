@@ -3,22 +3,26 @@
 
 	<property name="src.dir" location="src" />
 	<property name="build.dir" location="build" />
+	<property name="build.dir.tmp" location="${build.dir}/tmp" />
 	<property name="lib.dir" location="libs" />
-
 	<path id="build.classpath">
 		<fileset dir="${lib.dir}">
 			<include name="**/*.jar" />
 		</fileset>
 	</path>
 
-	<property name="name" value="WxPlatformMonitoring" />
-	<property name="builddir" location="${build.dir}/${name}" />
-	<property name="builddir.classes" location="${builddir}/classes" />
-
+	<property name="projectName" value="WxPlatformMonitoring_NagiosPlugin" />
+	<property name="builddir" location="${build.dir.tmp}/${projectName}" />
+	<property name="builddir.classes" location="${build.dir.tmp}/${projectName}/classes" />
+	<property name="builddir.sources" location="${build.dir.tmp}/${projectName}/sources" />
+	
 	<property name="nagiosPlugin.packagePath" value="com/softwareag/wx/platformMonitoring/nagios" />
-	<property name="nagiosPlugin.jarname" value="${name}_NagiosPlugin.jar" />
+	
+	<property name="nagiosPlugin.jarName" value="${projectName}.jar" />
+	<property name="nagiosPlugin.distributionName" value="${projectName}.zip" />
+	<property name="nagiosPlugin.dir" location="nagios" />
 
-	<target name="nagiosPlugin_build" depends="nagiosPlugin_build_jar, cleanup" description="build the task def jar and put in lib folder">
+	<target name="nagiosPlugin_build" depends="nagiosPlugin_build_jar, nagiosPlugin_build_distribution, cleanup" description="build the task def jar and put in lib folder">
 	</target>
 
 	<target name="nagiosPlugin_build_jar">
@@ -27,11 +31,26 @@
 			<include name="${nagiosPlugin.packagePath}/**" />
 		</javac>
 		<copy todir="${builddir.classes}/${nagiosPlugin.packagePath}" file="${src.dir}/${nagiosPlugin.packagePath}/nagios_check_jmx_ext.txt" />
-		<jar destfile="${builddir}/${nagiosPlugin.jarname}" basedir="${builddir.classes}" />
-		<copy file="${builddir}/${nagiosPlugin.jarname}" todir="nagios/plugin/" />
+		<copy todir="${builddir.sources}/src">
+			<fileset dir="${src.dir}">
+				<include name="${nagiosPlugin.packagePath}/**/*.*" />
+			</fileset>
+		</copy>
+		<jar destfile="${builddir}/${nagiosPlugin.jarName}">
+			<fileset dir="${builddir.classes}" />
+			<fileset dir="${builddir.sources}" />
+		</jar>
+		<copy file="${builddir}/${nagiosPlugin.jarName}" todir="${nagiosPlugin.dir}/plugin/" />
+	</target>
+
+	<target name="nagiosPlugin_build_distribution">
+		<zip destfile="${build.dir}/${projectName}/${nagiosPlugin.distributionName}" basedir="${nagiosPlugin.dir}" includes="**/*.*">
+		</zip>
 	</target>
 
 	<target name="cleanup">
-		<delete dir="${builddir.classes}" />
+		<delete dir="${build.dir.tmp}" />
+		<!--
+		-->
 	</target>
 </project>

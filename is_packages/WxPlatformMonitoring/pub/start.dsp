@@ -10,10 +10,10 @@
 
 	<!-- Bootstrap -->
 	<!-- <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet"> -->
-	<link href="css/pure-nr-min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/json-formatter.css">
-	<link href="css/wxplatformmonitoring.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/pure-nr-min.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/json-formatter.css" />
+	<link rel="stylesheet" type="text/css" href="css/wxplatformmonitoring.css" />
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -26,7 +26,7 @@
 <body>
 
 	<div class="pure-g">
-		<div class="pure-u-1-2">
+		<div class="overview pure-u-1-2">
 			<table class="pure-table pure-table-horizontal">
 				<thead>
 					<tr>
@@ -36,13 +36,13 @@
 						<th>Link</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody class="overview">
 					<tr id="wx.platformMonitoring.pub.um.monitoring:listJmsQueues">
 						<td class="is-state-unknown"></td>
 						<td class="status-description">Number of out of compliance JMS queues=<span class="status-value"></span></td>
 						<td class="status-details"></td>
 						<td class="status-edit"><a href="/"><span class="material-icons">mode_edit</span></a></td>
-					</tr>					
+					</tr>
 					<tr id="wx.platformMonitoring.pub.um.monitoring:listMessagingQueues">
 						<td class="is-state-unknown"></td>
 						<td class="status-description">Number of out of compliance Messaging channels=<span class="status-value"></span></td>
@@ -58,7 +58,7 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="pure-u-1-2">
+		<div class="overview pure-u-1-2">
 			<table class="pure-table pure-table-horizontal">
 				<thead>
 					<tr>
@@ -103,7 +103,7 @@
 			</table>
 		</div>
 
-				<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="js/jquery-3.1.1.min.js"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="js/bootstrap.min.js"></script>
@@ -153,19 +153,19 @@
 			evaluteService("wx.platformMonitoring.pub.server:getCountCurrentlyRunningServices", function checkFunction(result) {
 				return true;
 			}, function getStatusValue(result) {
-					return result.currentlyRunningServicesCount;
+				return result.currentlyRunningServicesCount;
 			});
 			evaluteService("wx.platformMonitoring.pub.um.monitoring:listJmsQueues", function checkFunction(result) {
-				return result.nrNOk > 0 ? false: true;
+				return result.nrNOk > 0 ? false : true;
 				return true;
 			}, function getStatusValue(result) {
-					return result.nrNOk;
+				return result.nrNOk;
 			});
 			evaluteService("wx.platformMonitoring.pub.um.monitoring:listMessagingQueues", function checkFunction(result) {
-				return result.nrNOk > 0 ? false: true;
+				return result.nrNOk > 0 ? false : true;
 				return true;
 			}, function getStatusValue(result) {
-					return result.nrNOk;
+				return result.nrNOk;
 			});
 		</script>
 </body>

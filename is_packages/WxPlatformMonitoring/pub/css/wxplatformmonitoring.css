@@ -1,16 +1,29 @@
+body {
+  font-size: 1em;
+}
+
+tbody.overview tr td{
+  padding: 0.25em 0.5em;
+}
+
+div.overview {
+  width: auto;
+  padding: 10px;
+}
+
 td.is-state-unknown {
   backround-color: rgb(176, 176, 176);
   border: 1px solid rgb(140, 134, 134);
 }
 
 td.is-state-ok {
-  background-color: rgb(129, 215, 148);
-  border: 1px solid rgb(104, 163, 117);
+  background-color: #5eb95e;
+  border: 1px solid #40a640;
 }
 
 td.is-state-nok {
-  background-color: rgb(221, 116, 116);
-  border: 1px solid rgb(158, 89, 89);
+  background-color: #dd514c;
+  border: 1px solid #c23a35;
 }
 
 span.tiny {
