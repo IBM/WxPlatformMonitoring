@@ -8,6 +8,7 @@
     <null name="wx.platformMonitoring.impl.startup:addAcl"/>
     <null name="wx.platformMonitoring.impl.startup:registerSolution"/>
     <null name="wx.platformMonitoring.impl.startup:setupLogger"/>
+    <null name="wx.platformMonitoring.impl.jmx:registerMBean"/>
   </record>
   <null name="shutdown_services"/>
   <null name="replication_services"/>

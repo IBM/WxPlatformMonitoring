@@ -9,9 +9,9 @@ function evaluateExtendedSettings(propertyName, checkFunctionCallback) {
 }
 
 function evaluteService(serviceName, checkFunctionCallback, getStatusValueCallback) {
-  var serviceNameSplit = serviceName.split(":");
-  var url = "/invoke/" + serviceNameSplit[0] + "/" + serviceNameSplit[1];
-  invoke(url, null, serviceName, checkFunctionCallback, getStatusValueCallback);
+    var serviceNameSplit = serviceName.split(":");
+    var url = "/invoke/" + serviceNameSplit[0] + "/" + serviceNameSplit[1];
+    invoke(url, null, serviceName, checkFunctionCallback, getStatusValueCallback);
 }
 
 
@@ -26,41 +26,6 @@ function invoke(url, data, id, checkFunctionCallback, getStatusValueCallback) {
             var isOk = checkFunctionCallback(msg);
             var statusValue = getStatusValueCallback(msg);
             handleResponse(id, isOk, msg, url, statusValue);
-            /*
-            var $statusTr = $("[id='" + id + "']");
-            var $tdStatus = $statusTr.children().first();
-            if (isOk) {
-                $tdStatus.attr("class", "is-state-ok");
-            } else if(!isOk) {
-                $tdStatus.attr("class", "is-state-nok");
-            } else {
-              $statusTr.remove();
-            }
-            var $spanStatusValue = $tdStatus.next().children().first();
-            var $statusDetail = $statusTr.find(".status-details");
-              $infoSpanLink = $("<a/>", {
-                name : "link",
-                href : "#"
-              });
-              $infoSpan = $("<span/>").attr("class", "is-link material-icons").text("info_outline");
-              $infoSpanLink.append($infoSpan);
-              $statusDetail.append($infoSpanLink);
-              $infoSpan.click(function() {
-                var formatter = new JSONFormatter(msg, 1, {hoverPreviewEnabled: true});
-                $result = $("<span/>").attr("class", "wx-json-formatter json-formatter-row json-formatter-open");
-                var rs = $result.get(0);
-                rs.innerHTML = '';
-                rs.appendChild(formatter.render());
-                bootbox.alert({
-                  size: "medium",
-                  title: "Response data for '<span class='wx-response-modal-bold'>" + url + "</span>'",
-                  message: rs,
-                  className: "wx-response-modal"
-                });
-              });
-            var statusValue = getStatusValueCallback(msg);
-            $spanStatusValue.text(statusValue);
-            */
         })
         .fail(function(jqXHR, exception, error) {
             if (jqXHR.status === 0) {
@@ -83,38 +48,39 @@ function invoke(url, data, id, checkFunctionCallback, getStatusValueCallback) {
 }
 
 function handleResponse(id, isOk, jsonResponse, url, statusValue) {
-  var $statusTr = $("[id='" + id + "']");
-  var $tdStatus = $statusTr.children().first();
-  if (isOk) {
-      $tdStatus.attr("class", "is-state-ok");
-  } else if(!isOk) {
-      $tdStatus.attr("class", "is-state-nok");
-  } else {
-    $statusTr.remove();
-  }
-  var $spanStatusValue = $tdStatus.next().children().first();
-  var $statusDetail = $statusTr.find(".status-details");
+    var $statusTr = $("[id='" + id + "']");
+    var $tdStatus = $statusTr.children().first();
+    if (isOk) {
+        $tdStatus.attr("class", "is-state-ok");
+    } else if (!isOk) {
+        $tdStatus.attr("class", "is-state-nok");
+    } else {
+        $statusTr.remove();
+    }
+    var $spanStatusValue = $tdStatus.next().children().first();
+    var $statusDetail = $statusTr.find(".status-details");
     $infoSpanLink = $("<a/>", {
-      name : "link",
-      href : "#"
+        name: "link",
+        href: "#"
     });
     $infoSpan = $("<span/>").attr("class", "is-link material-icons").text("info_outline");
     $infoSpanLink.append($infoSpan);
     $statusDetail.append($infoSpanLink);
     $infoSpan.click(function() {
-      var formatter = new JSONFormatter(jsonResponse, 1, {hoverPreviewEnabled: true});
-      $result = $("<span/>").attr("class", "wx-json-formatter json-formatter-row json-formatter-open");
-      var rs = $result.get(0);
-      rs.innerHTML = '';
-      rs.appendChild(formatter.render());
-      bootbox.alert({
-        size: "medium",
-        title: "Response data for '<span class='wx-response-modal-bold'>" + url + "</span>'",
-        message: rs,
-        className: "wx-response-modal"
-      });
+        var formatter = new JSONFormatter(jsonResponse, 1, {
+            hoverPreviewEnabled: true
+        });
+        $result = $("<span/>").attr("class", "wx-json-formatter json-formatter-row json-formatter-open");
+        var rs = $result.get(0);
+        rs.innerHTML = '';
+        rs.appendChild(formatter.render());
+        bootbox.alert({
+            size: "medium",
+            title: "Response data for '<span class='wx-response-modal-bold'>" + url + "</span>'",
+            message: rs,
+            className: "wx-response-modal"
+        });
     });
-  // var statusValue = getStatusValueCallback(msg);
-  $spanStatusValue.text(statusValue);
-
+    // var statusValue = getStatusValueCallback(msg);
+    $spanStatusValue.text(statusValue);
 }
