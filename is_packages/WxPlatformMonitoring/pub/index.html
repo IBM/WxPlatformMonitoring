@@ -1,27 +1,37 @@
 <head>
-<script>
-	var title = "<title>" + location.host + " - webMethods Integration Server" + "</title>";
-	document.write(title);
-</script>
-<LINK REL="SHORTCUT ICON" HREF="/favicon.ico">
+	<script>
+		var title = "<title>" + location.host + " - webMethods Integration Server" + "</title>";
+		document.write(title);
+	</script>
+	<LINK REL="SHORTCUT ICON" HREF="/favicon.ico">
 
-<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="js/wxplatformmonitoring-onload.js"></script>
-<!-- <script type="text/javascript" src="/WxPlatformMonitoring/js/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="/WxPlatformMonitoring/js/wxplatformmonitoring-onload.js"></script> -->
+	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="js/wxplatformmonitoring-onload.js"></script>
+
+	<script>
+		var extSettings_showOnStatusPage = %sysvar property(watt.wx.platformMonitoring.healthPortlet.showOnStatusPage)%;
+		%scope param(propertyName='watt.wx.platformMonitoring.healthPortlet.importPath')%
+		%scope param(defaultValue='undefined')%
+		%invoke pub.utils:getServerProperty%
+		var extSettings_importHealthPagePath = "%value propertyValue%";
+		if( extSettings_importHealthPagePath === "undefined" ) {
+			extSettings_importHealthPagePath = null;
+		}
+		extSettings_importHealthPagePath = extSettings_importHealthPagePath;
+	</script>
 
 </head>
 
-<frameset rows="100%,*" border=0><frame src="/WmRoot/index.dsp">
-
+<frameset rows="100%,*" border=0>
+	<frame src="/WmRoot/index.dsp">
 </frameset>
 
 
 <noframes>
-<body>
-<h4>
-  Your browser does not support frames.  Support for frames is required to use the webMethods Integration Server.
-</h4>
-</blockquote>
-</body>
+	<body>
+		<h4>
+  		Your browser does not support frames.  Support for frames is required to use the webMethods Integration Server.
+		</h4>
+		</blockquote>
+	</body>
 </noframes>
