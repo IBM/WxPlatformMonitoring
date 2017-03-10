@@ -143,7 +143,7 @@
 </MAPSET>
 </MAP>
 
-<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.config:getConfigUM" VALIDATE-IN="$none" VALIDATE-OUT="$none">
+<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.um:getConfigUM" VALIDATE-IN="$none" VALIDATE-OUT="$none">
   <COMMENT></COMMENT>
 
   <!-- nodes -->

@@ -2,6 +2,10 @@
 
 <Values version="2.0">
   <value name="name">getCallingServiceDetails</value>
+  <array name="sig" type="value" depth="1">
+    <value>[o] recref:0:required serviceDetails wx.restServices.impl.documents:serviceDetails</value>
+  </array>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">U3RyaW5nIGNhbGxpbmdTZXJ2aWNlTmFtZSA9ICJ1bmRlZmluZWQiOw0KDQovLyBnZXQgY2FsbGlu
 Z1NlcnZpY2VOYW1lDQpJRGF0YUN1cnNvciBwaXBlbGluZUN1cnNvciA9IHBpcGVsaW5lLmdldEN1
@@ -43,5 +47,5 @@ bnRleHRJZCIsIGN1cnJlbnRDb250ZXh0SUQgKTsNCklEYXRhVXRpbC5wdXQoIHNlcnZpY2VEZXRh
 aWxzQywgInJlc3RTZXJ2aWNlTmFtZSIsIGNhbGxpbmdTZXJ2aWNlTmFtZSApOw0Kc2VydmljZURl
 dGFpbHNDLmRlc3Ryb3koKTsNCklEYXRhVXRpbC5wdXQocGlwZWxpbmVDdXJzb3IsICJzZXJ2aWNl
 RGV0YWlscyIsIHNlcnZpY2VEZXRhaWxzKTsNCnBpcGVsaW5lQ3Vyc29yLmRlc3Ryb3koKTsNCgkN
-Cgk=</value>
+CgkNCg==</value>
 </Values>

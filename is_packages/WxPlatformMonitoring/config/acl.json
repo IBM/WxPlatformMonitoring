@@ -1,6 +1,9 @@
 {
 	"acl": {
-		"aclName": "WxPlatformMonitoring_ACL",
-		"allowedList": ["local/Administrators", "local/Anonymous"]
+		"config":{
+			"aclName": "WxPlatformMonitoring_ACL",
+			"allowedList": ["local/Administrators",
+			"local/Anonymous"]
+		}
 	}
 }

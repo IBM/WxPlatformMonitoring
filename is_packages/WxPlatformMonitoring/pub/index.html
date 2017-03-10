@@ -8,6 +8,12 @@
 	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" src="js/wxplatformmonitoring-onload.js"></script>
 
+<!--
+Checkout this in order to not use iframes
+http://stackoverflow.com/questions/8277462/jquery-append-external-html-file-into-my-page
+
+-->
+
 	<script>
 		var extSettings_showOnStatusPage = %sysvar property(watt.wx.platformMonitoring.healthPortlet.showOnStatusPage)%;
 		%scope param(propertyName='watt.wx.platformMonitoring.healthPortlet.importPath')%

@@ -24,7 +24,7 @@
           <value name="field_password">false</value>
         </record>
         <value name="is_public">false</value>
-        <value name="field_name">interfaces</value>
+        <value name="field_name">interfaceList</value>
         <value name="field_type">record</value>
         <value name="field_dim">1</value>
         <value name="wrapper_type">IData</value>

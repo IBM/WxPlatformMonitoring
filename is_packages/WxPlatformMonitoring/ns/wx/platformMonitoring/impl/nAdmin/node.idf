@@ -4,9 +4,6 @@
   <value name="encodeutf8">true</value>
   <array name="imports" type="value" depth="1">
     <value>java.util.Hashtable</value>
-    <value>javax.jms.ConnectionFactory</value>
-    <value>javax.jms.ConnectionMetaData</value>
-    <value>javax.jms.JMSException</value>
     <value>javax.naming.Context</value>
     <value>javax.naming.InitialContext</value>
     <value>javax.naming.NamingException</value>

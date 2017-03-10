@@ -2,6 +2,12 @@
 
 <Values version="2.0">
   <value name="name">touchFile</value>
+  <array name="sig" type="value" depth="1">
+    <value>[i] field:0:required filename</value>
+    <value>[i] field:0:optional context</value>
+    <value>[i] field:0:required dir</value>
+  </array>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">Ly8gcGlwZWxpbmUNCklEYXRhQ3Vyc29yIHBpcGVsaW5lQ3Vyc29yID0gcGlwZWxpbmUuZ2V0Q3Vy
 c29yKCk7DQpTdHJpbmcJZmlsZW5hbWUgPSBJRGF0YVV0aWwuZ2V0U3RyaW5nKCBwaXBlbGluZUN1
@@ -19,5 +25,5 @@ RmlsZS5jcmVhdGVOZXdGaWxlKCk7DQoJfSBjYXRjaCAoSU9FeGNlcHRpb24gZSkgew0KCQl0aHJv
 dyBuZXcgU2VydmljZUV4Y2VwdGlvbigiRXJyb3Igd2hlbiBjcmVhdGluZyBmaWxlIHdpdGggbmFt
 ZSAnIiArIGZpbGVuYW1lICsgIicgaW4gY29udGV4dCAnIiArIGNvbnRleHQgKyAiJzogIiArIGUp
 Ow0KCX0NCn0NCi8vIHNldCB0aGUgbW9kaWZpY2F0aW9uIGRhdGUgdG8gbm93IA0KdGFyZ2V0Rmls
-ZS5zZXRMYXN0TW9kaWZpZWQoU3lzdGVtLmN1cnJlbnRUaW1lTWlsbGlzKCkpOw0KCQ==</value>
+ZS5zZXRMYXN0TW9kaWZpZWQoU3lzdGVtLmN1cnJlbnRUaW1lTWlsbGlzKCkpOw0KCQ0K</value>
 </Values>

@@ -2,6 +2,14 @@
 
 <Values version="2.0">
   <value name="name">getFile</value>
+  <array name="sig" type="value" depth="1">
+    <value>[i] field:0:required filename</value>
+    <value>[i] field:0:optional context</value>
+    <value>[i] field:0:required dir</value>
+    <value>[i] field:0:optional encoding</value>
+    <value>[o] field:0:required stringOut</value>
+  </array>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">Ly8gcGlwZWxpbmUNCklEYXRhQ3Vyc29yIHBpcGVsaW5lQ3Vyc29yID0gcGlwZWxpbmUuZ2V0Q3Vy
 c29yKCk7DQpTdHJpbmcJZmlsZW5hbWUgPSBJRGF0YVV0aWwuZ2V0U3RyaW5nKCBwaXBlbGluZUN1
@@ -37,5 +45,5 @@ KTsNCn0gZmluYWxseSB7DQoJdHJ5IHsNCglyZWFkZXIuY2xvc2UoKTsNCgl9IGNhdGNoKCBJT0V4
 Y2VwdGlvbiBlICkgew0KCQkvLyBpZ25vcmUNCgl9DQp9DQpTdHJpbmcgc3RyaW5nT3V0ID0gZmls
 ZURhdGEudG9TdHJpbmcoKTsNCklEYXRhQ3Vyc29yIHBpcGVsaW5lQ3Vyc29yXzEgPSBwaXBlbGlu
 ZS5nZXRDdXJzb3IoKTsNCklEYXRhVXRpbC5wdXQoIHBpcGVsaW5lQ3Vyc29yXzEsICJzdHJpbmdP
-dXQiLCBzdHJpbmdPdXQgKTsNCnBpcGVsaW5lQ3Vyc29yXzEuZGVzdHJveSgpOw0KCQ==</value>
+dXQiLCBzdHJpbmdPdXQgKTsNCnBpcGVsaW5lQ3Vyc29yXzEuZGVzdHJveSgpOw0KCQ0K</value>
 </Values>

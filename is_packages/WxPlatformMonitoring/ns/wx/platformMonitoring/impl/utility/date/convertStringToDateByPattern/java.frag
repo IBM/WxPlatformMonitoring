@@ -2,6 +2,13 @@
 
 <Values version="2.0">
   <value name="name">convertStringToDateByPattern</value>
+  <array name="sig" type="value" depth="1">
+    <value>[i] field:0:required stringDate</value>
+    <value>[i] field:0:required datePattern {"yyyyMMdd","dd.MM.yyyy","yyyy-MM-dd'T'HH:mm:ss","yyyy-MM-dd'Z'","yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"}</value>
+    <value>[o] object:0:required date</value>
+  </array>
+  <value name="subtype">unknown</value>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">Ly8gYWNjZXNzaW5nIHBpcGVsaW5lIGZvciByZXRyaWV2aW5nIGlucHV0IHBhcmFtZXRlcnMNCklE
 YXRhQ3Vyc29yIHBpcGVsaW5lQ3Vyc29ySW5wdXQgPSBwaXBlbGluZS5nZXRDdXJzb3IoKTsNCglT
@@ -20,5 +27,5 @@ bWF0KHBhdHRlcm4pOw0KCURhdGUgZGF0ZSA9IHNpbXBsZURhdGVGb3JtYXQucGFyc2Uoc3RyaW5n
 RGF0ZSk7DQoJSURhdGFVdGlsLnB1dCggcGlwZWxpbmVDdXJzb3JPdXRwdXQsICJkYXRlIiwgZGF0
 ZSApOw0KCXBpcGVsaW5lQ3Vyc29yT3V0cHV0LmRlc3Ryb3koKTsNCg0KfSBjYXRjaCAoZmluYWwg
 UGFyc2VFeGNlcHRpb24gcGFyc2VFeGNlcHRpb24pIHsNCgl0aHJvdyBuZXcgU2VydmljZUV4Y2Vw
-dGlvbihwYXJzZUV4Y2VwdGlvbik7DQp9DQoJDQoJDQoJ</value>
+dGlvbihwYXJzZUV4Y2VwdGlvbik7DQp9DQoJDQoJDQoJDQo=</value>
 </Values>

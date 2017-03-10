@@ -1,3 +1,6 @@
 {
-	"schedulers": ["scheduler1", "scheduler2"]
+	"schedulers": {
+		"schedulerList": ["wm.monitor.admin:imageCleanup",
+		"scheduler2"]
+	}
 }

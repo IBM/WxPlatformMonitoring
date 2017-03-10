@@ -2,6 +2,12 @@
 
 <Values version="2.0">
   <value name="name">tracePipelineToString</value>
+  <array name="sig" type="value" depth="1">
+    <value>[i] record:0:required doc</value>
+    <value>[i] field:1:required ignore</value>
+    <value>[o] field:0:required pipelineAsString</value>
+  </array>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">SURhdGFDdXJzb3IgcGlwZWxpbmVDID0gcGlwZWxpbmUuZ2V0Q3Vyc29yKCk7DQpTdHJpbmdbXSBp
 Z25vcmUgPSBJRGF0YVV0aWwuZ2V0U3RyaW5nQXJyYXkocGlwZWxpbmVDLCAiaWdub3JlIik7DQpq
@@ -14,5 +20,5 @@ dGlsLkhhc2h0YWJsZTxPYmplY3QsIE9iamVjdD4gdGFibGUgPSBuZXcgamF2YS51dGlsLkhhc2h0
 YWJsZTxPYmplY3QsIE9iamVjdD4oKTsNCnRhYmxlLnB1dChwaXBlbGluZSwgcGlwZWxpbmUpOyAN
 CmR1bXBJRGF0YShidWZmZXIsIDAsIHBpcGVsaW5lLCAwLCB0YWJsZSwgaWdub3JlU2V0KTsgDQoN
 CnBpcGVsaW5lQy5pbnNlcnRBZnRlcigicGlwZWxpbmVBc1N0cmluZyIsIGJ1ZmZlci50b1N0cmlu
-ZygpKTsNCg0KcGlwZWxpbmVDLmRlc3Ryb3koKTsg</value>
+ZygpKTsNCg0KcGlwZWxpbmVDLmRlc3Ryb3koKTsgDQo=</value>
 </Values>

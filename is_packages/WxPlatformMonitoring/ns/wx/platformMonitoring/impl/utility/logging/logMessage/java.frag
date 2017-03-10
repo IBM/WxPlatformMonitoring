@@ -2,6 +2,12 @@
 
 <Values version="2.0">
   <value name="name">logMessage</value>
+  <array name="sig" type="value" depth="1">
+    <value>[i] field:0:required logMessage</value>
+    <value>[i] field:0:required severity {"TRACE","DEBUG","INFO","WARN","ERROR","FATAL"}</value>
+    <value>[i] field:0:optional logger</value>
+  </array>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">Ly8gcGlwZWxpbmUNCklEYXRhQ3Vyc29yIHBpcGVsaW5lQ3Vyc29yID0gcGlwZWxpbmUuZ2V0Q3Vy
 c29yKCk7DQpTdHJpbmcJbG9nTWVzc2FnZSA9IElEYXRhVXRpbC5nZXRTdHJpbmcoIHBpcGVsaW5l
@@ -19,5 +25,5 @@ ZSk7DQp9IGVsc2UgaWYoIHNldmVyaXR5LmVxdWFsc0lnbm9yZUNhc2UoImZhdGFsIikgKSB7DQoJ
 bG9nLmZhdGFsKGxvZ01lc3NhZ2UpOw0KfSBlbHNlIGlmKCBzZXZlcml0eS5lcXVhbHNJZ25vcmVD
 YXNlKCJpbmZvIikgKSB7DQoJbG9nLmluZm8obG9nTWVzc2FnZSk7DQp9IGVsc2UgaWYoIHNldmVy
 aXR5LmVxdWFsc0lnbm9yZUNhc2UoImRlYnVnIikgKSB7DQoJbG9nLmRlYnVnKGxvZ01lc3NhZ2Up
-Ow0KfSBlbHNlIHsNCglsb2cudHJhY2UobG9nTWVzc2FnZSk7DQp9DQoJ</value>
+Ow0KfSBlbHNlIHsNCglsb2cudHJhY2UobG9nTWVzc2FnZSk7DQp9DQoJDQo=</value>
 </Values>

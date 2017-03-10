@@ -5,7 +5,7 @@
 
   <!-- nodes -->
 
-<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.config:getOnedataConfig" VALIDATE-IN="$none" VALIDATE-OUT="$none">
+<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.onedata:getOneDataConfiguration" VALIDATE-IN="$none" VALIDATE-OUT="$none">
   <COMMENT></COMMENT>
 </INVOKE>
 
@@ -34,7 +34,7 @@
           <value name="field_password">false</value>
         </record>
         <value name="is_public">false</value>
-        <value name="field_name">onedataConnectionData</value>
+        <value name="field_name">oneDataConnectionConfiguration</value>
         <value name="field_type">recref</value>
         <value name="field_dim">0</value>
         <value name="wrapper_type">IData</value>
@@ -46,7 +46,7 @@
         <value name="rec_ref">wx.platformMonitoring.impl.onedata:OnedataConnectionData</value>
       </record>
       <record javaclass="com.wm.util.Values">
-        <value name="node_type">record</value>
+        <value name="node_type">unknown</value>
         <value name="node_subtype">unknown</value>
         <value name="is_public">false</value>
         <value name="field_name">odeUrl</value>
@@ -75,6 +75,39 @@
     <value name="form_qualified">false</value>
     <value name="is_global">false</value>
     <array name="rec_fields" type="record" depth="1">
+      <record javaclass="com.wm.util.Values">
+        <value name="node_type">record</value>
+        <value name="node_subtype">unknown</value>
+        <value name="node_comment"></value>
+        <record name="node_hints" javaclass="com.wm.util.Values">
+          <value name="field_largerEditor">false</value>
+          <value name="field_password">false</value>
+        </record>
+        <value name="is_public">false</value>
+        <value name="field_name">oneDataConnectionConfiguration</value>
+        <value name="field_type">recref</value>
+        <value name="field_dim">0</value>
+        <value name="wrapper_type">IData</value>
+        <value name="nillable">true</value>
+        <value name="form_qualified">false</value>
+        <value name="is_global">false</value>
+        <value name="rec_closed">true</value>
+        <value name="modifiable">true</value>
+        <value name="rec_ref">wx.platformMonitoring.impl.onedata:OnedataConnectionData</value>
+      </record>
+      <record javaclass="com.wm.util.Values">
+        <value name="node_type">record</value>
+        <value name="node_subtype">unknown</value>
+        <value name="is_public">false</value>
+        <value name="field_name">onedataConnectionData</value>
+        <value name="field_type">recref</value>
+        <value name="field_dim">0</value>
+        <value name="nillable">true</value>
+        <value name="form_qualified">false</value>
+        <value name="is_global">false</value>
+        <value name="modifiable">true</value>
+        <value name="rec_ref">wx.platformMonitoring.impl.onedata:OnedataConnectionData</value>
+      </record>
     </array>
     <value name="modifiable">true</value>
   </record>
@@ -83,13 +116,16 @@
 
   <!-- nodes -->
 
+<MAPDELETE FIELD="/onedataConnectionData;4;0;wx.platformMonitoring.impl.onedata:OnedataConnectionData">
+</MAPDELETE>
+
 <MAPSET NAME="Setter" OVERWRITE="true" VARIABLES="true" GLOBALVARIABLES="false" FIELD="/odeUrl;1;0">
   <DATA ENCODING="XMLValues" I18N="true">
 
 <Values version="2.0">
-  <value name="xml">http://%onedataConnectionData/host%:%onedataConnectionData/port%/%onedataConnectionData/restPath%</value>
+  <value name="xml">http://%oneDataConnectionConfiguration/config/host%:%onedataConnectionData/config/port%/%onedataConnectionData/config/restPath%</value>
   <record name="type" javaclass="com.wm.util.Values">
-    <value name="node_type">record</value>
+    <value name="node_type">unknown</value>
     <value name="node_subtype">unknown</value>
     <value name="is_public">false</value>
     <value name="field_name">odeUrl</value>
@@ -102,9 +138,6 @@
 </Values>
 </DATA>
 </MAPSET>
-
-<MAPDELETE FIELD="/onedataConnectionData;4;0;wx.platformMonitoring.impl.onedata:OnedataConnectionData">
-</MAPDELETE>
 </MAP>
 
 <SEQUENCE TIMEOUT="" EXIT-ON="SUCCESS">

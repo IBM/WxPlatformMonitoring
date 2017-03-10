@@ -2,6 +2,7 @@
 
 <Values version="2.0">
   <value name="name">preserveOutputSig</value>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">Y29tLndtLmxhbmcubnMuTlNTZXJ2aWNlIGNhbGxpbmdTZXJ2aWNlID0gU2VydmljZS5nZXRDYWxs
 aW5nU2VydmljZSgpOw0KU3RyaW5nIHBhY2thZ2VOYW1lID0gY2FsbGluZ1NlcnZpY2UuZ2V0UGFj
@@ -36,5 +37,5 @@ byBmaXJzdCBlbGVtZW50IG9mIHBpcGVsaW5lDQpwaXBlbGluZUN1cnNvci5maXJzdCgpOw0KLy9S
 ZW1vdmUgYWxsIHBpcGVsaW5lIGVsZW1lbnRzDQp3aGlsZShwaXBlbGluZUN1cnNvci5kZWxldGUo
 KSk7DQovL2FkZCBhbGwgc2F2ZWQgdmFsdWVzIHRvIHBpcGVsaW5lDQppZihzYXZlZCAhPSBudWxs
 KSB7DQogIElEYXRhVXRpbC5hcHBlbmQoc2F2ZWQsIHBpcGVsaW5lKTsNCn0NCnBpcGVsaW5lQ3Vy
-c29yLmRlc3Ryb3koKTs=</value>
+c29yLmRlc3Ryb3koKTsNCg==</value>
 </Values>

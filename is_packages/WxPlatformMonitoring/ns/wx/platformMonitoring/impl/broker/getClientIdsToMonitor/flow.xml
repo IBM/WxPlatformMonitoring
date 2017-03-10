@@ -5,13 +5,8 @@
 
   <!-- nodes -->
 
-<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.config:getBrokerMonitoringConfig" VALIDATE-IN="$none" VALIDATE-OUT="$none">
+<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.broker:getBrokerMonitoringConfiguration" VALIDATE-IN="$none" VALIDATE-OUT="$none">
   <COMMENT></COMMENT>
-
-  <!-- nodes -->
-
-<MAP MODE="OUTPUT">
-</MAP>
 </INVOKE>
 
 <MAP TIMEOUT="" MODE="STANDALONE">
@@ -39,7 +34,7 @@
           <value name="field_password">false</value>
         </record>
         <value name="is_public">false</value>
-        <value name="field_name">brokerMonitoringConfig</value>
+        <value name="field_name">brokerMonitoringConfiguration</value>
         <value name="field_type">recref</value>
         <value name="field_dim">0</value>
         <value name="wrapper_type">IData</value>
@@ -48,7 +43,7 @@
         <value name="is_global">false</value>
         <value name="rec_closed">true</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.broker:BrokerMonitoringData</value>
+        <value name="rec_ref">wx.platformMonitoring.impl.broker:BrokerMonitoringConfig</value>
       </record>
       <record javaclass="com.wm.util.Values">
         <value name="node_type">record</value>
@@ -61,7 +56,6 @@
         <value name="form_qualified">false</value>
         <value name="is_global">false</value>
         <value name="is_soap_array_encoding_used">false</value>
-        <value name="rec_closed">true</value>
         <value name="modifiable">true</value>
         <value name="rec_ref">wx.platformMonitoring.impl.broker:BrokerClient</value>
       </record>
@@ -87,13 +81,26 @@
       <record javaclass="com.wm.util.Values">
         <value name="node_type">record</value>
         <value name="node_subtype">unknown</value>
+        <value name="is_public">false</value>
+        <value name="field_name">brokerMonitoringConfig</value>
+        <value name="field_type">recref</value>
+        <value name="field_dim">0</value>
+        <value name="nillable">true</value>
+        <value name="form_qualified">false</value>
+        <value name="is_global">false</value>
+        <value name="modifiable">true</value>
+        <value name="rec_ref">wx.platformMonitoring.impl.broker:BrokerMonitoringData</value>
+      </record>
+      <record javaclass="com.wm.util.Values">
+        <value name="node_type">record</value>
+        <value name="node_subtype">unknown</value>
         <value name="node_comment"></value>
         <record name="node_hints" javaclass="com.wm.util.Values">
           <value name="field_largerEditor">false</value>
           <value name="field_password">false</value>
         </record>
         <value name="is_public">false</value>
-        <value name="field_name">brokerMonitoringConfig</value>
+        <value name="field_name">brokerMonitoringConfiguration</value>
         <value name="field_type">recref</value>
         <value name="field_dim">0</value>
         <value name="wrapper_type">IData</value>
@@ -102,7 +109,7 @@
         <value name="is_global">false</value>
         <value name="rec_closed">true</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.broker:BrokerMonitoringData</value>
+        <value name="rec_ref">wx.platformMonitoring.impl.broker:BrokerMonitoringConfig</value>
       </record>
     </array>
     <value name="modifiable">true</value>
@@ -112,10 +119,10 @@
 
   <!-- nodes -->
 
-<MAPCOPY FROM="/brokerMonitoringConfig;4;0;wx.platformMonitoring.impl.broker:BrokerMonitoringData/clients;4;1;wx.platformMonitoring.impl.broker:BrokerClient" TO="/brokerClientAndThreshold;4;1;wx.platformMonitoring.impl.broker:BrokerClient">
+<MAPCOPY FROM="/brokerMonitoringConfiguration;4;0;wx.platformMonitoring.impl.broker:BrokerMonitoringConfig/monitoring;4;0;wx.platformMonitoring.impl.broker:BrokerMonitoringData/clients;4;1;wx.platformMonitoring.impl.broker:BrokerClient" TO="/brokerClientAndThreshold;4;1;wx.platformMonitoring.impl.broker:BrokerClient">
 </MAPCOPY>
 
-<MAPDELETE FIELD="/brokerMonitoringConfig;4;0;wx.platformMonitoring.impl.broker:BrokerMonitoringData">
+<MAPDELETE FIELD="/brokerMonitoringConfiguration;4;0;wx.platformMonitoring.impl.broker:BrokerMonitoringConfig">
 </MAPDELETE>
 </MAP>
 </FLOW>

@@ -11,13 +11,7 @@ bGVtZW50KENBQ0hFX0tFWSwgdGNlKTsNCgljYWNoZS5wdXQoZSk7DQp9DQoJDQo=</value>
   <value name="encodeutf8">true</value>
   <array name="imports" type="value" depth="1">
     <value>net.sf.ehcache.Cache</value>
-    <value>net.sf.ehcache.CacheManager</value>
     <value>net.sf.ehcache.Element</value>
-    <value>net.sf.ehcache.search.Attribute</value>
-    <value>net.sf.ehcache.search.Query</value>
-    <value>net.sf.ehcache.search.Result</value>
-    <value>net.sf.ehcache.search.Results</value>
-    <value>net.sf.ehcache.search.expression.Criteria</value>
     <value>com.wm.app.b2b.server.cache.CacheManagerUtil</value>
     <value>com.softwareag.cache.admin.TestCacheEntry</value>
     <value>net.sf.ehcache.store.MemoryStoreEvictionPolicy</value>

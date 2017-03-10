@@ -2,6 +2,13 @@
 
 <Values version="2.0">
   <value name="name">contains</value>
+  <array name="sig" type="value" depth="1">
+    <value>[i] field:1:required stringArray</value>
+    <value>[i] field:0:required value</value>
+    <value>[o] field:0:required isIn</value>
+  </array>
+  <value name="subtype">unknown</value>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">Ly8gcGlwZWxpbmUNCklEYXRhQ3Vyc29yIHBpcGVsaW5lQ3Vyc29yID0gcGlwZWxpbmUuZ2V0Q3Vy
 c29yKCk7DQpTdHJpbmdbXSAgICAgICBzdHJpbmdBcnJheSA9IElEYXRhVXRpbC5nZXRTdHJpbmdB
@@ -15,5 +22,5 @@ IHBpcGVsaW5lQ3Vyc29yLCAiaXNJbiIsIGNvbnRhaW5zICk7DQovLwkJDQovLwkJU2V0PFN0cmlu
 Zz4gcyA9IG5ldyBIYXNoU2V0PFN0cmluZz4oKTsNCi8vCQlzLmFkZEFsbCggQXJyYXlzLmFzTGlz
 dCggc3RyaW5nQXJyYXkpICk7DQovLwkJDQovLwkJSURhdGFVdGlsLnB1dCggcGlwZWxpbmVDdXJz
 b3IsICJpc0luIiwgIiIgKyBzLmNvbnRhaW5zKCB2YWx1ZSApICk7DQpwaXBlbGluZUN1cnNvci5k
-ZXN0cm95KCk7DQoJDQoJ</value>
+ZXN0cm95KCk7DQoJDQoJDQo=</value>
 </Values>

@@ -1,9 +1,12 @@
 {
-	"interfaces": [{
-		"interface": "asdf",
-		"interval": "123"
-	},{
-		"interface": "i2",
-		"interval": "345"
-	}]
+	"interfaces": {
+		"interfaceList": [{
+			"interface": "asdf",
+			"interval": "123"
+		},
+		{
+			"interface": "i2",
+			"interval": "345"
+		}]
+	}
 }

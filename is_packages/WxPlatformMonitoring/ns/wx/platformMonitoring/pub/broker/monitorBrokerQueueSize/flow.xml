@@ -80,7 +80,7 @@
 </MAPSET>
 </MAP>
 
-<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.broker:getBrokerMonitoringConfig" VALIDATE-IN="$none" VALIDATE-OUT="$none">
+<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.broker:getBrokerMonitoringConfiguration" VALIDATE-IN="$none" VALIDATE-OUT="$none">
   <COMMENT></COMMENT>
 
   <!-- nodes -->

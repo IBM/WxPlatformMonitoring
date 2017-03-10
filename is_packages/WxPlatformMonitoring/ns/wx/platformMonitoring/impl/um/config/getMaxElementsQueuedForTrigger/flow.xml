@@ -5,7 +5,7 @@
 
   <!-- nodes -->
 
-<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.config:getConfigUM" VALIDATE-IN="$none" VALIDATE-OUT="$none">
+<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.um:getConfigUM" VALIDATE-IN="$none" VALIDATE-OUT="$none">
   <COMMENT></COMMENT>
 
   <!-- nodes -->
@@ -377,7 +377,7 @@
 
   <!-- nodes -->
 
-<SEQUENCE NAME="%maxElementsQueued% == $null || %maxElementsQueued% == &quot;&quot;" TIMEOUT="" EXIT-ON="FAILURE">
+<SEQUENCE NAME="%maxElementsQueued% == $null || %maxElementsQueued% == &#34;&#34;" TIMEOUT="" EXIT-ON="FAILURE">
   <COMMENT></COMMENT>
 
   <!-- nodes -->

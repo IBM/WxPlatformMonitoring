@@ -2,6 +2,16 @@
 
 <Values version="2.0">
   <value name="name">writeStringToFile</value>
+  <array name="sig" type="value" depth="1">
+    <value>[i] field:0:required string</value>
+    <value>[i] field:0:required filename</value>
+    <value>[i] field:0:required append {"true","false"}</value>
+    <value>[i] field:0:optional addNewLine</value>
+    <value>[i] field:0:optional context</value>
+    <value>[i] field:0:required dir</value>
+    <value>[i] field:0:optional encoding</value>
+  </array>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">Ly8gcGlwZWxpbmUNCklEYXRhQ3Vyc29yIHBpcGVsaW5lQ3Vyc29yID0gcGlwZWxpbmUuZ2V0Q3Vy
 c29yKCk7DQpTdHJpbmcJc3RyaW5nID0gSURhdGFVdGlsLmdldFN0cmluZyggcGlwZWxpbmVDdXJz
@@ -45,5 +55,5 @@ Z2V0UHJvcGVydHkoImxpbmUuc2VwYXJhdG9yIik7DQoJfQ0KCW9zdy53cml0ZShzdHJpbmcpOw0K
 fSBjYXRjaCAoSU9FeGNlcHRpb24gZSkgew0KICAgIHRocm93IG5ldyBTZXJ2aWNlRXhjZXB0aW9u
 KCJFeGNlcHRpb24gb2NjdXJlZCB3aGVuIHdyaXRpbmcgdG8gZmlsZSAiICsgdGFyZ2V0RmlsZSAr
 ICI6ICIgKyBlKTsNCn0gZmluYWxseSB7DQoJdHJ5IHsNCgkJb3N3LmNsb3NlKCk7DQoJfSBjYXRj
-aCAoSU9FeGNlcHRpb24gZSkgew0KCQkvLyBpZ25vcmUNCgl9DQp9DQoNCgk=</value>
+aCAoSU9FeGNlcHRpb24gZSkgew0KCQkvLyBpZ25vcmUNCgl9DQp9DQoNCgkNCg==</value>
 </Values>

@@ -2,11 +2,15 @@
 
 <Values version="2.0">
   <value name="name">getResponseString</value>
+  <array name="sig" type="value" depth="1">
+    <value>[o] field:0:required responseString</value>
+  </array>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">Y29tLndtLmFwcC5iMmIuc2VydmVyLkludm9rZVN0YXRlIGlzID0gY29tLndtLmFwcC5iMmIuc2Vy
 dmVyLkludm9rZVN0YXRlLmdldEN1cnJlbnRTdGF0ZSgpOw0KYnl0ZSByZXNwb25zZVtdID0gKGJ5
 dGVbXSlpcy5nZXRQcml2YXRlRGF0YSgiJG1zZ0J5dGVzT3V0Iik7DQppZiggcmVzcG9uc2UgIT0g
 bnVsbCApIHsNCglTdHJpbmcgcmVzcG9uc2VTdHJpbmcgPSBuZXcgU3RyaW5nKHJlc3BvbnNlKTsN
 CglJRGF0YVV0aWwucHV0KHBpcGVsaW5lLmdldEN1cnNvcigpLCAicmVzcG9uc2VTdHJpbmciLCBy
-ZXNwb25zZVN0cmluZyk7DQp9</value>
+ZXNwb25zZVN0cmluZyk7DQp9DQo=</value>
 </Values>

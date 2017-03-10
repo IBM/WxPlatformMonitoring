@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <FLOW VERSION="3.0" CLEANUP="true">
+  <COMMENT></COMMENT>
 
   <!-- nodes -->
 
-<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.config:getConfigUM" VALIDATE-IN="$none" VALIDATE-OUT="$none">
+<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.um:getConfigUM" VALIDATE-IN="$none" VALIDATE-OUT="$none">
   <COMMENT></COMMENT>
 
   <!-- nodes -->
@@ -149,7 +150,7 @@
 
   <!-- nodes -->
 
-<MAP NAME="%/umMonitoringConfig/direct/config/jmsConnectionAlias% == &quot;&quot;" TIMEOUT="" MODE="STANDALONE">
+<MAP NAME="%/umMonitoringConfig/direct/config/jmsConnectionAlias% == &#34;&#34;" TIMEOUT="" MODE="STANDALONE">
   <COMMENT></COMMENT>
 </MAP>
 
@@ -359,7 +360,7 @@
 
   <!-- nodes -->
 
-<MAP NAME="%/umMonitoringConfig/direct/config/messagingConnectionAlias% == &quot;&quot;" TIMEOUT="" MODE="STANDALONE">
+<MAP NAME="%/umMonitoringConfig/direct/config/messagingConnectionAlias% == &#34;&#34;" TIMEOUT="" MODE="STANDALONE">
   <COMMENT></COMMENT>
 </MAP>
 
@@ -635,7 +636,7 @@
 
   <!-- nodes -->
 
-<EXIT NAME="$null" FROM="$flow" SIGNAL="FAILURE" FAILURE-MESSAGE="Did not get a RNAME from um.json config at &quot;umMonitoringConfig/direct/config&quot;">
+<EXIT NAME="$null" FROM="$flow" SIGNAL="FAILURE" FAILURE-MESSAGE="Did not get a RNAME from um.json config at &#34;umMonitoringConfig/direct/config&#34;">
   <COMMENT></COMMENT>
 </EXIT>
 </BRANCH>

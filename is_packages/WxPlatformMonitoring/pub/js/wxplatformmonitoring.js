@@ -1,3 +1,87 @@
+// alert("inside");
+
+
+// $(window).on("load", loadSettings());
+
+
+function loadSettings() {
+  alert("loadSettings");
+  evaluateExtendedSettings("watt.server.scheduler.threadThrottle", function checkFunction(result) {
+    if (result.propertyValue > 0) {
+      return true;
+    }
+    return false;
+  });
+  evaluateExtendedSettings("watt.wx.platformmonitoring.server.quiesce", function checkFunction(result) {
+    if (result.propertyValue == "false") {
+      return true;
+    }
+    return false;
+  });
+  evaluteService("wx.platformMonitoring.pub.onedata:checkServerConnection", function checkFunction(result) {
+    if (result.success == "true") {
+      return true;
+    }
+    return false;
+  }, function getStatusValue(result) {
+    return result.odeUrl;
+  });
+
+  evaluteService("wx.platformMonitoring.pub.trigger:listJmsTriggers", function checkFunction(result) {
+    if (result.nrDisabled == 0) {
+      return true;
+    }
+    return false;
+  }, function getStatusValue(result) {
+    return result.nrDisabled;
+  });
+
+  evaluteService("wx.platformMonitoring.pub.scheduler:listScheduledServices", function checkFunction(result) {
+    if (result.nrDisabled == 0) {
+      return true;
+    }
+    return false;
+  }, function getStatusValue(result) {
+    return result.nrDisabled;
+  });
+
+  evaluteService("wx.platformMonitoring.pub.server:getCountCurrentlyRunningServices", function checkFunction(result) {
+    return true;
+  }, function getStatusValue(result) {
+    return result.currentlyRunningServicesCount;
+  });
+
+  evaluteService("wx.platformMonitoring.pub.um.monitoring:listJmsQueues", function checkFunction(result) {
+    return result.nrNOk > 0 ? false : true;
+  }, function getStatusValue(result) {
+    return result.nrNOk;
+  });
+
+  evaluteService("wx.platformMonitoring.pub.um.monitoring:listMessagingQueues", function checkFunction(result) {
+    return result.nrNOk > 0 ? false : true;
+  }, function getStatusValue(result) {
+    return result.nrNOk;
+  });
+
+  evaluteService("wx.platformMonitoring.pub.ports:listPorts", function checkFunction(result) {
+    var isOk = true;
+    $.each(result.portList, function(index, value) {
+        if( value.enabled == "false" ) {
+          isOk = false;
+        }
+    });
+    return isOk;
+  }, function getStatusValue(result) {
+    var count = 0;
+    $.each(result.portList, function(index, value) {
+        if( value.enabled == "false" ) {
+          count++;
+        }
+    });
+    return count;
+  });
+}
+
 function evaluateExtendedSettings(propertyName, checkFunctionCallback) {
     var url = "/invoke/pub.utils/getServerProperty";
     var data = {
@@ -49,6 +133,9 @@ function invoke(url, data, id, checkFunctionCallback, getStatusValueCallback) {
 
 function handleResponse(id, isOk, jsonResponse, url, statusValue) {
     var $statusTr = $("[id='" + id + "']");
+    if( $statusTr.length === 0 ) {
+      alert("did not find tr");
+    }
     var $tdStatus = $statusTr.children().first();
     if (isOk) {
         $tdStatus.attr("class", "is-state-ok");

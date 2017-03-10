@@ -2,6 +2,7 @@
 
 <Values version="2.0">
   <value name="name">setDefaultPackage</value>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">U3RyaW5nIHBhY2thZ2VOYW1lID0gSURhdGFVdGlsLmdldFN0cmluZyhwaXBlbGluZS5nZXRDdXJz
 b3IoKSwgInBhY2thZ2VOYW1lIik7DQpTeXN0ZW0uZ2V0UHJvcGVydGllcygpLnB1dCgid2F0dC5z
@@ -16,5 +17,5 @@ cHV0Q3Vyc29yLCAic2V2ZXJpdHkiLCAiZXJyb3IiICk7DQoJaW5wdXRDdXJzb3IuZGVzdHJveSgp
 Ow0KCXRyeXsNCgkJU2VydmljZS5kb0ludm9rZSggInd4LnBsYXRmb3JtTW9uaXRvcmluZy5pbXBs
 LnV0aWxpdHkubG9nZ2luZyIsICJsb2dNZXNzYWdlIiwgaW5wdXQgKTsNCgl9Y2F0Y2goIEV4Y2Vw
 dGlvbiBlKXsNCgkJU3lzdGVtLm91dC5wcmludGxuKCJlcnJvciB3aGVuIGxvZ2dpbmcgZXJyb3Ig
-bWVzc2FnZTogIiArIGUpOw0KCQkNCgl9DQp9DQoJ</value>
+bWVzc2FnZTogIiArIGUpOw0KCQkNCgl9DQp9DQoJDQo=</value>
 </Values>

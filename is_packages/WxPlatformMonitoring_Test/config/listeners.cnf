@@ -18,11 +18,11 @@
       <value name="clientAuth">none</value>
       <value name="idProvider">salesforce.com</value>
       <value name="ssl">false</value>
-      <value name="maxQueue">200</value>
+      <value name="maxQueue">5</value>
       <value name="keepAliveTimeout">20000</value>
       <value name="threadPool">true</value>
       <value name="minThread">1</value>
-      <value name="maxThread">50</value>
+      <value name="maxThread">5</value>
       <value name="threadPriority">5</value>
       <value name="usedThreadCount">0</value>
       <value name="internalPort">-1</value>

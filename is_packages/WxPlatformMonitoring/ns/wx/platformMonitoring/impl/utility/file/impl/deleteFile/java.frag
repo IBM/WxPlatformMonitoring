@@ -2,6 +2,13 @@
 
 <Values version="2.0">
   <value name="name">deleteFile</value>
+  <array name="sig" type="value" depth="1">
+    <value>[i] field:0:required filename</value>
+    <value>[i] field:0:optional context</value>
+    <value>[i] field:0:required dir</value>
+    <value>[o] field:0:required deleted {"false","true"}</value>
+  </array>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">Ly8gcGlwZWxpbmUNCklEYXRhQ3Vyc29yIHBpcGVsaW5lQ3Vyc29yID0gcGlwZWxpbmUuZ2V0Q3Vy
 c29yKCk7DQpTdHJpbmcJZmlsZW5hbWUgPSBJRGF0YVV0aWwuZ2V0U3RyaW5nKCBwaXBlbGluZUN1
@@ -22,5 +29,5 @@ ZmFsc2UiOw0KRmlsZSB0YXJnZXRGaWxlID0gbmV3IEZpbGUoY29udGV4dERpciwgZmlsZW5hbWUp
 Ow0KaWYoIHRhcmdldEZpbGUuZXhpc3RzKCkgKSB7DQoJdGFyZ2V0RmlsZS5kZWxldGUoKTsNCglk
 ZWxldGVkID0gInRydWUiOw0KfQ0KDQpJRGF0YUN1cnNvciBwaXBlbGluZUN1cnNvcl8xID0gcGlw
 ZWxpbmUuZ2V0Q3Vyc29yKCk7DQpJRGF0YVV0aWwucHV0KCBwaXBlbGluZUN1cnNvcl8xLCAiZGVs
-ZXRlZCIsIGRlbGV0ZWQgKTsNCnBpcGVsaW5lQ3Vyc29yXzEuZGVzdHJveSgpOwkJCQ==</value>
+ZXRlZCIsIGRlbGV0ZWQgKTsNCnBpcGVsaW5lQ3Vyc29yXzEuZGVzdHJveSgpOwkJCQ0K</value>
 </Values>

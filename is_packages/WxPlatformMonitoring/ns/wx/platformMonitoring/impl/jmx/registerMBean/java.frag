@@ -2,6 +2,7 @@
 
 <Values version="2.0">
   <value name="name">registerMBean</value>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">Ly8JCWNvbS5zb2Z0d2FyZWFnLnd4LnBsYXRmb3JtTW9uaXRvcmluZy5qbXguc3ByaW5nLkpteE1h
 bmFnZW1lbnQgaiA9IG5ldyBjb20uc29mdHdhcmVhZy53eC5wbGF0Zm9ybU1vbml0b3Jpbmcuam14
@@ -37,5 +38,5 @@ b3JtTW9uaXRvcmluZyIsICJ3eC5wbGF0Zm9ybU1vbml0b3JpbmcucHViIik7CQkNCglsb2dnZXIu
 aW5mbygiU3VjY2Vzc2Z1bGx5IGxvYWRlZCBXeFBsYXRmb3JtTW9uaXRvcmluZyBNQmVhbnMuLi4i
 KTsJCQkNCn0gZWxzZSB7DQoJbG9nZ2VyLmluZm8oIl9OT1RfIGxvYWRpbmcgV3hQbGF0Zm9ybU1v
 bml0b3JpbmcgTUJlYW5zLCBiZWNhdXNlIEV4dGVuZGVkU2V0dGluZ3MgJ3dhdHQud3gucGxhdGZv
-cm1tb25pdG9yaW5nLmpteC5lbmFibGUnIGlzIG5vdCBzZXQgdG8gJ3RydWUnISIpOw0KfQ==</value>
+cm1tb25pdG9yaW5nLmpteC5lbmFibGUnIGlzIG5vdCBzZXQgdG8gJ3RydWUnISIpOw0KfQ0K</value>
 </Values>

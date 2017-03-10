@@ -2,6 +2,14 @@
 
 <Values version="2.0">
   <value name="name">getPathForNewFile</value>
+  <array name="sig" type="value" depth="1">
+    <value>[i] field:0:required filename</value>
+    <value>[i] field:0:optional context</value>
+    <value>[i] field:0:required dir</value>
+    <value>[o] field:0:required path</value>
+    <value>[o] field:0:required fileExists {"false","true"}</value>
+  </array>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">Ly8gcGlwZWxpbmUNCklEYXRhQ3Vyc29yIHBpcGVsaW5lQ3Vyc29yID0gcGlwZWxpbmUuZ2V0Q3Vy
 c29yKCk7DQpTdHJpbmcJZmlsZW5hbWUgPSBJRGF0YVV0aWwuZ2V0U3RyaW5nKCBwaXBlbGluZUN1
@@ -26,5 +34,5 @@ ci4iKTsNCn0NCg0KSURhdGFDdXJzb3IgcGlwZWxpbmVDdXJzb3JfMSA9IHBpcGVsaW5lLmdldEN1
 cnNvcigpOw0KSURhdGFVdGlsLnB1dCggcGlwZWxpbmVDdXJzb3JfMSwgInBhdGgiLCB0YXJnZXRG
 aWxlLmdldEFic29sdXRlUGF0aCgpICk7DQpJRGF0YVV0aWwucHV0KCBwaXBlbGluZUN1cnNvcl8x
 LCAiZmlsZUV4aXN0cyIsIGZpbGVFeGlzdHMgKTsNCnBpcGVsaW5lQ3Vyc29yXzEuZGVzdHJveSgp
-Ow0KCQ==</value>
+Ow0KCQ0K</value>
 </Values>

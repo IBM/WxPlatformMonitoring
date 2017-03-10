@@ -22,6 +22,13 @@ function getDocHeight(doc) {
     return height;
 }
 
+function appendScript(url, $parent) {
+  var script = document.createElement( 'script' );
+  script.type = 'text/javascript';
+  script.src = url;
+  $parent.append( script );
+}
+
 $(window).on("load", function() {
     if (extSettings_showOnStatusPage !== true) {
         console.log("WxPlatformMonitoring: Extended settings 'watt.wx.platformMonitoring.healthPortlet.showOnStatusPage' is set to '" + extSettings_showOnStatusPage + "', there not including WxPlatformMonitoring health page");
@@ -39,6 +46,31 @@ $(window).on("load", function() {
     });
     // get the body of the main frame, i.e. the frame with the is-stats.dsp
     var $mainBody = $(window.parent.frames[0].frames[2].document);
+    //
+    // $('head', $mainBody).append('<link rel="stylesheet" type="text/css" href="/WxPlatformMonitoring/css/pure-nr-min.css" />');
+    // $('head', $mainBody).append('<link rel="stylesheet" type="text/css" href="/WxPlatformMonitoring/css/bootstrap/bootstrap.min.css" />');
+    // $('head', $mainBody).append('<link rel="stylesheet" type="text/css" href="/WxPlatformMonitoring/css/json-formatter.css" />');
+    // $('head', $mainBody).append('<link rel="stylesheet" type="text/css" href="/WxPlatformMonitoring/css/wxplatformmonitoring.css" />');
+    // $('head', $mainBody).append('<link rel="stylesheet" type="text/css" href="/WmRoot/webMethods.css" />');
+    //
+    // appendScript("/WxPlatformMonitoring/js/jquery-3.1.1.min.js", $('head', $mainBody));
+    // appendScript("/WxPlatformMonitoring/js/bootstrap.min.js", $('head', $mainBody));
+    // appendScript("/WxPlatformMonitoring/js/bootbox.min.js", $('head', $mainBody));
+    // appendScript("/WxPlatformMonitoring/js/json-formatter.js", $('head', $mainBody));
+
+    // $('head', $mainBody).append('<script src="/WxPlatformMonitoring/js/jquery-3.1.1.min.js"></' + 'script>');
+    // $('head', $mainBody).append('<script src="/WxPlatformMonitoring/js/bootstrap.min.js"></' + 'script>');
+    // $('head', $mainBody).append('<script src="/WxPlatformMonitoring/js/bootbox.min.js"></' + 'script>');
+    // $('head', $mainBody).append('<script src="/WxPlatformMonitoring/js/wxplatformmonitoring.js"></' + 'script>');
+    // $('head', $mainBody).append('<script src="/WxPlatformMonitoring/js/json-formatter.js"></' + 'script>');
+    //
+    // $b = $('body', $mainBody);
+    //   $('<script>alert("hi");</' + 'script>').appendTo($b);
+
     $('body', $mainBody).append($wxIFrame);
-    setIframeHeight($wxIFrame);
+    // $.get(extSettings_importHealthPagePath, function(data){
+    //   $('body', $mainBody).append(data);
+    // });
+    // appendScript("/WxPlatformMonitoring/js/wxplatformmonitoring.js", $('head', $mainBody));
+    //setIframeHeight($wxIFrame);
 });
