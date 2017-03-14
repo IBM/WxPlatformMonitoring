@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="node_type">interface</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_nsName">wx.platformMonitoring.impl.internal.jmx</value>
+  <value name="is_public">false</value>
+  <value name="shared">c3RhdGljIG9yZy5hcGFjaGUubG9nNGouTG9nZ2VyIGxvZ2dlciA9IG9yZy5hcGFjaGUubG9nNGou
+TG9nZ2VyLmdldExvZ2dlcigid3gucGxhdGZvcm1Nb25pdG9yaW5nLmNvbmZpZyIpOw0KDQpwcml2
+YXRlIHN0YXRpYyBTdHJpbmcgZ2V0UGF0aEZvckNvbmZpZ0ZpbGUoRmlsZSBmaWxlKSB0aHJvd3Mg
+U2VydmljZUV4Y2VwdGlvbiB7DQoJamF2YS5uaW8uZmlsZS5QYXRoIHBhdGhUb0ZpbGUgPSBqYXZh
+Lm5pby5maWxlLlBhdGhzLmdldChmaWxlLmdldEFic29sdXRlUGF0aCgpKTsNCglqYXZhLm5pby5m
+aWxlLlBhdGggcGFyZW50ID0gcGF0aFRvRmlsZS5nZXRQYXJlbnQoKTsNCglMaXN0PFN0cmluZz4g
+cGF0aEVsZW1lbnRzID0gbmV3IEFycmF5TGlzdDxTdHJpbmc+KCk7DQoJcGF0aEVsZW1lbnRzLmFk
+ZChwYXRoVG9GaWxlLmdldE5hbWUocGF0aFRvRmlsZS5nZXROYW1lQ291bnQoKS0xKS50b1N0cmlu
+ZygpKTsNCgkNCgl3aGlsZSh0cnVlKSB7DQoJCWJvb2xlYW4gaXNTeW1ib2xpY0xpbmsgPQ0KCQkg
+ICAgamF2YS5uaW8uZmlsZS5GaWxlcy5pc1N5bWJvbGljTGluayggcGFyZW50KTsNCgkJaWYoIGlz
+U3ltYm9saWNMaW5rICkgew0KCQkJdHJ5IHsNCgkJCQlGaWxlIGYgPSBqYXZhLm5pby5maWxlLkZp
+bGVzLnJlYWRTeW1ib2xpY0xpbmsocGFyZW50KS50b0ZpbGUoKTsNCgkJCQlmb3IoIGludCBpPXBh
+dGhFbGVtZW50cy5zaXplKCktMTsgaT49MDsgaS0tKSB7DQoJCQkJCWYgPSBuZXcgRmlsZShmLCBw
+YXRoRWxlbWVudHMuZ2V0KGkpKTsNCgkJCQl9DQoJCQkJcmV0dXJuIGYuZ2V0QWJzb2x1dGVQYXRo
+KCk7DQoJCQl9IGNhdGNoIChqYXZhLmlvLklPRXhjZXB0aW9uIHgpIHsNCgkJCQl0aHJvdyBuZXcg
+U2VydmljZUV4Y2VwdGlvbigiQ291bGQgbm90IGdldCBwYXRoIGZvciBmaWxlICIgKyBmaWxlLmdl
+dEFic29sdXRlUGF0aCgpKTsNCgkJCX0NCgkJfSBlbHNlIHsNCgkJCWlmKCBwYXJlbnQuZ2V0TmFt
+ZUNvdW50KCkgPT0gMCApIHsNCgkJCQlicmVhazsNCgkJCX0NCgkJCXBhdGhFbGVtZW50cy5hZGQo
+cGF0aFRvRmlsZS5nZXROYW1lKHBhcmVudC5nZXROYW1lQ291bnQoKS0xKS50b1N0cmluZygpKTsN
+CgkJCXBhcmVudCA9IHBhcmVudC5nZXRQYXJlbnQoKTsNCgkJCWlmKCBwYXJlbnQgPT0gbnVsbCAp
+IHsNCgkJCQlicmVhazsNCgkJCX0NCgkJfQ0KCX0NCgkNCglyZXR1cm4gZmlsZS5nZXRBYnNvbHV0
+ZVBhdGgoKTsNCn0NCg==</value>
+  <value name="encodeutf8">true</value>
+  <value name="extends"></value>
+  <array name="implements" type="value" depth="1">
+  </array>
+  <array name="imports" type="value" depth="1">
+    <value>java.io.File</value>
+    <value>java.lang.management.ManagementFactory</value>
+    <value>java.net.Socket</value>
+    <value>java.util.ArrayList</value>
+    <value>java.util.List</value>
+    <value>java.util.Set</value>
+    <value>javax.management.MBeanServer</value>
+    <value>javax.management.ObjectInstance</value>
+    <value>javax.management.ObjectName</value>
+    <value>com.softwareag.wx.platformMonitoring.jmx.agent.WxPlatformMonitoringMXBean</value>
+    <value>com.webmethods.core.util.Logger</value>
+    <value>com.wm.app.b2b.server.InvokeState</value>
+    <value>com.wm.app.b2b.server.User</value>
+  </array>
+</Values>

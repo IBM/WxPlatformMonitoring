@@ -191,7 +191,7 @@
 <MAPDELETE FIELD="/context;1;0">
 </MAPDELETE>
 
-<MAPINVOKE SERVICE="wx.platformMonitoring.impl.utility.file.pub.tmpFileStorage:getFileDetails" VALIDATE-IN="$none" VALIDATE-OUT="$none" INVOKE-ORDER="0">
+<MAPINVOKE SERVICE="wx.platformMonitoring.impl.internal.utility.file.pub.tmpFileStorage:getFileDetails" VALIDATE-IN="$none" VALIDATE-OUT="$none" INVOKE-ORDER="0">
 
   <!-- nodes -->
 

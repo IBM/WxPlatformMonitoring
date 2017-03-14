@@ -1,0 +1,6 @@
+{
+	"ports": {
+		"ports": ["3333", "44444"],
+		"packages": ["WxConfig"]
+	}
+}

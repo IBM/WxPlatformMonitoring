@@ -5,12 +5,13 @@
   <value name="system_package">no</value>
   <value name="version">1.0</value>
   <record name="startup_services" javaclass="com.wm.util.Values">
+    <null name="wx.platformMonitoring.impl.conf:loadDefaultConfiguration"/>
     <null name="wx.platformMonitoring.impl.jmx:registerMBean"/>
     <null name="wx.platformMonitoring.impl.startup:addAcl"/>
     <null name="wx.platformMonitoring.impl.startup:registerDefaultPackage"/>
     <null name="wx.platformMonitoring.impl.startup:registerSolution"/>
     <null name="wx.platformMonitoring.impl.startup:setupLogger"/>
-    <null name="wx.platformMonitoring.impl.conf:loadDefaultConfiguration"/>
+    <null name="wx.platformMonitoring.impl.internal.startup:registerDefaultPropertyResolver"/>
   </record>
   <null name="shutdown_services"/>
   <null name="replication_services"/>

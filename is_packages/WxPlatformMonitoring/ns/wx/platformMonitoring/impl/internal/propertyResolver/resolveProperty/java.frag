@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="name">resolveProperty</value>
+  <value name="encodeutf8">true</value>
+  <value name="body">Ly8gcGlwZWxpbmUNCklEYXRhQ3Vyc29yIHBpcGVsaW5lQ3Vyc29yID0gcGlwZWxpbmUuZ2V0Q3Vy
+c29yKCk7DQpTdHJpbmcJcHJvcGVydHlOYW1lID0gSURhdGFVdGlsLmdldFN0cmluZyggcGlwZWxp
+bmVDdXJzb3IsICJwcm9wZXJ0eU5hbWUiICk7DQpwaXBlbGluZUN1cnNvci5kZXN0cm95KCk7DQoN
+ClN0cmluZyBwcm9wZXJ0eVZhbHVlID0gcHJvcGVydHlSZXNvbHZlci5yZXNvbHZlUHJvcGVydHko
+cHJvcGVydHlOYW1lKTsNCg0KLy8gcGlwZWxpbmUNCklEYXRhQ3Vyc29yIHBpcGVsaW5lQ3Vyc29y
+XzEgPSBwaXBlbGluZS5nZXRDdXJzb3IoKTsNCklEYXRhVXRpbC5wdXQoIHBpcGVsaW5lQ3Vyc29y
+XzEsICJwcm9wZXJ0eVZhbHVlIiwgcHJvcGVydHlWYWx1ZSApOw0KcGlwZWxpbmVDdXJzb3JfMS5k
+ZXN0cm95KCk7DQoJDQoJ</value>
+</Values>

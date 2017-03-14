@@ -38,7 +38,7 @@
         <value name="is_global">false</value>
         <value name="rec_closed">true</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:PortMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:PortMonitoringConfiguration</value>
       </record>
     </array>
     <value name="modifiable">true</value>
@@ -67,13 +67,14 @@
 
   <!-- nodes -->
 
-<MAPSET NAME="Setter" OVERWRITE="true" VARIABLES="false" GLOBALVARIABLES="false" FIELD="/portConfig;4;0;wx.platformMonitoring.impl.port:PortMonitoringConfig">
+<MAPSET NAME="Setter" OVERWRITE="true" VARIABLES="false" GLOBALVARIABLES="false" FIELD="/portConfig;4;0;wx.platformMonitoring.pub.config.documents:PortMonitoringConfiguration">
   <DATA ENCODING="XMLValues" I18N="true">
 
 <Values version="2.0">
   <record name="xml" javaclass="com.wm.util.Values">
     <array name="ports" type="value" depth="1">
       <value>9191</value>
+      <value>${watt.wx.platformMonitoring.testProperty}</value>
       <value>1919</value>
     </array>
     <array name="packages" type="value" depth="1">
@@ -185,7 +186,7 @@
         <value name="is_global">false</value>
         <value name="rec_closed">true</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:PortMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:PortMonitoringConfiguration</value>
       </record>
     </array>
     <value name="modifiable">true</value>

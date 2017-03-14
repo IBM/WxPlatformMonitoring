@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="name">registerPropertyResolver</value>
+  <value name="encodeutf8">true</value>
+  <value name="body">Ly8gcGlwZWxpbmUNCklEYXRhQ3Vyc29yIHBpcGVsaW5lQ3Vyc29yID0gcGlwZWxpbmUuZ2V0Q3Vy
+c29yKCk7DQpTdHJpbmcJcmVzb2x2ZXJTZXJ2aWNlRnFuID0gSURhdGFVdGlsLmdldFN0cmluZygg
+cGlwZWxpbmVDdXJzb3IsICJyZXNvbHZlclNlcnZpY2VGcW4iICk7DQpwaXBlbGluZUN1cnNvci5k
+ZXN0cm95KCk7DQoNCmlmKCByZXNvbHZlclNlcnZpY2VGcW4gPT0gbnVsbCApIHsNCgl0aHJvdyBu
+ZXcgU2VydmljZUV4Y2VwdGlvbigiUHJvdmlkZSBhIHJlc29sdmVyIHNlcnZpY2UuIik7DQp9DQoN
+CnRyeSB7DQoJcHJvcGVydHlSZXNvbHZlci5yZWdpc3RlclJlc29sdmVyU2VydmljZShyZXNvbHZl
+clNlcnZpY2VGcW4pOw0KfSBjYXRjaChJbnZhbGlkTmFtZUV4Y2VwdGlvbiBpbmUpICB7DQoJdGhy
+b3cgbmV3IFNlcnZpY2VFeGNlcHRpb24oIkludmFsaWQgcmVzb2x2ZXIgc2VydmljZSAnIiArIHJl
+c29sdmVyU2VydmljZUZxbiArICInOiAiICArDQogaW5lKTsNCn0=</value>
+</Values>
