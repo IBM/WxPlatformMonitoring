@@ -1,7 +1,7 @@
 {
 	"ports": {
-		"ports": ["5912", "9999"],
-		"portAliases": ["WxPlatformMonitoring_Test_FilePoller"],
+		"ports": ["5912", "9999", "5591"],
+		"portAliases": ["Port_5678"],
 		"packages": ["WxPlatformMonitoring_Test"]
 	}
 }

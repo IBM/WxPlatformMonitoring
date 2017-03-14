@@ -1,107 +1,31 @@
-// alert("inside");
-
-
-// $(window).on("load", loadSettings());
-
-
-function loadSettings() {
-  alert("loadSettings");
-  evaluateExtendedSettings("watt.server.scheduler.threadThrottle", function checkFunction(result) {
-    if (result.propertyValue > 0) {
-      return true;
-    }
-    return false;
-  });
-  evaluateExtendedSettings("watt.wx.platformmonitoring.server.quiesce", function checkFunction(result) {
-    if (result.propertyValue == "false") {
-      return true;
-    }
-    return false;
-  });
-  evaluteService("wx.platformMonitoring.pub.onedata:checkServerConnection", function checkFunction(result) {
-    if (result.success == "true") {
-      return true;
-    }
-    return false;
-  }, function getStatusValue(result) {
-    return result.odeUrl;
-  });
-
-  evaluteService("wx.platformMonitoring.pub.trigger:listJmsTriggers", function checkFunction(result) {
-    if (result.nrDisabled == 0) {
-      return true;
-    }
-    return false;
-  }, function getStatusValue(result) {
-    return result.nrDisabled;
-  });
-
-  evaluteService("wx.platformMonitoring.pub.scheduler:listScheduledServices", function checkFunction(result) {
-    if (result.nrDisabled == 0) {
-      return true;
-    }
-    return false;
-  }, function getStatusValue(result) {
-    return result.nrDisabled;
-  });
-
-  evaluteService("wx.platformMonitoring.pub.server:getCountCurrentlyRunningServices", function checkFunction(result) {
-    return true;
-  }, function getStatusValue(result) {
-    return result.currentlyRunningServicesCount;
-  });
-
-  evaluteService("wx.platformMonitoring.pub.um.monitoring:listJmsQueues", function checkFunction(result) {
-    return result.nrNOk > 0 ? false : true;
-  }, function getStatusValue(result) {
-    return result.nrNOk;
-  });
-
-  evaluteService("wx.platformMonitoring.pub.um.monitoring:listMessagingQueues", function checkFunction(result) {
-    return result.nrNOk > 0 ? false : true;
-  }, function getStatusValue(result) {
-    return result.nrNOk;
-  });
-
-  evaluteService("wx.platformMonitoring.pub.ports:listPorts", function checkFunction(result) {
-    var isOk = true;
-    $.each(result.portList, function(index, value) {
-        if( value.enabled == "false" ) {
-          isOk = false;
-        }
-    });
-    return isOk;
-  }, function getStatusValue(result) {
-    var count = 0;
-    $.each(result.portList, function(index, value) {
-        if( value.enabled == "false" ) {
-          count++;
-        }
-    });
-    return count;
-  });
-}
-
-function evaluateExtendedSettings(propertyName, checkFunctionCallback) {
+function evaluateExtendedSettings(propertyName, checkFunctionCallback, details) {
     var url = "/invoke/pub.utils/getServerProperty";
     var data = {
         propertyName: propertyName
     };
     invoke(url, data, propertyName, checkFunctionCallback, function(result) {
         return result.propertyValue;
-    });
+    }, details.description, details.linkHref);
 }
 
-function evaluteService(serviceName, checkFunctionCallback, getStatusValueCallback) {
+function evaluteService(serviceName, checkFunctionCallback, getStatusValueCallback, details) {
     var serviceNameSplit = serviceName.split(":");
     var url = "/invoke/" + serviceNameSplit[0] + "/" + serviceNameSplit[1];
-    invoke(url, null, serviceName, checkFunctionCallback, getStatusValueCallback);
+    if (typeof details === "undefined" || details === null) {
+        invoke(url, null, serviceName, checkFunctionCallback, getStatusValueCallback);
+    } else {
+        invoke(url, null, serviceName, checkFunctionCallback, getStatusValueCallback, details.description, details.linkHref);
+    }
 }
 
 
 // function handleResponse(id, isOk, jsonResponse, url, statusValue);
 
-function invoke(url, data, id, checkFunctionCallback, getStatusValueCallback) {
+function invoke(url, data, id, checkFunctionCallback, getStatusValueCallback, description, linkHref) {
+
+    if (description !== null && linkHref !== null) {
+        createDashbaordElement(id, description, linkHref);
+    }
     $.get({
             url: url,
             data: data,
@@ -131,10 +55,94 @@ function invoke(url, data, id, checkFunctionCallback, getStatusValueCallback) {
         });
 }
 
-function handleResponse(id, isOk, jsonResponse, url, statusValue) {
+function createDashbaordElement(id, description, linkHref) {
     var $statusTr = $("[id='" + id + "']");
-    if( $statusTr.length === 0 ) {
-      alert("did not find tr");
+    if ($statusTr.length === 0) {
+        alert("did not find tr for id: " + id);
+    }
+    if (typeof description === "undefined") {
+        var desc = $statusTr.attr("description");
+        if (desc !== null) {
+            description = desc;
+        }
+    }
+    if (typeof linkHref === "undefined") {
+        linkHref = $statusTr.attr("linkHref");
+    }
+
+
+    $tdState = $("<td/>").addClass("is-state-unknown");
+    $spanStatusValue = $("<span/>").addClass("status-value");
+    $tdDesc = $("<td/>").addClass("status-description").text(description + "=").append($spanStatusValue);
+    $tdStatusIcon = $("<td/>").addClass("status-details icons");
+    $tdEdit = $("<td/>").addClass("status-edit");
+    $spanEditIcon = $("<span/>").text("mode_edit");
+    if (typeof linkHref !== "undefined" && linkHref !== null) {
+        $editLink = $('<a>', {
+            title: 'Edit',
+            href: linkHref,
+            target: '_parent'
+        });
+        // $editLink = $("<a href='" + linkHref + "' target='_parent'");
+        $spanEditIcon.addClass("material-icons");
+        $editLink.append($spanEditIcon);
+        $tdEdit.append($editLink);
+    } else {
+        $spanEditIcon.addClass("is-inactive material-icons");
+        $tdEdit.append($spanEditIcon);
+    }
+    $statusTr.append($tdState);
+    $statusTr.append($tdDesc);
+    $statusTr.append($tdStatusIcon);
+    $statusTr.append($tdEdit);
+}
+
+function handleResponse(id, isOk, jsonResponse, url, statusValue) {
+
+    var $statusTr = $("[id='" + id + "']");
+    if ($statusTr.length === 0) {
+        alert("did not find tr");
+    }
+    var $tdStatus = $statusTr.children().first();
+    if (isOk) {
+        $tdStatus.attr("class", "is-state-ok");
+    } else if (!isOk) {
+        $tdStatus.attr("class", "is-state-nok");
+    } else {
+        $statusTr.remove();
+    }
+    var $spanStatusValue = $tdStatus.next().children().first();
+    var $statusDetail = $statusTr.find(".status-details");
+    $infoSpanLink = $("<a/>", {
+        name: "link",
+        href: "#"
+    });
+    $infoSpan = $("<span/>").attr("class", "is-link material-icons").text("info_outline");
+    $infoSpanLink.append($infoSpan);
+    $statusDetail.append($infoSpanLink);
+    $infoSpan.click(function() {
+        var formatter = new JSONFormatter(jsonResponse, 1, {
+            hoverPreviewEnabled: true
+        });
+        $result = $("<span/>").attr("class", "wx-json-formatter json-formatter-row json-formatter-open");
+        var rs = $result.get(0);
+        rs.innerHTML = '';
+        rs.appendChild(formatter.render());
+        bootbox.alert({
+            size: "medium",
+            title: "Response data for '<span class='wx-response-modal-bold'>" + url + "</span>'",
+            message: rs,
+            className: "wx-response-modal"
+        });
+    });
+    // var statusValue = getStatusValueCallback(msg);
+    $spanStatusValue.text(statusValue);
+}
+
+function handleResponse2(id, isOk, jsonResponse, url, statusValue) {
+    var $statusTr = $("[id='" + id + "']");
+    if ($statusTr.length === 0) {
+        alert("did not find tr");
     }
     var $tdStatus = $statusTr.children().first();
     if (isOk) {

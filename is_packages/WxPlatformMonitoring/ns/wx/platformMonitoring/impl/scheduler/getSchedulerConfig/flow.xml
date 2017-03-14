@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <FLOW VERSION="3.0" CLEANUP="true">
+  <COMMENT></COMMENT>
 
   <!-- nodes -->
 
@@ -158,7 +159,7 @@
         <value name="is_global">false</value>
         <value name="rec_closed">true</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.scheduler:SchedulerMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:SchedulerMonitoringConfig</value>
       </record>
     </array>
     <value name="modifiable">true</value>

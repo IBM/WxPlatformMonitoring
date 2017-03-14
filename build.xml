@@ -1,8 +1,8 @@
 <project name="wxplatformmonitoring" basedir="." default="buildWxPlatformMonitoring">
 	<!--
-	<property name="version" value="912"/>
-	-->
 	<property name="version" value="910" />
+	-->
+	<property name="version" value="912"/>
 	<property file="build_${version}.properties" />
 
 	<property name="build.dir" value="build/${version}" />
@@ -83,7 +83,7 @@
 	
 	<target name="jcodeFrag">
 			<exec resultproperty="jcodeResult" failonerror="true" executable="${is.home}/bin/jcode.bat" dir="${is.home}/bin/" output="jcode.log">
-				<arg value="fragall" />
+				<arg value="update" />
 				<arg line="WxPlatformMonitoring" />
 			</exec>
 			<fail message="Jcode ended with error">

@@ -316,7 +316,7 @@
         <value name="form_qualified">false</value>
         <value name="is_global">false</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.adapter:AdapterMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:AdapterMonitoringConfig</value>
       </record>
     </array>
     <value name="modifiable">true</value>
@@ -467,7 +467,7 @@
         <value name="form_qualified">false</value>
         <value name="is_global">false</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.adapter:AdapterMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:AdapterMonitoringConfig</value>
       </record>
     </array>
     <value name="modifiable">true</value>
@@ -591,7 +591,7 @@
         <value name="form_qualified">false</value>
         <value name="is_global">false</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.adapter:AdapterMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:AdapterMonitoringConfig</value>
       </record>
       <record javaclass="com.wm.util.Values">
         <value name="node_type">unknown</value>
@@ -812,7 +812,7 @@
         <value name="form_qualified">false</value>
         <value name="is_global">false</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.adapter:AdapterMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:AdapterMonitoringConfig</value>
       </record>
       <record javaclass="com.wm.util.Values">
         <value name="node_type">unknown</value>
@@ -959,7 +959,7 @@
         <value name="form_qualified">false</value>
         <value name="is_global">false</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.adapter:AdapterMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:AdapterMonitoringConfig</value>
       </record>
       <record javaclass="com.wm.util.Values">
         <value name="node_type">field</value>
@@ -1216,7 +1216,7 @@
         <value name="form_qualified">false</value>
         <value name="is_global">false</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.adapter:AdapterMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:AdapterMonitoringConfig</value>
       </record>
       <record javaclass="com.wm.util.Values">
         <value name="node_type">unknown</value>
@@ -1367,7 +1367,7 @@
         <value name="form_qualified">false</value>
         <value name="is_global">false</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.adapter:AdapterMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:AdapterMonitoringConfig</value>
       </record>
       <record javaclass="com.wm.util.Values">
         <value name="node_type">field</value>
@@ -1622,7 +1622,7 @@
         <value name="form_qualified">false</value>
         <value name="is_global">false</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.adapter:AdapterMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:AdapterMonitoringConfig</value>
       </record>
       <record javaclass="com.wm.util.Values">
         <value name="node_type">unknown</value>
@@ -1800,7 +1800,7 @@
         <value name="form_qualified">false</value>
         <value name="is_global">false</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.adapter:AdapterMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:AdapterMonitoringConfig</value>
       </record>
       <record javaclass="com.wm.util.Values">
         <value name="node_type">unknown</value>
@@ -2024,7 +2024,7 @@
         <value name="form_qualified">false</value>
         <value name="is_global">false</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.adapter:AdapterMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:AdapterMonitoringConfig</value>
       </record>
       <record javaclass="com.wm.util.Values">
         <value name="node_type">unknown</value>
@@ -2202,7 +2202,7 @@
         <value name="form_qualified">false</value>
         <value name="is_global">false</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.adapter:AdapterMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:AdapterMonitoringConfig</value>
       </record>
       <record javaclass="com.wm.util.Values">
         <value name="node_type">unknown</value>
@@ -2466,7 +2466,7 @@
         <value name="form_qualified">false</value>
         <value name="is_global">false</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.adapter:AdapterMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:AdapterMonitoringConfig</value>
       </record>
       <record javaclass="com.wm.util.Values">
         <value name="node_type">unknown</value>
@@ -2647,7 +2647,7 @@
         <value name="form_qualified">false</value>
         <value name="is_global">false</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.adapter:AdapterMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:AdapterMonitoringConfig</value>
       </record>
       <record javaclass="com.wm.util.Values">
         <value name="node_type">unknown</value>

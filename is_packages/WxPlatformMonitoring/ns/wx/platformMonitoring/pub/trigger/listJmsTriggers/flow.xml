@@ -335,7 +335,7 @@
         <value name="form_qualified">false</value>
         <value name="is_global">false</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.trigger:TriggerMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:TriggerMonitoringConfig</value>
       </record>
       <record javaclass="com.wm.util.Values">
         <value name="node_type">record</value>
@@ -355,7 +355,7 @@
         <value name="is_global">false</value>
         <value name="rec_closed">true</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.trigger:TriggerMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:TriggerMonitoringConfig</value>
       </record>
       <record javaclass="com.wm.util.Values">
         <value name="node_type">unknown</value>
@@ -495,7 +495,7 @@
         <value name="form_qualified">false</value>
         <value name="is_global">false</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.trigger:TriggerMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:TriggerMonitoringConfig</value>
       </record>
       <record javaclass="com.wm.util.Values">
         <value name="node_type">unknown</value>
@@ -526,7 +526,7 @@
         <value name="is_global">false</value>
         <value name="rec_closed">true</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.trigger:TriggerMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:TriggerMonitoringConfig</value>
       </record>
       <record javaclass="com.wm.util.Values">
         <value name="node_type">field</value>
@@ -779,7 +779,7 @@
         <value name="is_global">false</value>
         <value name="rec_closed">true</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.trigger:TriggerMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:TriggerMonitoringConfig</value>
       </record>
       <record javaclass="com.wm.util.Values">
         <value name="node_type">unknown</value>
@@ -924,7 +924,7 @@
         <value name="is_global">false</value>
         <value name="rec_closed">true</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.trigger:TriggerMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:TriggerMonitoringConfig</value>
       </record>
       <record javaclass="com.wm.util.Values">
         <value name="node_type">unknown</value>
@@ -1032,7 +1032,7 @@
         <value name="is_global">false</value>
         <value name="rec_closed">true</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.trigger:TriggerMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:TriggerMonitoringConfig</value>
       </record>
       <record javaclass="com.wm.util.Values">
         <value name="node_type">unknown</value>
@@ -1198,7 +1198,7 @@
         <value name="is_global">false</value>
         <value name="rec_closed">true</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.trigger:TriggerMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:TriggerMonitoringConfig</value>
       </record>
       <record javaclass="com.wm.util.Values">
         <value name="node_type">unknown</value>
@@ -1306,7 +1306,7 @@
         <value name="is_global">false</value>
         <value name="rec_closed">true</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.trigger:TriggerMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:TriggerMonitoringConfig</value>
       </record>
       <record javaclass="com.wm.util.Values">
         <value name="node_type">unknown</value>
@@ -1581,7 +1581,7 @@
         <value name="is_global">false</value>
         <value name="rec_closed">true</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.trigger:TriggerMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:TriggerMonitoringConfig</value>
       </record>
       <record javaclass="com.wm.util.Values">
         <value name="node_type">record</value>
@@ -1765,7 +1765,7 @@
         <value name="is_global">false</value>
         <value name="rec_closed">true</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.trigger:TriggerMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:TriggerMonitoringConfig</value>
       </record>
       <record javaclass="com.wm.util.Values">
         <value name="node_type">record</value>

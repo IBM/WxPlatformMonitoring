@@ -172,7 +172,7 @@
         <value name="is_global">false</value>
         <value name="rec_closed">true</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.broker:BrokerMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:BrokerMonitoringConfig</value>
       </record>
     </array>
     <value name="modifiable">true</value>

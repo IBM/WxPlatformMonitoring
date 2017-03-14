@@ -151,14 +151,34 @@
         <value name="node_type">record</value>
         <value name="node_subtype">unknown</value>
         <value name="is_public">false</value>
-        <value name="field_name">portsMonitoringConfiguration</value>
+        <value name="field_name">portMonitoringConfiguration</value>
         <value name="field_type">recref</value>
         <value name="field_dim">0</value>
         <value name="nillable">true</value>
         <value name="form_qualified">false</value>
         <value name="is_global">false</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.port:PortMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:PortMonitoringConfig</value>
+      </record>
+      <record javaclass="com.wm.util.Values">
+        <value name="node_type">record</value>
+        <value name="node_subtype">unknown</value>
+        <value name="node_comment"></value>
+        <record name="node_hints" javaclass="com.wm.util.Values">
+          <value name="field_largerEditor">false</value>
+          <value name="field_password">false</value>
+        </record>
+        <value name="is_public">false</value>
+        <value name="field_name">portMonitoringConfig</value>
+        <value name="field_type">recref</value>
+        <value name="field_dim">0</value>
+        <value name="wrapper_type">IData</value>
+        <value name="nillable">true</value>
+        <value name="form_qualified">false</value>
+        <value name="is_global">false</value>
+        <value name="rec_closed">true</value>
+        <value name="modifiable">true</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:PortMonitoringConfig</value>
       </record>
     </array>
     <value name="modifiable">true</value>
@@ -211,11 +231,11 @@
 <MAPDELETE FIELD="/assetType;1;0">
 </MAPDELETE>
 
-<MAPCOPY FROM="/config;2;0" TO="/portsMonitoringConfiguration;4;0;wx.platformMonitoring.impl.port:PortMonitoringConfig">
-</MAPCOPY>
-
 <MAPDELETE FIELD="/config;2;0">
 </MAPDELETE>
+
+<MAPCOPY FROM="/config;2;0" TO="/portMonitoringConfig;4;0;wx.platformMonitoring.impl.port:PortMonitoringConfig">
+</MAPCOPY>
 </MAP>
 </INVOKE>
 </FLOW>

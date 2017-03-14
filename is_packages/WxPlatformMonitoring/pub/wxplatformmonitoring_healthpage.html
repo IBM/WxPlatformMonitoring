@@ -40,24 +40,11 @@
 							</tr>
 						</thead>
 						<tbody class="overview">
-
-							<tr id="wx.platformMonitoring.pub.server:getCountCurrentlyRunningServices">
-								<td class="is-state-unknown"></td>
-								<td class="status-description">Number of currently running services=<span class="status-value"></span></td>
-								<td class="status-details icons"></td>
-								<td class="status-edit"><a href="/WmRoot/stats-services.dsp" target="_parent"><span class="material-icons">mode_edit</span></a></td>
+							<tr id="wx.platformMonitoring.pub.server:getStatusCountCurrentlyRunningServices">
 							</tr>
 							<tr id="watt.server.scheduler.threadThrottle">
-								<td class="is-state-unknown"></td>
-								<td class="status-description">watt.server.scheduler.threadThrottle=<span class="status-value"></span></td>
-								<td class="status-details icons"></td>
-								<td class="status-edit"><a href="/WmRoot/settings-extended.dsp" target="_parent"><span class="material-icons">mode_edit</span></a></td>
 							</tr>
 							<tr id="watt.wx.platformmonitoring.server.quiesce">
-								<td class="is-state-unknown"></td>
-								<td class="status-description">watt.wx.platformmonitoring.server.quiesce=<span class="status-value"></span></td>
-								<td class="status-details icons"></td>
-								<td class="status-edit"><a href="/WmRoot/settings-extended.dsp" target="_parent"><span class="material-icons">mode_edit</span></a></td>
 							</tr>
 						</tbody>
 					</table>
@@ -79,34 +66,20 @@
 						</thead>
 						<tbody class="overview">
 							<tr id="wx.platformMonitoring.pub.um.monitoring:listJmsQueues">
-								<td class="is-state-unknown"></td>
-								<td class="status-description">Number of out of compliance JMS queues=<span class="status-value"></span></td>
-								<td class="status-details icons"></td>
-								<td class="status-edit"><a href="/"><span class="material-icons" target="_parent">mode_edit</span></a></td>
 							</tr>
 							<tr id="wx.platformMonitoring.pub.um.monitoring:listMessagingQueues">
-								<td class="is-state-unknown"></td>
-								<td class="status-description">Number of out of compliance Messaging channels=<span class="status-value"></span></td>
-								<td class="status-details icons"></td>
-								<td class="status-edit"><a href="/"><span class="material-icons" target="_parent">mode_edit</span></a></td>
 							</tr>
 							<tr id="wx.platformMonitoring.pub.onedata:checkServerConnection">
-								<td class="is-state-unknown"></td>
-								<td class="status-description">ODE URL=<span class="status-value"></span></td>
-								<td class="status-details icons"></td>
-								<td class="status-edit"><span class="is-inactive material-icons">mode_edit</span></td>
 							</tr>
 							<tr id="wx.platformMonitoring.pub.trigger:listJmsTriggers">
-								<td class="is-state-unknown"></td>
-								<td class="status-description">Disabled JMS Triggers=<span class="status-value"></span></td>
-								<td class="status-details icons"></td>
-								<td class="status-edit"><a href="/WmRoot/settings-jms-trigger-management.dsp" target="_parent"><span class="material-icons">mode_edit</span></a></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="pure-g">
 		<div class="overview pure-u-1-2">
 			<div class="pure-g">
 				<div class="overview tableView pure-u-1">
@@ -121,17 +94,34 @@
 							</tr>
 						</thead>
 						<tbody class="overview">
-							<tr id="wx.platformMonitoring.pub.scheduler:listScheduledServices">
-								<td class="is-state-unknown"></td>
-								<td class="status-description">Disabled Scheduled Services=<span class="status-value"></span></td>
-								<td class="status-details icons"></td>
-								<td class="status-edit"><a href="/WmRoot/scheduler.dsp" target="_parent"><span class="material-icons">mode_edit</span></a></td>
+							<tr id="wx.platformMonitoring.pub.scheduler:listConfiguredScheduledServices">
 							</tr>
-							<tr id="wx.platformMonitoring.pub.ports:listPorts">
-								<td class="is-state-unknown"></td>
-								<td class="status-description">Number of disabled ports=<span class="status-value"></span></td>
-								<td class="status-details icons"></td>
-								<td class="status-edit"><a href="/WmRoot/security-ports.dsp" target="_parent"><span class="material-icons">mode_edit</span></a></td>
+							<tr id="wx.platformMonitoring.pub.ports:listAllPorts" description="Total number of disabled ports"	linkHref="/WmRoot/security-ports.dsp">
+							</tr>
+							<tr id="wx.platformMonitoring.pub.ports:listConfiguredPorts" description="Number of disabled configured ports"	linkHref="/WmRoot/security-ports.dsp">
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="overview pure-u-1-2">
+			<div class="pure-g">
+				<div class="overview tableView pure-u-1">
+					<div class="heading">Adapters</div>
+					<table class="pure-table pure-table-bordered">
+						<thead class="overview">
+							<tr>
+								<th><span class="tiny material-icons">done</span></th>
+								<th>Check</th>
+								<th>Details</th>
+								<th>Link</th>
+							</tr>
+						</thead>
+						<tbody class="overview">
+							<tr id="wx.platformMonitoring.pub.adapter.jdbc:listAllJdbcAdapters" description="Total number of disabled JDBC connections" linkHref="/WmRoot/adapter-index.dsp?url=%2FWmART%2FListResources.dsp%3FadapterTypeName%3DJDBCAdapter%26dspName%3D.LISTRESOURCES&adapter=JDBCAdapter&text=webMethods+Adapter+for+JDBC&help=true">
+							</tr>
+							<tr id="wx.platformMonitoring.pub.adapter.jdbc:listConfiguredJdbcAdapters" description="Number of configured disabled JDBC connections" linkHref="/WmRoot/adapter-index.dsp?url=%2FWmART%2FListResources.dsp%3FadapterTypeName%3DJDBCAdapter%26dspName%3D.LISTRESOURCES&adapter=JDBCAdapter&text=webMethods+Adapter+for+JDBC&help=true">
 							</tr>
 						</tbody>
 					</table>
@@ -150,81 +140,141 @@
 	<script src="/WxPlatformMonitoring/js/wxplatformmonitoring.js"></script>
 	<!-- json-formatter: json tree in popup -->
 	<script src="/WxPlatformMonitoring/js/json-formatter.js"></script>
+
 	<script type="text/javascript">
+
+	evaluteService("wx.platformMonitoring.pub.adapter.jdbc:listAllJdbcAdapters", function checkFunction(result) {
+		if (result.nrDisabled == 0) {
+			return true;
+		}
+		return false;
+	}, function getStatusValue(result) {
+		return result.nrDisabled;
+	});
+
+	evaluteService("wx.platformMonitoring.pub.adapter.jdbc:listConfiguredJdbcAdapters", function checkFunction(result) {
+		if (result.nrDisabled == 0) {
+			return true;
+		}
+		return false;
+	}, function getStatusValue(result) {
+		return result.nrDisabled;
+	});
+
+	evaluteService("wx.platformMonitoring.pub.scheduler:listConfiguredScheduledServices", function checkFunction(result) {
+		if (result.nrDisabled == 0) {
+			return true;
+		}
+		return false;
+	}, function getStatusValue(result) {
+		return result.nrDisabled;
+	}, {
+		description: "Disabled Scheduled Services",
+		linkHref: "/WmRoot/scheduler.dsp"
+	});
+
+	evaluteService("wx.platformMonitoring.pub.ports:listAllPorts", function checkFunction(result) {
+		var isOk = true;
+		$.each(result.portList, function(index, value) {
+			if( value.enabled == "false" ) {
+				isOk = false;
+			}
+		});
+		return isOk;
+	}, function getStatusValue(result) {
+		var count = 0;
+		$.each(result.portList, function(index, value) {
+			if( value.enabled == "false" ) {
+				count++;
+			}
+		});
+		return count;
+	});
+
+	evaluteService("wx.platformMonitoring.pub.ports:listConfiguredPorts", function checkFunction(result) {
+		var isOk = true;
+		$.each(result.portStatusList, function(index, value) {
+			if( value.status != "enabled" ) {
+				isOk = false;
+			}
+		});
+		return isOk;
+	}, function getStatusValue(result) {
+		var count = 0;
+		$.each(result.portStatusList, function(index, value) {
+			if( value.status != "enabled" ) {
+				count++;
+			}
+		});
+		return count;
+	});
+
+	evaluteService("wx.platformMonitoring.pub.onedata:checkServerConnection", function checkFunction(result) {
+		if (result.success == "true") {
+			return true;
+		}
+		return false;
+	}, function getStatusValue(result) {
+		return result.odeUrl;
+	}, {
+		description: "ODE URL"
+	});
+
+	evaluteService("wx.platformMonitoring.pub.trigger:listJmsTriggers", function checkFunction(result) {
+		if (result.nrDisabled == 0) {
+			return true;
+		}
+		return false;
+	}, function getStatusValue(result) {
+		return result.nrDisabled;
+	}, {
+		description: "Disabled JMS Triggers",
+		linkHref: "/WmRoot/settings-jms-trigger-management.dsp"
+	});
+	evaluteService("wx.platformMonitoring.pub.um.monitoring:listJmsQueues", function checkFunction(result) {
+		return result.nrNOk > 0 ? false : true;
+	}, function getStatusValue(result) {
+		return result.nrNOk;
+	}, {
+		description: "Number of out of compliance JMS queues"
+	});
+
+	evaluteService("wx.platformMonitoring.pub.um.monitoring:listMessagingQueues", function checkFunction(result) {
+		return result.nrNOk > 0 ? false : true;
+	}, function getStatusValue(result) {
+		return result.nrNOk;
+	}, {
+		description: "Number of out of compliance Messaging channels"
+	});
+
+		evaluteService("wx.platformMonitoring.pub.server:getStatusCountCurrentlyRunningServices", function checkFunction(result) {
+			return true;
+		}, function getStatusValue(result) {
+			return result.currentlyRunningServicesCount;
+		}, {
+			description: "Number of currently running services",
+			linkHref: "/WmRoot/stats-services.dsp"
+		});
+
 		evaluateExtendedSettings("watt.server.scheduler.threadThrottle", function checkFunction(result) {
 			if (result.propertyValue > 0) {
 				return true;
 			}
 			return false;
+		}, {
+			description: "watt.server.scheduler.threadThrottle",
+			linkHref: "/WmRoot/settings-extended.dsp"
 		});
 		evaluateExtendedSettings("watt.wx.platformmonitoring.server.quiesce", function checkFunction(result) {
 			if (result.propertyValue == "false") {
 				return true;
 			}
 			return false;
-		});
-		evaluteService("wx.platformMonitoring.pub.onedata:checkServerConnection", function checkFunction(result) {
-			if (result.success == "true") {
-				return true;
-			}
-			return false;
-		}, function getStatusValue(result) {
-			return result.odeUrl;
+		}, {
+			description: "watt.wx.platformmonitoring.server.quiesce",
+			linkHref: "/WmRoot/settings-extended.dsp"
 		});
 
-		evaluteService("wx.platformMonitoring.pub.trigger:listJmsTriggers", function checkFunction(result) {
-			if (result.nrDisabled == 0) {
-				return true;
-			}
-			return false;
-		}, function getStatusValue(result) {
-			return result.nrDisabled;
-		});
-
-		evaluteService("wx.platformMonitoring.pub.scheduler:listScheduledServices", function checkFunction(result) {
-			if (result.nrDisabled == 0) {
-				return true;
-			}
-			return false;
-		}, function getStatusValue(result) {
-			return result.nrDisabled;
-		});
-
-		evaluteService("wx.platformMonitoring.pub.server:getCountCurrentlyRunningServices", function checkFunction(result) {
-			return true;
-		}, function getStatusValue(result) {
-			return result.currentlyRunningServicesCount;
-		});
-
-		evaluteService("wx.platformMonitoring.pub.um.monitoring:listJmsQueues", function checkFunction(result) {
-			return result.nrNOk > 0 ? false : true;
-		}, function getStatusValue(result) {
-			return result.nrNOk;
-		});
-
-		evaluteService("wx.platformMonitoring.pub.um.monitoring:listMessagingQueues", function checkFunction(result) {
-			return result.nrNOk > 0 ? false : true;
-		}, function getStatusValue(result) {
-			return result.nrNOk;
-		});
-
-		evaluteService("wx.platformMonitoring.pub.ports:listPorts", function checkFunction(result) {
-			var isOk = true;
-			$.each(result.portList, function(index, value) {
-					if( value.enabled == "false" ) {
-						isOk = false;
-					}
-			});
-			return isOk;
-		}, function getStatusValue(result) {
-			var count = 0;
-			$.each(result.portList, function(index, value) {
-					if( value.enabled == "false" ) {
-						count++;
-					}
-			});
-			return count;
-		});
 	</script>
 </body>
 

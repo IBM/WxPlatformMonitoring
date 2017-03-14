@@ -1,7 +1,7 @@
 package wx.platformMonitoring.impl;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-03-10 18:47:30 CET
+// -----( CREATED: 2017-03-14 11:45:45 CET
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
@@ -14,6 +14,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.List;
 import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonArray;
 import com.eclipsesource.json.JsonObject;
@@ -49,20 +51,28 @@ public final class conf
 		// @sigtype java 3.5
 		// [i] field:0:required assetType
 		// [o] record:0:required config
-		IDataCursor pipelineCursor = pipeline.getCursor();
-		String assetType = IDataUtil.getString(pipelineCursor, "assetType");
-		if (assetType == null || "".equals(assetType)) {
-			throw new ServiceException("assetType must not be empty");
-		}
-		JsonValue jConfig = _configurations.get(assetType);
-		if( jConfig == null ) {
-			logger.error("No config stored for asset of type '" + assetType + "'.");
-			return;
-		}
-		JsonValue assetConfig = jConfig.asObject().get(assetType);
-		IData configDoc = parseJson(assetConfig.asObject());
-		IDataUtil.put(pipelineCursor, "config", configDoc);
-		pipelineCursor.destroy();
+				IDataCursor pipelineCursor = pipeline.getCursor();
+				String assetType = IDataUtil.getString(pipelineCursor, "assetType");
+				if (assetType == null || "".equals(assetType)) {
+					throw new ServiceException("assetType must not be empty");
+				}
+				JsonValue jConfig = _configurations.get(assetType);
+				if (jConfig == null) {
+					logger.error(
+							"No config stored for asset of type '" + assetType + "', trying to reload default config dir.");
+					loadConfigurationFromDefaultConfigDir();
+					jConfig = _configurations.get(assetType);
+					if (jConfig == null) {
+						logger.error("No config stored for asset of type '" + assetType + "'.");
+						return;
+					}
+				}
+				JsonValue assetConfig = jConfig.asObject().get(assetType);
+		//		IData configDoc = parseJson(assetConfig.asObject());
+				IData configDoc = parseJson(jConfig.asObject());
+				IDataUtil.put(pipelineCursor, "config", configDoc);
+				pipelineCursor.destroy();
+		
 			
 		// --- <<IS-END>> ---
 
@@ -71,16 +81,43 @@ public final class conf
 
 
 
-	public static final void loadConfiguration (IData pipeline)
+	public static final void loadConfigurationFile (IData pipeline)
         throws ServiceException
 	{
-		// --- <<IS-START(loadConfiguration)>> ---
+		// --- <<IS-START(loadConfigurationFile)>> ---
 		// @sigtype java 3.5
 		// [i] field:0:required configFile
 		IDataCursor pipelineC = pipeline.getCursor();
 		String configFile = IDataUtil.getString(pipelineC, "configFile");
 		
 		addAssetConfiguration(configFile);
+		// --- <<IS-END>> ---
+
+                
+	}
+
+
+
+	public static final void loadConfigurationFromJsonString (IData pipeline)
+        throws ServiceException
+	{
+		// --- <<IS-START(loadConfigurationFromJsonString)>> ---
+		// @sigtype java 3.5
+		// [i] field:0:required jsonString
+		// [i] field:0:required assetType
+		// pipeline
+		IDataCursor pipelineCursor = pipeline.getCursor();
+		String	jsonString = IDataUtil.getString( pipelineCursor, "jsonString" );
+		String	assetType = IDataUtil.getString( pipelineCursor, "assetType" );
+		pipelineCursor.destroy();
+		
+		if( jsonString == null || assetType == null ) {
+			throw new ServiceException("Provide both a JSON string representing the configuration, as well as the asset type for which this configuration is.");
+		}
+		
+		JsonValue assetConfig = loadJsonConfiguration(jsonString);
+		addConfig(assetType, assetConfig);
+			
 		// --- <<IS-END>> ---
 
                 
@@ -119,7 +156,7 @@ public final class conf
 	
 	private static void addAssetConfiguration(String configFileName) throws ServiceException {
 		File configFile = new File(configFileName);
-		if( !configFile.exists() ) {
+		if (!configFile.exists()) {
 			throw new ServiceException("Config file " + configFileName + " does not exist.");
 		}
 		addAssetConfiguration(configFile);
@@ -127,12 +164,25 @@ public final class conf
 	
 	private static void addAssetConfiguration(File configFile) throws ServiceException {
 		JsonValue config = loadJsonConfiguration(configFile);
-		String assetType = getAssetTypeFromJsonConfig(config);
-		addConfig(assetType, config);
+		List<String> assetTypes = getAssetTypesFromJsonConfig(config);
+		logger.debug("Found " + assetTypes.size() + " asset types in config file " + configFile + ". Iterating over each of them.");
+		for (String assetType : assetTypes) {
+			JsonValue assetConfig = config.asObject().get(assetType);
+			addConfig(assetType, assetConfig);
+		}
+	}
+	
+	private static JsonValue loadJsonConfiguration(String jsonString) throws ServiceException {
+		logger.debug("Getting config from jsonString'");
+		try {
+			return Json.parse(jsonString);
+		} catch (com.eclipsesource.json.ParseException pe) {
+			throw new ServiceException("IOException: Could not parse json string: " + pe);
+		}
 	}
 	
 	private static JsonValue loadJsonConfiguration(File configFile) throws ServiceException {
-		logger.debug("Getting config from " + configFile.getAbsolutePath());
+		logger.debug("Getting config from '" + configFile.getAbsolutePath() + "'");
 		java.io.Reader reader = null;
 		try {
 			reader = new FileReader(configFile);
@@ -145,7 +195,7 @@ public final class conf
 			throw new ServiceException("IOException: Could not read json config file '" + configFile + "': " + ioe);
 		} finally {
 			try {
-				if( reader != null ) {
+				if (reader != null) {
 					reader.close();
 				}
 			} catch (IOException e) {
@@ -155,44 +205,25 @@ public final class conf
 			}
 		}
 	}
-	//	
-	//	static IData parseJson(JsonValue jVal, String name) {
-	//		IData element = IDataFactory.create();
-	//		IDataCursor elementC = element.getCursor();
-	//		if( jVal.isObject() ) {
-	//			for (String childName : jVal.asObject().names()) {
-	//				IData childDoc = parseJson(jVal.asObject().get(childName), childName);
-	//				IDataUtil.put(elementC, childName, childDoc);
-	//			}
-	//		} else if( jVal.isArray() ) {
-	//			Object[] array = iterateJsonArray(jVal.asArray(), name);
-	//			IDataUtil.put(elementC, name, array);
-	//		} else if( jVal.isString() ) {
-	//			IDataUtil.put(elementC, name, jVal.asString());
-	//			
-	//		}
-	//		elementC.destroy();
-	//		return element;
-	//	}
-		static IData parseJson(JsonObject jObj) {
-			IData element = IDataFactory.create();
-			IDataCursor elementC = element.getCursor();
-			for (String childName : jObj.names()) {
-				JsonValue child = jObj.get(childName);
-				if (child.isObject()) {
-					IData childDoc = parseJson(child.asObject());
-					IDataUtil.put(elementC, childName, childDoc);
-				} else if (child.isArray()) {
-					Object[] array = iterateJsonArray(child.asArray());
-					IDataUtil.put(elementC, childName, array);
-				} else if (child.isString()) {
-					IDataUtil.put(elementC, childName, child.asString());
-				}
-			}
-			elementC.destroy();
-			return element;
-		}
 	
+	static IData parseJson(JsonObject jObj) {
+		IData element = IDataFactory.create();
+		IDataCursor elementC = element.getCursor();
+		for (String childName : jObj.names()) {
+			JsonValue child = jObj.get(childName);
+			if (child.isObject()) {
+				IData childDoc = parseJson(child.asObject());
+				IDataUtil.put(elementC, childName, childDoc);
+			} else if (child.isArray()) {
+				Object[] array = iterateJsonArray(child.asArray());
+				IDataUtil.put(elementC, childName, array);
+			} else if (child.isString()) {
+				IDataUtil.put(elementC, childName, child.asString());
+			}
+		}
+		elementC.destroy();
+		return element;
+	}
 	
 	static Object[] iterateJsonArray(JsonArray jArr) {
 		IData[] docArr = new IData[jArr.size()];
@@ -226,58 +257,70 @@ public final class conf
 		});
 		for (String jsonConfigFile : jsonConfigFiles) {
 			File configFile = new File(configDir, jsonConfigFile);
-			JsonValue config = loadJsonConfiguration(configFile);
-			String assetType = getAssetTypeFromJsonConfig(config);
-			addConfig(assetType, config);
+			addAssetConfiguration(configFile);
 		}
 	}
 	
-	private static void addConfig(String assetType, JsonValue config)  {
-		
+	private static void addConfig(String assetType, JsonValue config) {
+	
 		JsonValue existingConfig = _configurations.get(assetType);
 		if (existingConfig == null) {
-			logger.debug("Storing first config for asset of type " + assetType);
+			logger.debug("Storing first config for asset of type '" + assetType + "'.");
 			_configurations.put(assetType, config);
 		} else {
-			logger.debug("Merging config for asset type " + assetType + " with existing config");
+			logger.debug("Merging config for asset type '" + assetType + "' with existing config.");
 			mergeJson(config, existingConfig);
 		}
 	}
 	
 	private static void mergeJson(JsonValue source, JsonValue target) {
-		for( java.util.Iterator<Member> it=source.asObject().iterator(); it.hasNext(); ) {
+		for (java.util.Iterator<Member> it = source.asObject().iterator(); it.hasNext();) {
 			Member sourceMember = it.next();
 			String sourceName = sourceMember.getName();
 			JsonValue sourceValue = sourceMember.getValue();
 			JsonValue targetValue = target.asObject().get(sourceName);
-			if( targetValue == null ) {
+			if (targetValue == null) {
 				target.asObject().add(sourceName, sourceValue);
 				continue;
 			}
-			if( sourceValue.isString() ) {				
+			if (sourceValue.isString()) {
 				// the source value overwrites the target value
 				target.asObject().set(sourceName, sourceValue);
-			} else if(sourceValue.isArray() ) {
-				for( java.util.Iterator<JsonValue> sourceIt = sourceValue.asArray().iterator(); sourceIt.hasNext(); ) {
+			} else if (sourceValue.isArray()) {
+				for (java.util.Iterator<JsonValue> sourceIt = sourceValue.asArray().iterator(); sourceIt.hasNext();) {
 					JsonValue sourceArrValue = sourceIt.next();
-					targetValue.asArray().add(sourceArrValue);
+					boolean found = false;
+					for (JsonValue targetArrValue : targetValue.asArray().values()) {
+						if (targetArrValue.isString() && sourceArrValue.isString()) {
+							if (targetArrValue.toString().equals(sourceArrValue.toString())) {
+								// nothing to do, elements are the same, no need
+								// to append
+								found = true;
+								break;
+							} else {
+								// search on
+								continue;
+							}
+						} else if (targetArrValue.isObject() && sourceArrValue.isObject()) {
+							mergeJson(sourceArrValue, targetArrValue);
+						} else {
+							// the type of the source and target are not the
+							// same, continue
+							continue;
+						}
+					}
+					if (!found)
+						targetValue.asArray().add(sourceArrValue);
 				}
-			} else if(sourceValue.isObject() ) {
+			} else if (sourceValue.isObject()) {
 				mergeJson(sourceValue, targetValue);
 			}
 		}
 	}
 	
-	
-	private static String getAssetTypeFromJsonConfig(JsonValue config) throws ServiceException {
-		String assetType = config.asObject().names().get(0);
-		if (assetType == null || "".equals(assetType)) {
-			throw new ServiceException(
-					"Cannot extract asset type from JSON config: file has no root String element specifying the asset type.");
-		}
-		return assetType;
+	private static List<String> getAssetTypesFromJsonConfig(JsonValue config) throws ServiceException {
+		return config.asObject().names();
 	}
-	
 	
 	private static File getDefaultConfigDir() {
 		File configDir = ServerAPI.getPackageConfigDir("WxPlatformMonitoring");
@@ -313,6 +356,8 @@ public final class conf
 		logger.info("Using " + configDir.getAbsolutePath() + " as config dir");
 		return configDir;
 	}
+	
+		
 		
 	// --- <<IS-END-SHARED>> ---
 }

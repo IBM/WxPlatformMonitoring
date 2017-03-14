@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <FLOW VERSION="3.0" CLEANUP="true">
+  <COMMENT></COMMENT>
 
   <!-- nodes -->
 
@@ -92,7 +93,7 @@
         <value name="is_global">false</value>
         <value name="rec_closed">true</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.interfaces:InterfacesMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:InterfacesMonitoringConfig</value>
       </record>
     </array>
     <value name="modifiable">true</value>
@@ -150,7 +151,7 @@
         <value name="is_global">false</value>
         <value name="rec_closed">true</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">wx.platformMonitoring.impl.interfaces:InterfacesMonitoringConfig</value>
+        <value name="rec_ref">wx.platformMonitoring.pub.config.documents:InterfacesMonitoringConfig</value>
       </record>
       <record javaclass="com.wm.util.Values">
         <value name="node_type">unknown</value>

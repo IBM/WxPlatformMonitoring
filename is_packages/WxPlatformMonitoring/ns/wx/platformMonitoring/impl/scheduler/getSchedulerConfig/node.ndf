@@ -48,7 +48,7 @@
           <value name="is_global">false</value>
           <value name="rec_closed">true</value>
           <value name="modifiable">true</value>
-          <value name="rec_ref">wx.platformMonitoring.impl.scheduler:SchedulerMonitoringConfig</value>
+          <value name="rec_ref">wx.platformMonitoring.pub.config.documents:SchedulerMonitoringConfiguration</value>
         </record>
       </array>
       <value name="modifiable">true</value>
