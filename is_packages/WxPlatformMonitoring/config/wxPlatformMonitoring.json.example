@@ -1,0 +1,17 @@
+{
+	"adapters": {
+		"jdbc": {
+			"connections": ["wx.platformMonitoring_Test.pub.jdbc:jdbcConn"],
+			"packages": ["SimpleTestPackage", "WxPlatformMonitoring_Test"]
+		},
+		"sap": {
+			"connections": ["sap.conn.connections:CoreConnection", "sap.conn.connections.pl:WebformsConnecctionPL"],
+			"listeners": ["sap.listener.connections:CoreConnection", "sap.listener.connections.pl:WebformsConnecctionPL"],
+			"notifications": ["sap.notification.connections:Connection", "sap.notification.connections.pl:WebformsConnecctionPL"]		
+		}
+	},
+	"triggers": {
+		"messagingTriggers": ["BDAS_Processes.BDAS_TestProcess.BDAS_TestProcess_1.local_910:transitionTrigger", "wm.prt.status:controlTrigger"],
+		"jmsTriggers": ["simpleTestPackage.services.filepolling.test.jms:getAddressTopic", "jtrigger2"]
+	}
+}

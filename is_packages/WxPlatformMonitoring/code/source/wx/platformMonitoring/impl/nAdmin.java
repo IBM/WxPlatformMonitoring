@@ -1,10 +1,11 @@
 package wx.platformMonitoring.impl;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-01-25 13:33:22 CET
+// -----( CREATED: 2017-03-15 10:24:32 CET
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
+import com.wm.util.Values;
 import com.wm.app.b2b.server.Service;
 import com.wm.app.b2b.server.ServiceException;
 // --- <<IS-START-IMPORTS>> ---
@@ -188,7 +189,6 @@ public final class nAdmin
 
 
 
-	@SuppressWarnings("unchecked")
 	public static final void getQueuedElementsForMessagingTrigger (IData pipeline)
         throws ServiceException
 	{
@@ -243,6 +243,9 @@ public final class nAdmin
 			
 		    nRealmNode realmNode = new nRealmNode(nsa);
 		    nNode documentLeafNode = realmNode.findNode(documentLeafNodeName);
+		    if( documentLeafNode == null ) {
+		    	throw new ServiceException("No channel with name '" + documentLeafNodeName + "' found for trigger '" + triggerName + "' on realm " + RNAME + ".");
+		    }
 		    Enumeration<nNode> nodes = ((nContainer)documentLeafNode).getNodes();
 		    nChannel channel = null;
 		    long outstandingEvents = -1;
@@ -278,6 +281,7 @@ public final class nAdmin
 		} catch (Exception e) {
 			throw new ServiceException("Could not get the nr of queued events for trigger " + triggerName + " on realm " + RNAME + ": " + e);
 		}
+			
 		// --- <<IS-END>> ---
 
                 

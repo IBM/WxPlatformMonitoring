@@ -1,6 +1,6 @@
 {
 	"schedulers": {
 		"schedulerList": ["wm.monitor.admin:imageCleanup",
-		"scheduler2"]
+		"wx.config.impl.reload:rescanForAdd"]
 	}
 }

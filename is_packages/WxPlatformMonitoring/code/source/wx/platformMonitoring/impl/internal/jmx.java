@@ -1,7 +1,7 @@
 package wx.platformMonitoring.impl.internal;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-03-14 12:48:58 CET
+// -----( CREATED: 2017-03-15 12:38:54 CET
 // -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
@@ -45,46 +45,12 @@ public final class jmx
 	{
 		// --- <<IS-START(registerMBean)>> ---
 		// @sigtype java 3.5
-		//		com.softwareag.wx.platformMonitoring.jmx.spring.JmxManagement j = new com.softwareag.wx.platformMonitoring.jmx.spring.JmxManagement();
-		//		j.init();
-		//		ClassLoader cl1 = Service.class.getClassLoader();
-		//		ClassLoader cl2 = Server.class.getClassLoader();
-		//		ClassLoader cl3 = Service.getSession().getClass().getClassLoader();
-		//		     Thread currentThread = Thread.currentThread();
-		//		/* --> */     ClassLoader cl4 = currentThread.getContextClassLoader();
-		//		ServerClassLoader cl5 = ServerClassLoader.getCurrent();
-		//		
-		//		
-		//		/* 641 */       currentThread.setContextClassLoader(ServerClassLoader.getPackageLoader("WxPlatformMonitoring"));
-		//		/* --> */     ClassLoader cl6 = currentThread.getContextClassLoader(); 
-		//		
-		
-		// input
-		IData input = IDataFactory.create();
-		IDataCursor inputCursor = input.getCursor();
-		IDataUtil.put( inputCursor, "propertyName", "watt.wx.platformmonitoring.jmx.enable" );
-		IDataUtil.put( inputCursor, "defaultValue", "false" );
-		inputCursor.destroy();
-		
-		// output
-		IData 	output = IDataFactory.create();
-		try{
-			output = Service.doInvoke( "pub.utils", "getServerProperty", input );
-		}catch( Exception e){}
-		IDataCursor outputCursor = output.getCursor();
-		String	enable = IDataUtil.getString( outputCursor, "propertyValue" );
-		outputCursor.destroy();
-		
-		if( enable.equals("true") ) {
-			logger.info("Loading WxPlatformMonitoring MBeans...");
-			com.wm.app.b2b.server.Session session = Service.getSession();
-			User user = InvokeState.getCurrentUser();
-			com.softwareag.wx.platformMonitoring.jmx.JmxManagement jmxManagement = new com.softwareag.wx.platformMonitoring.jmx.JmxManagement(session, user);
-			jmxManagement.exposeServicesInFolderRecursively("WxPlatformMonitoring", "wx.platformMonitoring.pub");		
-			logger.info("Successfully loaded WxPlatformMonitoring MBeans...");			
-		} else {
-			logger.info("_NOT_ loading WxPlatformMonitoring MBeans, because ExtendedSettings 'watt.wx.platformmonitoring.jmx.enable' is not set to 'true'!");
-		}
+		com.wm.app.b2b.server.Session session = Service.getSession();
+		User user = InvokeState.getCurrentUser();
+		com.softwareag.wx.platformMonitoring.jmx.JmxManagement jmxManagement = new com.softwareag.wx.platformMonitoring.jmx.JmxManagement(session, user);
+		jmxManagement.exposeServicesInFolderRecursively("WxPlatformMonitoring", "wx.platformMonitoring.pub");		
+		logger.info("Successfully loaded WxPlatformMonitoring MBeans...");			
+			
 		// --- <<IS-END>> ---
 
                 
@@ -126,6 +92,7 @@ public final class jmx
 		
 		return file.getAbsolutePath();
 	}
+		
 	// --- <<IS-END-SHARED>> ---
 }
 

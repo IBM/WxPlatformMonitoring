@@ -23,7 +23,7 @@
         "direct": {
             "config": {
                 "jmsConnectionAlias": "DEFAULT_IS_JMS_CONNECTION",
-                "messagingConnectionAlias": "IS_UM_CONNECTION"
+                "messagingConnectionAlias": "DEFAULT_IS_MESSAGING_CONNECTION"
             },
             "channels": [{
                     "name": "wm/is/wx/platformMonitoring_Test/pub/trigger/messaging/publishableDoc",
@@ -32,13 +32,17 @@
                 {
                     "name": "jmsTopic",
                     "maxElementsQueued": "20"
+                },
+                {
+                    "name": "testtopic",
+                    "maxElementsQueued": "20"
                 }
             ],
             "queues": [{
                 "name": "jmsQueue",
                 "maxElementsQueued": "150"
             }, {
-                "name": "jmsTopic",
+                "name": "testtopic",
                 "maxElementsQueued": "20"
             }]
         }

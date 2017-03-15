@@ -20,4 +20,8 @@
     <value>com.pcbsys.nirvana.nAdminAPI.nRealmNode</value>
     <value>java.util.Enumeration</value>
   </array>
+  <value name="shared"></value>
+  <value name="extends"></value>
+  <array name="implements" type="value" depth="1">
+  </array>
 </Values>

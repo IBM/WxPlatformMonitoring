@@ -39,6 +39,28 @@
           <value name="rec_closed">true</value>
           <value name="modifiable">true</value>
         </record>
+        <record javaclass="com.wm.util.Values">
+          <value name="node_type">record</value>
+          <value name="node_subtype">unknown</value>
+          <value name="node_comment">Set to false if you want to get the status for this trigger, wether it is configured for monitoring or not</value>
+          <record name="node_hints" javaclass="com.wm.util.Values">
+            <value name="field_usereditable">false</value>
+            <value name="field_largerEditor">false</value>
+            <value name="field_password">false</value>
+          </record>
+          <value name="is_public">false</value>
+          <value name="field_name">configuredOnly</value>
+          <value name="field_type">string</value>
+          <value name="field_dim">0</value>
+          <value name="field_opt">true</value>
+          <array name="field_options" type="value" depth="1">
+            <value>true</value>
+            <value>false</value>
+          </array>
+          <value name="nillable">true</value>
+          <value name="form_qualified">false</value>
+          <value name="is_global">false</value>
+        </record>
       </array>
       <value name="modifiable">true</value>
     </record>
@@ -103,11 +125,12 @@
           <value name="is_public">false</value>
           <value name="field_name">schedulerStatusList</value>
           <value name="field_type">recref</value>
-          <value name="field_dim">0</value>
+          <value name="field_dim">1</value>
           <value name="wrapper_type">IData</value>
           <value name="nillable">true</value>
           <value name="form_qualified">false</value>
           <value name="is_global">false</value>
+          <value name="is_soap_array_encoding_used">false</value>
           <value name="rec_closed">true</value>
           <value name="modifiable">true</value>
           <value name="rec_ref">wx.platformMonitoring.pub:assetStatus</value>
