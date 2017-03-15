@@ -1,6 +1,6 @@
 {
 	"ports": {
-		"ports": ["5912", "9999", "5591"],
+		"ports": ["${watt.wx.platformMonitoring.testProperty}", "9999", "5591"],
 		"portAliases": ["Port_5678"],
 		"packages": ["WxPlatformMonitoring_Test"]
 	}

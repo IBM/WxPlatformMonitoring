@@ -2,6 +2,8 @@ package com.softwareag.wx.platformMonitoring.propertyResolver;
 
 import javax.naming.InvalidNameException;
 
+import org.apache.log4j.Logger;
+
 import com.wm.app.b2b.server.BaseService;
 import com.wm.app.b2b.server.Service;
 import com.wm.app.b2b.server.ServiceException;
@@ -17,6 +19,8 @@ public class PropertyResolver {
 	private static PropertyResolver _instance = null;
 
 	private static NSName resolverService;
+
+	private static Logger logger = Logger.getLogger(PropertyResolver.class);
 
 	static {
 		_instance = new PropertyResolver();
@@ -44,8 +48,9 @@ public class PropertyResolver {
 	}
 
 	public static String resolveProperty(String propertyName) throws ServiceException {
-		if( resolverService == null ) {
-			throw new ServiceException("No property resolver service registerd!");
+		if (resolverService == null) {
+			logger.error("No property resolver service registerd! Returning property as-is.");
+			return propertyName;
 		}
 		IData input = IDataFactory.create();
 		IDataCursor inputC = input.getCursor();
@@ -59,8 +64,10 @@ public class PropertyResolver {
 			return propertyValue;
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new ServiceException("Could not resolve property " + propertyName + " with resolver service "
-					+ resolverService.getFullName() + ": " + e);
+			String msg = "Could not resolve property " + propertyName + " with resolver service "
+					+ resolverService.getFullName() + ": " + e;
+			logger.error(msg);
+			throw new ServiceException(msg);
 		}
 	}
 

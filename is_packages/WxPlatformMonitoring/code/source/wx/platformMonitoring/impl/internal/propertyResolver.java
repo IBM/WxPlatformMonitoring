@@ -1,8 +1,6 @@
 package wx.platformMonitoring.impl.internal;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-03-14 13:52:33 CET
-// -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
 import com.wm.util.Values;
@@ -40,9 +38,7 @@ public final class propertyResolver
 		// pipeline
 		IDataCursor pipelineCursor = pipeline.getCursor();
 		String	propertyName = IDataUtil.getString( pipelineCursor, "propertyName" );
-		
-		propertyName = removeMarkers(propertyName);
-		
+				
 		IData input = IDataFactory.create();
 		IDataCursor inputC = input.getCursor();
 		IDataUtil.put(inputC, "propertyName", propertyName);
@@ -124,15 +120,6 @@ public final class propertyResolver
 
 	// --- <<IS-START-SHARED>> ---
 	private static com.softwareag.wx.platformMonitoring.propertyResolver.PropertyResolver propertyResolver = com.softwareag.wx.platformMonitoring.propertyResolver.PropertyResolver.getInstance();
-	
-	private static String removeMarkers(String token) {
-		if( token.length() >= 3 ) {
-			if( token.charAt(0) == '$' && token.charAt(1) == '{' && token.charAt(token.length()-1) == '}') {
-				return token.substring(2, token.length()-1);
-			}
-		}
-		return token;
-	}
 		
 	// --- <<IS-END-SHARED>> ---
 }

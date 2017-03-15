@@ -4,11 +4,7 @@
   <value name="shared">cHJpdmF0ZSBzdGF0aWMgY29tLnNvZnR3YXJlYWcud3gucGxhdGZvcm1Nb25pdG9yaW5nLnByb3Bl
 cnR5UmVzb2x2ZXIuUHJvcGVydHlSZXNvbHZlciBwcm9wZXJ0eVJlc29sdmVyID0gY29tLnNvZnR3
 YXJlYWcud3gucGxhdGZvcm1Nb25pdG9yaW5nLnByb3BlcnR5UmVzb2x2ZXIuUHJvcGVydHlSZXNv
-bHZlci5nZXRJbnN0YW5jZSgpOwoKcHJpdmF0ZSBzdGF0aWMgU3RyaW5nIHJlbW92ZU1hcmtlcnMo
-U3RyaW5nIHRva2VuKSB7CglpZiggdG9rZW4ubGVuZ3RoKCkgPj0gMyApIHsKCQlpZiggdG9rZW4u
-Y2hhckF0KDApID09ICckJyAmJiB0b2tlbi5jaGFyQXQoMSkgPT0gJ3snICYmIHRva2VuLmNoYXJB
-dCh0b2tlbi5sZW5ndGgoKS0xKSA9PSAnfScpIHsKCQkJcmV0dXJuIHRva2VuLnN1YnN0cmluZygy
-LCB0b2tlbi5sZW5ndGgoKS0xKTsKCQl9Cgl9CglyZXR1cm4gdG9rZW47Cn0KCQ==</value>
+bHZlci5nZXRJbnN0YW5jZSgpOwoJ</value>
   <value name="encodeutf8">true</value>
   <array name="imports" type="value" depth="1">
     <value>javax.naming.InvalidNameException</value>
