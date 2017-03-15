@@ -245,9 +245,9 @@ public final class conf
 		if (token.length() >= 3) {
 			// Check if the property is surrounded by ${}
 			if (token.charAt(0) == '$' && token.charAt(1) == '{' && token.charAt(token.length() - 1) == '}') {
-				// String propertyName = token.substring(2, token.length() - 1);
+				String propertyName = token.substring(2, token.length() - 1);
 				try {
-					String resultValue = PropertyResolver.resolveProperty(token);
+					String resultValue = PropertyResolver.resolveProperty(propertyName);
 					return resultValue;
 				} catch (ServiceException e) {
 					// ignore any error, we just log the error and return the

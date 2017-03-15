@@ -1,7 +1,7 @@
 {
 	"adapters": {
 		"jdbc": {
-			"connections": ["wx.platformMonitoring_Test.pub.jdbc:jdbcConn"],
+			"connections": ["${pkg:WxPlatformMonitoring_Test;wx.test.param}"],
 			"packages": ["SimpleTestPackage"]
 		},
 		"sap": {
