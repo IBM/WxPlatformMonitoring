@@ -1,0 +1,11 @@
+{
+	"http": {
+		"connections": [{
+			"protocol": "http",
+			"host": "localhost",
+			"port": "9090",
+			"path": "/rest"
+		}],
+		"urls": ["http://localhost:5912/ping", "http://localhost:5912/invoke/wx.platformMonitoring.pub.server/ping"]
+	}
+}

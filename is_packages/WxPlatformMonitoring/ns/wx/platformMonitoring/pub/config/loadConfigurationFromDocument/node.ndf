@@ -32,6 +32,7 @@
           <array name="field_options" type="value" depth="1">
             <value>adapters</value>
             <value>broker</value>
+            <value>http</value>
             <value>interfaces</value>
             <value>ports</value>
             <value>schedulers</value>

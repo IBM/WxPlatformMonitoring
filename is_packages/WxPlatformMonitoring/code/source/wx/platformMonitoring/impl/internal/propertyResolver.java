@@ -38,18 +38,12 @@ public final class propertyResolver
 		// pipeline
 		IDataCursor pipelineCursor = pipeline.getCursor();
 		String	propertyName = IDataUtil.getString( pipelineCursor, "propertyName" );
-				
-		IData input = IDataFactory.create();
-		IDataCursor inputC = input.getCursor();
-		IDataUtil.put(inputC, "propertyName", propertyName);
-		inputC.destroy();
-		
+						
 		// output
 		IData 	output = IDataFactory.create();
 		try{
-			output = Service.doInvoke( "pub.utils", "getServerProperty", input );
+			output = Service.doInvoke( "pub.utils", "getServerProperty", pipeline );
 		}catch( Exception e){
-			pipelineCursor.destroy();
 			throw new ServiceException("Could not resolve proeprty " + propertyName + " using default property resolver:"  + e);
 		}
 		IDataCursor outputCursor = output.getCursor();
@@ -72,21 +66,25 @@ public final class propertyResolver
 		// --- <<IS-START(registerPropertyResolver)>> ---
 		// @sigtype java 3.5
 		// [i] field:0:required resolverServiceFqn
+		// [o] field:0:required success
 		// pipeline
 		IDataCursor pipelineCursor = pipeline.getCursor();
 		String	resolverServiceFqn = IDataUtil.getString( pipelineCursor, "resolverServiceFqn" );
 		pipelineCursor.destroy();
-		
+		String success = "false";
 		if( resolverServiceFqn == null ) {
 			throw new ServiceException("Provide a resolver service.");
 		}
 		
 		try {
-			propertyResolver.registerResolverService(resolverServiceFqn);
+			com.softwareag.wx.platformMonitoring.propertyResolver.PropertyResolver.registerResolverService(resolverServiceFqn);
+			success = "true";
 		} catch(InvalidNameException ine)  {
 			throw new ServiceException("Invalid resolver service '" + resolverServiceFqn + "': "  +
 		 ine);
 		}
+		IDataUtil.put(pipelineCursor, "success", success);
+		pipelineCursor.destroy();
 		// --- <<IS-END>> ---
 
                 
