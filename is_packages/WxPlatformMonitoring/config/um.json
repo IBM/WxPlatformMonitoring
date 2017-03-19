@@ -34,7 +34,7 @@
                     "maxElementsQueued": "20"
                 },
                 {
-                    "name": "testtopic",
+                    "name": "testChannel",
                     "maxElementsQueued": "20"
                 }
             ],
@@ -42,7 +42,7 @@
                 "name": "jmsQueue",
                 "maxElementsQueued": "150"
             }, {
-                "name": "testtopic",
+                "name": "testQeueu",
                 "maxElementsQueued": "20"
             }]
         }

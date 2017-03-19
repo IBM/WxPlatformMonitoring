@@ -1,0 +1,8 @@
+{
+	"aaa": {
+		"config":[
+				{"aclName": "value1"},
+				{"aclName": "value2"}
+			]
+	}
+}

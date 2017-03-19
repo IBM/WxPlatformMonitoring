@@ -65,13 +65,13 @@
 							</tr>
 						</thead>
 						<tbody class="overview">
-							<tr id="wx.platformMonitoring.pub.um.monitoring:listJmsQueues">
+							<tr id="wx.platformMonitoring.pub.um.jms:listConfiguredJmsQueues" description="Number of out of compliance JMS queues">
 							</tr>
-							<tr id="wx.platformMonitoring.pub.um.monitoring:listMessagingQueues">
+							<tr id="wx.platformMonitoring.pub.um.messaging:listConfiguredChannels" description="Number of out of compliance Messaging channels">
 							</tr>
-							<tr id="wx.platformMonitoring.pub.onedata:checkServerConnection">
+							<tr id="wx.platformMonitoring.pub.http:listConfiguredConnectionsAsync" description="Number of unreachable http destinations">
 							</tr>
-							<tr id="wx.platformMonitoring.pub.trigger:listJmsTriggers">
+							<tr id="wx.platformMonitoring.pub.trigger:listConfiguredTriggers" description="Number of disabled JMS triggers">
 							</tr>
 						</tbody>
 					</table>
@@ -209,42 +209,52 @@
 		return count;
 	});
 
-	evaluteService("wx.platformMonitoring.pub.onedata:checkServerConnection", function checkFunction(result) {
-		if (result.success == "true") {
-			return true;
-		}
-		return false;
+	evaluteService("wx.platformMonitoring.pub.http:listConfiguredConnectionsAsync", function checkFunction(result) {
+		var isOk = true;
+		$.each(result.connectionStatusList, function(index, value) {
+			if( value.status != "ok" ) {
+				isOk = false;
+			}
+		});
+		return isOk;
 	}, function getStatusValue(result) {
-		return result.odeUrl;
-	}, {
-		description: "ODE URL"
+		var count = 0;
+		$.each(result.connectionStatusList, function(index, value) {
+			if( value.status != "ok" ) {
+				count++;
+			}
+		});
+		return count;
 	});
 
-	evaluteService("wx.platformMonitoring.pub.trigger:listJmsTriggers", function checkFunction(result) {
-		if (result.nrDisabled == 0) {
-			return true;
-		}
-		return false;
-	}, function getStatusValue(result) {
-		return result.nrDisabled;
-	}, {
-		description: "Disabled JMS Triggers",
-		linkHref: "/WmRoot/settings-jms-trigger-management.dsp"
-	});
-	evaluteService("wx.platformMonitoring.pub.um.monitoring:listJmsQueues", function checkFunction(result) {
+	evaluteService("wx.platformMonitoring.pub.trigger:listConfiguredTriggers", function checkFunction(result) {
+		var isOk = true;
+		$.each(result.triggerList, function(index, value) {
+			if( value.status != "enabled" ) {
+				isOk = false;
+			}
+		});
+		return isOk;
+		}, function getStatusValue(result) {
+		var count = 0;
+		$.each(result.triggerList, function(index, value) {
+			if( value.status != "enabled" ) {
+				count++;
+			}
+		});
+		return count;
+		});
+
+	evaluteService("wx.platformMonitoring.pub.um.jms:listConfiguredJmsQueues", function checkFunction(result) {
 		return result.nrNOk > 0 ? false : true;
 	}, function getStatusValue(result) {
 		return result.nrNOk;
-	}, {
-		description: "Number of out of compliance JMS queues"
 	});
 
-	evaluteService("wx.platformMonitoring.pub.um.monitoring:listMessagingQueues", function checkFunction(result) {
+	evaluteService("wx.platformMonitoring.pub.um.messaging:listConfiguredChannels", function checkFunction(result) {
 		return result.nrNOk > 0 ? false : true;
 	}, function getStatusValue(result) {
 		return result.nrNOk;
-	}, {
-		description: "Number of out of compliance Messaging channels"
 	});
 
 		evaluteService("wx.platformMonitoring.pub.server:getStatusCountCurrentlyRunningServices", function checkFunction(result) {

@@ -5,7 +5,11 @@
 			"host": "localhost",
 			"port": "9090",
 			"path": "/rest"
+		},{
+			"protocol": "http",
+			"host": "externalHost"
 		}],
-		"urls": ["http://localhost:5912/ping", "http://localhost:5912/invoke/wx.platformMonitoring.pub.server/ping"]
+		"urls": ["http://localhost:5912/ping",
+			"http://localhost:5912/invoke/wx.platformMonitoring.pub.server/ping"]
 	}
 }
