@@ -2,8 +2,12 @@ package com.softwaerag.gcs.wx.platformmonitoring.utils.labcase
 
 
 @Grapes([
-         @Grab(group='commons-logging', module='commons-logging', version='1.2'),
-	@Grab(group='org.springframework', module='spring-core', version='4.3.5.RELEASE')
+    @Grab(group='commons-logging', module='commons-logging', version='1.2'),
+	@Grab(group='org.springframework', module='spring-core', version='4.3.5.RELEASE'),
+	@Grab(group='org.apache.httpcomponents', module='httpcore', version='4.3.3'),
+	@Grab(group='org.codehaus.groovy.modules.http-builder', module='http-builder', version='0.5.0'),
+	@Grab(group='org.apache.ant', module='ant', version='1.9.8'),
+	@Grab(group='org.apache.ant', module='ant-launcher', version='1.9.8')
 ]
 )
 import org.apache.http.entity.FileEntity
@@ -197,6 +201,8 @@ class UploadPackage {
 
 	String zipPackage() {
 		def destination = "build/WxPlatformMonitoring.zip";
+		// on ClassNotFoundException java.lang.NoClassDefFoundError: org/apache/tools/ant/BuildException
+		// http://stackoverflow.com/questions/13216875/antbuilder-works-in-groovy-console-but-not-in-eclipse#13222973
 		def ant = new AntBuilder()
 		ant.zip(destfile: destination, basedir: 'is_packages/WxPlatformMonitoring')
 		return destination;

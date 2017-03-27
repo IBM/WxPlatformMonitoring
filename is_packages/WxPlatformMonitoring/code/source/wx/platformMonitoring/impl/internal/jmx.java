@@ -19,7 +19,6 @@ import javax.management.MBeanServer;
 import javax.management.ObjectInstance;
 import javax.management.ObjectName;
 import com.softwareag.wx.platformMonitoring.jmx.agent.WxPlatformMonitoringMXBean;
-import com.webmethods.core.util.Logger;
 import com.wm.app.b2b.server.InvokeState;
 import com.wm.app.b2b.server.User;
 // --- <<IS-END-IMPORTS>> ---

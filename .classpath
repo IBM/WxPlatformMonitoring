@@ -24,5 +24,7 @@
 	<classpathentry kind="lib" path="C:/SoftwareAG910/common/lib/ehcache-ee.jar"/>
 	<classpathentry kind="lib" path="C:/SoftwareAG910/common/lib/ehcache-ee-terracotta-client-all.jar"/>
 	<classpathentry kind="lib" path="is_packages/WxPlatformMonitoring/code/jars/minimal-json-0.9.4.jar"/>
+	<classpathentry kind="lib" path="C:/SoftwareAG912/common/lib/ext/ant.jar"/>
+	<classpathentry kind="lib" path="C:/SoftwareAG912/common/lib/ext/ant-launcher.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
