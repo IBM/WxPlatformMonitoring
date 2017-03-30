@@ -1,0 +1,7 @@
+{
+    "messaging": {
+        "jmsConnectionAlias": ["DEFAULT_IS_JMS_CONNECTION", "PE_NONTRANSACTIONAL_ALIAS"],
+        "mesagingConnectionAlias": ["IS_UM_CONNECTION", "test_broker_conn_Alias"]
+    }
+    
+}
