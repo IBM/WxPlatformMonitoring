@@ -1,12 +1,15 @@
 <project name="wxplatformmonitoring" basedir="." default="installWxPlatformMonitoringPackage">
 	
-	<import file="build_internal.xml"/>
 
 	<!-- use the build_default.properties file -->
 	<property name="version" value="default" />
 	
+	<import file="build_internal.xml"/>
 	<target name="createWxPlatformMonitoringBuild" description="Copy the WxPlatformMonitoring package to the target IntegrationServer, run jcode, copy back and store as zip in the build dir">
-		<antcall target="buildWxPlatformMonitoring"></antcall>
+		<!--<antcall target="buildWxPlatformMonitoring" inheritall="true" inheritrefs="true">-->
+		<antcall target="buildWxPlatformMonitoring">
+			<param name="version" value="${version}"/>
+		</antcall>
 	</target>
 	
 	<target name="installWxPlatformMonitoringPackageAsSymLink" description="Create a symbolic link in the traget IS pointing to ./is_packages/WxPlatformMonitoring">
