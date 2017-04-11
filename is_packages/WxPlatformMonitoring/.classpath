@@ -139,6 +139,6 @@
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/wvcm.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/xqjapi.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/xqj-ino-api.jar"/>
-	<classpathentry kind="lib" path="/WxJMXAgent/code/jars/wx-jmx.jar"/>
+	<classpathentry kind="lib" path="code/jars/wx-jmx.jar"/>
 	<classpathentry kind="output" path="code/classes"/>
 </classpath>
