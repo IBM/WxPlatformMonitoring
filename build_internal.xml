@@ -2,6 +2,7 @@
 	<!--
 	These properties are only for building on different version of IntegrationServer
 	<property name="version" value="912"/>
+	<property name="version" value="99"/>
 	-->
 	<property name="version" value="910" />
 	<property file="build_${version}.properties" />
@@ -202,6 +203,9 @@
 		<antcall target="createSymLink">
 			<param name="link" value="${is.home}/packages/${packageName}" />
 			<param name="resource" value="./is_packages/${packageName}" />
+		</antcall>
+		<antcall target="activatePackage">
+			<param name="packageName" value="${packageName}" />
 		</antcall>
 	</target>
 	

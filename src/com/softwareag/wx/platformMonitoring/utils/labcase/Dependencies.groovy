@@ -1,4 +1,4 @@
-package com.softwaerag.gcs.wx.platformmonitoring.utils.labcase
+package com.softwareag.wx.platformMonitoring.utils.labcase
 // https://mvnrepository.com/artifact/org.springframework/spring-core
 
 @Grapes(

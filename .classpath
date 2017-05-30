@@ -1,30 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="is_packages/WxPlatformMonitoring/code/source"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry exported="true" kind="con" path="org.springsource.ide.eclipse.gradle.classpathcontainer"/>
-	<classpathentry exported="true" kind="con" path="GROOVY_DSL_SUPPORT"/>
-	<classpathentry exported="true" kind="con" path="GROOVY_SUPPORT"/>
-	<classpathentry kind="lib" path="is_packages/WxPlatformMonitoring/code/jars/wx-jmx.jar"/>
-	<classpathentry kind="lib" path="C:/SoftwareAG910/common/lib/ext/log4j.jar"/>
-	<classpathentry kind="lib" path="C:/SoftwareAG910/common/lib/wm-broker-acdl.jar"/>
-	<classpathentry kind="lib" path="C:/SoftwareAG910/common/lib/wm-brokerclient.jar"/>
-	<classpathentry kind="lib" path="C:/SoftwareAG910/common/lib/wm-isclient.jar"/>
-	<classpathentry kind="lib" path="C:/SoftwareAG910/common/lib/wm-jmsadmin.jar"/>
-	<classpathentry kind="lib" path="C:/SoftwareAG910/common/lib/wm-jmsclient.jar"/>
-	<classpathentry kind="lib" path="C:/SoftwareAG910/common/lib/wm-jmsnaming.jar"/>
-	<classpathentry kind="lib" path="C:/SoftwareAG910/IntegrationServer/lib/wm-isserver.jar"/>
-	<classpathentry kind="lib" path="is_packages/WxPlatformMonitoring/code/jars/nServer.jar"/>
-	<classpathentry kind="lib" path="C:/SoftwareAG910/common/lib/nAdminAPI.jar"/>
-	<classpathentry kind="lib" path="C:/SoftwareAG910/common/lib/nAdminXMLAPI.jar"/>
-	<classpathentry kind="lib" path="C:/SoftwareAG910/common/lib/nClient.jar"/>
-	<classpathentry kind="lib" path="C:/SoftwareAG910/common/lib/nJMS.jar"/>
-	<classpathentry kind="lib" path="C:/SoftwareAG910/common/lib/terracotta-toolkit-runtime-ee.jar"/>
-	<classpathentry kind="lib" path="C:/SoftwareAG910/common/lib/ehcache-ee.jar"/>
-	<classpathentry kind="lib" path="C:/SoftwareAG910/common/lib/ehcache-ee-terracotta-client-all.jar"/>
-	<classpathentry kind="lib" path="is_packages/WxPlatformMonitoring/code/jars/minimal-json-0.9.4.jar"/>
-	<classpathentry kind="lib" path="C:/SoftwareAG912/common/lib/ext/ant.jar"/>
-	<classpathentry kind="lib" path="C:/SoftwareAG912/common/lib/ext/ant-launcher.jar"/>
+	<classpathentry kind="src" path="is_packages/WxPlatformMonitoring/code/source"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/"/>
+	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

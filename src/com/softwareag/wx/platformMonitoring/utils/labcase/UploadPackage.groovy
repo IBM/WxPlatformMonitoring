@@ -1,4 +1,4 @@
-package com.softwaerag.gcs.wx.platformmonitoring.utils.labcase
+package com.softwareag.wx.platformMonitoring.utils.labcase
 
 
 @Grapes([
