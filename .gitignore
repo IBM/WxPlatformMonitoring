@@ -1,4 +1,5 @@
 /jcode.log
+/symlink.out
 /bin/*
-
-/.gradle/
+/.gradle
+/build/tmp

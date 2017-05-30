@@ -1,10 +1,9 @@
 <project name="wxplatformmonitoring_internal" basedir="." default="buildWxPlatformMonitoring">
 	<!--
 	These properties are only for building on different version of IntegrationServer
-	<property name="version" value="912"/>
-	<property name="version" value="99"/>
-	-->
 	<property name="version" value="910" />
+	-->
+	<property name="version" value="912"/>
 	<property file="build_${version}.properties" />
 
 	<property name="build.dir" value="build/${version}" />
