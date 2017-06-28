@@ -122,6 +122,9 @@ public final class server
 	{
 		// --- <<IS-START(getThreadCpuUsage)>> ---
 		// @sigtype java 3.5
+		// [i] field:0:required numberOfTopThreads
+		// [i] field:0:required measurementIntervalSeconds
+		// [o] recref:1:required threads wx.platformMonitoring.pub.server.threads:Thread
 		IDataCursor pipelineCursor = pipeline.getCursor();
 		int numberTopThreads = IDataUtil.getInt(pipelineCursor, "numberOfTopThreads", numberTopThreadsDefault);
 		int measurementIntervalSeconds = IDataUtil.getInt(pipelineCursor, "measurementIntervalSeconds", measurementIntervalSecondsDefault);
