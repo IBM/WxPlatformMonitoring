@@ -2,8 +2,9 @@
 	<!--
 	These properties are only for building on different version of IntegrationServer
 	<property name="version" value="910" />
-	-->
 	<property name="version" value="912"/>
+	-->
+	<property name="version" value="100"/>
 	<property file="build_${version}.properties" />
 
 	<property name="build.dir" value="build/${version}" />
