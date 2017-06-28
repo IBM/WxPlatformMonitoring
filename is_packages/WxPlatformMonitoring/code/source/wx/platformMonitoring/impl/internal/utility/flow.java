@@ -1,8 +1,6 @@
 package wx.platformMonitoring.impl.internal.utility;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-03-14 12:49:21 CET
-// -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
 import com.wm.util.Values;
@@ -68,7 +66,7 @@ public final class flow
 	{
 		// --- <<IS-START(getCallingServiceDetails)>> ---
 		// @sigtype java 3.5
-		// [o] recref:0:required serviceDetails wx.restServices.impl.documents:serviceDetails
+		// [o] field:0:required callingServiceName
 		String callingServiceName = "undefined";
 		
 		// get callingServiceName
@@ -78,7 +76,7 @@ public final class flow
 			// iterate over the stack and find the first service which is not from this WxRestServices package
 			for( int i=stack.size()-1; i>=0; i--) {
 				callingServiceName = stack.get(i).toString();
-				if( callingServiceName.startsWith("wx.restService") ) {
+				if( callingServiceName.startsWith("wx.") ) {
 					// still a wx.restservice service, continue
 					continue;
 				} else  {
@@ -103,33 +101,10 @@ public final class flow
 					}
 			}	
 		}	
-		String currentContextID = "";
-		try{
-			String[] contextStack = InvokeState.getCurrentState().getAuditRuntime().getContextStack();
-			currentContextID = contextStack[0];
-			/*
-			if(contextStack!=null) {
-				if(contextStack.length >=3) {
-					currentContextID = contextStack[2];
-				} else if (contextStack.length>=2) {
-					currentContextID = contextStack[1];
-				} else if (contextStack.length>=1) {
-					currentContextID = contextStack[0];
-				} 
-			}
-			*/
-		} catch(Exception ex) {
-			// ignore exception, just return no context Id
-			currentContextID = "n/a";
-		}
 		
-		IData serviceDetails = IDataFactory.create();
-		IDataCursor serviceDetailsC = serviceDetails.getCursor();
-		IDataUtil.put( serviceDetailsC, "contextId", currentContextID );
-		IDataUtil.put( serviceDetailsC, "restServiceName", callingServiceName );
-		serviceDetailsC.destroy();
-		IDataUtil.put(pipelineCursor, "serviceDetails", serviceDetails);
+		IDataUtil.put( pipelineCursor, "callingServiceName", callingServiceName );
 		pipelineCursor.destroy();
+			
 			
 			
 		// --- <<IS-END>> ---
@@ -406,6 +381,7 @@ public final class flow
 	    } 
 	    cursor.destroy(); 
 	  } 
+		
 	// --- <<IS-END-SHARED>> ---
 }
 

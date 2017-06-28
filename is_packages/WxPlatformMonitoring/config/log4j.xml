@@ -12,6 +12,18 @@
 			<param name="ConversionPattern" value="%d %-5p [%c] - %m%n" />
 		</layout>
 	</appender>
+	
+	
+	<appender name="wx.platformMonitoring.csv" class="org.apache.log4j.RollingFileAppender">
+		<param name="append" value="true" />
+		<param name="maxFileSize" value="10MB" />
+		<param name="maxBackupIndex" value="5" />
+		<param name="file" value="./logs/wxplatformmonitoring.log" />
+		<param name="threshold" value="trace" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%m%n" />
+		</layout>
+	</appender>
 
 	<category name="wx.platformMonitoring" additivity="false">
 		<priority value="trace" />
@@ -23,7 +35,16 @@
 		<appender-ref ref="wx.platformMonitoring" />
 	</category>
 
-
+	<category name="wx.platformMonitoring.server.threads.csv" additivity="false">
+		<priority value="trace" />
+		<appender-ref ref="wx.platformMonitoring.csv" />
+	</category>
+	
+	<category name="wx.platformMonitoring.server.threads" additivity="false">
+		<priority value="trace" />
+		<appender-ref ref="wx.platformMonitoring" />
+	</category>
+	
 	<category name="com.softwareag.wx.platformMonitoring" additivity="false">
 		<priority value="trace" />
 		<appender-ref ref="wx.platformMonitoring" />

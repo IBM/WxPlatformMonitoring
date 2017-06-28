@@ -2,11 +2,6 @@
 
 <Values version="2.0">
   <value name="name">getCurrentlyRunningServices</value>
-  <array name="sig" type="value" depth="1">
-    <value>[o] field:0:required currentlyRunningServicesCount</value>
-    <value>[o] field:1:required currentlyRunningServicesList</value>
-  </array>
-  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">SURhdGFDdXJzb3IgcGMgPSBwaXBlbGluZS5nZXRDdXJzb3IoKTsNCg0KU3RyaW5nIGN1cnJlbnRQ
 YWNrYWdlTmFtZSA9IEludm9rZVN0YXRlLmdldEN1cnJlbnRTZXJ2aWNlKCkuZ2V0UGFja2FnZSgp
@@ -45,5 +40,5 @@ ICkgew0KCQkvLyBpZ25vcmUNCgl9DQoJc2MuZGVzdHJveSgpOw0KfQ0Kb3V0cHV0Qy5kZXN0cm95
 KCk7DQoNCklEYXRhVXRpbC5wdXQoIHBjLCAiY3VycmVudGx5UnVubmluZ1NlcnZpY2VzQ291bnQi
 LCBjb3VudGVyICsgIiIgKTsNCklEYXRhVXRpbC5wdXQocGMsICJjdXJyZW50bHlSdW5uaW5nU2Vy
 dmljZXNMaXN0IiwgcnVubmluZ1NlcnZpY2VMaXN0LnRvQXJyYXkobmV3IFN0cmluZ1tydW5uaW5n
-U2VydmljZUxpc3Quc2l6ZSgpXSkpOw0KDQpwYy5kZXN0cm95KCk7DQoNCgkNCg==</value>
+U2VydmljZUxpc3Quc2l6ZSgpXSkpOw0KDQpwYy5kZXN0cm95KCk7DQoNCgkNCgk=</value>
 </Values>

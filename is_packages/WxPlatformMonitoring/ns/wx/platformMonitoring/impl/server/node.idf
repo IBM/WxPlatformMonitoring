@@ -3,8 +3,17 @@
 <Values version="2.0">
   <value name="encodeutf8">true</value>
   <array name="imports" type="value" depth="1">
+    <value>java.lang.management.ManagementFactory</value>
+    <value>java.lang.management.OperatingSystemMXBean</value>
+    <value>java.lang.management.RuntimeMXBean</value>
+    <value>java.lang.management.ThreadInfo</value>
+    <value>java.lang.management.ThreadMXBean</value>
     <value>java.util.ArrayList</value>
+    <value>java.util.Comparator</value>
+    <value>java.util.HashMap</value>
     <value>java.util.List</value>
+    <value>java.util.Map</value>
+    <value>java.util.Map.Entry</value>
     <value>com.wm.app.b2b.server.BaseService</value>
     <value>com.wm.app.b2b.server.InvokeState</value>
     <value>com.wm.data.IData</value>
@@ -12,5 +21,36 @@
     <value>com.wm.data.IDataFactory</value>
     <value>com.wm.data.IDataUtil</value>
     <value>com.wm.lang.ns.NSName</value>
+    <value>java.util.Collections</value>
+  </array>
+  <value name="shared">cHJpdmF0ZSBzdGF0aWMgVGhyZWFkTVhCZWFuIHRocmVhZE14QmVhbiA9IE1hbmFnZW1lbnRGYWN0
+b3J5LmdldFRocmVhZE1YQmVhbigpOwpwcml2YXRlIHN0YXRpYyBSdW50aW1lTVhCZWFuIHJ1bnRp
+bWVNeEJlYW4gPSBNYW5hZ2VtZW50RmFjdG9yeS5nZXRSdW50aW1lTVhCZWFuKCk7CnByaXZhdGUg
+c3RhdGljIE9wZXJhdGluZ1N5c3RlbU1YQmVhbiBvc014QmVhbiA9IE1hbmFnZW1lbnRGYWN0b3J5
+LmdldE9wZXJhdGluZ1N5c3RlbU1YQmVhbigpOwpwcml2YXRlIHN0YXRpYyBpbnQgbnVtYmVyVG9w
+VGhyZWFkc0RlZmF1bHQgPSA1Owpwcml2YXRlIHN0YXRpYyBpbnQgbWVhc3VyZW1lbnRJbnRlcnZh
+bFNlY29uZHNEZWZhdWx0ID0gNTsKCi8qKgogKiBGb3JtYXRzIGEgVGhyZWFkSW5mbyBvYmplY3Qg
+dG8gYSB0aHJlYWQgZHVtcCBsaWtlIHN0cmluZwogKi8KcHJpdmF0ZSBzdGF0aWMgU3RyaW5nIGdl
+dER1bXAoVGhyZWFkSW5mbyB0aHJlYWQpIHsKCVN0cmluZ0J1aWxkZXIgYnVpbGRlciA9IG5ldyBT
+dHJpbmdCdWlsZGVyKCk7CglidWlsZGVyLmFwcGVuZChTdHJpbmcuZm9ybWF0KCJcIiVzXCIgdGlk
+PSVkICVzXG5qYXZhLmxhbmcuVGhyZWFkLlN0YXRlOiAlc1xuIiwKCQkJdGhyZWFkLmdldFRocmVh
+ZE5hbWUoKSwgdGhyZWFkLmdldFRocmVhZElkKCksCgkJCVRocmVhZC5TdGF0ZS5XQUlUSU5HLmVx
+dWFscyh0aHJlYWQuZ2V0VGhyZWFkU3RhdGUoKSkgPyAiaW4gT2JqZWN0LndhaXQoKSIKCQkJCQk6
+IHRocmVhZC5nZXRUaHJlYWRTdGF0ZSgpLm5hbWUoKS50b0xvd2VyQ2FzZSgpLAoJCQkodGhyZWFk
+LmdldFRocmVhZFN0YXRlKCkuZXF1YWxzKFRocmVhZC5TdGF0ZS5XQUlUSU5HKSA/ICJXQUlUSU5H
+IChvbiBvYmplY3QgbW9uaXRvcikiIDogdGhyZWFkLmdldFRocmVhZFN0YXRlKCkpKSk7CgoJZmlu
+YWwgU3RhY2tUcmFjZUVsZW1lbnRbXSBzdGFja1RyYWNlRWxlbWVudHMgPSB0aHJlYWQuZ2V0U3Rh
+Y2tUcmFjZSgpOwoJZm9yIChmaW5hbCBTdGFja1RyYWNlRWxlbWVudCBzdGFja1RyYWNlRWxlbWVu
+dCA6IHN0YWNrVHJhY2VFbGVtZW50cykgewoJCWJ1aWxkZXIuYXBwZW5kKCJcdGF0ICIpOwoJCWJ1
+aWxkZXIuYXBwZW5kKHN0YWNrVHJhY2VFbGVtZW50KTsKCX0KCWJ1aWxkZXIuYXBwZW5kKCJcbiIp
+OwoJcmV0dXJuIGJ1aWxkZXIudG9TdHJpbmcoKTsKfQoKcHJpdmF0ZSBzdGF0aWMgY2xhc3MgRW50
+cnlDb21wYXJhdG9yIGltcGxlbWVudHMgQ29tcGFyYXRvcjxFbnRyeTxUaHJlYWRJbmZvLCBGbG9h
+dD4+IHsKCQoJLyoqCgkgKiBJbXBsZW1lbnRzIGRlc2NlbmRpbmcgb3JkZXIuCgkgKi8KCUBPdmVy
+cmlkZQoJcHVibGljIGludCBjb21wYXJlKEVudHJ5PFRocmVhZEluZm8sIEZsb2F0PiBvMSwgRW50
+cnk8VGhyZWFkSW5mbywgRmxvYXQ+IG8yKSB7CgkJaWYgKG8xLmdldFZhbHVlKCkgPCBvMi5nZXRW
+YWx1ZSgpKSB7CgkJCXJldHVybiAxOwoJCX0gZWxzZSBpZiAobzEuZ2V0VmFsdWUoKSA+IG8yLmdl
+dFZhbHVlKCkpIHsKCQkJcmV0dXJuIC0xOwoJCX0KCQlyZXR1cm4gMDsKCX0KCn0=</value>
+  <value name="extends"></value>
+  <array name="implements" type="value" depth="1">
   </array>
 </Values>
