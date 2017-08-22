@@ -20,7 +20,7 @@ apply plugin: 'org.ajoberstar.release-opinion'
 Properties props = new Properties()
 props.load(new FileInputStream(new File(projectDir, "build_912.properties")))
 
-version = '1.0.0'
+//version = '1.0.0'
 group = "com.softwareag.wx.platformMonitoring"
 archivesBaseName='WxPlatformMonitoringDist'
 def packages = ['WxPlatformMonitoring', 'WxPlatformMonitoring_Test']
@@ -97,7 +97,7 @@ task gitTagExists << {
 	boolean exists = false;
 	grgit.tag.list().each { tag ->
 		println "> ------- found tag ${tag.fullName}"
-		if( tag.fullName.endsWith(project.version) ) {
+		if( tag.fullName.endsWith(project.version.toString()) ) {
 			gitTagAlreadyExits = true;
 		}
 	}
@@ -215,7 +215,7 @@ task uploadRelease(type: Upload) {
 			]
 			def labcasePath = "DE/GCS/GCS/wxplatformmon/"
 			// does not work, snapshot is only after configuration phase...
-			if(project.version.endsWith('-SNAPSHOT')) {
+			if(project.version.toString().endsWith('-SNAPSHOT')) {
 				labcasePath = labcasePath + "snapshots"
 			} else {
 				labcasePath = labcasePath + "release"
