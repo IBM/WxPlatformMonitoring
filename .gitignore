@@ -4,3 +4,6 @@
 /.gradle
 /build/tmp
 /build/
+/tmp/
+/src/wxplatformmon/
+labcase.pwd

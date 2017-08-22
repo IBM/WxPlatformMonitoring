@@ -4,7 +4,8 @@ buildscript {
 		jcenter()
 	}
 	dependencies { 
-		classpath 'org.ajoberstar:grgit:2.0.0' 
+//		classpath 'org.ajoberstar:grgit:2.0.0' 
+		classpath "org.ajoberstar:gradle-git:1.7.2"
 	}
 }
 
@@ -14,6 +15,7 @@ apply plugin: 'distribution'
 apply plugin: 'base'
 apply plugin: 'maven'
 apply plugin: "org.ajoberstar.grgit"
+apply plugin: 'org.ajoberstar.release-opinion'
 
 Properties props = new Properties()
 props.load(new FileInputStream(new File(projectDir, "build_912.properties")))
@@ -28,8 +30,9 @@ tasks.distTar.enabled = false
 
 ext {
 	// Open the Git repository in the current directory.
-//	git = org.ajoberstar.grgit.Grgit.open(file('.'))
-	grgit.open(dir: projectDir, creds: null)
+	git = org.ajoberstar.grgit.Grgit.open(file('.'))
+			git = org.ajoberstar.grgit.Grgit.open(file('.'))
+//	grgit.open(dir: projectDir, creds: null)
 
 	// Get commit id of HEAD.
 	//    revision = git.head().id
@@ -100,7 +103,8 @@ task gitTagExists << {
 	}
 }
 
-task createTag(dependsOn: [gitTagExists, tagRelease]) << { println "> Created Git tag ${project.version}" }
+task createTagx(dependsOn: [gitTagExists, tagRelease]) << { println "> Created Git tag ${project.version}" }
+task createTag() << { }
 
 // copy the packages from the is_packages folder to the tmp folder
 task copyPackages() << {
@@ -274,10 +278,13 @@ task releaseActions(dependsOn: [cleanup, copyPackages, copyReleaseNote, wxplatfo
 task releaseSnapshot(dependsOn: [checkSnapshotRelease, releaseActions]) << {  println "We build the distribution ZIP with version '$version'."  }
 task releaseIt (dependsOn: [checkRelease, createTag, releaseActions]) << { println 'We release now.' }
 
+tasks.release.dependsOn 'releaseActions'
+
 sourceSets {
 	main {		
 		java {
-			srcDirs = ["src", "is_packages/WxPlatformMonitoring/code/source"]
+			srcDirs = ["src/main/java", "is_packages/WxPlatformMonitoring/code/source"]
+			java.outputDir = file("is_packages/WxPlatformMonitoring/code/classes")
 		}
 		groovy { srcDirs = ['src/main/groovy']}
 	}

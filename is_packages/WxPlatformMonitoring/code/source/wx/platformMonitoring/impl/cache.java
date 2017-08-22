@@ -1,15 +1,14 @@
 package wx.platformMonitoring.impl;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-01-15 12:30:08 CET
-// -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
+import com.wm.util.Values;
+import com.wm.app.b2b.server.Service;
 import com.wm.app.b2b.server.ServiceException;
 // --- <<IS-START-IMPORTS>> ---
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
-
 import com.wm.app.b2b.server.cache.CacheManagerUtil;
 import com.softwareag.cache.admin.TestCacheEntry;
 import net.sf.ehcache.store.MemoryStoreEvictionPolicy;
@@ -39,19 +38,19 @@ public final class cache
 		// @sigtype java 3.5
 		// [i] field:0:required cacheManagerName
 		// [i] field:0:required cacheName
-		IDataCursor idc = pipeline.getCursor();
-		String cacheManagerName = IDataUtil.getString(idc, "cacheManagerName");
-		String cacheName = IDataUtil.getString(idc, "cacheName");
-		idc.destroy();
-		
-		Cache cache = CacheManagerUtil.getCacheManager(cacheManagerName).getCache(cacheName);
-//		cache.getCacheConfiguration().setStatistics(true);
-		// TODO: class Statistics does not exist any more. cache.setStatisticsEnabled neither.
-		//		cache.setStatisticsEnabled(true);
-		cache.getCacheConfiguration().setMemoryStoreEvictionPolicy(MemoryStoreEvictionPolicy.FIFO.toString());
-		cache.setMemoryStoreEvictionPolicy(new FifoPolicy());
-		cache.getMemoryStoreEvictionPolicy().getName();
-		//cache.setStatisticsAccuracy(Statistics.STATISTICS_ACCURACY_GUARANTEED);
+				IDataCursor idc = pipeline.getCursor();
+				String cacheManagerName = IDataUtil.getString(idc, "cacheManagerName");
+				String cacheName = IDataUtil.getString(idc, "cacheName");
+				idc.destroy();
+				
+				Cache cache = CacheManagerUtil.getCacheManager(cacheManagerName).getCache(cacheName);
+		//		cache.getCacheConfiguration().setStatistics(true);
+				// TODO: class Statistics does not exist any more. cache.setStatisticsEnabled neither.
+				//		cache.setStatisticsEnabled(true);
+				cache.getCacheConfiguration().setMemoryStoreEvictionPolicy(MemoryStoreEvictionPolicy.FIFO.toString());
+				cache.setMemoryStoreEvictionPolicy(new FifoPolicy());
+				cache.getMemoryStoreEvictionPolicy().getName();
+				//cache.setStatisticsAccuracy(Statistics.STATISTICS_ACCURACY_GUARANTEED);
 		// --- <<IS-END>> ---
 
                 
@@ -133,6 +132,7 @@ public final class cache
 		TestCacheEntry tce = new TestCacheEntry(testValue);
 					 
 		putInCache(cache, tce);
+			
 		// --- <<IS-END>> ---
 
                 
@@ -166,8 +166,10 @@ public final class cache
 	
 	static void putInCache(Cache cache, TestCacheEntry tce) {
 		Element e = new Element(CACHE_KEY, tce);
+//		e.setTimeToLive(timeToLiveSeconds);
 		cache.put(e);
 	}
+		
 		
 	// --- <<IS-END-SHARED>> ---
 }
