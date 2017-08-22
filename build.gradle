@@ -173,10 +173,10 @@ task copyReleaseNote(dependsOn: createReleaseNotes) << {
 		println "> Copy releaseNotes into $dest with version $version"
 		copy {
 			from ("tmp/releaseNotes.txt")  {
-				filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: ["version": version])
+				filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: ["version": project.version.toString()])
 			}
 			into(dest)
-			rename { String fileName -> "releaseNotes_${version}.txt" }
+			rename { String fileName -> "releaseNotes_${project.version.toString()}.txt" }
 		}
 	}
 }
