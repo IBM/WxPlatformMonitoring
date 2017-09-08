@@ -10,13 +10,12 @@ import groovyx.net.http.Method
 class ReleaseNotes {
 
 	String labcaseToken = null;
-	String projectId = null;
+//	String projectId = null;
 	// this is the id of the folder under Assets > build
 	String uploadDirId = "ce714497-bdcd-4d1d-8f13-7826d3dc05d3_x";
 	
 	def issueId = null;
 	File releaseNotesFile = null;
-	def version = null;
 	def versionId = null;
 
 	def client = null;
@@ -32,12 +31,13 @@ class ReleaseNotes {
 
 	void writeReleaseNotes(String notes) {
 //		def releaseNotesFile = new File(filePath)
+		println "Writing release notes to file " + releaseNotesFile.absolutePath
+		println "Release Notes: "  + notes 
 		releaseNotesFile.write notes
 	}
 	
 	void init() {
 		initClient();
-		getProjectId();
 		getToken();
 	}
 
@@ -45,7 +45,6 @@ class ReleaseNotes {
 		def cli = new CliBuilder (usage:'ReleaseNotes.groovy -issueId LABCASE_ISSUE_ID -version VERSION -filePath PATH_TO_RELEASE_NOTES')
 		cli.with {
 			h longOpt:'help', 'Usage information'
-			version longOpt:'version',argName:'version', args:1, 'The version for this release'
 			issueId longOpt:'issueId',argName:'issueId', args:1, '[optional] The Labcase Issue Id from which to get the relase data'
 			versionId longOpt:'versionId',argName:'versionId', args:1, '[optional] The labcase version id which defines this release'
 			filePath longOpt:'filePath', argName:'filePath', args:1, 'The path to where to store the release notes'
@@ -61,9 +60,7 @@ class ReleaseNotes {
 		assert opts
 		assert opts.issueId || opts.versionId
 		assert opts.filePath
-		assert opts.version
 		
-		this.version = opts.version
 		this.issueId = opts.issueId
 		this.versionId = opts.versionId
 		this.releaseNotesFile = new File(opts.filePath)
@@ -88,60 +85,70 @@ class ReleaseNotes {
 		if( issueId ) {
 			getReleaseNotesForIssue(issueId)
 		} else if( versionId ) {
-			listVersions()
 			getReleaseNotesForVersion(versionId)
 		} else {
 		}
 	}
 	
-	void listVersions() {
-		client.get( path: 'projects/${projectId}/versions.json' ) { resp, json ->
-			println "> having ${json.versions.@total_count} versions"
-			json.versions.each { version ->
-					println "${version.id}: ${version.name}"
-			}
-		}
-	}
-	
 	String getReleaseNotesForVersion(versionId) {
 		println "Getting release info for version ${versionId}"
+		// get all versions: https://labcase.softwareag.com/projects/${projectId}/versions.xml
+		// get specific version: https://labcase.softwareag.com/versions/5227.json
+		// get iisues for given version: https://labcase.softwareag.com/issues.xml?fixed_version_id=5227&project_id=6363
 		client.get(
-				path: "/issues/${issueId}.json",
-				query: [include : "children"],
+				path: "/versions/${versionId}.json",
 				contentType: groovyx.net.http.ContentType.TEXT ) { resp, json ->
 				println resp.status
 				def jsonSlurper = new groovy.json.JsonSlurper()
-				def issue = jsonSlurper.parse(json).issue;
-				def issueSubject = issue.subject
-						def issueDesc = issue.description
-						def childIssues = issue.children
-						println "issue: " + issue
-						println "Subject: " + issue.subject
-						
-						String nl = System.getProperty("line.separator");
+				def version = jsonSlurper.parse(json).version;
+				def versionSubject = version.name
+				def versionDesc = version.description
+				def projectId = version.project.id
+				println "version: " + version
+				println "Subject: " + versionSubject
+				println "Project: " + projectId
+				
+				String nl = System.getProperty("line.separator");
 				StringBuilder releaseNotes = new StringBuilder();
-				releaseNotes.append(issueSubject + " [${issueId}]");
+				releaseNotes.append("WxPlatformMonitoring");
+				releaseNotes.append(nl);
+				releaseNotes.append(versionSubject + " [${versionId}]");
 				releaseNotes.append(nl);
 				releaseNotes.append("@version@");
 				releaseNotes.append(nl);
 				releaseNotes.append("-------------------");
 				releaseNotes.append(nl);
 				releaseNotes.append(nl);
-				releaseNotes.append(issueDesc);
+				releaseNotes.append(versionDesc);
 				releaseNotes.append(nl);
 				releaseNotes.append(nl);
 				releaseNotes.append("Contents:");
 				releaseNotes.append(nl);
 				releaseNotes.append("--------");
 				releaseNotes.append(nl);
-				for (def childIssue in childIssues) {
-					releaseNotes.append("- [${childIssue.id}] ${childIssue.subject}");
-					releaseNotes.append(nl);
-				}
+				releaseNotes.append(getIssuesForVersion(versionId, projectId));
 				return releaseNotes
 		}
 	}
-	
+
+	String getIssuesForVersion(versionId, projectId) {
+		// get iisues for given version: https://labcase.softwareag.com/issues.xml?fixed_version_id=5227&project_id=6363
+		client.get(
+			path: "/issues.json",
+			query: [fixed_version : versionId, project_id: projectId],
+			contentType: groovyx.net.http.ContentType.TEXT ) { resp, json ->
+			def jsonSlurper = new groovy.json.JsonSlurper()
+			def issues = jsonSlurper.parse(json).issues;
+			StringBuilder issuesReleaseNotes = new StringBuilder() 
+			String nl = System.getProperty("line.separator");
+			for (def childIssue in issues) {
+				issuesReleaseNotes.append("- [${childIssue.id}] ${childIssue.subject}");
+				issuesReleaseNotes.append(nl);
+			}
+			return issuesReleaseNotes
+		}
+	}
+		
 	String getReleaseNotesForIssue(issueId) {
 		println "Getting release info for issue ${issueId}"
 		client.get( 
@@ -187,116 +194,5 @@ class ReleaseNotes {
 			println "Token: ${json.labcase.token}"
 			labcaseToken = json.labcase.token;
 		}
-	}
-
-	void getProjectId() {
-		client.get( path: 'projects/wxrestservices.json' ) { resp, json ->
-//			println resp.status
-//			println "Project id: ${json.project}"
-			projectId = json.project.id
-		}
-		println "> Project id for wxrestservices is $projectId"
-	}
-
-	void uploadPackage() {
-		String zipDestination = zipPackage();
-		def file = new File(zipDestination)
-		String filetoken = uploadDocument(file);
-		println "got file token "  + filetoken
-		String assetId = getPackageAssetIdIfExists();
-		if( assetId == null ) {
-			createDocument(filetoken);
-		} else {
-			updateDocument(filetoken, assetId);
-		}
-	}
-
-	void updateDocument(String filetoken, String assetId) {
-		println "updating document in labcase (filetoke: " + filetoken + ", assetId: "  + assetId + ")"
-		String jsonBody = '{"asset":{"token":"' + filetoken + '"}}';
-		String updateDocumentPath = "projects/wxrestservices/alfresco/documents/" + assetId + ".json"
-		println "jsonBody: " + jsonBody;
-		println "path: " + updateDocumentPath;
-		client.request( Method.PUT, ContentType.JSON ) { req ->
-			uri.path = updateDocumentPath
-			headers.Accept = 'application/json'
-			body = jsonBody
-			response.success = { resp, reader ->
-				println "Got response: ${resp.statusLine}"
-				println "Content-Type: ${resp.headers.'Content-Type'}"
-			}
-		}
-	}
-
-	String createDocument(String filetoken) {
-		println "creating new document in labcase for uploaded package"
-		String jsonBody = '{"assets":[{"type":"file","name":"' + packageAssetName + '","title":"' + packageAssetName + '","description":"' + packageAssetName + '","token":"' + filetoken + '"}]}';
-		// hardcoded to Assets > build folder in labcase
-		String createDocumentPath = "projects/wxrestservices/alfresco/documents/" + uploadDirId + ".json"
-		println "jsonBody: " + jsonBody;
-		println "path: " + createDocumentPath;
-
-		client.request( Method.POST, ContentType.JSON ) { req ->
-			uri.path = createDocumentPath
-			headers.Accept = 'application/json'
-			body = jsonBody
-			response.success = { resp, reader ->
-				println "Got response: ${resp.statusLine}"
-				println "Content-Type: ${resp.headers.'Content-Type'}"
-				print reader.text
-			}
-		}
-	}
-
-
-
-	String getPackageAssetIdIfExists() {
-		println "checking if package has been uploaded already"
-		String uploadDirPath = "projects/wxrestservices/alfresco/documents/" + uploadDirId + ".json"
-		String id = null;
-		client.get(path: uploadDirPath) { resp, json ->
-			println "folder listing: "  + json
-			def children = json.asset.children;
-			children.each() { child ->
-				println "child: " + child
-				if( child.name == packageAssetName ) {
-					println "package has been uploaded already (id: ${child.id})"
-					id= child.id;
-				}
-			}
-		}
-		return id;
-	}
-
-	String uploadDocument(File zipFile) {
-		println "uploading document to labcase.... this could take a while..."
-		client.encoder.'application/octet-stream' = this.&encodeZipFile
-		client.post( path: "uploads.json", body: zipFile, requestContentType: 'application/octet-stream' ) { resp, json ->
-			println resp.status
-			println json.upload.token
-			return json.upload.token
-		}
-	}
-
-	def encodeZipFile( Object data ) throws UnsupportedEncodingException {
-		if ( data instanceof File ) {
-			def entity = new FileEntity( (File) data, "application/octet-stream" );
-			entity.setContentType( "application/octet-stream" );
-			return entity
-		} else {
-			throw new IllegalArgumentException(
-			"Don't know how to encode ${data.class.name} as a zip file" );
-		}
-	}
-
-	String zipPackage() {
-		def destination = "build/WxPlatformMonitoring.zip";
-		// on ClassNotFoundException java.lang.NoClassDefFoundError: org/apache/tools/ant/BuildException
-		// http://stackoverflow.com/questions/13216875/antbuilder-works-in-groovy-console-but-not-in-eclipse#13222973
-		def ant = new AntBuilder()
-		ant.zip(destfile: destination, basedir: 'is_packages/WxPlatformMonitoring')
-		return destination;
-		//		println "!!!!!!!!!!!!!!!!!!!!!!! returning dummy zip"
-		//		return "build/tmp.zip";
 	}
 }

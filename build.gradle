@@ -4,7 +4,6 @@ buildscript {
 		jcenter()
 	}
 	dependencies { 
-//		classpath 'org.ajoberstar:grgit:2.0.0' 
 		classpath "org.ajoberstar:gradle-git:1.7.2"
 	}
 }
@@ -15,16 +14,20 @@ apply plugin: 'distribution'
 apply plugin: 'base'
 apply plugin: 'maven'
 apply plugin: "org.ajoberstar.grgit"
-apply plugin: 'org.ajoberstar.release-opinion'
+apply plugin: 'org.ajoberstar.release-opinion' // https://github.com/ajoberstar/gradle-git/wiki/Release-Plugins
 
+
+/**
+ * Run with:
+ * -Prelease.scope=major|minor|patch -Prelease.stage=rc|final
+ */
 Properties props = new Properties()
 props.load(new FileInputStream(new File(projectDir, "build_912.properties")))
 
-//version = '1.0.0'
 group = "com.softwareag.wx.platformMonitoring"
 archivesBaseName='WxPlatformMonitoringDist'
 def packages = ['WxPlatformMonitoring', 'WxPlatformMonitoring_Test']
-def labcaseReleaseIssue = "137102"
+def labcaseReleaseVersion = "5227"
 
 tasks.distTar.enabled = false
 
@@ -32,16 +35,12 @@ ext {
 	// Open the Git repository in the current directory.
 	git = org.ajoberstar.grgit.Grgit.open(file('.'))
 			git = org.ajoberstar.grgit.Grgit.open(file('.'))
-//	grgit.open(dir: projectDir, creds: null)
-
 	// Get commit id of HEAD.
-	//    revision = git.head().id
+	// revision = git.head().id
 	// Alternative is using abbreviatedId of head() method.
 	revision = grgit.head().abbreviatedId
 	buildNumber = grgit.head().abbreviatedId
 }
-
-
 
 distributions {
 	wxplatformmon {
@@ -51,7 +50,6 @@ distributions {
 		}
 	}
 }
-
 
 // read the labcase password of user waa from the file labcase.pwd
 def getLabcasePassword() {
@@ -64,18 +62,6 @@ def getLabcasePassword() {
 		throw new RuntimeException(mgs)
 	}
 }
-
-//
-//
-//ext.gitTag = "${project.version.toString()}"
-//
-//task createTag(type: GitTag) {
-//	repoPath = rootDir
-//	tagName = gitTag
-//	message = "Application release ${gitTag}"
-//}
-//
-//task pushTag(type: GitPush, dependsOn: createTag) { namesOrSpecs = [gitTag] }
 
 ext.gitTagAlreadyExits = false;
 
@@ -161,9 +147,10 @@ task createReleaseNotes(dependsOn: classes) << {
 		println "> Creating release notes"
 		main = 'com.softwareag.wx.restServices.utils.labcase.ReleaseNotes'
 		classpath = sourceSets.main.runtimeClasspath
-		args('-issueId', labcaseReleaseIssue)
+		args('-versionId', labcaseReleaseVersion)
 		args('-filePath', './tmp/releaseNotes.txt')
-		args('-version', version)
+//		args('-version', version)
+//		args('-version', version)
 	}
 }
 
@@ -215,17 +202,14 @@ task uploadRelease(type: Upload) {
 			]
 			def labcasePath = "DE/GCS/GCS/wxplatformmon/"
 			// does not work, snapshot is only after configuration phase...
-			if(project.version.toString().endsWith('-SNAPSHOT')) {
+			println "---------- project.'release.stage': " + project.'release.stage'
+			if(project.'release.stage'.equals('rc')) {
 				labcasePath = labcasePath + "snapshots"
-			} else {
+			} else if(project.'release.stage'.equals('final')) {
 				labcasePath = labcasePath + "release"
 			}
 			repository(url: "dav:https://${DAV.server}/${DAV.root}/${labcasePath}") {
 				println "> uploading to release repo"
-				authentication(userName: DAV.user, password: DAV.pass)
-			}
-			snapshotRepository(url: "dav:https://${DAV.server}/${DAV.root}/${labcasePath}") {
-				println "> uploading to snapshot repo"
 				authentication(userName: DAV.user, password: DAV.pass)
 			}
 			uniqueVersion = false
@@ -262,6 +246,11 @@ task uploadRelease(type: Upload) {
 		}
 	}
 }
+uploadRelease.doFirst {
+	if (!project.'release.stage'.equals('final') && !project.'release.stage'.equals('rc')) { 
+		throw new StopExecutionException(">>> Skippipng uploading release to Labcase because release stage is neither 'final' nor 'milestone' but '${project.'release.stage'}' ") 
+	}
+}
 
 task checkSnapshotRelease << {
 	if( !version.toString().endsWith("SNAPSHOT") ) {
@@ -274,7 +263,8 @@ task checkRelease << {
 	}
 }
 
-task releaseActions(dependsOn: [cleanup, copyPackages, copyReleaseNote, wxplatformmonDistZip, install, uploadRelease]) << {  println "We build the distribution ZIP with version '$version'."  }
+task releaseActions(dependsOn: [cleanup, copyPackages, copyReleaseNote, wxplatformmonDistZip, install, uploadRelease]) << {  
+	println "We build the distribution ZIP with version '$version'."  }
 task releaseSnapshot(dependsOn: [checkSnapshotRelease, releaseActions]) << {  println "We build the distribution ZIP with version '$version'."  }
 task releaseIt (dependsOn: [checkRelease, createTag, releaseActions]) << { println 'We release now.' }
 
