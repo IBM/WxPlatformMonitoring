@@ -1,0 +1,10 @@
+{
+	"wmic": {
+		"accounts": [{
+			"alias": "dev"
+		},{
+			"alias": "prod",
+			"stage": "stage03" 
+		}]
+	}
+}

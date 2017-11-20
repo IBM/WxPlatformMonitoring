@@ -1,0 +1,15 @@
+{
+	"acl": {
+		"config":{
+			"aclName": "WxPlatformMonitoring",
+			"allowedList": ["local/Administrators",
+			"local/Anonymous"]
+		}
+	},
+	"wmic": {
+		"accounts": [{
+			"alias": "dev"},{
+			"alias": "dev1"
+		}]
+	}
+}

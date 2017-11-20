@@ -1,8 +1,6 @@
 package wx.platformMonitoring.impl.internal.utility;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-03-14 12:49:23 CET
-// -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
 import com.wm.util.Values;
@@ -68,6 +66,39 @@ public final class list
 		//		IDataUtil.put( pipelineCursor, "isIn", "" + s.contains( value ) );
 		pipelineCursor.destroy();
 			
+			
+		// --- <<IS-END>> ---
+
+                
+	}
+
+
+
+	public static final void docListToStringList (IData pipeline)
+        throws ServiceException
+	{
+		// --- <<IS-START(docListToStringList)>> ---
+		// @sigtype java 3.5
+		// [i] record:1:required docList
+		// [i] field:0:required fieldName
+		// [o] field:1:required stringList
+		IDataCursor pipelineCursor = pipeline.getCursor();
+		String	fieldName = IDataUtil.getString( pipelineCursor, "fieldName" );
+		IData[]	docList = IDataUtil.getIDataArray( pipelineCursor, "docList" );
+		java.util.List<String> tmpList = new java.util.ArrayList<String>();
+		if ( docList != null) {
+			for ( int i = 0; i < docList.length; i++ ) {
+				String field = IDataUtil.getString(docList[i].getCursor(), fieldName);
+				if( field != null && !("".equals(field)) ) {
+					tmpList.add(field);
+				}
+			}
+		}
+		if( tmpList.size() == 0 ) {
+			return;
+		}
+		IDataUtil.put( pipelineCursor, "stringList", tmpList.toArray(new String[0]));
+		pipelineCursor.destroy();
 			
 		// --- <<IS-END>> ---
 

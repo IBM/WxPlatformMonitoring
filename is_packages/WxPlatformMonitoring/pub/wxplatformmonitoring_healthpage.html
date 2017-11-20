@@ -83,6 +83,31 @@
 		<div class="overview pure-u-1-2">
 			<div class="pure-g">
 				<div class="overview tableView pure-u-1">
+					<div class="heading">webMethods Integration Cloud health</div>
+					<table class="pure-table pure-table-bordered">
+						<thead class="overview">
+							<tr>
+								<th><span class="tiny material-icons">done</span></th>
+								<th>Check</th>
+								<th>Details</th>
+								<th>Link</th>
+							</tr>
+						</thead>
+						<tbody class="overview">
+							<tr id="wx.platformMonitoring.pub.wmic:getWmicConnectionState" >
+							</tr>
+							<tr id="wx.platformMonitoring.pub.wmic:listConfiguredWmicAccounts" >
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="pure-g">
+		<div class="overview pure-u-1-2">
+			<div class="pure-g">
+				<div class="overview tableView pure-u-1">
 					<div class="heading">Misc health</div>
 					<table class="pure-table pure-table-bordered">
 						<thead class="overview">
@@ -143,6 +168,28 @@
 
 	<script type="text/javascript">
 
+	evaluteService("wx.platformMonitoring.pub.wmic:getWmicConnectionState", function checkFunction(result) {
+		if (result.wmicConnectionStatus.status == "ok") {
+			return true;
+		}
+		return false;
+	}, function getStatusValue(result) {
+		return result.wmicConnectionStatus.reading;
+	}, {
+		description: "Http connection status for WMIC",
+		linkHref: "/WmCloud/integration-live-tenant-account.dsp"
+	});
+	evaluteService("wx.platformMonitoring.pub.wmic:listConfiguredWmicAccounts", function checkFunction(result) {
+		if (result.nrDisabled == 0) {
+			return true;
+		}
+		return false;
+	}, function getStatusValue(result) {
+		return result.nrDisabled;
+	}, {
+		description: "Disabled WMIC accounts",
+		linkHref: "/WmCloud/integration-live-tenant-account.dsp"
+	});
 	evaluteService("wx.platformMonitoring.pub.adapter.jdbc:listAllJdbcAdapters", function checkFunction(result) {
 		if (result.nrDisabled == 0) {
 			return true;

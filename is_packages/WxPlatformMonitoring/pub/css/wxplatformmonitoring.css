@@ -35,6 +35,10 @@ div.overview {
   padding-right: 10px;
 }
 
+div.pure-g {
+	margin-top: 5px;
+}
+
 div.overview .heading {
   display:flex;
 align-items: center; /* Vertical center alignment */
