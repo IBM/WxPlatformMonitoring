@@ -1,0 +1,18 @@
+{
+	"acl": {
+		"config":{
+			"aclName": "WxPlatformMonitoring",
+			"allowedList": ["local/Administrators",
+			"local/Anonymous"]
+		}
+	},
+	"schedulers": {
+		"schedulerList": ["pub.math:multiplyFloats",
+		"wx.config.impl.reload:rescanForAdd"]
+	},
+	"ports": {
+		"ports": ["${watt.wx.platformMonitoring.testProperty}", "9999", "5111"],
+		"portAliases": ["Port_5678"],
+		"packages": ["WxPlatformMonitoring_Test"]
+	}
+}

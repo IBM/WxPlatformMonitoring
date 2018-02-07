@@ -8,9 +8,10 @@
     <null name="wx.platformMonitoring.impl.internal.startup:addAcl"/>
     <null name="wx.platformMonitoring.impl.internal.startup:loadConfig"/>
     <null name="wx.platformMonitoring.impl.internal.startup:registerDefaultPackage"/>
+    <null name="wx.platformMonitoring.impl.internal.startup:registerDefaultPropertyResolver"/>
     <null name="wx.platformMonitoring.impl.internal.startup:registerSolution"/>
     <null name="wx.platformMonitoring.impl.internal.startup:setupLogger"/>
-    <null name="wx.platformMonitoring.impl.internal.startup:registerDefaultPropertyResolver"/>
+    <null name="wx.platformMonitoring.impl.internal.startup:setupJmx"/>
   </record>
   <null name="shutdown_services"/>
   <null name="replication_services"/>

@@ -1,8 +1,6 @@
 package wx.platformMonitoring.impl.internal.utility;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-03-14 12:49:27 CET
-// -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
 import com.wm.util.Values;
@@ -83,6 +81,32 @@ public final class string
 		IDataUtil.put( pipelineCursor, "doesMatch", doesMatch?"true":"false" );
 		pipelineCursor.destroy();
 			
+		// --- <<IS-END>> ---
+
+                
+	}
+
+
+
+	public static final void toFloat (IData pipeline)
+        throws ServiceException
+	{
+		// --- <<IS-START(toFloat)>> ---
+		// @sigtype java 3.5
+		// [i] object:0:required in
+		// [o] object:0:required out
+		IDataCursor pipelineCursor = pipeline.getCursor();
+		Object	in = IDataUtil.get( pipelineCursor, "in" );
+		Float out = null;
+		if( in != null ) {
+			try {
+				out = Float.parseFloat(in.toString());
+			} catch( Exception e ) {
+				return;
+			}
+		}
+		IDataUtil.put( pipelineCursor, "out", out );
+		pipelineCursor.destroy();
 		// --- <<IS-END>> ---
 
                 

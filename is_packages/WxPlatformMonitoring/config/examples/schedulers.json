@@ -1,6 +1,6 @@
 {
 	"schedulers": {
-		"schedulerList": ["wm.monitor.admin:imageCleanup",
+		"schedulerList": ["pub.math:multiplyFloats",
 		"wx.config.impl.reload:rescanForAdd"]
 	}
 }
