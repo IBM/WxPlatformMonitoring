@@ -2,6 +2,7 @@ package com.softwareag.wx.restServices.utils.labcase
 
 import org.apache.http.entity.FileEntity
 import groovy.swing.SwingBuilder
+import groovy.transform.EqualsAndHashCode
 import groovy.util.logging.Log4j
 import groovyx.net.http.ContentType
 import groovyx.net.http.Method
@@ -10,13 +11,9 @@ import groovyx.net.http.Method
 class ReleaseNotes {
 
 	String labcaseToken = null;
-//	String projectId = null;
-	// this is the id of the folder under Assets > build
-	String uploadDirId = "ce714497-bdcd-4d1d-8f13-7826d3dc05d3_x";
-	
-	def issueId = null;
+
 	File releaseNotesFile = null;
-	def versionId = null;
+	def projectVersion = null
 
 	def client = null;
 
@@ -24,13 +21,11 @@ class ReleaseNotes {
 		ReleaseNotes u = new ReleaseNotes();
 		u.parseCLI(args);
 		u.init();
-		//u.uploadPackage();
 		String releaseNotes = u.getReleaseNotes();
 		u.writeReleaseNotes(releaseNotes)
 	}
 
 	void writeReleaseNotes(String notes) {
-//		def releaseNotesFile = new File(filePath)
 		println "Writing release notes to file " + releaseNotesFile.absolutePath
 		println "Release Notes: "  + notes 
 		releaseNotesFile.write notes
@@ -45,12 +40,10 @@ class ReleaseNotes {
 		def cli = new CliBuilder (usage:'ReleaseNotes.groovy -issueId LABCASE_ISSUE_ID -version VERSION -filePath PATH_TO_RELEASE_NOTES')
 		cli.with {
 			h longOpt:'help', 'Usage information'
-			issueId longOpt:'issueId',argName:'issueId', args:1, '[optional] The Labcase Issue Id from which to get the relase data'
-			versionId longOpt:'versionId',argName:'versionId', args:1, '[optional] The labcase version id which defines this release'
+			projectVersion longOpt:'projectVersion',argName:'projectVersion', args:1, '[optional] The project version, e.g. 1.1.0'
 			filePath longOpt:'filePath', argName:'filePath', args:1, 'The path to where to store the release notes'
 		}
 		def opts = cli.parse(args)
-		println "-----"  + opts.issueId + " + " + args
 		if(!opts) return
 			if(opts.help) {
 				cli.usage()
@@ -58,14 +51,15 @@ class ReleaseNotes {
 			}
 		
 		assert opts
-		assert opts.issueId || opts.versionId
+		assert opts.projectVersion
 		assert opts.filePath
 		
-		this.issueId = opts.issueId
-		this.versionId = opts.versionId
+		this.projectVersion = opts.projectVersion
 		this.releaseNotesFile = new File(opts.filePath)
 		
-		assert releaseNotesFile.parentFile.exists()		
+		if( !releaseNotesFile.parentFile.exists() ) {
+			releaseNotesFile.parentFile.mkdirs()
+		}		
 	}
 
 	void initClient() {
@@ -81,12 +75,48 @@ class ReleaseNotes {
 		client.auth.basic 'waa', pwd
 	}
 
+	String getProjectId() {
+		client.get( path: 'projects/wxinterceptor.json' ) { resp, json ->
+			println "> Project id for WxInterceptor is " + json.project.id
+			return json.project.id
+		}
+	}
+	
+	/**
+	 * Getting labcase version by converntion: 
+	 * Labcase Version Name must end with the same version number as the project version
+	 * E.g. "New Release 1.1.1", or "Version 1.0.0"
+	 * @param projectVersion
+	 * @param projectId
+	 * @return
+	 */
+	String getLabcaseVersionByProjectVersion(projectVersion, projectId) {
+		def labcaseVersionId = null
+		println "Getting labcase version for project ${projectId} and release version ${projectVersion}"
+		client.get( path: "projects/${projectId}/versions.json" ) { resp, json ->
+			json.versions.each { version ->
+					def versionId = version.id
+					def versionName = version.name
+					if( versionName.endsWith(projectVersion) ) {
+						println "found Labcase version ${versionId} (Name: '${versionName}') for project version"
+						labcaseVersionId = versionId
+					}
+			}
+		}
+		if( !labcaseVersionId ) {
+			throw new RuntimeException("Did not find a Labcase Version for project version " + projectVersion)
+		}
+		return labcaseVersionId
+	}
+	
 	String getReleaseNotes() {
-		if( issueId ) {
-			getReleaseNotesForIssue(issueId)
-		} else if( versionId ) {
+		if( this.projectVersion ) {
+			// lets try to get the release notes by 
+			def projectId = this.getProjectId()
+			def versionId = getLabcaseVersionByProjectVersion(this.projectVersion, projectId)
 			getReleaseNotesForVersion(versionId)
 		} else {
+			throw new RuntimeException("Cannot create Release Notes without neither issueId, versionId nor project version number...");
 		}
 	}
 	
@@ -110,81 +140,53 @@ class ReleaseNotes {
 				
 				String nl = System.getProperty("line.separator");
 				StringBuilder releaseNotes = new StringBuilder();
-				releaseNotes.append("WxPlatformMonitoring");
+				releaseNotes.append("WxInterceptor");
 				releaseNotes.append(nl);
-				releaseNotes.append(versionSubject + " [${versionId}]");
-				releaseNotes.append(nl);
-				releaseNotes.append("@version@");
+				releaseNotes.append("Version @version@");
 				releaseNotes.append(nl);
 				releaseNotes.append("-------------------");
-				releaseNotes.append(nl);
-				releaseNotes.append(nl);
-				releaseNotes.append(versionDesc);
+				if( versionDesc != null && !''.equals(versionDesc) ) {
+					releaseNotes.append(nl);
+					releaseNotes.append(nl);
+					releaseNotes.append(versionDesc);
+					releaseNotes.append(nl);
+					releaseNotes.append(nl);
+				}
 				releaseNotes.append(nl);
 				releaseNotes.append(nl);
 				releaseNotes.append("Contents:");
 				releaseNotes.append(nl);
-				releaseNotes.append("--------");
+				releaseNotes.append("---------");
 				releaseNotes.append(nl);
 				releaseNotes.append(getIssuesForVersion(versionId, projectId));
 				return releaseNotes
 		}
 	}
-
+	
 	String getIssuesForVersion(versionId, projectId) {
 		// get iisues for given version: https://labcase.softwareag.com/issues.xml?fixed_version_id=5227&project_id=6363
+		/*
+		 * Debug RestClient/HttpClient: https://stackoverflow.com/questions/7858238/how-to-output-the-generated-request-and-response-from-groovy-restclient
+		 * Add the following parameters to groovy call:
+		 * 	-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog 
+			-Dorg.apache.commons.logging.simplelog.showdatetime=true 
+			-Dorg.apache.commons.logging.simplelog.log.org.apache.http=DEBUG 
+		 */
+		println "Getting Project Issues for project ${projectId} and version ${versionId}"
 		client.get(
-			path: "/issues.json",
-			query: [fixed_version : versionId, project_id: projectId],
-			contentType: groovyx.net.http.ContentType.TEXT ) { resp, json ->
-			def jsonSlurper = new groovy.json.JsonSlurper()
-			def issues = jsonSlurper.parse(json).issues;
-			StringBuilder issuesReleaseNotes = new StringBuilder() 
-			String nl = System.getProperty("line.separator");
-			for (def childIssue in issues) {
-				issuesReleaseNotes.append("- [${childIssue.id}] ${childIssue.subject}");
-				issuesReleaseNotes.append(nl);
-			}
-			return issuesReleaseNotes
-		}
-	}
-		
-	String getReleaseNotesForIssue(issueId) {
-		println "Getting release info for issue ${issueId}"
-		client.get( 
-				path: "/issues/${issueId}.json",
-				query: [include : "children"],
+				path: "/issues.json",
+				query: ['fixed_version_id': versionId, 'project_id': projectId],
 				contentType: groovyx.net.http.ContentType.TEXT ) { resp, json ->
-				println resp.status
 				def jsonSlurper = new groovy.json.JsonSlurper()
-				def issue = jsonSlurper.parse(json).issue;
-				def issueSubject = issue.subject
-						def issueDesc = issue.description
-						def childIssues = issue.children
-						println "issue: " + issue
-						println "Subject: " + issue.subject
-						
+				def issues = jsonSlurper.parse(json).issues;
+				StringBuilder issuesReleaseNotes = new StringBuilder() 
 						String nl = System.getProperty("line.separator");
-				StringBuilder releaseNotes = new StringBuilder();
-				releaseNotes.append(issueSubject + " [${issueId}]");
-				releaseNotes.append(nl);
-				releaseNotes.append("@version@");
-				releaseNotes.append(nl);
-				releaseNotes.append("-------------------");
-				releaseNotes.append(nl);
-				releaseNotes.append(nl);
-				releaseNotes.append(issueDesc);
-				releaseNotes.append(nl);
-				releaseNotes.append(nl);
-				releaseNotes.append("Contents:");
-				releaseNotes.append(nl);
-				releaseNotes.append("--------");
-				releaseNotes.append(nl);
-				for (def childIssue in childIssues) {
-					releaseNotes.append("- [${childIssue.id}] ${childIssue.subject}");
-					releaseNotes.append(nl);
+				for (def childIssue in issues) {
+					println ">> Found issue ${childIssue.id} for version"
+					issuesReleaseNotes.append("- [${childIssue.id}] ${childIssue.subject}");
+					issuesReleaseNotes.append(nl);
 				}
-				return releaseNotes
+				return issuesReleaseNotes
 		}
 	}
 	
