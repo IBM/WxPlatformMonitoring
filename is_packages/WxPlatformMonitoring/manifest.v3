@@ -5,14 +5,7 @@
   <value name="system_package">no</value>
   <value name="version">1.0</value>
   <record name="startup_services" javaclass="com.wm.util.Values">
-    <null name="wx.platformMonitoring.impl.internal.startup:addAcl"/>
-    <null name="wx.platformMonitoring.impl.internal.startup:loadConfig"/>
-    <null name="wx.platformMonitoring.impl.internal.startup:registerDefaultPackage"/>
-    <null name="wx.platformMonitoring.impl.internal.startup:registerDefaultPropertyResolver"/>
-    <null name="wx.platformMonitoring.impl.internal.startup:registerSolution"/>
-    <null name="wx.platformMonitoring.impl.internal.startup:setupJmx"/>
-    <null name="wx.platformMonitoring.impl.internal.startup:setupLogger"/>
-    <null name="wx.platformMonitoring.impl.internal.startup:registerForPrometheus"/>
+    <null name="wx.platformMonitoring.impl.internal.startup:startup"/>
   </record>
   <null name="shutdown_services"/>
   <null name="replication_services"/>

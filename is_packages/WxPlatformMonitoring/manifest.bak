@@ -9,9 +9,11 @@
     <null name="wx.platformMonitoring.impl.internal.startup:loadConfig"/>
     <null name="wx.platformMonitoring.impl.internal.startup:registerDefaultPackage"/>
     <null name="wx.platformMonitoring.impl.internal.startup:registerDefaultPropertyResolver"/>
+    <null name="wx.platformMonitoring.impl.internal.startup:registerForPrometheus"/>
     <null name="wx.platformMonitoring.impl.internal.startup:registerSolution"/>
-    <null name="wx.platformMonitoring.impl.internal.startup:setupLogger"/>
     <null name="wx.platformMonitoring.impl.internal.startup:setupJmx"/>
+    <null name="wx.platformMonitoring.impl.internal.startup:setupLogger"/>
+    <null name="wx.platformMonitoring.impl.internal.startup:registerWxConfigConfigResolverService"/>
   </record>
   <null name="shutdown_services"/>
   <null name="replication_services"/>

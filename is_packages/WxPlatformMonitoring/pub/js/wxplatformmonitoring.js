@@ -70,13 +70,13 @@ function invokeSimple(url, data, id, successCallback) {
 	}).done(function(msg) {
 		successCallback(msg);
 	}).fail(function failure(jqXHR, exception, error) {
-		failureFunction(jqXHR, id, url)
+		failureFunctionSilent(jqXHR, id, url, successCallback)
 	});
 }
 
 function failureFunction(jqXHR, id, url) {
 		if (jqXHR.status === 0) {
-			alert('Not connect.\n Verify Network.');
+			alert("Not connected to '" + url + "'. Verify Network.");
 		} else if (jqXHR.status == 404) {
 			alert('Requested page not found. [404]');
 		} else if (jqXHR.status == 500) {
@@ -91,6 +91,27 @@ function failureFunction(jqXHR, id, url) {
 		} else {
 			alert('Uncaught Error.\n' + jqXHR.responseText);
 		}
+}
+
+function failureFunctionSilent(jqXHR, id, url, callback) {
+		var msg = {connectionStatus: {status: "nok"}};
+		if (jqXHR.status === 0) {
+			msg.connectionStatus.reading = "No connection";
+		} else if (jqXHR.status == 404) {
+			msg.connectionStatus.reading = "404";
+		} else if (jqXHR.status == 500) {
+			msg.connectionStatus.reading = "500";
+		} else if (exception === 'parsererror') {
+			msg.connectionStatus.reading = "Requested JSON parse failed.";
+		} else if (exception === 'timeout') {
+			msg.connectionStatus.reading = "Time out error.";
+		} else if (exception === 'abort') {
+			msg.connectionStatus.reading = "Ajax request aborted.";
+		} else {
+			msg.connectionStatus.reading = "Uncaught Error." + jqXHR.responseText;
+		}
+		console.log("failure. returning " + msg);
+		callback(msg);
 }
 
 function createDashbaordElement(id, description, linkHref) {

@@ -5,10 +5,6 @@
 
   <!-- nodes -->
 
-<INVOKE TIMEOUT="" SERVICE="pub.flow:tracePipeline" VALIDATE-IN="$none" VALIDATE-OUT="$none">
-  <COMMENT></COMMENT>
-</INVOKE>
-
 <INVOKE TIMEOUT="" SERVICE="wx.config.pub:getValue" VALIDATE-IN="$none" VALIDATE-OUT="$none">
   <COMMENT></COMMENT>
 
@@ -917,6 +913,10 @@
 </MAP>
 </INVOKE>
 </BRANCH>
+
+<INVOKE TIMEOUT="" SERVICE="pub.flow:tracePipeline" VALIDATE-IN="$none" VALIDATE-OUT="$none">
+  <COMMENT></COMMENT>
+</INVOKE>
 
 <MAP TIMEOUT="" MODE="STANDALONE">
   <COMMENT></COMMENT>
