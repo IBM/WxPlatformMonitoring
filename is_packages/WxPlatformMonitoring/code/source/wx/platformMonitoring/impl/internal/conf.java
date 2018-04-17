@@ -82,10 +82,34 @@ public final class conf
 		// --- <<IS-START(loadConfigurationFile)>> ---
 		// @sigtype java 3.5
 		// [i] field:0:required configFile
+		// [i] field:0:optional packageName
 		IDataCursor pipelineC = pipeline.getCursor();
 		String configFile = IDataUtil.getString(pipelineC, "configFile");
+		String packageName = IDataUtil.getString(pipelineC, "packageName");
+		File cFile = null;
 		
-		addAssetConfiguration(configFile);
+		if( packageName != null && !"".equals(packageName) ) {
+			File configDir = ServerAPI.getPackageConfigDir(packageName);
+			if( !configDir.exists() ) {
+				logger.error("Could not load '" + configFile + "' from config dir of package " + packageName + "': config dir does not exist.");				
+				return;
+			}
+			cFile = new File(configDir, configFile);
+			if( !cFile.exists() ) {
+				logger.error("Could not load '" + configFile + "' from config dir of package '" + packageName + "': config file does not exist.");				
+				return;
+			}
+		} else {
+			cFile = new File(configFile);
+			if (!cFile.exists()) {
+				logger.error("Could not load '" + configFile + ": config file does not exist in directory " + new File(".").getAbsolutePath());				
+				return;
+			}
+		}
+		if( cFile != null ) {
+			logger.debug("Loading configuration file " + cFile.getAbsolutePath());
+			addAssetConfiguration(cFile);
+		}			
 		// --- <<IS-END>> ---
 
                 
@@ -479,6 +503,7 @@ public final class conf
 		return configDir;
 	}
 	
+		
 		
 		
 	// --- <<IS-END-SHARED>> ---

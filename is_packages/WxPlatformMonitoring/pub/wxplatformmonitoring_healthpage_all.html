@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<title>WxPlatformMonitoring Overview</title>
+
+	<!-- Bootstrap -->
+	<!-- <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet"> -->
+	<link rel="stylesheet" type="text/css" href="/WxPlatformMonitoring/css/pure-nr-min.css" />
+	<link rel="stylesheet" type="text/css" href="/WxPlatformMonitoring/css/bootstrap/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="/WxPlatformMonitoring/css/json-formatter.css" />
+	<link rel="stylesheet" type="text/css" href="/WxPlatformMonitoring/css/wxplatformmonitoring.css" />
+	<link rel="stylesheet" type="text/css" href="/WmRoot/webMethods.css" />
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+	<div class="pure-g">
+		<div class="overview pure-u-1-5">
+			<div class="pure-g">
+				<div class="overview tableView pure-u-1">
+					<div class="heading">JDBC Connections</div>
+					<table class="pure-table pure-table-bordered">
+						<thead class="overview">
+							<tr>
+								<th><span class="tiny material-icons">done</span></th>
+								<th>Check</th>
+								<th>Reading</th>
+								<th>Link</th>
+							</tr>
+						</thead>
+						<tbody class="overview" id="wx.platformMonitoring.pub.adapter.jdbc:listConfiguredJdbcAdapters">
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="overview pure-u-1-5">
+			<div class="pure-g">
+				<div class="overview tableView pure-u-1">
+					<div class="heading">SAP Connections</div>
+					<table class="pure-table pure-table-bordered">
+						<thead class="overview">
+							<tr>
+								<th><span class="tiny material-icons">done</span></th>
+								<th>Check</th>
+								<th>Reading</th>
+								<th>Link</th>
+							</tr>
+						</thead>
+						<tbody class="overview" id="wx.platformMonitoring.pub.adapter.sap:listConfiguredSapConnections" linkHref="/WmRoot/adapter-index.dsp?url=%2FWmART%2FListResources.dsp%3FadapterTypeName%3DJDBCAdapter%26dspName%3D.LISTRESOURCES&adapter=JDBCAdapter&text=webMethods+Adapter+for+JDBC&help=true">
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="overview pure-u-1-5">
+			<div class="pure-g">
+				<div class="overview tableView pure-u-1">
+					<div class="heading">HTTP Connections</div>
+					<table class="pure-table pure-table-bordered">
+						<thead class="overview">
+							<tr>
+								<th><span class="tiny material-icons">done</span></th>
+								<th>Check</th>
+								<th>Reading</th>
+								<th>Link</th>
+							</tr>
+						</thead>
+						<tbody class="overview" id="wx.platformMonitoring.pub.http:listConfiguredConnections" description="http connections" linkHref="/WmRoot/adapter-index.dsp?url=%2FWmART%2FListResources.dsp%3FadapterTypeName%3DJDBCAdapter%26dspName%3D.LISTRESOURCES&adapter=JDBCAdapter&text=webMethods+Adapter+for+JDBC&help=true">
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="/WxPlatformMonitoring/js/jquery-3.1.1.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="/WxPlatformMonitoring/js/bootstrap.min.js"></script>
+	<!-- bootbox: alert popup -->
+	<script src="/WxPlatformMonitoring/js/bootbox.min.js"></script>
+	<script src="/WxPlatformMonitoring/js/wxplatformmonitoring.js"></script>
+	<!-- json-formatter: json tree in popup -->
+	<script src="/WxPlatformMonitoring/js/json-formatter.js"></script>
+
+	<script type="text/javascript">
+
+	evaluteServiceAsList("wx.platformMonitoring.pub.adapter.jdbc:listConfiguredJdbcAdapters", "statusList", function isOk(value) {
+		return value.status == "enabled";
+	});
+
+	evaluteServiceAsList("wx.platformMonitoring.pub.adapter.sap:listConfiguredSapConnections", "assetList", function isOk(value) {
+		return value.status == "ok";
+	});
+
+	evaluteServiceAsListWithData("wx.platformMonitoring.pub.http:listConfiguredConnections", {"executeConnection": "false"}, "connectionStatusList", function isOk(value) {
+		return value.status == "ok";
+	}, function getStatusValue(checkUrl, id, callback) {
+		var serviceUrl = createUrlForService("wx.platformMonitoring.pub.http:getConnectionStatusAsync");
+		invokeSimple(serviceUrl, {"url": checkUrl}, id, function response(data) {
+			if( data.connectionStatus !== undefined ) {
+				callback(data.connectionStatus.status, data.connectionStatus.reading);
+			} else {
+				callback("nok", "n/a");
+			}
+		});
+	});
+
+
+	</script>
+</body>
+
+</html>

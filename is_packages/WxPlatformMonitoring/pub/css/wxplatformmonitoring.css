@@ -15,7 +15,7 @@ body {
 }
 
 tbody.overview tr td{
-  padding: 0.25em 0.25em 0.25em 1.0em;
+  padding: 0.1em 0.5em;
 }
 
 tbody.overview tr td.icons {

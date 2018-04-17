@@ -24,7 +24,7 @@ Properties props = new Properties()
 props.load(new FileInputStream(new File(projectDir, "build_101.properties")))
 
 // dummy version number necessary for grggit
-version = "1.1.0-SNAPSHOT"
+version = "1.2.0-SNAPSHOT"
 group = "com.softwareag.wx.platformMonitoring"
 archivesBaseName='WxPlatformMonitoringDist'
 def packages = ['WxPlatformMonitoring', 'WxPlatformMonitoring_Test']
@@ -247,9 +247,7 @@ task releaseIt (dependsOn: [releaseActions]) {
 
 sourceSets {
 	main {
-		java {
-			srcDirs = ["is_packages/WxPlatformMonitoring/code/source"]
-		}
+		java { srcDirs = ["is_packages/WxPlatformMonitoring/code/source"] }
 		java.outputDir = file("is_packages/WxPlatformMonitoring/code/classes")
 		groovy { srcDirs = ['src/main/groovy']}
 	}
@@ -273,6 +271,10 @@ packages.each { packageName ->
 }
 
 
+/**
+Add the following jars to your jcode.bat|.sh script classpath:
+%IS_COMMON_DIR%\..\common\lib\nAdminAPI.jar;%IS_COMMON_DIR%\..\common\lib\ehcache-ee.jar;%IS_COMMON_DIR%\..\common\lib\ehcache-ee-terracotta-client-all.jar;%IS_COMMON_DIR%\..\common\lib\terracotta-toolkit-runtime-ee.jar;%IS_COMMON_DIR%\..\common\lib\nClient.jar;%IS_COMMON_DIR%\..\common\lib\nJMS.jar;%IS_COMMON_DIR%\..\common\lib\glassfish\gf.javax.jms.jar;%IS_COMMON_DIR%\..\common\lib\wm-brokerclient.jar;
+*/
 task jcodeMakeAll(type: Exec, dependsOn: "distributeLocal") {
 	workingDir "${props['is.home']}/bin"
 	commandLine 'cmd', '/c', "${props['is.home']}/bin/jcode.bat"
