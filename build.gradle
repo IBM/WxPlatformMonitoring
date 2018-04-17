@@ -29,7 +29,9 @@ group = "com.softwareag.wx.platformMonitoring"
 archivesBaseName='WxPlatformMonitoringDist'
 def packages = ['WxPlatformMonitoring', 'WxPlatformMonitoring_Test']
 
-tasks.distTar.enabled = false
+// disable tar distribution
+distTar.enabled = false
+configurations.archives.artifacts.removeAll { it.archiveTask.is distTar }
 
 ext {
 	// Open the Git repository in the current directory.
