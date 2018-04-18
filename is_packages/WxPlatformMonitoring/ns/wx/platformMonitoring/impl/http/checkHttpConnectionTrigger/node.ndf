@@ -25,7 +25,7 @@
       <value name="onRedeliveryFailure">0</value>
     </record>
     <value name="joinTimeout">86400000</value>
-    <value name="maxConcurrentThreads">10</value>
+    <value name="maxConcurrentThreads">20</value>
     <value name="inDoubtDetection">false</value>
     <value name="resolveWithHistory">false</value>
     <value name="resolutionHistoryTTL">7200000</value>
@@ -49,7 +49,7 @@
     <value name="transportAckSize">1</value>
     <value name="deliverEnabled">true</value>
     <value name="executeEnabled">true</value>
-    <value name="docsPrefetchMax">10</value>
+    <value name="docsPrefetchMax">20</value>
     <value name="docsPrefetchMin">4</value>
     <value name="priorityEnabled">false</value>
     <null name="namedObjectString"/>
