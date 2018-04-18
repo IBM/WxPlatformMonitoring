@@ -339,12 +339,12 @@
   <COMMENT></COMMENT>
 </INVOKE>
 
-<SEQUENCE TIMEOUT="" EXIT-ON="FAILURE" DISABLED="true">
+<SEQUENCE TIMEOUT="" EXIT-ON="FAILURE">
   <COMMENT>check if we should scan all packages for config files</COMMENT>
 
   <!-- nodes -->
 
-<INVOKE TIMEOUT="" SERVICE="pub.utils:getServerProperty" VALIDATE-IN="$none" VALIDATE-OUT="$none" DISABLED="true">
+<INVOKE TIMEOUT="" SERVICE="pub.utils:getServerProperty" VALIDATE-IN="$none" VALIDATE-OUT="$none">
   <COMMENT>watt.wx.platformMonitoring.config.scanPackages</COMMENT>
 
   <!-- nodes -->
@@ -569,17 +569,17 @@
 </MAP>
 </INVOKE>
 
-<BRANCH TIMEOUT="" SWITCH="/watt.wx.platformMonitoring.config.scanPackages" DISABLED="true">
+<BRANCH TIMEOUT="" SWITCH="/watt.wx.platformMonitoring.config.scanPackages">
   <COMMENT></COMMENT>
 
   <!-- nodes -->
 
-<SEQUENCE NAME="true" TIMEOUT="" EXIT-ON="FAILURE" DISABLED="true">
+<SEQUENCE NAME="true" TIMEOUT="" EXIT-ON="FAILURE">
   <COMMENT></COMMENT>
 
   <!-- nodes -->
 
-<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.internal.utility.logging:logDebug" VALIDATE-IN="$none" VALIDATE-OUT="$none" DISABLED="true">
+<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.internal.utility.logging:logDebug" VALIDATE-IN="$none" VALIDATE-OUT="$none">
   <COMMENT></COMMENT>
 
   <!-- nodes -->
@@ -748,36 +748,36 @@
 </MAP>
 </INVOKE>
 
-<INVOKE TIMEOUT="" SERVICE="wm.server.packages:packageList" VALIDATE-IN="$none" VALIDATE-OUT="$none" DISABLED="true">
+<INVOKE TIMEOUT="" SERVICE="wm.server.packages:packageList" VALIDATE-IN="$none" VALIDATE-OUT="$none">
   <COMMENT></COMMENT>
 </INVOKE>
 
-<LOOP TIMEOUT="" IN-ARRAY="/packages" DISABLED="true">
+<LOOP TIMEOUT="" IN-ARRAY="/packages">
   <COMMENT></COMMENT>
 
   <!-- nodes -->
 
-<BRANCH TIMEOUT="" SWITCH="/packages/name" DISABLED="true">
+<BRANCH TIMEOUT="" SWITCH="/packages/name">
   <COMMENT></COMMENT>
 
   <!-- nodes -->
 
-<SEQUENCE NAME="$default" TIMEOUT="" EXIT-ON="FAILURE" DISABLED="true">
+<SEQUENCE NAME="$default" TIMEOUT="" EXIT-ON="FAILURE">
   <COMMENT></COMMENT>
 
   <!-- nodes -->
 
-<BRANCH TIMEOUT="" SWITCH="/packages/enabled" DISABLED="true">
+<BRANCH TIMEOUT="" SWITCH="/packages/enabled">
   <COMMENT></COMMENT>
 
   <!-- nodes -->
 
-<SEQUENCE NAME="true" TIMEOUT="" EXIT-ON="FAILURE" DISABLED="true">
+<SEQUENCE NAME="true" TIMEOUT="" EXIT-ON="FAILURE">
   <COMMENT></COMMENT>
 
   <!-- nodes -->
 
-<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.internal.utility.logging:logDebug" VALIDATE-IN="$none" VALIDATE-OUT="$none" DISABLED="true">
+<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.internal.utility.logging:logDebug" VALIDATE-IN="$none" VALIDATE-OUT="$none">
   <COMMENT></COMMENT>
 
   <!-- nodes -->
@@ -932,7 +932,7 @@
 </MAP>
 </INVOKE>
 
-<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.internal.conf:loadPlatformMonitoringConfigForPackage" VALIDATE-IN="$none" VALIDATE-OUT="$none" DISABLED="true">
+<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.internal.conf:loadPlatformMonitoringConfigForPackage" VALIDATE-IN="$none" VALIDATE-OUT="$none">
   <COMMENT></COMMENT>
 
   <!-- nodes -->
@@ -1079,18 +1079,18 @@
 </INVOKE>
 </SEQUENCE>
 
-<MAP NAME="$default" TIMEOUT="" MODE="STANDALONE" DISABLED="true">
+<MAP NAME="$default" TIMEOUT="" MODE="STANDALONE">
   <COMMENT>do nothing, not enabled</COMMENT>
 </MAP>
 </BRANCH>
 </SEQUENCE>
 
-<SEQUENCE NAME="/^Wm/" TIMEOUT="" EXIT-ON="FAILURE" DISABLED="true">
+<SEQUENCE NAME="/^Wm/" TIMEOUT="" EXIT-ON="FAILURE">
   <COMMENT></COMMENT>
 
   <!-- nodes -->
 
-<MAP TIMEOUT="" MODE="STANDALONE" DISABLED="true">
+<MAP TIMEOUT="" MODE="STANDALONE">
   <COMMENT>do nothing</COMMENT>
 </MAP>
 </SEQUENCE>
@@ -1098,12 +1098,12 @@
 </LOOP>
 </SEQUENCE>
 
-<SEQUENCE NAME="$default" TIMEOUT="" EXIT-ON="FAILURE" DISABLED="true">
+<SEQUENCE NAME="$default" TIMEOUT="" EXIT-ON="FAILURE">
   <COMMENT></COMMENT>
 
   <!-- nodes -->
 
-<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.internal.utility.logging:logDebug" VALIDATE-IN="$none" VALIDATE-OUT="$none" DISABLED="true">
+<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.internal.utility.logging:logDebug" VALIDATE-IN="$none" VALIDATE-OUT="$none">
   <COMMENT></COMMENT>
 
   <!-- nodes -->
