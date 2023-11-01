@@ -48,14 +48,16 @@ public final class list
 		String[]       stringArray = IDataUtil.getStringArray( pipelineCursor, "stringArray" );
 		String               value = IDataUtil.getString( pipelineCursor, "value" );
 		
+		String contains;
 		if( stringArray == null ) {
-			stringArray = new String[0];
-		}
-		String contains = "false";
-		for( String stringElem : stringArray ) {
-			if( stringElem.equals(value) )  {
-				contains = "true";
-				break;
+			contains = "true";
+		} else {
+			contains = "false";
+			for( String stringElem : stringArray ) {
+				if( stringElem.equals(value) )  {
+					contains = "true";
+					break;
+				}
 			}
 		}
 		IDataUtil.put( pipelineCursor, "isIn", contains );
@@ -65,6 +67,7 @@ public final class list
 		//		
 		//		IDataUtil.put( pipelineCursor, "isIn", "" + s.contains( value ) );
 		pipelineCursor.destroy();
+			
 			
 			
 		// --- <<IS-END>> ---
