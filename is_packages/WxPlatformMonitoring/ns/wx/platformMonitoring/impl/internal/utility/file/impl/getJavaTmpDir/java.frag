@@ -8,5 +8,5 @@
   <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">SURhdGFVdGlsLnB1dChwaXBlbGluZS5nZXRDdXJzb3IoKSwgInRtcERpciIsIFN5c3RlbS5nZXRQ
-cm9wZXJ0eSgiamF2YS5pby50bXBkaXIiKSk7DQo=</value>
+cm9wZXJ0eSgiamF2YS5pby50bXBkaXIiKSk7Cg==</value>
 </Values>

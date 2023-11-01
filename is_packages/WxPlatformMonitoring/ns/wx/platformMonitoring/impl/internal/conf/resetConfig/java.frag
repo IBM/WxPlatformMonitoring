@@ -4,5 +4,5 @@
   <value name="name">resetConfig</value>
   <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
-  <value name="body">X2NvbmZpZ3VyYXRpb25zLmNsZWFyKCk7DQo=</value>
+  <value name="body">X2NvbmZpZ3VyYXRpb25zLmNsZWFyKCk7Cg==</value>
 </Values>

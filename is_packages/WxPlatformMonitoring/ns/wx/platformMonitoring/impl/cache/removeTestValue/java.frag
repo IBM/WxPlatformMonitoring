@@ -4,6 +4,6 @@
   <value name="name">removeTestValue</value>
   <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
-  <value name="body">Q2FjaGUgY2FjaGUgPSBnZXRUZXN0Q2FjaGUoKTsNCg0KY2FjaGUucmVtb3ZlKENBQ0hFX0tFWSk7
-DQoJDQo=</value>
+  <value name="body">Q2FjaGUgY2FjaGUgPSBnZXRUZXN0Q2FjaGUoKTsKCmNhY2hlLnJlbW92ZShDQUNIRV9LRVkpOwoJ
+Cg==</value>
 </Values>
