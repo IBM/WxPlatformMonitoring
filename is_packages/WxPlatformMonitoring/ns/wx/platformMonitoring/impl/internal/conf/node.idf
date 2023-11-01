@@ -185,7 +185,7 @@ IHsKCQlsb2dnZXIuZXJyb3IoCgkJCQkiQ291bGQgbm90IGdldCBjb25maWcgZGlyZWN0b3J5IGZy
 b20gZXh0ZW5kZWQgc2V0dGluZ3MgJ3dhdHQud3gucGxhdGZvcm1Nb25pdG9yaW5nLmNvbmZpZ0Rp
 cicuIFVzaW5nICdXeFBsYXRmb3JtTW9uaXRvcmluZy9jb25maWcnIGFzIGNvbmZpZyBkaXJlY3Rv
 cnkuIik7Cgl9Cglsb2dnZXIuaW5mbygiVXNpbmcgIiArIGNvbmZpZ0Rpci5nZXRBYnNvbHV0ZVBh
-dGgoKSArICIgYXMgY29uZmlnIGRpciIpOwoJcmV0dXJuIGNvbmZpZ0RpcjsKfQoKCQoJCgk=</value>
+dGgoKSArICIgYXMgY29uZmlnIGRpciIpOwoJcmV0dXJuIGNvbmZpZ0RpcjsKfQoKCQoJCgkK</value>
   <value name="encodeutf8">true</value>
   <array name="imports" type="value" depth="1">
     <value>java.io.File</value>
@@ -205,8 +205,5 @@ dGgoKSArICIgYXMgY29uZmlnIGRpciIpOwoJcmV0dXJuIGNvbmZpZ0RpcjsKfQoKCQoJCgk=</value>
     <value>com.wm.data.IDataCursor</value>
     <value>com.wm.data.IDataFactory</value>
     <value>com.wm.data.IDataUtil</value>
-  </array>
-  <value name="extends"></value>
-  <array name="implements" type="value" depth="1">
   </array>
 </Values>

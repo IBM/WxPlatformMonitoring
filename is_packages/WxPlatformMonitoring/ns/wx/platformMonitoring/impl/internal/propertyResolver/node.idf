@@ -4,15 +4,12 @@
   <value name="shared">cHJpdmF0ZSBzdGF0aWMgY29tLnNvZnR3YXJlYWcud3gucGxhdGZvcm1Nb25pdG9yaW5nLnByb3Bl
 cnR5UmVzb2x2ZXIuUHJvcGVydHlSZXNvbHZlciBwcm9wZXJ0eVJlc29sdmVyID0gY29tLnNvZnR3
 YXJlYWcud3gucGxhdGZvcm1Nb25pdG9yaW5nLnByb3BlcnR5UmVzb2x2ZXIuUHJvcGVydHlSZXNv
-bHZlci5nZXRJbnN0YW5jZSgpOwoJ</value>
+bHZlci5nZXRJbnN0YW5jZSgpOwoJCg==</value>
   <value name="encodeutf8">true</value>
   <array name="imports" type="value" depth="1">
     <value>javax.naming.InvalidNameException</value>
     <value>com.wm.data.IData</value>
     <value>com.wm.data.IDataCursor</value>
     <value>com.wm.data.IDataUtil</value>
-  </array>
-  <value name="extends"></value>
-  <array name="implements" type="value" depth="1">
   </array>
 </Values>

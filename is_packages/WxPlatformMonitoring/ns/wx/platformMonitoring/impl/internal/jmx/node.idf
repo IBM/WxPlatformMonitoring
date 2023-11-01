@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Values version="2.0">
-  <value name="node_type">interface</value>
-  <value name="node_subtype">unknown</value>
-  <value name="node_nsName">wx.platformMonitoring.impl.internal.jmx</value>
-  <value name="is_public">false</value>
   <value name="shared">c3RhdGljIG9yZy5hcGFjaGUubG9nNGouTG9nZ2VyIGxvZ2dlciA9IG9yZy5hcGFjaGUubG9nNGou
 TG9nZ2VyLmdldExvZ2dlcigid3gucGxhdGZvcm1Nb25pdG9yaW5nLmNvbmZpZyIpOwoKcHJpdmF0
 ZSBzdGF0aWMgU3RyaW5nIGdldFBhdGhGb3JDb25maWdGaWxlKEZpbGUgZmlsZSkgdGhyb3dzIFNl
@@ -25,11 +21,8 @@ CQl9CgkJfSBlbHNlIHsKCQkJaWYoIHBhcmVudC5nZXROYW1lQ291bnQoKSA9PSAwICkgewoJCQkJ
 YnJlYWs7CgkJCX0KCQkJcGF0aEVsZW1lbnRzLmFkZChwYXRoVG9GaWxlLmdldE5hbWUocGFyZW50
 LmdldE5hbWVDb3VudCgpLTEpLnRvU3RyaW5nKCkpOwoJCQlwYXJlbnQgPSBwYXJlbnQuZ2V0UGFy
 ZW50KCk7CgkJCWlmKCBwYXJlbnQgPT0gbnVsbCApIHsKCQkJCWJyZWFrOwoJCQl9CgkJfQoJfQoJ
-CglyZXR1cm4gZmlsZS5nZXRBYnNvbHV0ZVBhdGgoKTsKfQoJ</value>
+CglyZXR1cm4gZmlsZS5nZXRBYnNvbHV0ZVBhdGgoKTsKfQoJCg==</value>
   <value name="encodeutf8">true</value>
-  <value name="extends"></value>
-  <array name="implements" type="value" depth="1">
-  </array>
   <array name="imports" type="value" depth="1">
     <value>java.io.File</value>
     <value>java.lang.management.ManagementFactory</value>
@@ -40,8 +33,6 @@ CglyZXR1cm4gZmlsZS5nZXRBYnNvbHV0ZVBhdGgoKTsKfQoJ</value>
     <value>javax.management.MBeanServer</value>
     <value>javax.management.ObjectInstance</value>
     <value>javax.management.ObjectName</value>
-    <value>com.softwareag.wx.platformMonitoring.jmx.agent.WxPlatformMonitoringMXBean</value>
-    <value>com.webmethods.core.util.Logger</value>
     <value>com.wm.app.b2b.server.InvokeState</value>
     <value>com.wm.app.b2b.server.User</value>
   </array>

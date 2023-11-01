@@ -9,21 +9,16 @@
       <value name="node_type">record</value>
       <value name="node_subtype">unknown</value>
       <value name="is_public">false</value>
+      <value name="field_name">toFloatInput</value>
       <value name="field_type">record</value>
       <value name="field_dim">0</value>
-      <value name="wrapper_type">IData</value>
       <value name="nillable">true</value>
       <value name="form_qualified">false</value>
       <value name="is_global">false</value>
       <array name="rec_fields" type="record" depth="1">
         <record javaclass="com.wm.util.Values">
-          <value name="node_type">record</value>
+          <value name="node_type">field</value>
           <value name="node_subtype">unknown</value>
-          <value name="node_comment"></value>
-          <record name="node_hints" javaclass="com.wm.util.Values">
-            <value name="field_largerEditor">false</value>
-            <value name="field_password">false</value>
-          </record>
           <value name="is_public">false</value>
           <value name="field_name">in</value>
           <value name="field_type">object</value>
@@ -39,26 +34,20 @@
       <value name="node_type">record</value>
       <value name="node_subtype">unknown</value>
       <value name="is_public">false</value>
+      <value name="field_name">toFloatOutput</value>
       <value name="field_type">record</value>
       <value name="field_dim">0</value>
-      <value name="wrapper_type">IData</value>
       <value name="nillable">true</value>
       <value name="form_qualified">false</value>
       <value name="is_global">false</value>
       <array name="rec_fields" type="record" depth="1">
         <record javaclass="com.wm.util.Values">
-          <value name="node_type">record</value>
+          <value name="node_type">field</value>
           <value name="node_subtype">unknown</value>
-          <value name="node_comment"></value>
-          <record name="node_hints" javaclass="com.wm.util.Values">
-            <value name="field_largerEditor">false</value>
-            <value name="field_password">false</value>
-          </record>
           <value name="is_public">false</value>
           <value name="field_name">out</value>
           <value name="field_type">object</value>
           <value name="field_dim">0</value>
-          <value name="wrapper_type">java.lang.Float</value>
           <value name="nillable">true</value>
           <value name="form_qualified">false</value>
           <value name="is_global">false</value>
@@ -76,7 +65,6 @@
   <value name="audit_level">off</value>
   <value name="check_internal_acls">no</value>
   <value name="icontext_policy">$null</value>
-  <value name="svcInvkURLAlias"></value>
   <value name="system_service">no</value>
   <value name="retry_max">0</value>
   <value name="retry_interval">0</value>

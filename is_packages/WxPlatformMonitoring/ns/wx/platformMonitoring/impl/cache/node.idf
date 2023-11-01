@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Values version="2.0">
-  <value name="shared">cHVibGljIHN0YXRpYyBmaW5hbCBTdHJpbmcgQ0FDSEVfS0VZID0gInRlc3RWYWx1ZSI7CgpwdWJs
-aWMgc3RhdGljIENhY2hlIGdldFRlc3RDYWNoZSgpIHsKCVN0cmluZyBjYWNoZU1hbmFnZXJOYW1l
-ID0gIk9yZGVyQ2FjaGVNYW5hZ2VyIjsKCVN0cmluZyBjYWNoZU5hbWUgPSAiVGVzdENhY2hlIjsK
-CQoJcmV0dXJuIENhY2hlTWFuYWdlclV0aWwuZ2V0Q2FjaGVNYW5hZ2VyKGNhY2hlTWFuYWdlck5h
-bWUpLmdldENhY2hlKGNhY2hlTmFtZSk7Cn0KCnN0YXRpYyB2b2lkIHB1dEluQ2FjaGUoQ2FjaGUg
-Y2FjaGUsIFRlc3RDYWNoZUVudHJ5IHRjZSkgewoJRWxlbWVudCBlID0gbmV3IEVsZW1lbnQoQ0FD
-SEVfS0VZLCB0Y2UpOwoJZS5zZXRUaW1lVG9MaXZlKHRpbWVUb0xpdmVTZWNvbmRzKTsKCWNhY2hl
-LnB1dChlKTsKfQoJCgk=</value>
+  <value name="shared">CXB1YmxpYyBzdGF0aWMgZmluYWwgU3RyaW5nIENBQ0hFX0tFWSA9ICJ0ZXN0VmFsdWUiOwoJCglw
+dWJsaWMgc3RhdGljIENhY2hlIGdldFRlc3RDYWNoZSgpIHsKCQlTdHJpbmcgY2FjaGVNYW5hZ2Vy
+TmFtZSA9ICJPcmRlckNhY2hlTWFuYWdlciI7CgkJU3RyaW5nIGNhY2hlTmFtZSA9ICJUZXN0Q2Fj
+aGUiOwoJCQoJCXJldHVybiBDYWNoZU1hbmFnZXJVdGlsLmdldENhY2hlTWFuYWdlcihjYWNoZU1h
+bmFnZXJOYW1lKS5nZXRDYWNoZShjYWNoZU5hbWUpOwoJfQoJCglzdGF0aWMgdm9pZCBwdXRJbkNh
+Y2hlKENhY2hlIGNhY2hlLCBUZXN0Q2FjaGVFbnRyeSB0Y2UpIHsKCQlFbGVtZW50IGUgPSBuZXcg
+RWxlbWVudChDQUNIRV9LRVksIHRjZSk7Ci8vCQllLnNldFRpbWVUb0xpdmUodGltZVRvTGl2ZVNl
+Y29uZHMpOwoJCWNhY2hlLnB1dChlKTsKCX0KCQkKCQkK</value>
   <value name="encodeutf8">true</value>
   <array name="imports" type="value" depth="1">
     <value>net.sf.ehcache.Cache</value>
@@ -17,8 +17,5 @@ LnB1dChlKTsKfQoJCgk=</value>
     <value>com.softwareag.cache.admin.TestCacheEntry</value>
     <value>net.sf.ehcache.store.MemoryStoreEvictionPolicy</value>
     <value>net.sf.ehcache.store.FifoPolicy</value>
-  </array>
-  <value name="extends"></value>
-  <array name="implements" type="value" depth="1">
   </array>
 </Values>

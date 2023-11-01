@@ -1,28 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Values version="2.0">
-  <value name="encodeutf8">true</value>
-  <array name="imports" type="value" depth="1">
-    <value>java.lang.management.ManagementFactory</value>
-    <value>java.lang.management.OperatingSystemMXBean</value>
-    <value>java.lang.management.RuntimeMXBean</value>
-    <value>java.lang.management.ThreadInfo</value>
-    <value>java.lang.management.ThreadMXBean</value>
-    <value>java.util.ArrayList</value>
-    <value>java.util.Comparator</value>
-    <value>java.util.HashMap</value>
-    <value>java.util.List</value>
-    <value>java.util.Map</value>
-    <value>java.util.Map.Entry</value>
-    <value>com.wm.app.b2b.server.BaseService</value>
-    <value>com.wm.app.b2b.server.InvokeState</value>
-    <value>com.wm.data.IData</value>
-    <value>com.wm.data.IDataCursor</value>
-    <value>com.wm.data.IDataFactory</value>
-    <value>com.wm.data.IDataUtil</value>
-    <value>com.wm.lang.ns.NSName</value>
-    <value>java.util.Collections</value>
-  </array>
   <value name="shared">cHJpdmF0ZSBzdGF0aWMgVGhyZWFkTVhCZWFuIHRocmVhZE14QmVhbiA9IE1hbmFnZW1lbnRGYWN0
 b3J5LmdldFRocmVhZE1YQmVhbigpOwpwcml2YXRlIHN0YXRpYyBSdW50aW1lTVhCZWFuIHJ1bnRp
 bWVNeEJlYW4gPSBNYW5hZ2VtZW50RmFjdG9yeS5nZXRSdW50aW1lTVhCZWFuKCk7CnByaXZhdGUg
@@ -49,8 +27,27 @@ dD4+IHsKCQoJLyoqCgkgKiBJbXBsZW1lbnRzIGRlc2NlbmRpbmcgb3JkZXIuCgkgKi8KCUBPdmVy
 cmlkZQoJcHVibGljIGludCBjb21wYXJlKEVudHJ5PFRocmVhZEluZm8sIEZsb2F0PiBvMSwgRW50
 cnk8VGhyZWFkSW5mbywgRmxvYXQ+IG8yKSB7CgkJaWYgKG8xLmdldFZhbHVlKCkgPCBvMi5nZXRW
 YWx1ZSgpKSB7CgkJCXJldHVybiAxOwoJCX0gZWxzZSBpZiAobzEuZ2V0VmFsdWUoKSA+IG8yLmdl
-dFZhbHVlKCkpIHsKCQkJcmV0dXJuIC0xOwoJCX0KCQlyZXR1cm4gMDsKCX0KCn0=</value>
-  <value name="extends"></value>
-  <array name="implements" type="value" depth="1">
+dFZhbHVlKCkpIHsKCQkJcmV0dXJuIC0xOwoJCX0KCQlyZXR1cm4gMDsKCX0KCn0K</value>
+  <value name="encodeutf8">true</value>
+  <array name="imports" type="value" depth="1">
+    <value>java.lang.management.ManagementFactory</value>
+    <value>java.lang.management.OperatingSystemMXBean</value>
+    <value>java.lang.management.RuntimeMXBean</value>
+    <value>java.lang.management.ThreadInfo</value>
+    <value>java.lang.management.ThreadMXBean</value>
+    <value>java.util.ArrayList</value>
+    <value>java.util.Comparator</value>
+    <value>java.util.HashMap</value>
+    <value>java.util.List</value>
+    <value>java.util.Map</value>
+    <value>java.util.Map.Entry</value>
+    <value>com.wm.app.b2b.server.BaseService</value>
+    <value>com.wm.app.b2b.server.InvokeState</value>
+    <value>com.wm.data.IData</value>
+    <value>com.wm.data.IDataCursor</value>
+    <value>com.wm.data.IDataFactory</value>
+    <value>com.wm.data.IDataUtil</value>
+    <value>com.wm.lang.ns.NSName</value>
+    <value>java.util.Collections</value>
   </array>
 </Values>
