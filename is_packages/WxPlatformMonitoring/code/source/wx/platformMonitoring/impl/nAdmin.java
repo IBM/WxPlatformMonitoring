@@ -140,19 +140,19 @@ public final class nAdmin
 		    nChannel channel = mySession.findChannel(attrib);
 		    // check for shared durable
 		
-		    if( channel.getNamedObjects().length != 0 ) {
+		    if( channel.getDurableManager().getAll().length != 0 ) {		    
 		    	/*
 		    	 * A standard wM messaging trigger has a shared durable connection and does "concurrent" processing.
 		    	 * For such a trigger hidden queues are created, which are Named Objects in UM. 
 		    	 */
-		    	IData[] sharedDurableOutstandingEvents = new IData[channel.getNamedObjects().length];
+		    	IData[] sharedDurableOutstandingEvents = new IData[channel.getDurableManager().getAll().length];
 		    	long max = 0;
-		    	nNamedObject[] namedObjects = channel.getNamedObjects();
+		    	nNamedObject[] namedObjects = channel.getDurableManager().getAll();
 		    	for( int i=0; i<sharedDurableOutstandingEvents.length; i++ ) {
 		    		nNamedObject no = namedObjects[i];
 		    		sharedDurableOutstandingEvents[i] = IDataFactory.create();
 		    		IDataCursor sharedDurableOutstandingEventsC = sharedDurableOutstandingEvents[i].getCursor();
-		    		long outstandingEvents = no.getSharedNamedObjectOutstandingEvents();
+		    		long outstandingEvents = no.getOutstandingEvents();
 		    		IDataUtil.put(sharedDurableOutstandingEventsC, "outstandingEvents", outstandingEvents + "");
 		    		IDataUtil.put(sharedDurableOutstandingEventsC, "namedObject", no.getName());
 		    		sharedDurableOutstandingEventsC.destroy();
@@ -256,7 +256,7 @@ public final class nAdmin
 		    	      if( ((nLeafNode) node).isChannel() ) {
 		    	    	  nLeafNode leaf = (nLeafNode) node;
 		    	    	  channel = mySession.findChannel(leaf.getAttributes());
-							for (nNamedObject nno : channel.getNamedObjects()) {
+							for (nNamedObject nno : channel.getDurableManager().getAll()) {
 								String nnoName = nno.getName();
 								/*
 								 * the name of the named object differs slightly from the clientId
@@ -266,7 +266,7 @@ public final class nAdmin
 								 */
 								String clientId = nnoName.replaceAll("__", "_").replaceFirst("##", "_");
 								if( clientId.equals(principal) ) {
-									outstandingEvents = nno.getSharedNamedObjectOutstandingEvents();
+									outstandingEvents = nno.getOutstandingEvents();
 									break;
 								}
 							}
