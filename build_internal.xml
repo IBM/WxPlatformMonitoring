@@ -3,10 +3,12 @@
 	These properties are only for building on different version of IntegrationServer
 	<property name="version" value="910" />
 	<property name="version" value="912"/>
-	-->
 	<property name="version" value="100"/>
+	-->
+	<property name="version" value="1015"/>
+	<property file="build_1015.properties" />
 	<property file="build_${version}.properties" />
-
+	
 	<property name="build.dir" value="build/${version}" />
 	<property name="build.dir.tmp" value="build/tmp" />
 	<property name="build.dir.tmp.wxplatformmonitoring" value="${build.dir.tmp}/WxPlatformMonitoring" />
@@ -37,12 +39,18 @@
 		</fileset>
 	</path>
 
-	<taskdef name="xmltask" classname="com.oopsconsultancy.xmltask.ant.XmlTask" classpathref="build.classpath" />
-	<taskdef resource="net/sf/antcontrib/antcontrib.properties" classpathref="build.classpath" />
+	<path id="ant.classpath">
+		<fileset dir="libs/ant">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	
+	
+	<taskdef name="xmltask" classname="com.oopsconsultancy.xmltask.ant.XmlTask" classpathref="ant.classpath" />
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties" classpathref="ant.classpath" />
 	<taskdef resource="net/sf/antcontrib/antlib.xml">
-		<classpath refid="build.classpath" />
+		<classpath refid="ant.classpath" />
 	</taskdef>
-	<taskdef name="log" classname="com.sag.wm.ant.tasks.is.util.TALogger" classpathref="build.classpath" />
 
 	<target name="jcode">
 		<property name="wxplatformmonitoringTmp" value="${is.home}/packages/WxPlatformMonitoring_Tmp" />
@@ -55,7 +63,7 @@
 		</copy>
 
 		<exec resultproperty="jcodeResult" failonerror="true" executable="${is.home}/bin/jcode.bat" dir="${is.home}/bin/" output="jcode.log">
-			<arg value="makeall" />
+			<arg value="upall" />
 			<arg line="WxPlatformMonitoring_Tmp" />
 		</exec>
 		<fail message="Jcode ended with error">
@@ -68,8 +76,9 @@
 				</and>
 			</condition>
 		</fail>
-		<echo>Result from jcode: ${jcodeResult}</echo>
+		<echo>Result from jcode.sh makeall: ${jcodeResult}</echo>
 
+		
 		<delete dir="${build.dir.tmp.wxplatformmonitoring}">
 		</delete>
 		<copy todir="${build.dir.tmp.wxplatformmonitoring}">
@@ -81,22 +90,26 @@
 	</target>
 	
 	<target name="jcodeFrag">
-			<exec resultproperty="jcodeResult" failonerror="true" executable="${is.home}/bin/jcode.bat" dir="${is.home}/bin/" output="jcode.log">
-				<arg value="update" />
-				<arg line="WxPlatformMonitoring" />
-			</exec>
-			<fail message="Jcode ended with error">
-				<condition>
-					<and>
-						<resourcecontains resource="jcode.log" substring=" errors" />
-						<not>
-							<resourcecontains resource="jcode.log" substring="compile errors may result" />
-						</not>
-					</and>
-				</condition>
-			</fail>
-			<echo>Result from jcode: ${jcodeResult}</echo>
-		</target>
+		<exec resultproperty="jcodeResult" failonerror="true" executable="${is.home}/bin/jcode.bat" dir="${is.home}/bin/" output="jcode.log">
+			<!-- 'update' does not work, changed to 'fragall'				
+			<arg value="update" />
+			-->
+
+			<arg value="fragall" />
+			<arg line="WxPlatformMonitoring" />
+		</exec>
+		<fail message="Jcode ended with error">
+			<condition>
+				<and>
+					<resourcecontains resource="jcode.log" substring=" errors" />
+					<not>
+						<resourcecontains resource="jcode.log" substring="compile errors may result" />
+					</not>
+				</and>
+			</condition>
+		</fail>
+		<echo>Result from jcode: ${jcodeResult}</echo>
+	</target>
 
 	<target name="clean.package">
 		<delete dir="${build.dir.package}" />

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="code/source"/>
-	<classpathentry kind="lib" path="code/jars/minimal-json-0.9.4.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="var" path="IS_CLIENT"/>
 	<classpathentry kind="var" path="IS_CORE"/>
 	<classpathentry kind="var" path="IS_EDITOR"/>
@@ -15,7 +18,6 @@
 	<classpathentry kind="var" path="IS_WSDL4J"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/terracotta-toolkit-runtime-ee.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/ehcache-ee.jar"/>
-	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/ehcache-ee-terracotta-client-all.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/CentraSiteAssetManagement-API.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/CentraSiteCommons.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/CentraSiteDownloadDocuments.jar"/>
@@ -46,7 +48,6 @@
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/CentraSiteVMS.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/CentraSiteVMS-L10N.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/CentraSiteVMS-L10N_en.jar"/>
-	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/commons-io.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/cstUtils.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/eda-common.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/eda-eventtypes.jar"/>
@@ -70,27 +71,19 @@
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/INMConfiguration-L10N_en.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/inmUtil.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/nAdminAPI.jar"/>
-	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/nAdminXMLAPI.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/nClient.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/nDeployer.jar"/>
-	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/nerv-cipher-util.jar"/>
-	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/nerv-classpath-basic.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/nJMS.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/nPlugin.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/PolicyLogBindings.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/saglic.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/spm-metering-validator.jar"/>
-	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/TaminoAPI4J.jar"/>
-	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/TaminoAPI4J-l10n.jar"/>
-	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/TaminoAPI4J-l10n_en.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/uddi-client.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/uddiKeyConverter.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/uddiv3ClientAPI.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/uddiv3ClientAPI-L10N.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/uddiv3ClientAPI-L10N_en.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/umExtensions.jar"/>
-	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/umStorage.jar"/>
-	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/umTransport.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/wm-acdl-common.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/wm-bpm-processmodel.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/wm-broker-acdl.jar"/>
@@ -98,7 +91,6 @@
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/wm-caf-bpm.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/wm-caf-client.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/wm-caf-common.jar"/>
-	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/wm-caf-csp.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/wm-caf-diagnostics.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/wm-caf-event.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/wm-caf-event-common.jar"/>
@@ -113,8 +105,6 @@
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/wm-caf-ws-wss.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/wm-calendar.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/wm-calendar-components.jar"/>
-	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/wm-cdc-core.jar"/>
-	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/wm-converters.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/wm-directory.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/wm-directory-components.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/wm-eform.jar"/>
@@ -137,7 +127,7 @@
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/wm-trang.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/wm-wsclient.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/wvcm.jar"/>
-	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/xqjapi.jar"/>
 	<classpathentry kind="var" path="WEBMETHODS_HOME/common/lib/xqj-ino-api.jar"/>
+	<classpathentry kind="lib" path="code/jars/minimal-json-0.9.4.jar"/>
 	<classpathentry kind="output" path="code/classes"/>
 </classpath>

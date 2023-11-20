@@ -7,3 +7,5 @@
 /tmp/
 /src/wxplatformmon/
 labcase.pwd
+*.class
+*.bak
