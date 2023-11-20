@@ -4,7 +4,7 @@
   <value name="shared">cHJpdmF0ZSBzdGF0aWMgY29tLnNvZnR3YXJlYWcud3gucGxhdGZvcm1Nb25pdG9yaW5nLnByb3Bl
 cnR5UmVzb2x2ZXIuUHJvcGVydHlSZXNvbHZlciBwcm9wZXJ0eVJlc29sdmVyID0gY29tLnNvZnR3
 YXJlYWcud3gucGxhdGZvcm1Nb25pdG9yaW5nLnByb3BlcnR5UmVzb2x2ZXIuUHJvcGVydHlSZXNv
-bHZlci5nZXRJbnN0YW5jZSgpOwoJCg==</value>
+bHZlci5nZXRJbnN0YW5jZSgpOw0KCQ0K</value>
   <value name="encodeutf8">true</value>
   <array name="imports" type="value" depth="1">
     <value>javax.naming.InvalidNameException</value>

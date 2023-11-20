@@ -2,7 +2,8 @@ package com.softwareag.wx.platformMonitoring.propertyResolver;
 
 import javax.naming.InvalidNameException;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.wm.app.b2b.server.BaseService;
 import com.wm.app.b2b.server.Service;
@@ -20,7 +21,7 @@ public class PropertyResolver {
 
 	private static NSName resolverService;
 
-	private static Logger logger = Logger.getLogger(PropertyResolver.class);
+	private static Logger logger = LogManager.getLogger(PropertyResolver.class);
 
 	static {
 		_instance = new PropertyResolver();

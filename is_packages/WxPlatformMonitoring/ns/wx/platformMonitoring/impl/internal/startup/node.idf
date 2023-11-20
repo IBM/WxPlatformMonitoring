@@ -3,10 +3,17 @@
 <Values version="2.0">
   <value name="encodeutf8">true</value>
   <array name="imports" type="value" depth="1">
-    <value>java.io.File</value>
-    <value>org.apache.log4j.Logger</value>
-    <value>org.apache.log4j.xml.DOMConfigurator</value>
     <value>com.wm.app.b2b.server.ServerAPI</value>
-    <value>com.wm.data.IData</value>
+    <value>com.wm.lang.ns.NSName</value>
+    <value>com.softwareag.util.IDataMap</value>
+    <value>java.io.FileInputStream</value>
+    <value>java.io.FileNotFoundException</value>
+    <value>java.io.IOException</value>
+    <value>java.util.HashMap</value>
+    <value>java.util.Map</value>
+    <value>org.apache.logging.log4j.LogManager</value>
+    <value>org.apache.logging.log4j.Logger</value>
+    <value>org.apache.logging.log4j.core.config.Configurator</value>
+    <value>org.apache.logging.log4j.message.StringMapMessage</value>
   </array>
 </Values>

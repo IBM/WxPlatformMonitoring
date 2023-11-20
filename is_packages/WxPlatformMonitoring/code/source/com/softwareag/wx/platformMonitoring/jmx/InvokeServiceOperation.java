@@ -15,7 +15,8 @@ import javax.management.openmbean.OpenMBeanParameterInfoSupport;
 import javax.management.openmbean.OpenType;
 import javax.management.openmbean.SimpleType;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.wm.app.b2b.server.InvokeState;
 import com.wm.app.b2b.server.Service;
@@ -35,7 +36,7 @@ import com.wm.lang.ns.NSRecord;
 
 public class InvokeServiceOperation implements ServiceOperation {
 
-	Logger logger = Logger.getLogger(this.getClass());
+	Logger logger = LogManager.getLogger(this.getClass());
 
 	// a list of input parameters for the given service
 	private List<OpenMBeanParameterInfoSupport> serviceInputParameters = new ArrayList<OpenMBeanParameterInfoSupport>();

@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<Configuration monitorInterval="5" status="trace">
+
+  <Appenders>
+    <RollingFile name="wx.platformMonitoring" fileName="./logs/wxplatformmonitoring.log" filePattern="./logs/wxplatformmonitoring.log-%i.gz">
+      <PatternLayout>
+	    <Pattern>%d %-5p [%c] - %m%n</Pattern>
+	  </PatternLayout>
+      <Policies>
+	    <SizeBasedTriggeringPolicy size="10MB" />
+      </Policies>
+	  <DefaultRolloverStrategy max="5"/>
+    </RollingFile>
+
+    <RollingFile name="wx.platformMonitoring.csv" fileName="./logs/wxplatformmonitoring.threads.csv" filePattern="./logs/wxplatformmonitoring.threads.csv-%1.gz">
+      <PatternLayout>
+	    <Pattern>%d %-5p [%c] - %m%n</Pattern>
+	  </PatternLayout>
+      <Policies>
+	    <SizeBasedTriggeringPolicy size="10MB" />
+      </Policies>
+	  <DefaultRolloverStrategy max="5"/>
+    </RollingFile>
+  </Appenders>
+
+  <Loggers>
+	<Logger name="wx.platformMonitoring" level="trace" additivity="false">
+		<AppenderRef ref="wx.platformMonitoring"/>
+	</Logger>
+  
+	<Logger name="wx.platformMonitoring.config" level="trace" additivity="false">
+		<AppenderRef ref="wx.platformMonitoring"/>
+	</Logger>
+
+	<Logger name="wx.platformMonitoring.server.threads.csv" level="trace" additivity="false">
+		<AppenderRef ref="wx.platformMonitoring.csv"/>
+	</Logger>
+
+	<Logger name="wx.platformMonitoring.server.threads.threads" level="trace" additivity="false">
+		<AppenderRef ref="wx.platformMonitoring"/>
+	</Logger>
+	
+	<Logger name="com.softwareag.wx.platformMonitoring" level="trace" additivity="false">
+		<AppenderRef ref="wx.platformMonitoring"/>
+	</Logger>
+
+	<Logger name="com.softwareag.wx.platformMonitoring.jmx" level="debug" additivity="false">
+		<AppenderRef ref="wx.platformMonitoring"/>
+	</Logger>
+   </Loggers>
+
+</Configuration>

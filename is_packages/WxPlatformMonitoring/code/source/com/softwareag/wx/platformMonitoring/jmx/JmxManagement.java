@@ -12,7 +12,8 @@ import javax.management.MalformedObjectNameException;
 import javax.management.NotCompliantMBeanException;
 import javax.management.ObjectName;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.wm.app.b2b.server.ServiceException;
 import com.wm.app.b2b.server.Session;
@@ -23,7 +24,7 @@ import com.wm.lang.ns.NSService;
 
 public class JmxManagement {
 
-	Logger logger = Logger.getLogger(this.getClass());
+	Logger logger = LogManager.getLogger(this.getClass());
 	// we need the session when we want to invoke an IS Service
 	Session session;
 	// we need the user when we want to invoke an IS Service

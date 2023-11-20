@@ -205,7 +205,7 @@ public final class conf
 	}
 
 	// --- <<IS-START-SHARED>> ---
-	static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger("wx.platformMonitoring.config");
+	static org.apache.logging.log4j.Logger logger = org.apache.logging.log4j.LogManager.getLogger("wx.platformMonitoring.config");
 	static java.util.Map<String, JsonValue> _configurations = new java.util.HashMap<String, JsonValue>();
 	
 	private static void addAssetConfiguration(String configFileName) throws ServiceException {

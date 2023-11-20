@@ -23,7 +23,7 @@ import javax.management.ReflectionException;
 import javax.management.RuntimeOperationsException;
 import javax.management.openmbean.OpenDataException;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 
 import com.wm.app.b2b.server.InvokeState;
 import com.wm.app.b2b.server.ServiceException;
@@ -47,7 +47,7 @@ public class ServicesDynamicMBean implements DynamicMBean {
 	Map<String, ServiceOperation> serviceOperationMap = null;
 	MBeanConstructorInfo[] dConstructors = null;
 
-	Logger logger = Logger.getLogger(this.getClass());
+	Logger logger = org.apache.logging.log4j.LogManager.getLogger(this.getClass());
 
 	/**
 	 * Create a Dynamic MBean for the list of services

@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Values version="2.0">
+  <value name="shared">cHJpdmF0ZSBzdGF0aWMgZmluYWwgU3RyaW5nIFBBQ0tBR0VfTkFNRSA9ICJXeFBsYXRmb3JtTW9u
+aXRvcmluZyI7DQpwcml2YXRlIHN0YXRpYyBmaW5hbCBTdHJpbmcgTE9HNEpfQ0ZHID0gIi4vcGFj
+a2FnZXMvIiArIFBBQ0tBR0VfTkFNRSArICIvY29uZmlnL2xvZzRqMi54bWwiOw0KcHJpdmF0ZSBz
+dGF0aWMgTG9nZ2VyQ29udGV4dCBsb2dDdHggID0gbnVsbDsNCg==</value>
   <value name="encodeutf8">true</value>
   <array name="imports" type="value" depth="1">
     <value>java.io.File</value>
-    <value>org.apache.log4j.Logger</value>
-    <value>org.apache.log4j.xml.DOMConfigurator</value>
+    <value>java.io.FileInputStream</value>
+    <value>java.io.FileNotFoundException</value>
+    <value>java.io.IOException</value>
+    <value>org.apache.logging.log4j.Level</value>
+    <value>org.apache.logging.log4j.Logger</value>
+    <value>org.apache.logging.log4j.core.LoggerContext</value>
+    <value>org.apache.logging.log4j.core.config.Configuration</value>
+    <value>org.apache.logging.log4j.core.config.ConfigurationFactory</value>
+    <value>org.apache.logging.log4j.core.config.ConfigurationSource</value>
+    <value>org.apache.logging.log4j.core.config.xml.XmlConfigurationFactory</value>
     <value>com.wm.app.b2b.server.ServerAPI</value>
     <value>com.wm.data.IData</value>
   </array>

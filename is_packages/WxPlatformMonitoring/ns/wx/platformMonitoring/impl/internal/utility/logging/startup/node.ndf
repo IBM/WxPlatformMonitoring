@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Values version="2.0">
-  <value name="svc_type">flow</value>
+  <value name="svc_type">java</value>
   <value name="svc_subtype">default</value>
   <value name="svc_sigtype">java 3.5</value>
   <record name="svc_sig" javaclass="com.wm.util.Values">
@@ -73,6 +73,7 @@
     <value name="concurrentRequestLimitEnabled">false</value>
   </record>
   <array name="allowedHTTPMethods" type="value" depth="1">
+    <value>TRACE</value>
     <value>HEAD</value>
     <value>DELETE</value>
     <value>POST</value>

@@ -8,9 +8,9 @@
   </array>
   <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
-  <value name="body">SURhdGFDdXJzb3IgcGlwZWxpbmVDID0gcGlwZWxpbmUuZ2V0Q3Vyc29yKCk7ClN0cmluZyBjYWxs
-aW5nU2VydmljZSA9IElEYXRhVXRpbC5nZXRTdHJpbmcocGlwZWxpbmVDLCAiY2FsbGluZ1NlcnZp
-Y2UiKTsKSURhdGFVdGlsLnB1dChwaXBlbGluZUMsICJyZXNvdXJjZVBhdGgiLCBjYWxsaW5nU2Vy
-dmljZS5zdWJzdHJpbmcoMCwgY2FsbGluZ1NlcnZpY2UuaW5kZXhPZigiOiIpKSk7CnBpcGVsaW5l
-Qy5kZXN0cm95KCk7CgkK</value>
+  <value name="body">SURhdGFDdXJzb3IgcGlwZWxpbmVDID0gcGlwZWxpbmUuZ2V0Q3Vyc29yKCk7DQpTdHJpbmcgY2Fs
+bGluZ1NlcnZpY2UgPSBJRGF0YVV0aWwuZ2V0U3RyaW5nKHBpcGVsaW5lQywgImNhbGxpbmdTZXJ2
+aWNlIik7DQpJRGF0YVV0aWwucHV0KHBpcGVsaW5lQywgInJlc291cmNlUGF0aCIsIGNhbGxpbmdT
+ZXJ2aWNlLnN1YnN0cmluZygwLCBjYWxsaW5nU2VydmljZS5pbmRleE9mKCI6IikpKTsNCnBpcGVs
+aW5lQy5kZXN0cm95KCk7DQoJDQo=</value>
 </Values>

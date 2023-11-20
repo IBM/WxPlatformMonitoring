@@ -55,7 +55,7 @@ public final class jmx
 	}
 
 	// --- <<IS-START-SHARED>> ---
-	static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger("wx.platformMonitoring.config");
+	static org.apache.logging.log4j.Logger logger = org.apache.logging.log4j.LogManager.getLogger("wx.platformMonitoring.config");
 	
 	private static String getPathForConfigFile(File file) throws ServiceException {
 		java.nio.file.Path pathToFile = java.nio.file.Paths.get(file.getAbsolutePath());
