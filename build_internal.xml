@@ -1,10 +1,10 @@
 <project name="wxplatformmonitoring_internal" basedir="." default="buildWxPlatformMonitoring">
 	
-	<!-- property file for the desired webmethods installation -->
-	<property file="build_1015.properties" />
-	
-	<!-- property file for the desired version. Update this file if you want to build a new version -->
-	<property file="build_version.properties" />
+	<!-- load property file which specifies the build version and the build environment -->
+	<property file="build.properties" />
+
+	<!-- load property file which specifies the build environment -->
+	<property file="${build.environment}" />
 		
 	<property name="build.dir" value="build/${version}" />
 	<property name="build.dir.tmp" value="build/tmp" />
