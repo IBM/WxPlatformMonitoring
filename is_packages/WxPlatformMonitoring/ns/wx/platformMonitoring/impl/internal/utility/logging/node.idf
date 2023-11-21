@@ -2,9 +2,9 @@
 
 <Values version="2.0">
   <value name="shared">cHJpdmF0ZSBzdGF0aWMgZmluYWwgU3RyaW5nIFBBQ0tBR0VfTkFNRSA9ICJXeFBsYXRmb3JtTW9u
-aXRvcmluZyI7DQpwcml2YXRlIHN0YXRpYyBmaW5hbCBTdHJpbmcgTE9HNEpfQ0ZHID0gIi4vcGFj
-a2FnZXMvIiArIFBBQ0tBR0VfTkFNRSArICIvY29uZmlnL2xvZzRqMi54bWwiOw0KcHJpdmF0ZSBz
-dGF0aWMgTG9nZ2VyQ29udGV4dCBsb2dDdHggID0gbnVsbDsNCg==</value>
+aXRvcmluZyI7CnByaXZhdGUgc3RhdGljIGZpbmFsIFN0cmluZyBMT0c0Sl9DRkcgPSAiLi9wYWNr
+YWdlcy8iICsgUEFDS0FHRV9OQU1FICsgIi9jb25maWcvbG9nNGoyLnhtbCI7CnByaXZhdGUgc3Rh
+dGljIExvZ2dlckNvbnRleHQgbG9nQ3R4ICA9IG51bGw7Cgk=</value>
   <value name="encodeutf8">true</value>
   <array name="imports" type="value" depth="1">
     <value>java.io.File</value>
@@ -20,5 +20,8 @@ dGF0aWMgTG9nZ2VyQ29udGV4dCBsb2dDdHggID0gbnVsbDsNCg==</value>
     <value>org.apache.logging.log4j.core.config.xml.XmlConfigurationFactory</value>
     <value>com.wm.app.b2b.server.ServerAPI</value>
     <value>com.wm.data.IData</value>
+  </array>
+  <value name="extends"></value>
+  <array name="implements" type="value" depth="1">
   </array>
 </Values>
