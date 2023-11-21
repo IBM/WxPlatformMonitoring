@@ -119,10 +119,6 @@ public final class logging
 			try {
 				configurationSource = new ConfigurationSource(new FileInputStream(log4jConfigFile),log4jConfigFile);
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			Configuration configuration = factory.getConfiguration(logCtx, configurationSource);
@@ -136,6 +132,7 @@ public final class logging
 			throw new ServiceException("Configuration file '" + LOG4J_CFG + "' does not exist or cannot be read");
 		}		
 			
+			
 		// --- <<IS-END>> ---
 
                 
@@ -145,6 +142,7 @@ public final class logging
 	private static final String PACKAGE_NAME = "WxPlatformMonitoring";
 	private static final String LOG4J_CFG = "./packages/" + PACKAGE_NAME + "/config/log4j2.xml";
 	private static LoggerContext logCtx  = null;
+		
 		
 	// --- <<IS-END-SHARED>> ---
 }
