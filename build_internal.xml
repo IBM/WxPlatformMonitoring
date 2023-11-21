@@ -131,8 +131,8 @@
 
 
 	<target name="buildWxPlatformMonitoringsPackage" depends="clean.package, jcode">
-		<xmltask source="${build.dir.tmp.wxplatformmonitoring}/manifest.v3" dest="${build.dir.tmp.wxplatformmonitoring}/manifest.v3">
-			<replace path="Values/value[@name='version']/text()" withText="${version.num}" />
+		<xmltask source="${build.dir.tmp.wxplatformmonitoring}/manifest.v3" dest="${build.dir.tmp.wxplatformmonitoring}/manifest.v3" outputter="simple">
+			<replace path="Values/value[@name='version']/text()" withText="${version}" />
 			<remove path="Values/value[@name='build']" />
 			<insert path="Values">
 				<![CDATA[<value name="build">${build.number}</value>]]>
@@ -140,8 +140,8 @@
 		</xmltask>
 		<!--<zip destfile="${build.dir.package}/WxPlatformMonitoring_Test.zip" basedir="${wxplatformmonitoring.package.home}_Test" />-->
 		<zip destfile="${build.dir.package}/WxPlatformMonitoring.zip" basedir="${build.dir.tmp.wxplatformmonitoring}" />
-	</target>
-	
+	</target>	
+		
 	<target name="buildAndDistributeWxPlatformMonitoringPackage" depends="buildWxPlatformMonitoringsPackage, distWxPlatformMonitoringPackage">
 	</target>
 	
