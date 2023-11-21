@@ -1,27 +1,20 @@
 <project name="wxplatformmonitoring_internal" basedir="." default="buildWxPlatformMonitoring">
-	<!--
-	These properties are only for building on different version of IntegrationServer
-	<property name="version" value="910" />
-	<property name="version" value="912"/>
-	<property name="version" value="100"/>
-	-->
-	<property name="version" value="1015"/>
-	<property file="build_1015.properties" />
-	<property file="build_${version}.properties" />
 	
+	<!-- property file for the desired webmethods installation -->
+	<property file="build_1015.properties" />
+	
+	<!-- property file for the desired version. Update this file if you want to build a new version -->
+	<property file="build_version.properties" />
+		
 	<property name="build.dir" value="build/${version}" />
 	<property name="build.dir.tmp" value="build/tmp" />
 	<property name="build.dir.tmp.wxplatformmonitoring" value="${build.dir.tmp}/WxPlatformMonitoring" />
 	<property name="build.dir.java" value="${build.dir}/java" />
 	<property name="classes.dir.java" value="${build.dir.java}/classes" />
-
 	<property name="wxplatformmonitoring.package.name" value="WxPlatformMonitoring" />
-
-
 	<property name="wxplatformmonitoring.package.home" value="is_packages/${wxplatformmonitoring.package.name}" />
 	<property name="wxplatformmonitoring.package.lib" value="${wxplatformmonitoring.package.home}/code/jars" />
 	<property name="build.dir.package" value="${build.dir}/package" />
-
 	<property name="svn.installation.path" value="c:/Program Files/SlikSvn/bin" />
 
 	<path id="build.classpath">
@@ -44,11 +37,10 @@
 			<include name="**/*.jar" />
 		</fileset>
 	</path>
-	
-	
+
 	<taskdef name="xmltask" classname="com.oopsconsultancy.xmltask.ant.XmlTask" classpathref="ant.classpath" />
 	<taskdef resource="net/sf/antcontrib/antcontrib.properties" classpathref="ant.classpath" />
-	<taskdef resource="net/sf/antcontrib/antlib.xml">
+	<taskdef resource="net/sf/antcontrib/antlib.xml"> 
 		<classpath refid="ant.classpath" />
 	</taskdef>
 
@@ -91,10 +83,7 @@
 	
 	<target name="jcodeFrag">
 		<exec resultproperty="jcodeResult" failonerror="true" executable="${is.home}/bin/jcode.bat" dir="${is.home}/bin/" output="jcode.log">
-			<!-- 'update' does not work, changed to 'fragall'				
-			<arg value="update" />
-			-->
-
+			<!-- 'update' did not work, there fore changed to 'fragall'	-->
 			<arg value="fragall" />
 			<arg line="WxPlatformMonitoring" />
 		</exec>
