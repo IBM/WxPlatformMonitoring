@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
 <Values version="2.0">
-    <value name="enabled">yes</value>
-    <value name="system_package">no</value>
-    <value name="version">1.0</value>
-    <record javaclass="com.wm.util.Values" name="startup_services">
-        <null name="wx.platformMonitoring.impl.internal.startup:startup"/>
-    </record>
-    <record javaclass="com.wm.util.Values" name="shutdown_services">
-        <null name="wx.platformMonitoring.impl.internal.shutdown:shutdown"/>
-    </record>
-    <null name="replication_services"/>
-    <record javaclass="com.wm.util.Values" name="requires">
+  <value name="enabled">yes</value>
+  <value name="system_package">no</value>
+  <value name="version">2.0.0</value>
+  <record javaclass="com.wm.util.Values" name="startup_services">
+    <null name="wx.platformMonitoring.impl.internal.startup:startup"></null>
   </record>
-    <value name="listACL">Default</value>
-    <value name="webappLoad">yes</value>
-    <value name="classloader">package</value>
-    <value name="reloadWithDependentPackage">yes</value>
-    <null name="description"/>
-    <null name="created_date"/>
-    <null name="extendedProperties"/>
+  <record javaclass="com.wm.util.Values" name="shutdown_services">
+    <null name="wx.platformMonitoring.impl.internal.shutdown:shutdown"></null>
+  </record>
+  <null name="replication_services"></null>
+  <record javaclass="com.wm.util.Values" name="requires"></record>
+  <value name="listACL">Default</value>
+  <value name="webappLoad">yes</value>
+  <value name="classloader">package</value>
+  <value name="reloadWithDependentPackage">yes</value>
+  <null name="description"></null>
+  <null name="created_date"></null>
+  <null name="extendedProperties"></null>
 </Values>
+
