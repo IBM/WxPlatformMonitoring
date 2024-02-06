@@ -1,23 +1,41 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <Values version="2.0">
   <value name="enabled">yes</value>
   <value name="system_package">no</value>
-  <value name="version">2.0.0</value>
-  <record javaclass="com.wm.util.Values" name="startup_services">
-    <null name="wx.platformMonitoring.impl.internal.startup:startup"></null>
+  <value name="version">2.0.1</value>
+  <record name="startup_services" javaclass="com.wm.util.Values">
+    <null name="wx.platformMonitoring.impl.internal.startup:startup"/>
   </record>
-  <record javaclass="com.wm.util.Values" name="shutdown_services">
-    <null name="wx.platformMonitoring.impl.internal.shutdown:shutdown"></null>
+  <record name="shutdown_services" javaclass="com.wm.util.Values">
+    <null name="wx.platformMonitoring.impl.internal.shutdown:shutdown"/>
   </record>
-  <null name="replication_services"></null>
-  <record javaclass="com.wm.util.Values" name="requires"></record>
+  <null name="replication_services"/>
+  <record name="requires" javaclass="com.wm.util.Values">
+  </record>
   <value name="listACL">Default</value>
   <value name="webappLoad">yes</value>
   <value name="classloader">package</value>
   <value name="reloadWithDependentPackage">yes</value>
-  <null name="description"></null>
-  <null name="created_date"></null>
-  <null name="extendedProperties"></null>
+  <value name="description"></value>
+  <null name="created_date"/>
+  <array name="extendedProperties" type="record" depth="1">
+    <record javaclass="com.wm.util.Values">
+      <value name="key">displayName</value>
+      <value name="value"></value>
+    </record>
+    <record javaclass="com.wm.util.Values">
+      <value name="key">trusted</value>
+      <value name="value">no</value>
+    </record>
+    <record javaclass="com.wm.util.Values">
+      <value name="key">status</value>
+      <value name="value">Development</value>
+    </record>
+    <record javaclass="com.wm.util.Values">
+      <value name="key">tags</value>
+      <value name="value"></value>
+    </record>
+  </array>
+  <value name="build">0536755</value>
 </Values>
-

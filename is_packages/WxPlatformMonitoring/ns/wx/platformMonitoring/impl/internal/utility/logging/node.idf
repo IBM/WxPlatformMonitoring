@@ -4,7 +4,9 @@
   <value name="shared">cHJpdmF0ZSBzdGF0aWMgZmluYWwgU3RyaW5nIFBBQ0tBR0VfTkFNRSA9ICJXeFBsYXRmb3JtTW9u
 aXRvcmluZyI7CnByaXZhdGUgc3RhdGljIGZpbmFsIFN0cmluZyBMT0c0Sl9DRkcgPSAiLi9wYWNr
 YWdlcy8iICsgUEFDS0FHRV9OQU1FICsgIi9jb25maWcvbG9nNGoyLnhtbCI7CnByaXZhdGUgc3Rh
-dGljIExvZ2dlckNvbnRleHQgbG9nQ3R4ICA9IG51bGw7CgkKCQ==</value>
+dGljIExvZ2dlckNvbnRleHQgbG9nQ3R4ICA9IG51bGw7CnB1YmxpYyBzdGF0aWMgTG9nZ2VyIGdl
+dExvZ2dlciggU3RyaW5nIG5hbWUgKSB7CglyZXR1cm4gbG9nQ3R4LmdldExvZ2dlcihuYW1lKTsK
+fQoJCgk=</value>
   <value name="encodeutf8">true</value>
   <array name="imports" type="value" depth="1">
     <value>java.io.File</value>

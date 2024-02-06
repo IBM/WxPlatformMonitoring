@@ -5,11 +5,11 @@
 
   <!-- nodes -->
 
-<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.internal.startup:addAcl" VALIDATE-IN="$none" VALIDATE-OUT="$none">
+<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.internal.utility.logging:startup" VALIDATE-IN="$none" VALIDATE-OUT="$none">
   <COMMENT></COMMENT>
 </INVOKE>
 
-<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.internal.utility.logging:startup" VALIDATE-IN="$none" VALIDATE-OUT="$none">
+<INVOKE TIMEOUT="" SERVICE="wx.platformMonitoring.impl.internal.startup:addAcl" VALIDATE-IN="$none" VALIDATE-OUT="$none">
   <COMMENT></COMMENT>
 </INVOKE>
 

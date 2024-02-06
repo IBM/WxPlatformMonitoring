@@ -56,12 +56,12 @@ public final class conf
 		}
 		JsonValue jConfig = _configurations.get(assetType);
 		if (jConfig == null) {
-			logger.error(
+			logger.debug(
 					"No config stored for asset of type '" + assetType + "', trying to reload default config dir.");
 			loadConfigurationFromDefaultConfigDir();
 			jConfig = _configurations.get(assetType);
 			if (jConfig == null) {
-				logger.error("No config stored for asset of type '" + assetType + "'.");
+				logger.debug("No config stored for asset of type '" + assetType + "'.");
 				return;
 			}
 		}
@@ -151,6 +151,7 @@ public final class conf
 		// --- <<IS-START(loadDefaultConfiguration)>> ---
 		// @sigtype java 3.5
 		loadConfigurationFromDefaultConfigDir();
+			
 		// --- <<IS-END>> ---
 
                 
@@ -186,6 +187,7 @@ public final class conf
 			File configFile = new File(configDir, configFileName);
 			addAssetConfiguration(configFile);
 		}
+			
 		// --- <<IS-END>> ---
 
                 
@@ -205,7 +207,7 @@ public final class conf
 	}
 
 	// --- <<IS-START-SHARED>> ---
-	static org.apache.logging.log4j.Logger logger = org.apache.logging.log4j.LogManager.getLogger("wx.platformMonitoring.config");
+	static org.apache.logging.log4j.Logger logger =  wx.platformMonitoring.impl.internal.utility.logging.getLogger("wx.platformMonitoring.config");
 	static java.util.Map<String, JsonValue> _configurations = new java.util.HashMap<String, JsonValue>();
 	
 	private static void addAssetConfiguration(String configFileName) throws ServiceException {
@@ -238,7 +240,7 @@ public final class conf
 	}
 	
 	private static JsonValue loadJsonConfiguration(File configFile) throws ServiceException {
-		logger.debug("Getting config from '" + configFile.getAbsolutePath() + "'");
+		logger.debug("Getting config wx.platformMonitoring.impl.internal.utility.logging.startup_SVC'" + configFile.getAbsolutePath() + "'");
 		java.io.Reader reader = null;
 		try {
 			reader = new FileReader(configFile);
@@ -503,6 +505,7 @@ public final class conf
 		return configDir;
 	}
 	
+		
 		
 		
 		

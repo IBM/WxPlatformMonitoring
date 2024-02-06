@@ -75,9 +75,7 @@ public final class logging
 			log.debug(logMessage);
 		} else {
 			log.trace(logMessage);
-		}
-			
-			
+		}	
 		// --- <<IS-END>> ---
 
                 
@@ -133,6 +131,7 @@ public final class logging
 		}		
 			
 			
+			
 		// --- <<IS-END>> ---
 
                 
@@ -142,6 +141,9 @@ public final class logging
 	private static final String PACKAGE_NAME = "WxPlatformMonitoring";
 	private static final String LOG4J_CFG = "./packages/" + PACKAGE_NAME + "/config/log4j2.xml";
 	private static LoggerContext logCtx  = null;
+	public static Logger getLogger( String name ) {
+		return logCtx.getLogger(name);
+	}
 		
 		
 	// --- <<IS-END-SHARED>> ---

@@ -28,7 +28,7 @@
 		<AppenderRef ref="wx.platformMonitoring"/>
 	</Logger>
   
-	<Logger name="wx.platformMonitoring.config" level="trace" additivity="false">
+	<Logger name="wx.platformMonitoring.config" level="info" additivity="false">
 		<AppenderRef ref="wx.platformMonitoring"/>
 	</Logger>
 

@@ -1,8 +1,6 @@
 package wx.platformMonitoring.impl.internal;
 
 // -----( IS Java Code Template v1.2
-// -----( CREATED: 2017-03-15 12:38:54 CET
-// -----( ON-HOST: 192.168.221.165
 
 import com.wm.data.*;
 import com.wm.util.Values;
@@ -48,14 +46,13 @@ public final class jmx
 		com.softwareag.wx.platformMonitoring.jmx.JmxManagement jmxManagement = new com.softwareag.wx.platformMonitoring.jmx.JmxManagement(session, user);
 		jmxManagement.exposeServicesInFolderRecursively("WxPlatformMonitoring", "wx.platformMonitoring.pub");		
 		logger.info("Successfully loaded WxPlatformMonitoring MBeans...");			
-			
 		// --- <<IS-END>> ---
 
                 
 	}
 
 	// --- <<IS-START-SHARED>> ---
-	static org.apache.logging.log4j.Logger logger = org.apache.logging.log4j.LogManager.getLogger("wx.platformMonitoring.config");
+	static org.apache.logging.log4j.Logger logger = wx.platformMonitoring.impl.internal.utility.logging.getLogger("wx.platformMonitoring.config");
 	
 	private static String getPathForConfigFile(File file) throws ServiceException {
 		java.nio.file.Path pathToFile = java.nio.file.Paths.get(file.getAbsolutePath());
@@ -90,6 +87,7 @@ public final class jmx
 		
 		return file.getAbsolutePath();
 	}
+		
 		
 	// --- <<IS-END-SHARED>> ---
 }
