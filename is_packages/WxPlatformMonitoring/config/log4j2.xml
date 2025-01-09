@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<Configuration monitorInterval="30" status="trace">
+<Configuration monitorInterval="30" status="info">
 
   <Appenders>
     <RollingFile name="wx.platformMonitoring" fileName="./logs/wxplatformmonitoring.log" filePattern="./logs/wxplatformmonitoring.log-%i.gz">
