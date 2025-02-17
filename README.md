@@ -4,8 +4,8 @@ Provides basic services for Integration Server metrics.
 
 ## Related Work
 
-* [WxPrometheus](../../../WxPrometheus/README.md)
-* [WxPlatformInsight](../../../WxPlatformInsight/README.md)
+* [WxPrometheus](https://github.com/IBM/WxPrometheus)
+* [WxPlatformInsight](https://github.com/IBM/WxPlatformInsight)
 
 ## Version History
 
