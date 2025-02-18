@@ -2,10 +2,6 @@
 
 <Values version="2.0">
   <value name="name">loadPlatformMonitoringConfigForPackage</value>
-  <array name="sig" type="value" depth="1">
-    <value>[i] field:0:required packageName</value>
-  </array>
-  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">Ly8gcGlwZWxpbmUNCklEYXRhQ3Vyc29yIHBpcGVsaW5lQ3Vyc29yID0gcGlwZWxpbmUuZ2V0Q3Vy
 c29yKCk7DQpTdHJpbmcgcGFja2FnZU5hbWUgPSBJRGF0YVV0aWwuZ2V0U3RyaW5nKHBpcGVsaW5l
@@ -18,5 +14,5 @@ YW4gYWNjZXB0KEZpbGUgcGFyYW1GaWxlLCBTdHJpbmcgcGFyYW1TdHJpbmcpIHsNCgkJcmV0dXJu
 IHBhcmFtU3RyaW5nLmVxdWFsc0lnbm9yZUNhc2UoInd4cGxhdGZvcm1tb25pdG9yaW5nLmpzb24i
 KTsNCgl9DQp9KTsNCmZvciAoU3RyaW5nIGNvbmZpZ0ZpbGVOYW1lIDogY29uZmlnRmlsZXMpIHsN
 CglGaWxlIGNvbmZpZ0ZpbGUgPSBuZXcgRmlsZShjb25maWdEaXIsIGNvbmZpZ0ZpbGVOYW1lKTsN
-CglhZGRBc3NldENvbmZpZ3VyYXRpb24oY29uZmlnRmlsZSk7DQp9DQo=</value>
+CglhZGRBc3NldENvbmZpZ3VyYXRpb24oY29uZmlnRmlsZSk7DQp9DQoJ</value>
 </Values>
