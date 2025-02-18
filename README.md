@@ -29,6 +29,10 @@ Remove Log4J unwanted trace logging.
 
 Same version as `2.0.2`. Switch version numbering from 3 digits `2.0.2` to 2 digits `2.2`.
 
+### v2.3
+
+Service `getCurrentlyRunningServices` ignores services of `Wx.` packages.
+
 ## Disclaimer
 
 ### IBM Public Repository Disclosure
