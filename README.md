@@ -7,6 +7,10 @@ Provides basic services for Integration Server metrics.
 * [WxPrometheus](https://github.com/IBM/WxPrometheus)
 * [WxPlatformInsight](https://github.com/IBM/WxPlatformInsight)
 
+## Dependencies 
+
+There are no dependent packages.
+
 ## Version History
 
 ### v1.0
