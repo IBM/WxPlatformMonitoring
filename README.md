@@ -7,6 +7,10 @@ Provides basic services for Integration Server metrics.
 * [WxPrometheus](https://github.com/IBM/WxPrometheus)
 * [WxPlatformInsight](https://github.com/IBM/WxPlatformInsight)
 
+## Dependencies 
+
+There are no dependent packages.
+
 ## Version History
 
 ### v1.0
@@ -32,6 +36,14 @@ Same version as `2.0.2`. Switch version numbering from 3 digits `2.0.2` to 2 dig
 ### v2.3
 
 Service `getCurrentlyRunningServices` ignores services of `Wx.` packages.
+
+### v2.4
+
+Solves NPE in service `getCurrentlyRunningServices`. The IS log is flooding with error messages ...
+
+```
+WxPrometheus: Exception occurred when invoking registered metrics service: java.lang.NullPointerException: Cannot invoke "com.wm.app.b2b.server.BaseService.getPackage()" because "bs" is null
+```
 
 ## Disclaimer
 

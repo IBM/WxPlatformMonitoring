@@ -52,9 +52,7 @@ public final class server
 		// [o] field:0:required currentlyRunningServicesCount
 		// [o] field:1:required currentlyRunningServicesList
 		IDataCursor pc = pipeline.getCursor();
-		
-		String currentPackageName = InvokeState.getCurrentService().getPackage().getName();
-		
+				
 		// input
 		IData input = IDataFactory.create();
 		
@@ -86,11 +84,8 @@ public final class server
 						com.wm.util.Name svc = (com.wm.util.Name)IDataUtil.get(sc, "svc");
 						// create a NSName object by folder and name
 						NSName name = NSName.create(ifc.toString(), svc.toString());
-						// create a base service from the nsname
-						BaseService bs = com.wm.app.b2b.server.ns.Namespace.getService(name);
 						// check if the package of the base service is the same as for this currently running service
-						if ( ! serviceName.startsWith( "WX.") )
-							{
+						if( ! serviceName.startsWith( "WX." ) ) {
 							// it is not the same, so we want to count this service run stats
 							runningServiceList.add(name.getFullName());
 							counter++;
