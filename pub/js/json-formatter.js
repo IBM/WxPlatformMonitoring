@@ -848,7 +848,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Escapes `"` charachters from string
 	*/
 	function escapeString(str) {
-	    return str.replace('"', '\"');
+	    return str.replace(/'/g, "''");
 	}
 	/*
 	 * Determines if a value is an object
